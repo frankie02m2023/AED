@@ -1,0 +1,3 @@
+C:/Users/franc/TrabalhoAED/cmake-build-debug/CMakeFiles/TrabalhoAED.dir
+C:/Users/franc/TrabalhoAED/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/franc/TrabalhoAED/cmake-build-debug/CMakeFiles/rebuild_cache.dir

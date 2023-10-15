@@ -8,8 +8,8 @@ using namespace std;
 class course{
 public:
     course(string course);
-    string get_course_name();
-    vector<class1> get_classes();
+    string get_course_name() const;
+    vector<class1> get_classes() const;
     void add_class();
 
 

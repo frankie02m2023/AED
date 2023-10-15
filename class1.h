@@ -1,6 +1,8 @@
 //
 // Created by franc on 12/10/2023.
 //
+#ifdef CLASS1_H
+#define CLASS1_H
 #include <list>
 #include <string>
 #include "student.h"
@@ -20,5 +22,7 @@ private:
     time PL_class;
     list<student> students;
 };
+
+#endif
 
 

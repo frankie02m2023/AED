@@ -1,3 +1,5 @@
+#ifdef COURSE_H
+#define COURSE_H
 #include <string>
 #include <vector>
 #include "class1.h"
@@ -15,3 +17,5 @@ private:
     string course_code;
     vector<class1> classes;
 };
+
+#endif

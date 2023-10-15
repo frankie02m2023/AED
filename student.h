@@ -1,7 +1,7 @@
 //
 // Created by franc on 12/10/2023.
 //
-#ifdef STUDENT_H
+#ifndef STUDENT_H
 #define STUDENT_H
 
 #include <string>

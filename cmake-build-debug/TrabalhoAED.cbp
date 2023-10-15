@@ -94,6 +94,9 @@
 		<Unit filename="D:/FEUP/2 ano/Algoritmos e Estruturas de Dados/Projeto 1/AED/library.h">
 			<Option target="TrabalhoAED"/>
 		</Unit>
+		<Unit filename="D:/FEUP/2 ano/Algoritmos e Estruturas de Dados/Projeto 1/AED/student.cpp">
+			<Option target="TrabalhoAED"/>
+		</Unit>
 		<Unit filename="D:/FEUP/2 ano/Algoritmos e Estruturas de Dados/Projeto 1/AED/student.h">
 			<Option target="TrabalhoAED"/>
 		</Unit>

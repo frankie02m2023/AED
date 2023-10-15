@@ -152,6 +152,30 @@ library.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\TrabalhoAED.dir\build.make CMakeFiles/TrabalhoAED.dir/library.cpp.s
 .PHONY : library.cpp.s
 
+student.obj: student.cpp.obj
+.PHONY : student.obj
+
+# target to build an object file
+student.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\TrabalhoAED.dir\build.make CMakeFiles/TrabalhoAED.dir/student.cpp.obj
+.PHONY : student.cpp.obj
+
+student.i: student.cpp.i
+.PHONY : student.i
+
+# target to preprocess a source file
+student.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\TrabalhoAED.dir\build.make CMakeFiles/TrabalhoAED.dir/student.cpp.i
+.PHONY : student.cpp.i
+
+student.s: student.cpp.s
+.PHONY : student.s
+
+# target to generate assembly for a file
+student.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\TrabalhoAED.dir\build.make CMakeFiles/TrabalhoAED.dir/student.cpp.s
+.PHONY : student.cpp.s
+
 # Help Target
 help:
 	@echo The following are some of the valid targets for this Makefile:
@@ -164,6 +188,9 @@ help:
 	@echo ... library.obj
 	@echo ... library.i
 	@echo ... library.s
+	@echo ... student.obj
+	@echo ... student.i
+	@echo ... student.s
 .PHONY : help
 
 

@@ -1,2 +1,2 @@
-"D:\clion\CLion 2023.2.2\bin\mingw\bin\ar.exe" qc libTrabalhoAED.a CMakeFiles/TrabalhoAED.dir/library.cpp.obj
+"D:\clion\CLion 2023.2.2\bin\mingw\bin\ar.exe" qc libTrabalhoAED.a CMakeFiles/TrabalhoAED.dir/library.cpp.obj CMakeFiles/TrabalhoAED.dir/student.cpp.obj
 "D:\clion\CLion 2023.2.2\bin\mingw\bin\ranlib.exe" libTrabalhoAED.a

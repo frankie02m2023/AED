@@ -80,12 +80,12 @@ clean: CMakeFiles/TrabalhoAED.dir/clean
 CMakeFiles/TrabalhoAED.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\TrabalhoAED.dir\build.make CMakeFiles/TrabalhoAED.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\TrabalhoAED.dir\build.make CMakeFiles/TrabalhoAED.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir="D:\FEUP\2 ano\Algoritmos e Estruturas de Dados\Projeto 1\AED\cmake-build-debug\CMakeFiles" --progress-num=1,2 "Built target TrabalhoAED"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir="D:\FEUP\2 ano\Algoritmos e Estruturas de Dados\Projeto 1\AED\cmake-build-debug\CMakeFiles" --progress-num=1,2,3 "Built target TrabalhoAED"
 .PHONY : CMakeFiles/TrabalhoAED.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/TrabalhoAED.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start "D:\FEUP\2 ano\Algoritmos e Estruturas de Dados\Projeto 1\AED\cmake-build-debug\CMakeFiles" 2
+	$(CMAKE_COMMAND) -E cmake_progress_start "D:\FEUP\2 ano\Algoritmos e Estruturas de Dados\Projeto 1\AED\cmake-build-debug\CMakeFiles" 3
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 CMakeFiles/TrabalhoAED.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start "D:\FEUP\2 ano\Algoritmos e Estruturas de Dados\Projeto 1\AED\cmake-build-debug\CMakeFiles" 0
 .PHONY : CMakeFiles/TrabalhoAED.dir/rule

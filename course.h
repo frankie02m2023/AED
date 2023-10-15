@@ -1,4 +1,4 @@
-#ifdef COURSE_H
+#ifndef COURSE_H
 #define COURSE_H
 #include <string>
 #include <vector>

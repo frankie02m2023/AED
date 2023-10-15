@@ -8,6 +8,8 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
+  "D:/FEUP/2 ano/Algoritmos e Estruturas de Dados/Projeto 1/AED/class1.cpp" "CMakeFiles/TrabalhoAED.dir/class1.cpp.obj" "gcc" "CMakeFiles/TrabalhoAED.dir/class1.cpp.obj.d"
+  "D:/FEUP/2 ano/Algoritmos e Estruturas de Dados/Projeto 1/AED/course.cpp" "CMakeFiles/TrabalhoAED.dir/course.cpp.obj" "gcc" "CMakeFiles/TrabalhoAED.dir/course.cpp.obj.d"
   "D:/FEUP/2 ano/Algoritmos e Estruturas de Dados/Projeto 1/AED/library.cpp" "CMakeFiles/TrabalhoAED.dir/library.cpp.obj" "gcc" "CMakeFiles/TrabalhoAED.dir/library.cpp.obj.d"
   "D:/FEUP/2 ano/Algoritmos e Estruturas de Dados/Projeto 1/AED/student.cpp" "CMakeFiles/TrabalhoAED.dir/student.cpp.obj" "gcc" "CMakeFiles/TrabalhoAED.dir/student.cpp.obj.d"
   )

@@ -8,10 +8,10 @@ student::student(string student_name, string student_number){
     this->student_number = student_number;
 }
 
-string student::get_name() {
+string student::get_name() const {
     return student_name;
 }
 
-string student::get_number() {
+string student::get_number() const {
     return student_number;
 }

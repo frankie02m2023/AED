@@ -96,19 +96,51 @@ CMakeFiles/TrabalhoAED.dir/student.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/TrabalhoAED.dir/student.cpp.s"
 	"D:\clion\CLion 2023.2.2\bin\mingw\bin\g++.exe" $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "D:\FEUP\2 ano\Algoritmos e Estruturas de Dados\Projeto 1\AED\student.cpp" -o CMakeFiles\TrabalhoAED.dir\student.cpp.s
 
+CMakeFiles/TrabalhoAED.dir/course.cpp.obj: CMakeFiles/TrabalhoAED.dir/flags.make
+CMakeFiles/TrabalhoAED.dir/course.cpp.obj: D:/FEUP/2\ ano/Algoritmos\ e\ Estruturas\ de\ Dados/Projeto\ 1/AED/course.cpp
+CMakeFiles/TrabalhoAED.dir/course.cpp.obj: CMakeFiles/TrabalhoAED.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="D:\FEUP\2 ano\Algoritmos e Estruturas de Dados\Projeto 1\AED\cmake-build-debug\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/TrabalhoAED.dir/course.cpp.obj"
+	"D:\clion\CLion 2023.2.2\bin\mingw\bin\g++.exe" $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/TrabalhoAED.dir/course.cpp.obj -MF CMakeFiles\TrabalhoAED.dir\course.cpp.obj.d -o CMakeFiles\TrabalhoAED.dir\course.cpp.obj -c "D:\FEUP\2 ano\Algoritmos e Estruturas de Dados\Projeto 1\AED\course.cpp"
+
+CMakeFiles/TrabalhoAED.dir/course.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/TrabalhoAED.dir/course.cpp.i"
+	"D:\clion\CLion 2023.2.2\bin\mingw\bin\g++.exe" $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "D:\FEUP\2 ano\Algoritmos e Estruturas de Dados\Projeto 1\AED\course.cpp" > CMakeFiles\TrabalhoAED.dir\course.cpp.i
+
+CMakeFiles/TrabalhoAED.dir/course.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/TrabalhoAED.dir/course.cpp.s"
+	"D:\clion\CLion 2023.2.2\bin\mingw\bin\g++.exe" $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "D:\FEUP\2 ano\Algoritmos e Estruturas de Dados\Projeto 1\AED\course.cpp" -o CMakeFiles\TrabalhoAED.dir\course.cpp.s
+
+CMakeFiles/TrabalhoAED.dir/class1.cpp.obj: CMakeFiles/TrabalhoAED.dir/flags.make
+CMakeFiles/TrabalhoAED.dir/class1.cpp.obj: D:/FEUP/2\ ano/Algoritmos\ e\ Estruturas\ de\ Dados/Projeto\ 1/AED/class1.cpp
+CMakeFiles/TrabalhoAED.dir/class1.cpp.obj: CMakeFiles/TrabalhoAED.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="D:\FEUP\2 ano\Algoritmos e Estruturas de Dados\Projeto 1\AED\cmake-build-debug\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/TrabalhoAED.dir/class1.cpp.obj"
+	"D:\clion\CLion 2023.2.2\bin\mingw\bin\g++.exe" $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/TrabalhoAED.dir/class1.cpp.obj -MF CMakeFiles\TrabalhoAED.dir\class1.cpp.obj.d -o CMakeFiles\TrabalhoAED.dir\class1.cpp.obj -c "D:\FEUP\2 ano\Algoritmos e Estruturas de Dados\Projeto 1\AED\class1.cpp"
+
+CMakeFiles/TrabalhoAED.dir/class1.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/TrabalhoAED.dir/class1.cpp.i"
+	"D:\clion\CLion 2023.2.2\bin\mingw\bin\g++.exe" $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "D:\FEUP\2 ano\Algoritmos e Estruturas de Dados\Projeto 1\AED\class1.cpp" > CMakeFiles\TrabalhoAED.dir\class1.cpp.i
+
+CMakeFiles/TrabalhoAED.dir/class1.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/TrabalhoAED.dir/class1.cpp.s"
+	"D:\clion\CLion 2023.2.2\bin\mingw\bin\g++.exe" $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "D:\FEUP\2 ano\Algoritmos e Estruturas de Dados\Projeto 1\AED\class1.cpp" -o CMakeFiles\TrabalhoAED.dir\class1.cpp.s
+
 # Object files for target TrabalhoAED
 TrabalhoAED_OBJECTS = \
 "CMakeFiles/TrabalhoAED.dir/library.cpp.obj" \
-"CMakeFiles/TrabalhoAED.dir/student.cpp.obj"
+"CMakeFiles/TrabalhoAED.dir/student.cpp.obj" \
+"CMakeFiles/TrabalhoAED.dir/course.cpp.obj" \
+"CMakeFiles/TrabalhoAED.dir/class1.cpp.obj"
 
 # External object files for target TrabalhoAED
 TrabalhoAED_EXTERNAL_OBJECTS =
 
 libTrabalhoAED.a: CMakeFiles/TrabalhoAED.dir/library.cpp.obj
 libTrabalhoAED.a: CMakeFiles/TrabalhoAED.dir/student.cpp.obj
+libTrabalhoAED.a: CMakeFiles/TrabalhoAED.dir/course.cpp.obj
+libTrabalhoAED.a: CMakeFiles/TrabalhoAED.dir/class1.cpp.obj
 libTrabalhoAED.a: CMakeFiles/TrabalhoAED.dir/build.make
 libTrabalhoAED.a: CMakeFiles/TrabalhoAED.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir="D:\FEUP\2 ano\Algoritmos e Estruturas de Dados\Projeto 1\AED\cmake-build-debug\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_3) "Linking CXX static library libTrabalhoAED.a"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir="D:\FEUP\2 ano\Algoritmos e Estruturas de Dados\Projeto 1\AED\cmake-build-debug\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_5) "Linking CXX static library libTrabalhoAED.a"
 	$(CMAKE_COMMAND) -P CMakeFiles\TrabalhoAED.dir\cmake_clean_target.cmake
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles\TrabalhoAED.dir\link.txt --verbose=$(VERBOSE)
 

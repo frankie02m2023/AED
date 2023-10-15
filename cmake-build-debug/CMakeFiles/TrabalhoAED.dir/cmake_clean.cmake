@@ -1,4 +1,8 @@
 file(REMOVE_RECURSE
+  "CMakeFiles/TrabalhoAED.dir/class1.cpp.obj"
+  "CMakeFiles/TrabalhoAED.dir/class1.cpp.obj.d"
+  "CMakeFiles/TrabalhoAED.dir/course.cpp.obj"
+  "CMakeFiles/TrabalhoAED.dir/course.cpp.obj.d"
   "CMakeFiles/TrabalhoAED.dir/library.cpp.obj"
   "CMakeFiles/TrabalhoAED.dir/library.cpp.obj.d"
   "CMakeFiles/TrabalhoAED.dir/student.cpp.obj"

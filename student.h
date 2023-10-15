@@ -10,8 +10,8 @@ using namespace std;
 class student{
 public:
     student(string student_name, string student_number);
-    string get_name();
-    string get_number();
+    string get_name() const;
+    string get_number() const;
 
 private:
     string student_name;

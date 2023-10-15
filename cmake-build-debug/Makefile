@@ -128,6 +128,54 @@ TrabalhoAED/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\TrabalhoAED.dir\build.make CMakeFiles/TrabalhoAED.dir/build
 .PHONY : TrabalhoAED/fast
 
+class1.obj: class1.cpp.obj
+.PHONY : class1.obj
+
+# target to build an object file
+class1.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\TrabalhoAED.dir\build.make CMakeFiles/TrabalhoAED.dir/class1.cpp.obj
+.PHONY : class1.cpp.obj
+
+class1.i: class1.cpp.i
+.PHONY : class1.i
+
+# target to preprocess a source file
+class1.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\TrabalhoAED.dir\build.make CMakeFiles/TrabalhoAED.dir/class1.cpp.i
+.PHONY : class1.cpp.i
+
+class1.s: class1.cpp.s
+.PHONY : class1.s
+
+# target to generate assembly for a file
+class1.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\TrabalhoAED.dir\build.make CMakeFiles/TrabalhoAED.dir/class1.cpp.s
+.PHONY : class1.cpp.s
+
+course.obj: course.cpp.obj
+.PHONY : course.obj
+
+# target to build an object file
+course.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\TrabalhoAED.dir\build.make CMakeFiles/TrabalhoAED.dir/course.cpp.obj
+.PHONY : course.cpp.obj
+
+course.i: course.cpp.i
+.PHONY : course.i
+
+# target to preprocess a source file
+course.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\TrabalhoAED.dir\build.make CMakeFiles/TrabalhoAED.dir/course.cpp.i
+.PHONY : course.cpp.i
+
+course.s: course.cpp.s
+.PHONY : course.s
+
+# target to generate assembly for a file
+course.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\TrabalhoAED.dir\build.make CMakeFiles/TrabalhoAED.dir/course.cpp.s
+.PHONY : course.cpp.s
+
 library.obj: library.cpp.obj
 .PHONY : library.obj
 
@@ -185,6 +233,12 @@ help:
 	@echo ... edit_cache
 	@echo ... rebuild_cache
 	@echo ... TrabalhoAED
+	@echo ... class1.obj
+	@echo ... class1.i
+	@echo ... class1.s
+	@echo ... course.obj
+	@echo ... course.i
+	@echo ... course.s
 	@echo ... library.obj
 	@echo ... library.i
 	@echo ... library.s

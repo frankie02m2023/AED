@@ -15,6 +15,7 @@ public:
     time get_T_class() const;
     time get_TP_class() const;
     time get_PL_class() const;
+    void add_students(student st);
 private:
     string class_name;
     time T_class;

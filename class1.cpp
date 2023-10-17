@@ -26,3 +26,7 @@ time class1::get_T_class() const {
 string class1::get_class_name() const {
     return class_name;
 }
+
+void class1::add_students(student st) {
+    students.push_back(st);
+}

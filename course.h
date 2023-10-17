@@ -10,7 +10,7 @@ public:
     course(string course);
     string get_course_name() const;
     vector<class1> get_classes() const;
-    void add_class();
+    void add_class(class1 cl);
 
 
 private:

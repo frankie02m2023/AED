@@ -1,4 +1,4 @@
 "D:\clion\CLion 2023.2.2\bin\cmake\win\x64\bin\cmake.exe" -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - MinGW Makefiles" -S "D:\FEUP\2 ano\Algoritmos e Estruturas de Dados\Projeto 1\AED" -B "D:\FEUP\2 ano\Algoritmos e Estruturas de Dados\Projeto 1\AED\cmake-build-debug"
--- Configuring done (0.1s)
+-- Configuring done (0.2s)
 -- Generating done (0.1s)
 -- Build files have been written to: D:/FEUP/2 ano/Algoritmos e Estruturas de Dados/Projeto 1/AED/cmake-build-debug

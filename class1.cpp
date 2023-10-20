@@ -8,22 +8,22 @@ class1::class1(std::string class_name){
     this->class_name = class_name;
 }
 
-class1::class1(std::string class_name, time T_class, time TP_class, time PL_class) {
+class1::class1(std::string class_name, schedule T_class, schedule TP_class, schedule PL_class) {
     this->class_name = class_name;
     this->T_class = T_class;
     this->TP_class = TP_class;
     this->PL_class = PL_class;
 }
 
-time class1::get_PL_class() const {
+schedule class1::get_PL_class() const {
     return PL_class;
 }
 
-time class1::get_TP_class() const {
+schedule class1::get_TP_class() const {
     return TP_class;
 }
 
-time class1::get_T_class() const {
+schedule class1::get_T_class() const {
     return T_class;
 }
 
@@ -31,18 +31,25 @@ string class1::get_class_name() const {
     return class_name;
 }
 
-void class1::set_T_class(const time& T_time) {
+void class1::set_T_class(const schedule& T_time) {
     this->T_class = T_time;
 }
 
-void class1::set_TP_class(const time& TP_time) {
+void class1::set_TP_class(const schedule& TP_time) {
     this->TP_class = TP_time;
 }
 
-void class1::set_PL_class(const time& PL_time) {
+void class1::set_PL_class(const schedule& PL_time) {
     this->PL_class = PL_time;
 }
 
 void class1::add_students(student st) {
     students.push_back(st);
+}
+
+void class1::print_class_data() const {
+    std::cout << "Class name = " << class_name << endl;
+    std::cout << "T Class schedule = " << T_class.week_day << " Start time - " <<  T_class.hour << " Duration - " << T_class.duration;
+    std::cout << "TP Class schedule = " << TP_class.week_day << " Start time - " <<  TP_class.hour << " Duration - " << TP_class.duration;
+    std::cout << "PL Class schedule = " << PL_class.week_day << " Start time - " <<  PL_class.hour << " Duration - " << PL_class.duration;
 }

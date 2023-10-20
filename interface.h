@@ -13,6 +13,7 @@ public:
     void read_data_classes_per_uc();
     void read_data_classes();
     void read_data_students_classes();
+    void print_data() const;
 };
 
 

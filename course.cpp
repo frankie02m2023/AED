@@ -20,7 +20,7 @@ void course::add_class(class1 cl) {
     classes.push_back(cl);
 }
 
-void course::edit_class(class1 cl, time time1, string class_type){
+void course::edit_class(class1 cl, schedule time1, string class_type){
     for (class1 &a_class: classes) {
         if (a_class.get_class_name() == cl.get_class_name()) {
             if (class_type == "T") {
@@ -31,6 +31,14 @@ void course::edit_class(class1 cl, time time1, string class_type){
                 a_class.set_PL_class(time1);
             }
         }
+    }
+}
+
+void course::print_course_data() const {
+    cout << "Course Code = " << course_code << endl;
+    cout << "Class list for course " << course_code << endl;
+    for(class1 aclass : classes){
+        aclass.print_class_data();
     }
 }
 

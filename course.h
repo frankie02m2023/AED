@@ -7,10 +7,13 @@ using namespace std;
 
 class course{
 public:
+    course();
     course(string course);
     string get_course_name() const;
     vector<class1> get_classes() const;
     void add_class(class1 cl);
+    bool operator==(const course& other_course) const;
+    class1 get_class(class1 cl) const;
 
 
 private:

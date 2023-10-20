@@ -11,4 +11,6 @@ add_library(TrabalhoAED library.cpp
         student.cpp
         course.cpp
         class1.cpp
+        interface.cpp
+        interface.h
 )

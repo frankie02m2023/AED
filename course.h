@@ -13,7 +13,7 @@ public:
     vector<class1> get_classes() const;
     void add_class(class1 cl);
     bool operator==(const course& other_course) const;
-    class1 get_class(class1 cl) const;
+    void edit_class(class1 cl, time time1, string class_type);
 
 
 private:

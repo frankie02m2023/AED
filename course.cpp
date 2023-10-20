@@ -20,11 +20,16 @@ void course::add_class(class1 cl) {
     classes.push_back(cl);
 }
 
-// only works if class exists in classes
-class1 course::get_class(class1 cl) const {
-    for(class1 a_class : classes){
-        if(a_class.get_class_name() == cl.get_class_name()){
-            return a_class;
+void course::edit_class(class1 cl, time time1, string class_type){
+    for (class1 &a_class: classes) {
+        if (a_class.get_class_name() == cl.get_class_name()) {
+            if (class_type == "T") {
+                a_class.set_T_class(time1);
+            } else if (class_type == "TP") {
+                a_class.set_TP_class(time1);
+            } else {
+                a_class.set_PL_class(time1);
+            }
         }
     }
 }

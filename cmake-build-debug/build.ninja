@@ -55,6 +55,30 @@ build CMakeFiles/TrabalhoAED.dir/library.cpp.obj: CXX_COMPILER__TrabalhoAED_unsc
   OBJECT_DIR = CMakeFiles\TrabalhoAED.dir
   OBJECT_FILE_DIR = CMakeFiles\TrabalhoAED.dir
 
+build CMakeFiles/TrabalhoAED.dir/student.cpp.obj: CXX_COMPILER__TrabalhoAED_unscanned_Debug C$:/Users/franc/TrabalhoAED/student.cpp || cmake_object_order_depends_target_TrabalhoAED
+  DEP_FILE = CMakeFiles\TrabalhoAED.dir\student.cpp.obj.d
+  FLAGS = -g -fdiagnostics-color=always
+  OBJECT_DIR = CMakeFiles\TrabalhoAED.dir
+  OBJECT_FILE_DIR = CMakeFiles\TrabalhoAED.dir
+
+build CMakeFiles/TrabalhoAED.dir/course.cpp.obj: CXX_COMPILER__TrabalhoAED_unscanned_Debug C$:/Users/franc/TrabalhoAED/course.cpp || cmake_object_order_depends_target_TrabalhoAED
+  DEP_FILE = CMakeFiles\TrabalhoAED.dir\course.cpp.obj.d
+  FLAGS = -g -fdiagnostics-color=always
+  OBJECT_DIR = CMakeFiles\TrabalhoAED.dir
+  OBJECT_FILE_DIR = CMakeFiles\TrabalhoAED.dir
+
+build CMakeFiles/TrabalhoAED.dir/class1.cpp.obj: CXX_COMPILER__TrabalhoAED_unscanned_Debug C$:/Users/franc/TrabalhoAED/class1.cpp || cmake_object_order_depends_target_TrabalhoAED
+  DEP_FILE = CMakeFiles\TrabalhoAED.dir\class1.cpp.obj.d
+  FLAGS = -g -fdiagnostics-color=always
+  OBJECT_DIR = CMakeFiles\TrabalhoAED.dir
+  OBJECT_FILE_DIR = CMakeFiles\TrabalhoAED.dir
+
+build CMakeFiles/TrabalhoAED.dir/interface.cpp.obj: CXX_COMPILER__TrabalhoAED_unscanned_Debug C$:/Users/franc/TrabalhoAED/interface.cpp || cmake_object_order_depends_target_TrabalhoAED
+  DEP_FILE = CMakeFiles\TrabalhoAED.dir\interface.cpp.obj.d
+  FLAGS = -g -fdiagnostics-color=always
+  OBJECT_DIR = CMakeFiles\TrabalhoAED.dir
+  OBJECT_FILE_DIR = CMakeFiles\TrabalhoAED.dir
+
 
 # =============================================================================
 # Link build statements for STATIC_LIBRARY target TrabalhoAED
@@ -63,7 +87,7 @@ build CMakeFiles/TrabalhoAED.dir/library.cpp.obj: CXX_COMPILER__TrabalhoAED_unsc
 #############################################
 # Link the static library libTrabalhoAED.a
 
-build libTrabalhoAED.a: CXX_STATIC_LIBRARY_LINKER__TrabalhoAED_Debug CMakeFiles/TrabalhoAED.dir/library.cpp.obj
+build libTrabalhoAED.a: CXX_STATIC_LIBRARY_LINKER__TrabalhoAED_Debug CMakeFiles/TrabalhoAED.dir/library.cpp.obj CMakeFiles/TrabalhoAED.dir/student.cpp.obj CMakeFiles/TrabalhoAED.dir/course.cpp.obj CMakeFiles/TrabalhoAED.dir/class1.cpp.obj CMakeFiles/TrabalhoAED.dir/interface.cpp.obj
   LANGUAGE_COMPILE_FLAGS = -g
   OBJECT_DIR = CMakeFiles\TrabalhoAED.dir
   POST_BUILD = cd .

@@ -10,8 +10,8 @@ using namespace std;
 
 struct time{
    string week_day;
-   short hour;
-   short minute;
+   float hour;
+   float duration;
 };
 
 #endif

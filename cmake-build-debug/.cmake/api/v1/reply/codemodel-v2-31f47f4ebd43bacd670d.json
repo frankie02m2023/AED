@@ -39,7 +39,7 @@
 				{
 					"directoryIndex" : 0,
 					"id" : "TrabalhoAED::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-TrabalhoAED-Debug-1305e87b8eeffcc78d62.json",
+					"jsonFile" : "target-TrabalhoAED-Debug-6d387af5700ce47ae735.json",
 					"name" : "TrabalhoAED",
 					"projectIndex" : 0
 				}
@@ -49,8 +49,8 @@
 	"kind" : "codemodel",
 	"paths" : 
 	{
-		"build" : "D:/FEUP/2 ano/Algoritmos e Estruturas de Dados/Projeto 1/AED/cmake-build-debug",
-		"source" : "D:/FEUP/2 ano/Algoritmos e Estruturas de Dados/Projeto 1/AED"
+		"build" : "C:/Users/franc/TrabalhoAED/cmake-build-debug",
+		"source" : "C:/Users/franc/TrabalhoAED"
 	},
 	"version" : 
 	{

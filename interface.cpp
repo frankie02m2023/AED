@@ -15,16 +15,27 @@
 void interface::read_data_classes_per_uc() {
     string file, line;
     file = "classes_per_uc.csv";
-    ifstream open_file(file);
+    ifstream open_file;
+    open_file.open(file);
+    bool is_trash = true;
+    if (!open_file.is_open()) {
+        std::cerr << "Error: Unable to open the CSV file." << std::endl;
+        // Exit the function
+    }
     while(getline(open_file, line)){
-        auto it1 = line.find_first_of(',');
-        course new_course(line.substr(0,it1));
-        auto it = std::find(courses.begin(), courses.end(),new_course);
-        if(it == courses.end()){
-            courses.push_back(new_course);
+        if(!is_trash){
+            auto it1 = line.find_first_of(',');
+            course new_course(line.substr(0,it1));
+            auto it = std::find(courses.begin(), courses.end(),new_course);
+            if(it == courses.end()){
+                courses.push_back(new_course);
+            }
+            class1 new_class(line.substr(it1 + 1));
+            courses[courses.size() - 1].add_class(new_class);
         }
-        class1 new_class = line.substr(it1);
-        new_course.add_class(new_class);
+        else{
+            is_trash = false;
+        }
     }
 }
 

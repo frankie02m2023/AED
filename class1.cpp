@@ -49,7 +49,7 @@ void class1::add_students(student st) {
 
 void class1::print_class_data() const {
     std::cout << "Class name = " << class_name << endl;
-    std::cout << "T Class schedule = " << T_class.week_day << " Start time - " <<  T_class.hour << " Duration - " << T_class.duration;
-    std::cout << "TP Class schedule = " << TP_class.week_day << " Start time - " <<  TP_class.hour << " Duration - " << TP_class.duration;
-    std::cout << "PL Class schedule = " << PL_class.week_day << " Start time - " <<  PL_class.hour << " Duration - " << PL_class.duration;
+    std::cout << "T Class schedule = " << T_class.week_day << " Start time - " <<  T_class.hour << " Duration - " << T_class.duration << endl;
+    std::cout << "TP Class schedule = " << TP_class.week_day << " Start time - " <<  TP_class.hour << " Duration - " << TP_class.duration << endl;
+    std::cout << "PL Class schedule = " << PL_class.week_day << " Start time - " <<  PL_class.hour << " Duration - " << PL_class.duration << endl;
 }

@@ -55,20 +55,10 @@ void interface::read_data_classes() {
         class_type = line.substr(0, it);
         for (course &a_course: courses) {
             if (a_course == course1) {
-                for (class1 &a_class: a_course.get_classes()) {
-                    if (a_class.get_class_name() == class_in_line.get_class_name()) {
-                        time1.week_day = day_of_the_week;
-                        time1.hour = class_time;
-                        time1.duration = class_duration;
-                        if (class_type == "T") {
-                            a_class.set_T_class(time1);
-                        } else if (class_type == "TP") {
-                            a_class.set_TP_class(time1);
-                        } else {
-                            a_class.set_PL_class(time1);
-                        }
-                    }
-                }
+                time1.hour = class_time;
+                time1.duration = class_duration;
+                time1.week_day = day_of_the_week;
+               a_course.edit_class(class_in_line, time1, class_type);
             }
 
         }

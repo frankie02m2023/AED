@@ -1,7 +1,0 @@
-# ninja log v5
-1	564	7195223683419059	CMakeFiles/TrabalhoAED.dir/student.cpp.obj	942895841416ae07
-22	696	7195223684741206	CMakeFiles/TrabalhoAED.dir/class1.cpp.obj	643b0a4aab92c776
-15	747	7195223685258424	CMakeFiles/TrabalhoAED.dir/library.cpp.obj	cd1b5e18a5f05874
-9	826	7195223686057893	CMakeFiles/TrabalhoAED.dir/course.cpp.obj	fae546c4b8845fbb
-28	959	7195223687375695	CMakeFiles/TrabalhoAED.dir/interface.cpp.obj	62645274f3f1881
-960	1102	7195223688828913	libTrabalhoAED.a	a5dcc2dc4b4331a1

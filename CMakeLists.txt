@@ -7,7 +7,7 @@ add_library(TrabalhoAED library.cpp
         course.h
         class1.h
         student.h
-        time.h
+        schedule.h
         student.cpp
         course.cpp
         class1.cpp

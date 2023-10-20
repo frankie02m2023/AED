@@ -2,7 +2,7 @@
 // Created by franc on 20/10/2023.
 
 #include "interface.h"
-#include "time.h"
+#include "schedule.h"
 #include <iostream>
 #include <fstream>
 #include <sstream>
@@ -34,7 +34,7 @@ void interface::read_data_classes() {
     ifstream open_file(file);
     string day_of_the_week, class_type;
     float class_time, class_duration;
-    struct time time1;
+    struct schedule time1;
     while (getline(open_file, line)) {
         auto it = line.find_first_of(',');
         course course1(line.substr(0, it));
@@ -65,3 +65,9 @@ void interface::read_data_classes() {
     }
 }
 
+void interface::print_data() const{
+    cout << "Printing data for the entire system" << endl;
+    for(course a_course : courses){
+        a_course.print_course_data();
+    }
+}

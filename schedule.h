@@ -8,7 +8,7 @@
 #include <string>
 using namespace std;
 
-struct time{
+struct schedule{
    string week_day;
    float hour;
    float duration;

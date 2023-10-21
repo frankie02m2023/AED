@@ -17,25 +17,29 @@ void interface::read_data_classes_per_uc() {
     file = "classes_per_uc.csv";
     ifstream open_file;
     open_file.open(file);
-    bool is_trash = true;
+
     if (!open_file.is_open()) {
         std::cerr << "Error: Unable to open the CSV file." << std::endl;
         // Exit the function
     }
+
+    getline(open_file, line); //dummy
+
+    //gets the course and class from the file
     while(getline(open_file, line)){
-        if(!is_trash){
-            auto it1 = line.find_first_of(',');
-            course new_course(line.substr(0,it1));
-            auto it = std::find(courses.begin(), courses.end(),new_course);
-            if(it == courses.end()){
-                courses.push_back(new_course);
-            }
-            class1 new_class(line.substr(it1 + 1));
-            courses[courses.size() - 1].add_class(new_class);
+        //get course
+        size_t it1 = line.find_first_of(',');
+        course new_course(line.substr(0,it1));
+
+        //confirm if we have already inserted the course
+        auto it = std::find(courses.begin(), courses.end(),new_course);
+        if(it == courses.end()){
+            courses.push_back(new_course);
         }
-        else{
-            is_trash = false;
-        }
+
+        //get and insert the new_class
+        class1 new_class(line.substr(it1 + 1));
+        courses[courses.size() - 1].add_class(new_class);
     }
 }
 
@@ -43,6 +47,12 @@ void interface::read_data_classes() {
     string file, line;
     file = "classes.csv";
     ifstream open_file(file);
+
+    if (!open_file.is_open()) {
+        std::cerr << "Error: Unable to open the CSV file." << std::endl;
+        // Exit the function
+    }
+
     string day_of_the_week, class_type;
     float class_time, class_duration;
     struct schedule time1;
@@ -94,6 +104,12 @@ void interface::read_data_classes() {
 void interface::read_data_students_classes() {
     ifstream f("students_classes.csv");
     string line;
+
+    if (!f.is_open()) {
+        std::cerr << "Error: Unable to open the CSV file." << std::endl;
+        // Exit the function
+    }
+
     getline(f,line); //dummy
 
     while(getline(f,line)){

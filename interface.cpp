@@ -44,24 +44,37 @@ void interface::read_data_classes() {
     file = "classes.csv";
     ifstream open_file(file);
     string day_of_the_week, class_type;
-    float class_time, class_duration;
+    int class_time, class_duration;
     struct schedule time1;
+    getline(open_file, line); //dummy
+
     while (getline(open_file, line)) {
+        //get couse
         auto it = line.find_first_of(',');
         course course1(line.substr(0, it));
-        line = line.substr(it);
+        line = line.substr(it+1);
+
+        //get class
         it = line.find_first_of(',');
         class1 class_in_line(line.substr(0, it));
-        line = line.substr(it);
+        line = line.substr(it+1);
+
+        //get days of the week
         it = line.find_first_of(',');
         day_of_the_week = line.substr(0, it);
-        line = line.substr(it);
+        line = line.substr(it+1);
+
+        //get class time
         it = line.find_first_of(',');
         class_time = std::stoi(line.substr(0, it));
-        line = line.substr(it);
+        line = line.substr(it+1);
+
+        //get class duration
         it = line.find_first_of(',');
         class_duration = std::stoi(line.substr(0, it));
-        line = line.substr(it);
+        line = line.substr(it+1);
+
+        //get class type
         it = line.find_first_of(',');
         class_type = line.substr(0, it);
         for (course &a_course: courses) {

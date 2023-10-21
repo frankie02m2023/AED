@@ -4,11 +4,7 @@
 
 #include "class1.h"
 
-class1::class1(std::string class_name){
-    this->class_name = class_name;
-}
-
-class1::class1(std::string class_name, schedule T_class, schedule TP_class, schedule PL_class) {
+class1::class1(std::string class_name, schedule T_class, schedule TP_class , schedule PL_class ) {
     this->class_name = class_name;
     this->T_class = T_class;
     this->TP_class = TP_class;

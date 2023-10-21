@@ -18,7 +18,7 @@ set(SOURCE_FILES
         testing1.cpp
 )
 
-file(COPY classes_per_uc.csv DESTINATION ${CMAKE_BINARY_DIR})
+file(COPY classes_per_uc.csv classes.csv DESTINATION ${CMAKE_BINARY_DIR})
 
 # Define the executable target
 add_executable(testing ${SOURCE_FILES})

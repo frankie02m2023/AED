@@ -10,7 +10,7 @@ include_directories(googletest/googletest/include)
 include_directories(googletest/googlemock/include)
 set( CMAKE_BUILD_TYPE ${CMAKE_BUILD_TYPE_TMP} )
 
-add_executable(googletest gtest.cpp)
+add_executable(googletest gtest.cpp student.cpp interface.cpp class1.cpp course.cpp)
 
 target_link_libraries(googletest gtest gtest_main)
 

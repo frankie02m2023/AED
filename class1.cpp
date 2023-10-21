@@ -56,3 +56,4 @@ void class1::print_class_data() const {
     }
     std::cout <<'\n';
 }
+

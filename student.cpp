@@ -1,6 +1,7 @@
 //
 // Created by lucas on 15/10/2023.
 //
+#include <iostream>
 #include "student.h"
 
 student::student(string student_name, string student_number){
@@ -14,4 +15,8 @@ string student::get_name() const {
 
 string student::get_number() const {
     return student_number;
+}
+
+void student::print_student() const {
+    std::cout << "name: " << student_name << ", Number: " << student_number << endl;
 }

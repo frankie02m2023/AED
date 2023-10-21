@@ -8,8 +8,12 @@ course::course(std::string course) {
     course_code = course;
 }
 
-vector<class1> course::get_classes() const {
+vector<class1> course::get_classes() const{
     return classes;
+}
+
+void course::set_classes(vector<class1> classes){
+    this->classes = classes;
 }
 
 string course::get_course_name() const{

@@ -12,6 +12,7 @@ public:
     student(string student_name, string student_number);
     string get_name() const;
     string get_number() const;
+    void print_student() const;
 
 private:
     string student_name;

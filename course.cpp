@@ -50,5 +50,10 @@ void course::print_course_data() const {
 
 
 bool course::operator==(const course& other_course) const {
+
     return other_course.course_code == course_code;
+}
+
+bool course::operator!=(const course& other_course) const {
+    return  other_course.course_code != course_code;
 }

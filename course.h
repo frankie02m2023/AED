@@ -14,6 +14,7 @@ public:
     void set_classes(vector<class1> classes);
     void add_class(class1 cl);
     bool operator==(const course& other_course) const;
+    bool operator!=(const course& other_course) const;
     void edit_class(class1 cl, schedule time1, string class_type);
     void print_course_data() const;
 

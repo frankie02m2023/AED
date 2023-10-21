@@ -61,6 +61,7 @@ TEST(Data_readers,read_data_classes_per_uc){
 }
 
 TEST(Data_readers,read_data_classes){
+    cout << "Testing read_data_classes " << endl;
     class1 test1 {"1LEIC01",{"Tuesday",10.5, 1.5 }, {"Monday", 10.5, 1.5} };
     interface testi;
     testi.read_data_classes_per_uc();
@@ -71,13 +72,14 @@ TEST(Data_readers,read_data_classes){
     EXPECT_EQ(test1.get_T_class().duration, cl.get_T_class().duration);
     EXPECT_EQ(test1.get_T_class().hour, cl.get_T_class().hour);
     EXPECT_EQ(test1.get_T_class().week_day, cl.get_T_class().week_day);
-    EXPECT_EQ(test1.get_TP_class().week_day, cl.get_T_class().week_day);
+    EXPECT_EQ(test1.get_TP_class().week_day, cl.get_TP_class().week_day);
     EXPECT_EQ(test1.get_TP_class().hour, cl.get_TP_class().hour);
     EXPECT_EQ(test1.get_TP_class().duration, cl.get_TP_class().duration);
 }
 
 TEST(Data_readers, read_data_students_classes){
-    student test1 {"Iara", "202025232"};
+    cout << "Testing read_data_students_classes" << endl;
+    student test1 {"Francisca", "202020897"};
     interface testi;
     testi.read_data_classes_per_uc();
     testi.read_data_classes();

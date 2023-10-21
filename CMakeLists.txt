@@ -10,26 +10,26 @@ include_directories(googletest/googletest/include)
 include_directories(googletest/googlemock/include)
 set( CMAKE_BUILD_TYPE ${CMAKE_BUILD_TYPE_TMP} )
 
-add_executable(googletest gtest.cpp student.cpp interface.cpp class1.cpp course.cpp)
+add_executable(googletest Tests/gtest.cpp Source_files/student.cpp Source_files/interface.cpp Source_files/class1.cpp Source_files/course.cpp)
 
 target_link_libraries(googletest gtest gtest_main)
 
 # List your source files for the executable
 set(SOURCE_FILES
-        library.cpp
-        course.h
-        class1.h
-        student.h
-        schedule.h
-        student.cpp
-        course.cpp
-        class1.cpp
-        interface.cpp
-        interface.h
-        testing1.cpp
+        Source_files/library.cpp
+        Source_files/course.h
+        Source_files/class1.h
+        Source_files/student.h
+        Source_files/schedule.h
+        Source_files/student.cpp
+        Source_files/course.cpp
+        Source_files/class1.cpp
+        Source_files/interface.cpp
+        Source_files/interface.h
+        Source_files/testing1.cpp
 )
 
-file(COPY classes_per_uc.csv classes.csv students_classes.csv DESTINATION ${CMAKE_BINARY_DIR})
+file(COPY Data_files/classes_per_uc.csv Data_files/classes.csv Data_files/students_classes.csv DESTINATION ${CMAKE_BINARY_DIR})
 
 # Define the executable target
 add_executable(testing ${SOURCE_FILES})

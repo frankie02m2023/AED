@@ -39,8 +39,10 @@ void course::edit_class(class1 cl, schedule time1, string class_type){
 }
 
 void course::print_course_data() const {
+    cout << "----------------------------------------------" << endl;
     cout << "Course Code = " << course_code << endl;
-    cout << "Class list for course " << course_code << endl;
+    cout << "Class list for course: " << course_code << endl;
+    cout << "\n";
     for(class1 aclass : classes){
         aclass.print_class_data();
     }

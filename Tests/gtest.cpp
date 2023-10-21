@@ -2,10 +2,11 @@
 // Created by lucas on 21/10/2023.
 //
 #include <gtest/gtest.h>
-#include "student.h"
-#include "class1.h"
-#include "course.h"
-#include "interface.h"
+#include "../Source_files/student.h"
+#include "../Source_files/class1.h"
+#include "../Source_files/course.h"
+#include "../Source_files/interface.h"
+
 
 // Demonstrate some basic assertions.
 TEST(HelloTest, BasicAssertions) {

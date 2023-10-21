@@ -48,4 +48,11 @@ void class1::print_class_data() const {
     std::cout << "T Class schedule = " << T_class.week_day << " Start time - " <<  T_class.hour << " Duration - " << T_class.duration << endl;
     std::cout << "TP Class schedule = " << TP_class.week_day << " Start time - " <<  TP_class.hour << " Duration - " << TP_class.duration << endl;
     std::cout << "PL Class schedule = " << PL_class.week_day << " Start time - " <<  PL_class.hour << " Duration - " << PL_class.duration << endl;
+    for(const student& s : students){
+        s.print_student();
+    }
+    if(students.empty()){
+        std::cout << "There is no student in this class" << endl;
+    }
+    std::cout <<'\n';
 }

@@ -91,6 +91,55 @@ void interface::read_data_classes() {
     }
 }
 
+void interface::read_data_students_classes() {
+    ifstream f("students_classes.csv");
+    string line;
+    getline(f,line); //dummy
+
+    while(getline(f,line)){
+        //get student number
+        string student_number;
+        size_t s = line.find_first_of(',');
+        student_number = line.substr(0, s);
+        line = line.substr(s+1);
+
+        //get student name
+        string student_name;
+        s = line.find_first_of(',');
+        student_name = line.substr(0, s);
+        line = line.substr(s+1);
+
+        //get ucCode
+        string Uccode;
+        s = line.find_first_of(',');
+        Uccode = line.substr(0, s);
+        line = line.substr(s+1);
+
+        //get Classcode
+        string class_code;
+        s = line.find_first_of(',');
+        class_code = line.substr(0, s);
+        line = line.substr(s+1);
+
+        //create a new student
+        student new_student {student_name, student_number};
+
+        //place student in correct uc and class
+        for(course& c: courses){
+            if(c.get_course_name() == Uccode){
+                vector<class1> classes = c.get_classes();
+                for(class1& cl: classes){
+                    if(cl.get_class_name() == class_code){
+                        cl.add_students(new_student);
+                        c.set_classes(classes);
+                        break;
+                    }
+                }
+            }
+        }
+    }
+}
+
 void interface::print_data() const{
     cout << "Printing data for the entire system" << endl;
     for(course a_course : courses){

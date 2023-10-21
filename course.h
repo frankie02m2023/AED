@@ -11,6 +11,7 @@ public:
     course(string course);
     string get_course_name() const;
     vector<class1> get_classes() const;
+    void set_classes(vector<class1> classes);
     void add_class(class1 cl);
     bool operator==(const course& other_course) const;
     void edit_class(class1 cl, schedule time1, string class_type);

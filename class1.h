@@ -17,6 +17,7 @@ public:
     schedule get_T_class() const;
     schedule get_TP_class() const;
     schedule get_PL_class() const;
+    list<student> get_students() const;
     void set_T_class(const schedule& T_time);
     void set_TP_class(const schedule& TP_time);
     void set_PL_class(const schedule& PL_time);

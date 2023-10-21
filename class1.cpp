@@ -27,6 +27,10 @@ string class1::get_class_name() const {
     return class_name;
 }
 
+list<student> class1::get_students() const {
+    return students;
+}
+
 void class1::set_T_class(const schedule& T_time) {
     this->T_class = T_time;
 }

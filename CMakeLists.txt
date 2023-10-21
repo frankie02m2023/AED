@@ -3,6 +3,17 @@ project(TrabalhoAED)
 
 set(CMAKE_CXX_STANDARD 17)
 
+set( CMAKE_BUILD_TYPE_TMP "${CMAKE_BUILD_TYPE}" )
+set( CMAKE_BUILD_TYPE "Release" )
+add_subdirectory(googletest)
+include_directories(googletest/googletest/include)
+include_directories(googletest/googlemock/include)
+set( CMAKE_BUILD_TYPE ${CMAKE_BUILD_TYPE_TMP} )
+
+add_executable(googletest gtest.cpp)
+
+target_link_libraries(googletest gtest gtest_main)
+
 # List your source files for the executable
 set(SOURCE_FILES
         library.cpp

@@ -12,8 +12,7 @@
 
 class class1{
 public:
-    class1(string class_name);
-    class1(string class_name, schedule T_class, schedule TP_class, schedule PL_class);
+    class1(string class_name, schedule T_class = {"dont apply",0, 0 }, schedule TP_class = {"dont apply",0, 0 }, schedule PL_class = {"dont apply",0, 0 });
     string get_class_name() const;
     schedule get_T_class() const;
     schedule get_TP_class() const;

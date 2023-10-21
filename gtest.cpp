@@ -59,3 +59,30 @@ TEST(Data_readers,read_data_classes_per_uc){
     EXPECT_EQ(testi.courses[testi.courses.size()-1].get_classes().size(), test2.get_classes().size());
     EXPECT_NE(testi.courses[2], test1);
 }
+
+TEST(Data_readers,read_data_classes){
+    class1 test1 {"1LEIC01",{"Tuesday",10.5, 1.5 }, {"Monday", 10.5, 1.5} };
+    interface testi;
+    testi.read_data_classes_per_uc();
+    testi.read_data_classes();
+    course c = testi.courses[0];
+    class1 cl = c.get_classes()[0];
+    EXPECT_EQ(test1.get_class_name(), cl.get_class_name());
+    EXPECT_EQ(test1.get_T_class().duration, cl.get_T_class().duration);
+    EXPECT_EQ(test1.get_T_class().hour, cl.get_T_class().hour);
+    EXPECT_EQ(test1.get_T_class().week_day, cl.get_T_class().week_day);
+    EXPECT_EQ(test1.get_TP_class().week_day, cl.get_T_class().week_day);
+    EXPECT_EQ(test1.get_TP_class().hour, cl.get_TP_class().hour);
+    EXPECT_EQ(test1.get_TP_class().duration, cl.get_TP_class().duration);
+}
+
+TEST(Data_readers, read_data_students_classes){
+    student test1 {"Iara", "202025232"};
+    interface testi;
+    testi.read_data_classes_per_uc();
+    testi.read_data_classes();
+    testi.read_data_students_classes();
+    student s = testi.courses[0].get_classes()[0].get_students().front();
+    EXPECT_EQ(s.get_number(), test1.get_number());
+    EXPECT_EQ(s.get_name(), test1.get_name());
+}

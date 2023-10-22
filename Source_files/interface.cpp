@@ -7,6 +7,8 @@
 #include <fstream>
 #include <sstream>
 #include <algorithm>
+#include <utility>
+#include <functional>
 
 
 vector<course> interface::get_courses() const {
@@ -161,11 +163,46 @@ void interface::read_data_students_classes() {
     }
 }
 
+
 //TODO
 //Loop through courses and use course::has_class to check if a given course has the class you are looking for
 //If it does use course::get_class to get access to the class
 //Create a set of pairs where the first pair element is a course and the second is each class schedule
-void interface::consult_class_schedule(class1 a_class) const{}
+set<pair<pair<schedule,string>,course>> interface::get_class_schedule(class1 a_class) const{
+    set<pair<pair<schedule,string>,course>> class_schedule;
+    class1 a_class_copy = a_class;
+    string class_type;
+    for(course a_course : courses){
+        if(a_course.get_class(a_class)){
+            if(a_class.get_T_class().week_day != "Dont Apply"){
+                class_type = "T";
+                class_schedule.insert(make_pair(make_pair(a_class.get_T_class(),class_type),a_course));
+            }
+            if(a_class.get_TP_class().week_day != "Dont Apply"){
+                class_type = "TP";
+                class_schedule.insert(make_pair(make_pair(a_class.get_TP_class(),class_type),a_course));
+            }
+            if(a_class.get_PL_class().week_day != "Dont Apply"){
+                class_type = "PL";
+                class_schedule.insert(make_pair(make_pair(a_class.get_PL_class(),class_type),a_course));
+            }
+        }
+        a_class = a_class_copy;
+    }
+    return class_schedule;
+}
+
+//TODO
+void interface::consult_class_schedule(class1 a_class) const {
+    set<pair<pair<schedule,string>,course>> class_schedule = get_class_schedule(a_class);
+    auto it = class_schedule.begin();
+    cout << "Schedule for class " << a_class.get_class_name() << ':' << endl;
+    while(it != class_schedule.end()){
+        cout << "Course " << it->second.get_course_name() << endl;
+        cout << "Class " << it->first.second << " Schedule = " << it->first.first.week_day << " " << class1::convert_class_to_hour_and_minute_format(it->first.first) << endl;
+        it++;
+    }
+}
 
 //TODO
 //Loop through courses and check if the given student is in course by using course::has_student

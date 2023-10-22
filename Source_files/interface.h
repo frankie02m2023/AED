@@ -4,6 +4,7 @@
 
 #ifndef TRABALHOAED_INTERFACE_H
 #define TRABALHOAED_INTERFACE_H
+#include <set>
 #include "course.h"
 #include <queue>
 #include "course_request.h"
@@ -19,6 +20,7 @@ public:
     void read_data_classes_per_uc();
     void read_data_classes();
     void read_data_students_classes();
+    set<pair<pair<schedule,string>,course>> get_class_schedule(class1 a_class) const;
     void consult_class_schedule(class1 a_class) const;
     void consult_student_schedule(student a_student) const;
     void print_data() const;

@@ -5,6 +5,7 @@
 
 int main(){
     schedule_system system;
-    system.print_current_schedule_system_data();
+    class1 test_class("1LEIC05");
+    system.system_changes.top().consult_class_schedule(test_class);
     return 0;
 }

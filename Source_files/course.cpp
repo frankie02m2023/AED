@@ -49,8 +49,11 @@ void course::print_course_data() const {
     }
 }
 
-bool course::has_class(class1 cl) const {
+bool course::get_class(class1& cl) const {
     auto it = std::find(classes.begin(),classes.end(),cl);
+    if(it != classes.end()){
+        cl = *it;
+    }
     return it != classes.end();
 }
 
@@ -71,4 +74,9 @@ bool course::operator==(const course& other_course) const {
 
 bool course::operator!=(const course& other_course) const {
     return  other_course.course_code != course_code;
+}
+
+bool course::operator<(const course& other_course) const {
+
+    return course_code < other_course.course_code;
 }

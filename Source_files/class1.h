@@ -25,7 +25,8 @@ public:
     void add_students(student st);
     bool operator==(const class1& other_class1) const;
     bool operator!=(const class1& other_class1) const;
-    string convert_class_to_hour_and_minute_format(schedule class_schedule) const;
+    void operator=(const class1& other_class1);
+    static string convert_class_to_hour_and_minute_format(schedule class_schedule);
     string convert_T_class_to_hour_and_minute_format() const;
     string convert_TP_class_to_hour_and_minute_format() const;
     string convert_PL_class_to_hour_and_minute_format() const;

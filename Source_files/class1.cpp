@@ -61,7 +61,15 @@ bool class1::operator!=(const class1& other_class1) const {
     return other_class1.class_name != class_name;
 }
 
-string class1::convert_class_to_hour_and_minute_format(schedule class_schedule) const {
+void class1::operator=(const class1& other_class1){
+    class_name = other_class1.class_name;
+    T_class = other_class1.T_class;
+    TP_class = other_class1.TP_class;
+    PL_class = other_class1.PL_class;
+    students = other_class1.students;
+}
+
+string class1::convert_class_to_hour_and_minute_format(schedule class_schedule){
     string time_and_duration, start_time_hour, start_time_minute, duration_hours, duration_minutes;
     stringstream ss;
     int class_start_hour = static_cast<int>(class_schedule.hour);

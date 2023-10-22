@@ -3,6 +3,7 @@
 //
 
 #include "course.h"
+#include <algorithm>
 
 course::course(std::string course) {
     course_code = course;
@@ -47,6 +48,20 @@ void course::print_course_data() const {
         aclass.print_class_data();
     }
 }
+
+bool course::has_class(class1 cl) const {
+    auto it = std::find(classes.begin(),classes.end(),cl);
+    return it != classes.end();
+}
+
+
+//TODO
+bool course::has_student(student st) const{
+    return true;
+}
+
+//TODO
+class1 course::get_student_class(student st) const{}
 
 
 bool course::operator==(const course& other_course) const {

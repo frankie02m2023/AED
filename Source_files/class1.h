@@ -3,6 +3,7 @@
 //
 #ifndef CLASS1_H
 #define CLASS1_H
+#include <algorithm>
 #include <list>
 #include <string>
 #include <iostream>
@@ -22,6 +23,13 @@ public:
     void set_TP_class(const schedule& TP_time);
     void set_PL_class(const schedule& PL_time);
     void add_students(student st);
+    bool operator==(const class1& other_class1) const;
+    bool operator!=(const class1& other_class1) const;
+    string convert_class_to_hour_and_minute_format(schedule class_schedule) const;
+    string convert_T_class_to_hour_and_minute_format() const;
+    string convert_TP_class_to_hour_and_minute_format() const;
+    string convert_PL_class_to_hour_and_minute_format() const;
+    bool student_in_class(student st) const;
     void print_class_data() const;
 private:
     string class_name;

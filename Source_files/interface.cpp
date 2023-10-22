@@ -9,8 +9,13 @@
 #include <algorithm>
 
 
+vector<course> interface::get_courses() const {
+    return courses;
+}
 
-
+queue<course_request> interface::get_requests() const {
+    return requests;
+}
 
 void interface::read_data_classes_per_uc() {
     string file, line;
@@ -155,6 +160,18 @@ void interface::read_data_students_classes() {
         }
     }
 }
+
+//TODO
+//Loop through courses and use course::has_class to check if a given course has the class you are looking for
+//If it does use course::get_class to get access to the class
+//Create a set of pairs where the first pair element is a course and the second is each class schedule
+void interface::consult_class_schedule(class1 a_class) const{}
+
+//TODO
+//Loop through courses and check if the given student is in course by using course::has_student
+//If it does use course::get_student_class to access his scheduled classes for the course
+//Create a set of pairs where the first pair element is a course and the second are the students' schedules for the different courses
+void interface::consult_student_schedule(student a_student) const{}
 
 void interface::print_data() const{
     cout << "Printing data for the entire system" << endl;

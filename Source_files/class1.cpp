@@ -80,7 +80,7 @@ string class1::convert_class_to_hour_and_minute_format(schedule class_schedule) 
     if(class_start_minute < 10){
         start_time_minute = '0' + start_time_minute;
     }
-    int class_duration_hours = static_cast<int>(TP_class.duration);
+    int class_duration_hours = static_cast<int>(class_schedule.duration);
     ss << class_duration_hours;
     duration_hours = ss.str() + "h ";
     ss.str("");
@@ -98,111 +98,15 @@ string class1::convert_class_to_hour_and_minute_format(schedule class_schedule) 
 }
 
 string class1::convert_T_class_to_hour_and_minute_format() const {
-    string time_and_duration, start_time_hour, start_time_minute, duration_hours, duration_minutes;
-    stringstream ss;
-    int T_class_start_hour = static_cast<int>(T_class.hour);
-    ss << T_class_start_hour;
-    start_time_hour = ss.str();
-    ss.str("");
-    ss.clear();
-    if(T_class_start_hour < 10){
-        start_time_hour = '0' + start_time_hour;
-    }
-    int T_class_start_minute = (T_class.hour - T_class_start_hour) * 60;
-    ss << T_class_start_minute;
-    start_time_minute = ss.str();
-    ss.str("");
-    ss.clear();
-    if(T_class_start_minute < 10){
-        start_time_minute = '0' + start_time_minute;
-    }
-    int T_class_duration_hours = static_cast<int>(T_class.duration);
-    ss << T_class_duration_hours;
-    duration_hours = ss.str() + "h ";
-    ss.str("");
-    ss.clear();
-    int T_class_duration_minutes = (T_class.duration - T_class_duration_hours) * 60;
-    ss << T_class_duration_minutes;
-    duration_minutes = ss.str() + "min";
-    ss.str("");
-    ss.clear();
-    if(T_class_duration_minutes == 0){
-        duration_minutes = "";
-    }
-    time_and_duration = start_time_hour + ':' + start_time_minute + " Duration = " + duration_hours + duration_minutes;
-    return time_and_duration;
+    return convert_class_to_hour_and_minute_format(T_class);
 }
 
 string class1::convert_TP_class_to_hour_and_minute_format() const {
-    string time_and_duration, start_time_hour, start_time_minute, duration_hours, duration_minutes;
-    stringstream ss;
-    int TP_class_start_hour = static_cast<int>(TP_class.hour);
-    ss << TP_class_start_hour;
-    start_time_hour = ss.str();
-    ss.str("");
-    ss.clear();
-    if(TP_class_start_hour < 10){
-        start_time_hour = '0' + start_time_hour;
-    }
-    int TP_class_start_minute = (TP_class.hour - TP_class_start_hour) * 60;
-    ss << TP_class_start_minute;
-    start_time_minute = ss.str();
-    ss.str("");
-    ss.clear();
-    if(TP_class_start_minute < 10){
-        start_time_minute = '0' + start_time_minute;
-    }
-    int TP_class_duration_hours = static_cast<int>(TP_class.duration);
-    ss << TP_class_duration_hours;
-    duration_hours = ss.str() + "h ";
-    ss.str("");
-    ss.clear();
-    int TP_class_duration_minutes = (TP_class.duration - TP_class_duration_hours) * 60;
-    ss << TP_class_duration_minutes;
-    duration_minutes = ss.str() + "min";
-    ss.str("");
-    ss.clear();
-    if(TP_class_duration_minutes == 0){
-        duration_minutes = "";
-    }
-    time_and_duration = start_time_hour + ':' + start_time_minute + " Duration = " + duration_hours + duration_minutes;
-    return time_and_duration;
+    return convert_class_to_hour_and_minute_format(TP_class);
 }
 
 string class1::convert_PL_class_to_hour_and_minute_format() const {
-    string time_and_duration, start_time_hour, start_time_minute, duration_hours, duration_minutes;
-    stringstream ss;
-    int PL_class_start_hour = static_cast<int>(PL_class.hour);
-    ss << PL_class_start_hour;
-    start_time_hour = ss.str();
-    ss.str("");
-    ss.clear();
-    if(PL_class_start_hour < 10){
-        start_time_hour = '0' + start_time_hour;
-    }
-    int PL_class_start_minute = (PL_class.hour - PL_class_start_hour) * 60;
-    ss << PL_class_start_minute;
-    start_time_minute = ss.str();
-    ss.str("");
-    ss.clear();
-    if(PL_class_start_minute < 10){
-        start_time_minute = '0' + start_time_minute;
-    }
-    int PL_class_duration_hours = static_cast<int>(PL_class.duration);
-    ss << PL_class_duration_hours;
-    duration_hours = ss.str() + "h ";
-    ss.str("");
-    ss.clear();
-    int PL_class_duration_minutes = (PL_class.duration - PL_class_duration_hours) * 60;
-    ss << PL_class_duration_minutes;
-    duration_minutes = ss.str() + "min";
-    ss.str("");
-    ss.clear();
-    if(PL_class_duration_minutes == 0){
-        duration_minutes = "";
-    }
-    time_and_duration = start_time_hour + ':' + start_time_minute + " Duration = " + duration_hours + duration_minutes;
-    return time_and_duration;
+    return convert_class_to_hour_and_minute_format(PL_class);
 }
 
 void class1::print_class_data() const {

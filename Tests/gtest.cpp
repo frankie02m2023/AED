@@ -6,6 +6,11 @@
 #include "../Source_files/class1.h"
 #include "../Source_files/course.h"
 #include "../Source_files/interface.h"
+#include "../Source_files/schedule.h"
+#include "../Source_files/schedule_system.h"
+#include "../Source_files/course_class_request.h"
+
+
 
 
 // Demonstrate some basic assertions.
@@ -63,7 +68,7 @@ TEST(Data_readers,read_data_classes_per_uc){
 
 TEST(Data_readers,read_data_classes){
     cout << "Testing read_data_classes " << endl;
-    class1 test1 {"1LEIC01",{"Tuesday",10.5, 1.5 }, {"Monday", 10.5, 1.5} };
+    class1 test1 {"1LEIC01",{"Tuesday",10.5, 1.5 },{},{"Monday", 10.5, 1.5} };
     interface testi;
     testi.read_data_classes_per_uc();
     testi.read_data_classes();
@@ -89,6 +94,7 @@ TEST(Data_readers, read_data_students_classes){
     EXPECT_EQ(s.get_number(), test1.get_number());
     EXPECT_EQ(s.get_name(), test1.get_name());
 }
+
 
 TEST(Schedule_readers, get_class_schedule) {
     cout << "Testing get_class_schedule" << endl;

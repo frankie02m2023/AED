@@ -29,7 +29,12 @@ void course::edit_class(class1 cl, schedule time1, string class_type){
     for (class1 &a_class: classes) {
         if (a_class.get_class_name() == cl.get_class_name()) {
             if (class_type == "T") {
-                a_class.set_T_class(time1);
+                if(a_class.get_T_class().week_day == "Dont Apply"){
+                    a_class.set_T_class(time1);
+                }
+                else{
+                    a_class.set_T_class_2(time1);
+                }
             } else if (class_type == "TP") {
                 a_class.set_TP_class(time1);
             } else {

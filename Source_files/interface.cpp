@@ -178,6 +178,10 @@ set<pair<pair<schedule,string>,course>> interface::get_class_schedule(class1 a_c
                 class_type = "T";
                 class_schedule.insert(make_pair(make_pair(a_class.get_T_class(),class_type),a_course));
             }
+            if(a_class.get_T_class_2().week_day != "Dont Apply"){
+                class_type = "T";
+                class_schedule.insert(make_pair(make_pair(a_class.get_T_class_2(),class_type),a_course));
+            }
             if(a_class.get_TP_class().week_day != "Dont Apply"){
                 class_type = "TP";
                 class_schedule.insert(make_pair(make_pair(a_class.get_TP_class(),class_type),a_course));

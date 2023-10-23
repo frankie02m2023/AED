@@ -5,9 +5,10 @@
 #include <sstream>
 #include "class1.h"
 
-class1::class1(std::string class_name, schedule T_class, schedule TP_class , schedule PL_class ) {
+class1::class1(std::string class_name, schedule T_class, schedule T_class_2, schedule TP_class , schedule PL_class ) {
     this->class_name = class_name;
     this->T_class = T_class;
+    this->T_class_2 = T_class_2;
     this->TP_class = TP_class;
     this->PL_class = PL_class;
 }
@@ -24,6 +25,10 @@ schedule class1::get_T_class() const {
     return T_class;
 }
 
+schedule class1::get_T_class_2() const {
+    return T_class_2;
+}
+
 string class1::get_class_name() const {
     return class_name;
 }
@@ -34,6 +39,10 @@ list<student> class1::get_students() const {
 
 void class1::set_T_class(const schedule& T_time) {
     this->T_class = T_time;
+}
+
+void class1::set_T_class_2(const schedule& T_time) {
+    this->T_class_2 = T_time;
 }
 
 void class1::set_TP_class(const schedule& TP_time) {
@@ -64,6 +73,7 @@ bool class1::operator!=(const class1& other_class1) const {
 void class1::operator=(const class1& other_class1){
     class_name = other_class1.class_name;
     T_class = other_class1.T_class;
+    T_class_2 = other_class1.T_class_2;
     TP_class = other_class1.TP_class;
     PL_class = other_class1.PL_class;
     students = other_class1.students;
@@ -109,6 +119,10 @@ string class1::convert_T_class_to_hour_and_minute_format() const {
     return convert_class_to_hour_and_minute_format(T_class);
 }
 
+string class1::convert_T_class2_to_hour_and_minute_format() const {
+    return convert_class_to_hour_and_minute_format(T_class_2);
+}
+
 string class1::convert_TP_class_to_hour_and_minute_format() const {
     return convert_class_to_hour_and_minute_format(TP_class);
 }
@@ -120,6 +134,7 @@ string class1::convert_PL_class_to_hour_and_minute_format() const {
 void class1::print_class_data() const {
     std::cout << "Class name = " << class_name << endl;
     std::cout << "T Class schedule = " << T_class.week_day << " Start time = " << convert_T_class_to_hour_and_minute_format() << endl;
+    std::cout << "T Class schedule = " << T_class_2.week_day << " Start time = " << convert_T_class2_to_hour_and_minute_format() << endl;
     std::cout << "TP Class schedule = " << TP_class.week_day << " Start time = " << convert_TP_class_to_hour_and_minute_format() << endl;
     std::cout << "PL Class schedule = " << PL_class.week_day << " Start time = " << convert_PL_class_to_hour_and_minute_format() << endl;
     for(const student& s : students){

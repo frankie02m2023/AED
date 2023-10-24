@@ -15,6 +15,7 @@ public:
     void add_class(class1 cl);
     bool get_class(class1& cl) const;
     bool has_student(student st) const;
+    int get_course_grade() const;
     class1 get_student_class(student st) const;
     bool operator==(const course& other_course) const;
     bool operator!=(const course& other_course) const;

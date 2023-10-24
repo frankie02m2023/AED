@@ -12,6 +12,10 @@ public:
     stack<interface> system_changes;
     schedule_system();
     void schedule_system_functions();
+    void consult_class_schedule(class1 a_class) const;
+    void consult_student_schedule(student a_student) const;
+    void consult_students_in_class_and_course(class1 a_class, course a_course) const;
+    void consult_students_in_class(class1 a_class) const;
     void print_current_schedule_system_data() const;
 };
 

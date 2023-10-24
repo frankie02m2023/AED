@@ -173,27 +173,53 @@ set<pair<pair<schedule,string>,course>> interface::get_class_schedule(class1 a_c
     class1 a_class_copy = a_class;
     string class_type;
     for(course a_course : courses){
-        if(a_course.get_class(a_class)){
-            if(a_class.get_T_class().week_day != "Dont Apply"){
-                class_type = "T";
-                class_schedule.insert(make_pair(make_pair(a_class.get_T_class(),class_type),a_course));
+        if(a_course.get_course_grade() == a_class.get_class_grade()) {
+            if (a_course.get_class(a_class)) {
+                if (a_class.get_T_class().week_day != "Dont Apply") {
+                    class_type = "T";
+                    class_schedule.insert(make_pair(make_pair(a_class.get_T_class(), class_type), a_course));
+                }
+                if (a_class.get_T_class_2().week_day != "Dont Apply") {
+                    class_type = "T";
+                    class_schedule.insert(make_pair(make_pair(a_class.get_T_class_2(), class_type), a_course));
+                }
+                if (a_class.get_TP_class().week_day != "Dont Apply") {
+                    class_type = "TP";
+                    class_schedule.insert(make_pair(make_pair(a_class.get_TP_class(), class_type), a_course));
+                }
+                if (a_class.get_PL_class().week_day != "Dont Apply") {
+                    class_type = "PL";
+                    class_schedule.insert(make_pair(make_pair(a_class.get_PL_class(), class_type), a_course));
+                }
             }
-            if(a_class.get_T_class_2().week_day != "Dont Apply"){
-                class_type = "T";
-                class_schedule.insert(make_pair(make_pair(a_class.get_T_class_2(),class_type),a_course));
-            }
-            if(a_class.get_TP_class().week_day != "Dont Apply"){
-                class_type = "TP";
-                class_schedule.insert(make_pair(make_pair(a_class.get_TP_class(),class_type),a_course));
-            }
-            if(a_class.get_PL_class().week_day != "Dont Apply"){
-                class_type = "PL";
-                class_schedule.insert(make_pair(make_pair(a_class.get_PL_class(),class_type),a_course));
-            }
+            a_class = a_class_copy;
         }
-        a_class = a_class_copy;
     }
     return class_schedule;
+}
+
+set<student> interface::get_class_students_for_all_courses(class1 a_class) const{
+    set<student> students;
+    for(course a_course : courses){
+        if(a_course.get_course_grade() == a_class.get_class_grade()){
+           if(a_course.get_class(a_class)){
+               for(student a_student : a_class.get_students()){
+                   students.insert(a_student);
+               }
+           }
+        }
+    }
+    return students;
+}
+
+list<student> interface::get_class_students_for_course(class1 a_class, course a_course) const{
+    list<student> students;
+    auto it = std::find(courses.begin(), courses.end(), a_course);
+    a_course = *it;
+    if(a_course.get_class(a_class)){
+        return a_class.get_students();
+    }
+    return students;
 }
 
 //TODO
@@ -213,6 +239,30 @@ void interface::consult_class_schedule(class1 a_class) const {
 //If it does use course::get_student_class to access his scheduled classes for the course
 //Create a set of pairs where the first pair element is a course and the second are the students' schedules for the different courses
 void interface::consult_student_schedule(student a_student) const{}
+
+void interface::consult_students_in_class(class1 a_class) const {
+    set<student> students = get_class_students_for_all_courses(a_class);
+    auto it = students.begin();
+    cout << "List of students for class " << a_class.get_class_name() << " in all available courses for this class: " << endl;
+    while(it != students.end()){
+        it->print_student();
+        it++;
+    }
+}
+
+
+void interface::consult_students_in_class_and_course(class1 a_class, course a_course) const{
+    list<student> students = get_class_students_for_course(a_class,a_course);
+    if(!students.empty()){
+        cout << "List of students for class " << a_class.get_class_name() << " in course " << a_course.get_course_name() << ':' << endl;
+        for(student a_student : students){
+            a_student.print_student();
+        }
+    }
+    else{
+        cout << "Your input class does not exist in your input course! Please try again." << endl;
+    }
+}
 
 void interface::print_data() const{
     cout << "Printing data for the entire system" << endl;

@@ -62,6 +62,10 @@ bool class1::student_in_class(student st) const {
     return it != students.end();
 }
 
+int class1::get_class_grade() const{
+    return class_name[0] - '0';
+}
+
 bool class1::operator==(const class1& other_class1) const {
     return other_class1.class_name == class_name;
 }

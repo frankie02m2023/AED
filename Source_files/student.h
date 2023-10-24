@@ -15,6 +15,8 @@ public:
     string get_number() const;
     bool operator==(const student& other_student) const;
     bool operator!=(const student& other_student) const;
+    bool operator<(const student& other_student) const;
+    bool operator>(const student& other_student) const;
     void print_student() const;
 
 private:

@@ -143,10 +143,16 @@ TEST(Schedule_readers, get_class_schedule) {
     string class_type11 = "T";
     course course11("L.EIC005");
     expected_class_schedule.insert(make_pair(make_pair(schedule11,class_type11),course11));
+    schedule schedule12("Wednesday", 15.5, 1.5);
+    string class_type12 = "TP";
+    course course12("UP001");
+    expected_class_schedule.insert(make_pair(make_pair(schedule12,class_type12),course12));
     interface testi;
+    testi.read_data_classes_per_uc();
+    testi.read_data_classes();
+    testi.read_data_students_classes();
     class1 test_class1("1LEIC05");
-    set<pair<pair<schedule,string>,course>> class_schedule;
-    class_schedule = testi.get_class_schedule(test_class1);
+    set<pair<pair<schedule,string>,course>> class_schedule = testi.get_class_schedule(test_class1);
     EXPECT_EQ(expected_class_schedule.size(), class_schedule.size());
     EXPECT_EQ(expected_class_schedule,class_schedule);
 

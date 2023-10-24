@@ -25,6 +25,7 @@ public:
     void set_TP_class(const schedule& TP_time);
     void set_PL_class(const schedule& PL_time);
     void add_students(student st);
+    int get_class_grade() const;
     bool operator==(const class1& other_class1) const;
     bool operator!=(const class1& other_class1) const;
     void operator=(const class1& other_class1);

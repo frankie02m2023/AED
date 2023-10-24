@@ -21,8 +21,12 @@ public:
     void read_data_classes();
     void read_data_students_classes();
     set<pair<pair<schedule,string>,course>> get_class_schedule(class1 a_class) const;
+    set<student> get_class_students_for_all_courses(class1 a_class) const;
+    list<student> get_class_students_for_course(class1 a_class, course a_course) const;
     void consult_class_schedule(class1 a_class) const;
     void consult_student_schedule(student a_student) const;
+    void consult_students_in_class(class1 a_class) const;
+    void consult_students_in_class_and_course(class1 a_class, course a_course) const;
     void print_data() const;
 };
 

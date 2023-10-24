@@ -62,7 +62,9 @@ bool course::get_class(class1& cl) const {
     return it != classes.end();
 }
 
-
+int course::get_course_grade() const {
+    return classes[0].get_class_grade();
+}
 //TODO
 bool course::has_student(student st) const{
     return true;

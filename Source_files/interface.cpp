@@ -251,7 +251,7 @@ void interface::consult_class_schedule(class1 a_class) const {
 //Create a set of pairs where the first pair element is a course and the second are the students' schedules for the different courses
 void interface::consult_student_schedule(student a_student) const{}
 
-//prints students in a class
+//NEEDS TO BE REMOVED
 void interface::consult_students_in_class(class1 a_class) const {
     set<student> students = get_class_students_for_all_courses(a_class);
     auto it = students.begin();
@@ -262,7 +262,7 @@ void interface::consult_students_in_class(class1 a_class) const {
     }
 }
 
-//NEEDS TO BE REMOVED
+//prints the students in a given class
 void interface::consult_students_in_class_and_course(class1 a_class, course a_course) const{
     list<student> students = get_class_students_for_course(a_class,a_course);
     if(!students.empty()){

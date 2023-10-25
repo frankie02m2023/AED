@@ -86,35 +86,55 @@ void class1::operator=(const class1& other_class1){
 string class1::convert_class_to_hour_and_minute_format(schedule class_schedule){
     string time_and_duration, start_time_hour, start_time_minute, duration_hours, duration_minutes;
     stringstream ss;
+
+    //get the start hour in the float format from the schedule and convert into string
     int class_start_hour = static_cast<int>(class_schedule.hour);
     ss << class_start_hour;
     start_time_hour = ss.str();
+
     ss.str("");
     ss.clear();
+
+    //convert the hour into the format '00'
     if(class_start_hour < 10){
         start_time_hour = '0' + start_time_hour;
     }
+
+    //get the start minutes from the schedule and convert into string
     int class_start_minute = (class_schedule.hour - class_start_hour) * 60;
     ss << class_start_minute;
     start_time_minute = ss.str();
+
     ss.str("");
     ss.clear();
+
+    //convert the start minutes into the format '00'
     if(class_start_minute < 10){
         start_time_minute = '0' + start_time_minute;
     }
+
+    //get duration hour part in the float format and convert it into string
     int class_duration_hours = static_cast<int>(class_schedule.duration);
     ss << class_duration_hours;
     duration_hours = ss.str() + "h ";
+
     ss.str("");
     ss.clear();
+
+    //get duration minute part and convert it into string
     int class_duration_minutes = (class_schedule.duration - class_duration_hours) * 60;
     ss << class_duration_minutes;
     duration_minutes = ss.str() + "min";
+
     ss.str("");
     ss.clear();
+
+    //convert the duration minute part into the format '00'
     if(class_duration_minutes == 0){
         duration_minutes = "";
     }
+
+    //joins everythin into the format '00:00 Duration = 0h00min'
     time_and_duration = start_time_hour + ':' + start_time_minute + " Duration = " + duration_hours + duration_minutes;
     return time_and_duration;
 }

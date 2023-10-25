@@ -19,6 +19,9 @@ queue<course_request> interface::get_requests() const {
     return requests;
 }
 
+
+//reads data from the file "classes_per_uc.csv"
+//and organizes the data into the correct data structures
 void interface::read_data_classes_per_uc() {
     string file, line;
     file = "classes_per_uc.csv";
@@ -50,6 +53,8 @@ void interface::read_data_classes_per_uc() {
     }
 }
 
+//reads data from the file "classes.csv"
+//and organizes the data into the correct data structures
 void interface::read_data_classes() {
     string file, line;
     file = "classes.csv";
@@ -108,6 +113,8 @@ void interface::read_data_classes() {
     }
 }
 
+//reads data from the file "students_classes.csv"
+//and organizes the data into the correct data structures
 void interface::read_data_students_classes() {
     ifstream f("students_classes.csv");
     string line;
@@ -169,9 +176,10 @@ void interface::read_data_students_classes() {
 //If it does use course::get_class to get access to the class
 //Create a set of pairs where the first pair element is a course and the second is each class schedule
 set<pair<pair<schedule,string>,course>> interface::get_class_schedule(class1 a_class) const{
-    set<pair<pair<schedule,string>,course>> class_schedule;
+    set<pair<pair<schedule,string>,course>> class_schedule; //schedule for each class
     class1 a_class_copy = a_class;
     string class_type;
+
     for(course a_course : courses){
         if(a_course.get_course_grade() == a_class.get_class_grade()) {
             if (a_course.get_class(a_class)) {
@@ -198,6 +206,7 @@ set<pair<pair<schedule,string>,course>> interface::get_class_schedule(class1 a_c
     return class_schedule;
 }
 
+//NEEDS TO BE REMOVED
 set<student> interface::get_class_students_for_all_courses(class1 a_class) const{
     set<student> students;
     for(course a_course : courses){
@@ -212,6 +221,7 @@ set<student> interface::get_class_students_for_all_courses(class1 a_class) const
     return students;
 }
 
+//gets the students in a class for a specific course
 list<student> interface::get_class_students_for_course(class1 a_class, course a_course) const{
     list<student> students;
     auto it = std::find(courses.begin(), courses.end(), a_course);
@@ -223,6 +233,7 @@ list<student> interface::get_class_students_for_course(class1 a_class, course a_
 }
 
 //TODO
+//prints the given class schedule
 void interface::consult_class_schedule(class1 a_class) const {
     set<pair<pair<schedule,string>,course>> class_schedule = get_class_schedule(a_class);
     auto it = class_schedule.begin();
@@ -240,6 +251,7 @@ void interface::consult_class_schedule(class1 a_class) const {
 //Create a set of pairs where the first pair element is a course and the second are the students' schedules for the different courses
 void interface::consult_student_schedule(student a_student) const{}
 
+//prints students in a class
 void interface::consult_students_in_class(class1 a_class) const {
     set<student> students = get_class_students_for_all_courses(a_class);
     auto it = students.begin();
@@ -250,7 +262,7 @@ void interface::consult_students_in_class(class1 a_class) const {
     }
 }
 
-
+//NEEDS TO BE REMOVED
 void interface::consult_students_in_class_and_course(class1 a_class, course a_course) const{
     list<student> students = get_class_students_for_course(a_class,a_course);
     if(!students.empty()){
@@ -264,6 +276,7 @@ void interface::consult_students_in_class_and_course(class1 a_class, course a_co
     }
 }
 
+//prints the data in the entire system
 void interface::print_data() const{
     cout << "Printing data for the entire system" << endl;
     for(course a_course : courses){

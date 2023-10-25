@@ -249,3 +249,34 @@ TEST(Schedule_readers, get_class_students_for_course){
     EXPECT_EQ(expected.size(), student_test.size());
     EXPECT_EQ(expected, student_test);
 }
+
+TEST(Course_operations, edit_class) {
+    cout << "Testing edit_class" << endl;
+
+    //initialize the first expected class
+    class1 expected = {"1LEIC01",{"Monday", 10, 2}};
+
+    //initialize the testing course
+    course course_test = {"test"};
+
+    //initialize the testing class
+    class1 class_test  {"1LEIC01"};
+
+    //class_test modified by the function we want to test
+    course_test.add_class(class_test);
+    course_test.edit_class(class_test,{"Monday", 10, 2}, "T");
+    course_test.get_class(class_test);
+
+    //assertion
+    EXPECT_EQ(expected, class_test);
+
+    //more modifications
+    course_test.edit_class(class_test,{"Monday", 12, 2}, "TP");
+    course_test.edit_class(class_test,{"Tuesday", 10, 2}, "PL");
+
+    //initialize second expected class
+    class1 expected2 = {"1LEIC01",{"Monday", 10, 2}, {"Dont aplly",0,0 }, {"Monday", 12, 2}, {"Tuesday", 10, 2}};
+
+    //assertion
+    EXPECT_EQ(expected2, class_test);
+}

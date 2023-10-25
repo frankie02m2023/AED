@@ -17,7 +17,6 @@ target_link_libraries(googletest gtest gtest_main)
 
 # List your source files for the executable
 set(SOURCE_FILES
-        Source_files/library.cpp
         Source_files/course.h
         Source_files/class1.h
         Source_files/student.h

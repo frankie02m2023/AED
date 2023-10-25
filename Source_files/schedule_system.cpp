@@ -27,6 +27,7 @@ void schedule_system::consult_students_in_class(class1 a_class) const{
     system_changes.top().consult_students_in_class(a_class);
 }
 
+//Controls the flow of the program according to the users instructions
 void schedule_system::schedule_system_functions(){
     std::cout << "Write 1 in the terminal if you wish to read data in the system" << endl;
     std::cout << "Write 2 in the terminal if you wish to insert new data into the system" << endl;

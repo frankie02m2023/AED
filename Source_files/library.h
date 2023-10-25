@@ -1,6 +1,0 @@
-#ifndef TRABALHOAED_LIBRARY_H
-#define TRABALHOAED_LIBRARY_H
-
-void hello();
-
-#endif //TRABALHOAED_LIBRARY_H

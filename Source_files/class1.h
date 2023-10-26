@@ -36,6 +36,7 @@ public:
     string convert_PL_class_to_hour_and_minute_format() const;
     bool student_in_class(student st) const;
     void print_class_data() const;
+    void print_class_schedule() const;
 private:
     string class_name;
     schedule T_class;

@@ -67,11 +67,22 @@ int course::get_course_grade() const {
 }
 //TODO
 bool course::has_student(student st) const{
-    return true;
+    for(class1 cl: classes){
+        if(cl.student_in_class(st))
+            return true;
+    }
+    return false;
 }
 
 //TODO
-class1 course::get_student_class(student st) const{}
+class1 course::get_student_class(student st) const{
+    class1 dummy {"Dummy"};
+    for(class1 cl: classes){
+        if(cl.student_in_class(st))
+            return cl;
+    }
+    return dummy;
+}
 
 
 bool course::operator==(const course& other_course) const {

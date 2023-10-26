@@ -280,3 +280,41 @@ TEST(Course_operations, edit_class) {
     //assertion
     EXPECT_EQ(expected2, class_test);
 }
+
+TEST(Course_operations, has_student){
+    //initialize the test values
+    course test_course {"test"};
+    class1 test_class{"test class"};
+    student test_student1 {"Lucas", "123456789"};
+    student test_student2 {"Francisco", "987654321"};
+    test_class.add_students(test_student1);
+    test_course.add_class(test_class);
+
+    //call the function we want to tes
+    bool test_value = test_course.has_student(test_student1);
+    bool test_value2 = test_course.has_student(test_student2);
+
+    //assertions
+    EXPECT_EQ(test_value, true);
+    EXPECT_EQ(test_value2, false);
+
+}
+
+TEST(Course_operations, get_student_class){
+    //initialize the test values
+    course test_course {"test"};
+    class1 test_class{"test class"};
+    class1 test_class2 {"Dummy"};
+    student test_student1 {"Lucas", "123456789"};
+    student test_student2 {"Francisco", "987654321"};
+    test_class.add_students(test_student1);
+    test_course.add_class(test_class);
+
+    //call the function we want to test
+    class1 test_values_1 = test_course.get_student_class(test_student1);
+    class1 test_values_2 = test_course.get_student_class(test_student2);
+
+    //assertions
+    EXPECT_EQ(test_values_1, test_class);
+    EXPECT_EQ(test_values_2, test_class2);
+}

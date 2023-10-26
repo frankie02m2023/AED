@@ -241,6 +241,7 @@ void interface::consult_class_schedule(class1 a_class) const {
     while(it != class_schedule.end()){
         cout << "Course " << it->second.get_course_name() << endl;
         cout << "Class " << it->first.second << " Schedule = " << it->first.first.week_day << " " << class1::convert_class_to_hour_and_minute_format(it->first.first) << endl;
+        cout << '\n';
         it++;
     }
 }
@@ -249,7 +250,20 @@ void interface::consult_class_schedule(class1 a_class) const {
 //Loop through courses and check if the given student is in course by using course::has_student
 //If it does use course::get_student_class to access his scheduled classes for the course
 //Create a set of pairs where the first pair element is a course and the second are the students' schedules for the different courses
-void interface::consult_student_schedule(student a_student) const{}
+void interface::consult_student_schedule(student a_student) const{
+    cout << "Schedule for student " << a_student.get_name() << ", number " << a_student.get_number() <<":" << endl;
+    
+    for(course c: courses){
+        if(c.has_student(a_student)){
+           class1 cl = c.get_student_class(a_student);
+           cout << '\n';
+           cout << "---------------------------" << endl;
+           cout << "Course: " << c.get_course_name() << endl;
+           cout << '\n';
+           cl.print_class_schedule();
+        }
+    }
+}
 
 //NEEDS TO BE REMOVED
 void interface::consult_students_in_class(class1 a_class) const {

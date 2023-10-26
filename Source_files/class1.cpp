@@ -134,7 +134,7 @@ string class1::convert_class_to_hour_and_minute_format(schedule class_schedule){
         duration_minutes = "";
     }
 
-    //joins everythin into the format '00:00 Duration = 0h00min'
+    //joins everything into the format '00:00 Duration = 0h00min'
     time_and_duration = start_time_hour + ':' + start_time_minute + " Duration = " + duration_hours + duration_minutes;
     return time_and_duration;
 }
@@ -168,5 +168,13 @@ void class1::print_class_data() const {
         std::cout << "There is no student in this class" << endl;
     }
     std::cout <<'\n';
+}
+
+void class1::print_class_schedule() const {
+    std::cout << "Class name = " << class_name << endl;
+    std::cout << "T Class schedule = " << T_class.week_day << " Start time = " << convert_T_class_to_hour_and_minute_format() << endl;
+    std::cout << "T Class schedule = " << T_class_2.week_day << " Start time = " << convert_T_class2_to_hour_and_minute_format() << endl;
+    std::cout << "TP Class schedule = " << TP_class.week_day << " Start time = " << convert_TP_class_to_hour_and_minute_format() << endl;
+    std::cout << "PL Class schedule = " << PL_class.week_day << " Start time = " << convert_PL_class_to_hour_and_minute_format() << endl;
 }
 

@@ -15,6 +15,7 @@ class class1{
 public:
     class1(){};
     class1(string class_name, schedule T_class = {"Dont Apply",0, 0 },schedule T_class_2 = {"Dont Apply", 0, 0}, schedule TP_class = {"Dont Apply",0, 0 }, schedule PL_class = {"Dont Apply",0, 0 });
+    static short student_capacity;
     string get_class_name() const;
     schedule get_T_class() const;
     schedule get_T_class_2() const;
@@ -26,9 +27,11 @@ public:
     void set_TP_class(const schedule& TP_time);
     void set_PL_class(const schedule& PL_time);
     void add_students(student st);
+    void remove_students(student st);
     int get_class_grade() const;
     bool operator==(const class1& other_class1) const;
     bool operator!=(const class1& other_class1) const;
+    bool operator<(const class1& other_class1) const;
     void operator=(const class1& other_class1);
     static string convert_class_to_hour_and_minute_format(schedule class_schedule);
     string convert_T_class_to_hour_and_minute_format() const;
@@ -36,6 +39,9 @@ public:
     string convert_TP_class_to_hour_and_minute_format() const;
     string convert_PL_class_to_hour_and_minute_format() const;
     bool student_in_class(student st) const;
+    student get_student_in_class(student st) const;
+    bool under_max_student_capicity() const;
+    bool overlapping_class(const class1& other_class) const;
     void print_class_data() const;
     void print_class_schedule() const;
 private:
@@ -46,6 +52,7 @@ private:
     schedule PL_class;
     list<student> students;
 };
+bool overlapping_schedule(const schedule& schedule1, const schedule &schedule2);
 
 #endif
 

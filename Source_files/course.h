@@ -20,6 +20,8 @@ public:
     bool operator==(const course& other_course) const;
     bool operator!=(const course& other_course) const;
     bool operator<(const course& other_course) const;
+    bool check_class_balance() const;
+    bool can_add_student_to_class(class1& cl, student& st);
     void edit_class(class1 cl, schedule time1, string class_type);
     void print_course_data() const;
 
@@ -27,5 +29,7 @@ private:
     string course_code;
     vector<class1> classes;
 };
+
+bool compare_class_ocupation(class1 cl1, class1 cl2);
 
 #endif

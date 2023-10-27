@@ -19,6 +19,10 @@ void schedule_system::consult_class_schedule(class1 a_class) const {
     system_changes.top().consult_class_schedule(a_class);
 }
 
+void schedule_system::consult_student_schedule(student a_student) const {
+    system_changes.top().consult_student_schedule_by_course(a_student);
+}
+
 void schedule_system::consult_students_in_class_and_course(class1 a_class, course a_course) const {
     system_changes.top().consult_students_in_class_and_course(a_class,a_course);
 }
@@ -65,7 +69,7 @@ void schedule_system::schedule_system_functions(){
             cin >> student_number;
             cout << endl;
             student target_student(student_name, student_number);
-            system_changes.top().consult_student_schedule(target_student);
+            system_changes.top().consult_student_schedule_by_schedule(target_student);
         }
 
         else if(option == '3'){

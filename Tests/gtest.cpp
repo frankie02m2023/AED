@@ -342,3 +342,72 @@ TEST(Schedule_readers,  get_all_students_in_aCourse){
     EXPECT_NE(it1, students_test.end());
     EXPECT_NE(it2, students_test.end());
 }
+
+TEST(Schedule_operations,overlapping_schedules){
+    schedule schedule1("Monday",10.5,2.0);
+    schedule schedule2("Friday",8.0,1.5);
+    schedule schedule3("Monday",11.0,2.0);
+    schedule schedule4("Monday",11.0,1.0);
+    schedule schedule5("Friday",9.5,2.0);
+    schedule schedule6("Dont Apply",0,0);
+    EXPECT_FALSE(overlapping_schedule(schedule1,schedule2));
+    EXPECT_TRUE(overlapping_schedule(schedule1,schedule3));
+    EXPECT_TRUE(overlapping_schedule(schedule1,schedule4));
+    EXPECT_TRUE(overlapping_schedule(schedule3,schedule4));
+    EXPECT_FALSE(overlapping_schedule(schedule2,schedule5));
+    EXPECT_FALSE(overlapping_schedule(schedule5,schedule6));
+}
+
+//This function turned out to be useless I think
+TEST(Schedule_operations, overlapping_classes){
+    schedule scheduleT1_1("Wednesday",14.0,1.0);
+    schedule scheduleT2_1("Friday",14.0,1.0);
+    schedule scheduleTP_1("Friday",10.5,2.0);
+    schedule scheduleT1_2("Wednesday",14.0,1.0);
+    schedule scheduleT2_2("Friday",14.0,1.0);
+    schedule scheduleTP_2("Friday",10.5,2.0);
+    class1 class_1("2LEIC01");
+    class1 class_2("2LEIC05");
+    class_1.set_T_class(scheduleT1_1);
+    class_1.set_T_class_2(scheduleT2_1);
+    class_1.set_TP_class(scheduleTP_1);
+    class_2.set_T_class(scheduleT1_2);
+    class_2.set_T_class_2(scheduleT2_2);
+    class_2.set_TP_class(scheduleTP_2);
+    EXPECT_TRUE(class_1.overlapping_class(class_2));
+    EXPECT_TRUE(class_2.overlapping_class(class_1));
+
+    schedule scheduleT_3("Thursday",9.0,2.0);
+    schedule scheduleTP_3("Tuesday",10.0,2.0);
+    schedule schedulePL_3("Friday",8.0,2.0);
+    schedule scheduleT_4("Friday",8.5,2.0);
+    schedule scheduleTP_4("Monday",15.0,2.0);
+    schedule schedulePL_4("Thursday",10.5,2.0);
+    class1 class_3("3LEIC08");
+    class1 class_4("3LEIC02");
+    class_3.set_T_class(scheduleT_3);
+    class_3.set_TP_class(scheduleTP_3);
+    class_3.set_PL_class(schedulePL_3);
+    class_4.set_T_class(scheduleT_4);
+    class_4.set_TP_class(scheduleTP_4);
+    class_4.set_PL_class(schedulePL_4);
+    EXPECT_FALSE(class_3.overlapping_class(class_4));
+    EXPECT_FALSE(class_4.overlapping_class(class_3));
+
+    schedule scheduleT_5("Tuesday",8.5,1.5);
+    schedule scheduleTP_5("Tuesday",10.0,2.0);
+    schedule schedulePL_5("Friday",11.0,2.0);
+    schedule scheduleT_6("Tuesday",8.5,1.5);
+    schedule scheduleTP_6("Wednesday",10.0,2.0);
+    schedule schedulePL_6("Tuesday",10.0,2.0);
+    class1 class_5("1LEIC13");
+    class1 class_6("1LEIC14");
+    class_5.set_T_class(scheduleT_5);
+    class_5.set_TP_class(scheduleTP_5);
+    class_5.set_PL_class(schedulePL_5);
+    class_6.set_T_class(scheduleT_6);
+    class_6.set_TP_class(scheduleTP_6);
+    class_6.set_PL_class(schedulePL_6);
+    EXPECT_TRUE(class_5.overlapping_class(class_6));
+    EXPECT_TRUE(class_6.overlapping_class(class_5));
+}

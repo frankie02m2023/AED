@@ -31,10 +31,12 @@ public:
     void consult_class_schedule(const class1& a_class) const;
     void consult_student_schedule(const student& a_student) const;
     void consult_students_in_class(const class1& a_class) const;
-    void consult_students_in_class_and_course(const class1& a_class, const course& a_course) const;
-    void consult_all_students_in_aCourse(const course& a_course) const;
-    void consult_all_students_in_aYear(int year) const;
+    void consult_students_in_class_and_course(const class1& a_class, const course& a_course,  string sortby, string sort_option) const;
+    void consult_all_students_in_aCourse(const course& a_course,  string sortby, string sort_option) const;
+    void consult_all_students_in_aYear(int year,  string sortby, string sort_option) const;
+    void consult_classes_and_courses_occupation_by_year(int year, string sorting_uc, string sorting_classes);
     void print_data() const;
+
 };
 
 

@@ -11,7 +11,7 @@ include_directories(googletest/googlemock/include)
 set( CMAKE_BUILD_TYPE ${CMAKE_BUILD_TYPE_TMP} )
 
 add_executable(googletest Tests/gtest.cpp Source_files/student.cpp Source_files/interface.cpp Source_files/class1.cpp Source_files/course.cpp Source_files/schedule.cpp
-        Source_files/course_class_request.cpp Source_files/course_request.cpp)
+        Source_files/course_class_request.cpp Source_files/course_request.cpp Source_files/sorting_options.cpp)
 
 target_link_libraries(googletest gtest gtest_main)
 
@@ -34,6 +34,8 @@ set(SOURCE_FILES
         Source_files/course_class_request.cpp
         Source_files/course_class_request.h
         Source_files/schedule.cpp
+        Source_files/sorting_options.cpp
+        Source_files/sorting_options.h
 )
 
 file(COPY Data_files/classes_per_uc.csv Data_files/classes.csv Data_files/students_classes.csv DESTINATION ${CMAKE_BINARY_DIR})

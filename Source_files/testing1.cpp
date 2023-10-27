@@ -12,7 +12,9 @@ int main(){
      test.read_data_classes_per_uc();
      test.read_data_classes();
      test.read_data_students_classes();
-     course a {"L.EIC001"};
-     test.consult_all_students_in_aCourse(a);
+     //test.consult_all_students_in_aYear(1, "name", "descending");
+     class1 cl {"1LEIC02"};
+     course c {"L.EIC001"};
+     test.consult_students_in_class_and_course(cl, c, "number", "ascending");
     return 0;
 }

@@ -65,7 +65,7 @@ bool course::get_class(class1& cl) const {
 int course::get_course_grade() const {
     return classes[0].get_class_grade();
 }
-//TODO
+
 bool course::has_student(student st) const{
     for(class1 cl: classes){
         if(cl.student_in_class(st))
@@ -74,7 +74,6 @@ bool course::has_student(student st) const{
     return false;
 }
 
-//TODO
 class1 course::get_student_class(student st) const{
     class1 dummy {"Dummy"};
     for(class1 cl: classes){
@@ -84,6 +83,13 @@ class1 course::get_student_class(student st) const{
     return dummy;
 }
 
+size_t course::number_of_students() const {
+    size_t res = 0;
+    for(class1 cl: classes){
+        res += cl.get_students().size();
+    }
+    return res;
+}
 
 bool course::operator==(const course& other_course) const {
 

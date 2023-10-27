@@ -390,5 +390,4 @@ TEST(Schedule_readers, number_of_students){
     EXPECT_EQ(expected_class, n_cl);
     EXPECT_EQ(expected_course, n_course);
     EXPECT_NE(n_year, 0);
-
 }

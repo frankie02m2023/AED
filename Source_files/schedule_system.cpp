@@ -19,8 +19,8 @@ void schedule_system::consult_class_schedule(class1 a_class) const {
     system_changes.top().consult_class_schedule(a_class);
 }
 
-void schedule_system::consult_students_in_class_and_course(class1 a_class, course a_course) const {
-    system_changes.top().consult_students_in_class_and_course(a_class,a_course);
+void schedule_system::consult_students_in_class_and_course(class1 a_class, course a_course, string sortby, string sort_option) const {
+    system_changes.top().consult_students_in_class_and_course(a_class,a_course,sortby, sort_option);
 }
 
 void schedule_system::consult_students_in_class(class1 a_class) const{
@@ -73,7 +73,7 @@ void schedule_system::schedule_system_functions(){
             cout << endl;
             class1 target_class(class_name);
             course target_course(course_code);
-            consult_students_in_class_and_course(target_class, target_course);
+            //consult_students_in_class_and_course(target_class, target_course);
         }
 
         else if(option == '4'){
@@ -82,7 +82,7 @@ void schedule_system::schedule_system_functions(){
             cin >> class_name;
             cout << endl;
             class1 target_class(class_name);
-            consult_students_in_class(target_class);
+            //consult_students_in_class(target_class);
         }
 
     }

@@ -9,7 +9,7 @@
 #include <algorithm>
 #include <utility>
 #include <functional>
-
+#include"sorting_options.h"
 //----------------------------------------------------------------------------------------
 //Basic getters
 vector<course> interface::get_courses() const {
@@ -179,10 +179,7 @@ void interface::read_data_students_classes() {
 //----------------------------------------------------------------------------------------------------------------
 //Advanced getters
 
-//TODO
-//Loop through courses and use course::has_class to check if a given course has the class you are looking for
-//If it does use course::get_class to get access to the class
-//Create a set of pairs where the first pair element is a course and the second is each class schedule
+//gets a specific class schedule
 set<pair<pair<schedule,string>,course>> interface::get_class_schedule(class1 a_class) const{
     set<pair<pair<schedule,string>,course>> class_schedule; //schedule for each class
     class1 a_class_copy = a_class;
@@ -283,10 +280,11 @@ size_t interface::number_of_students_in_anUC(const course& a_course) const {
     return get_all_students_in_aCourse(a_course).size();
 }
 
+
 //---------------------------------------------------------------------------------------------
 //Data printers
 
-//TODO
+
 //prints the given class schedule
 void interface::consult_class_schedule(const class1& a_class) const {
     set<pair<pair<schedule,string>,course>> class_schedule = get_class_schedule(a_class);
@@ -300,14 +298,12 @@ void interface::consult_class_schedule(const class1& a_class) const {
     }
 }
 
-//TODO
-//Loop through courses and check if the given student is in course by using course::has_student
-//If it does use course::get_student_class to access his scheduled classes for the course
-//Create a set of pairs where the first pair element is a course and the second are the students' schedules for the different courses
+
+//prints the student schedule
 void interface::consult_student_schedule(const student& a_student) const{
     cout << "Schedule for student " << a_student.get_name() << ", number " << a_student.get_number() <<":" << endl;
 
-    for(course c: courses){
+    for(const course& c: courses){
         if(c.has_student(a_student)){
            class1 cl = c.get_student_class(a_student);
            cout << '\n';
@@ -331,11 +327,15 @@ void interface::consult_students_in_class(const class1& a_class) const {
 }
 
 //prints the students in a given class
-void interface::consult_students_in_class_and_course(const class1& a_class, const course& a_course) const{
+void interface::consult_students_in_class_and_course(const class1& a_class, const course& a_course, string sortby, string sort_option) const{
     list<student> students = get_class_students_for_course(a_class,a_course);
+    list<student> sorted_students {students.begin(), students.end()};
+
+    sorted_students = sort_students_list(sorted_students, sortby, sort_option);
+
     if(!students.empty()){
         cout << "List of students for class " << a_class.get_class_name() << " in course " << a_course.get_course_name() << ':' << endl;
-        for(const student& a_student : students){
+        for(const student& a_student : sorted_students){
             a_student.print_student();
         }
     }
@@ -345,22 +345,29 @@ void interface::consult_students_in_class_and_course(const class1& a_class, cons
 }
 
 //prints all the students in a course
-void interface::consult_all_students_in_aCourse(const course& a_course) const {
+void interface::consult_all_students_in_aCourse(const course& a_course, string sortby, string sort_option) const {
     set<student> students = get_all_students_in_aCourse(a_course);
+    list<student> sorted_students {students.begin(), students.end()};
+
+    sorted_students = sort_students_list(sorted_students, sortby, sort_option);
     cout << "Course: " << a_course.get_course_name() << endl;
     cout <<'\n';
-    for (const student& a_student : students){
+    for (const student& a_student : sorted_students){
         cout <<"Name: " << a_student.get_name() << ' ' << "Number: " << a_student.get_number() << endl;
     }
 }
 
 //prints all the students in a year
-void interface::consult_all_students_in_aYear(int year) const {
+void interface::consult_all_students_in_aYear(int year, string sortby, string sort_option) const {
     set<student> students = get_all_students_in_aYear(year);
+    list<student> sorted_students {students.begin(), students.end()};
+
+    sorted_students = sort_students_list(sorted_students, sortby, sort_option);
+
     cout << "Year: " << year << endl;
     cout << '\n';
-    for(const student& a_student: students){
-        cout <<"Name: " << a_student.get_name() << ' ' << "Number: " << a_student.get_number();
+    for(const student& a_student: sorted_students){
+        cout <<"Name: " << a_student.get_name() << ' ' << "Number: " << a_student.get_number() << endl;
     }
 }
 
@@ -369,5 +376,46 @@ void interface::print_data() const{
     cout << "Printing data for the entire system" << endl;
     for(const course& a_course : courses){
         a_course.print_course_data();
+    }
+}
+
+//prints the occupation in every course and class for a specific year
+void interface::consult_classes_and_courses_occupation_by_year(int year , string sorting_uc, string sorting_classes) {
+    vector<course> sorted_courses = courses;
+
+    if(sorting_uc == "ascending"){
+        sort(sorted_courses.begin(), sorted_courses.end(), sort_course_occupation);
+    }
+    else if(sorting_uc == "descending"){
+        sort(sorted_courses.begin(), sorted_courses.end(), sort_course_occupation_reverse);
+    }
+    else{
+        cout << "Not a valid option for course sorting. Using default setting";
+    }
+
+    for(const course& c: sorted_courses){
+        if(c.get_course_grade() != year){
+            continue;
+        }
+        vector<class1> sorted_classes = c.get_classes();
+
+        if(sorting_classes == "ascending"){
+            sort(sorted_classes.begin(), sorted_classes.end(), sort_class_occupation);
+        }
+        else if(sorting_classes == "descending"){
+            sort(sorted_classes.begin(), sorted_classes.end(), sort_class_occupation_reverse);
+        }
+        else{
+            cout << "Not a valid option for class sorting. Using default setting";
+        }
+
+        cout << "------------------------------------------" << endl;
+        cout << "Course: " << c.get_course_name() << " occupation: " << c.number_of_students() << endl;
+        cout << '\n';
+
+        for(const class1& cl : sorted_classes){
+            cout << "Class: " << cl.get_class_name() << " occupation: " << cl.get_students().size() << endl;
+        }
+        cout << '\n';
     }
 }

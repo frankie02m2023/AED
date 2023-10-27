@@ -22,6 +22,7 @@ public:
     bool operator<(const course& other_course) const;
     void edit_class(class1 cl, schedule time1, string class_type);
     void print_course_data() const;
+    size_t number_of_students() const;
 
 private:
     string course_code;

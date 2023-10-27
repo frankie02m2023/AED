@@ -5,12 +5,15 @@
 #include <vector>
 #include <algorithm>
 
+//constructor ----------------------------------------------------------
 schedule::schedule(string week_day, float hour, float duration){
     this->week_day = week_day;
     this->hour = hour;
     this->duration = duration;
 }
 
+
+//operators -------------------------------------------------------------
 bool schedule::operator<(const schedule& other_schedule) const{
     //auxiliary vector with the days os the week ordered
     vector<string> week_days = {"Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"};

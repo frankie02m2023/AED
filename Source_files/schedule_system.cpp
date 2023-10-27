@@ -23,9 +23,6 @@ void schedule_system::consult_students_in_class_and_course(class1 a_class, cours
     system_changes.top().consult_students_in_class_and_course(a_class,a_course,sortby, sort_option);
 }
 
-void schedule_system::consult_students_in_class(class1 a_class) const{
-    system_changes.top().consult_students_in_class(a_class);
-}
 
 //Controls the flow of the program according to the users instructions
 void schedule_system::schedule_system_functions(){

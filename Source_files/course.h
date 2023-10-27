@@ -7,22 +7,33 @@ using namespace std;
 
 class course{
 public:
+    //constructors
     course(){};
     course(string course);
+
+    //getters
     string get_course_name() const;
     vector<class1> get_classes() const;
-    void set_classes(vector<class1> classes);
-    void add_class(class1 cl);
     bool get_class(class1& cl) const;
-    bool has_student(student st) const;
     int get_course_grade() const;
     class1 get_student_class(student st) const;
+    size_t number_of_students() const;
+
+    //setters
+    void set_classes(vector<class1> classes);
+    void add_class(class1 cl);
+
+    //auxiliary
+    bool has_student(const student& st) const;
+    void edit_class(class1 cl, schedule time1, string class_type);
+
+    //operators
     bool operator==(const course& other_course) const;
     bool operator!=(const course& other_course) const;
     bool operator<(const course& other_course) const;
-    void edit_class(class1 cl, schedule time1, string class_type);
-    void print_course_data() const;
-    size_t number_of_students() const;
+
+    //Data printer
+    void print_course_data( const string& class_sort_by ,const string& student_sort_by, const string& class_sort_option, const string& student_sort_option) const;
 
 private:
     string course_code;

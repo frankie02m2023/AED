@@ -4,7 +4,9 @@
 
 #include <sstream>
 #include "class1.h"
+#include "sorting_options.h"
 
+//constructor --------------------------------------------------
 class1::class1(std::string class_name, schedule T_class, schedule T_class_2, schedule TP_class , schedule PL_class ) {
     this->class_name = class_name;
     this->T_class = T_class;
@@ -13,6 +15,8 @@ class1::class1(std::string class_name, schedule T_class, schedule T_class_2, sch
     this->PL_class = PL_class;
 }
 
+
+//getters -------------------------------------------------------
 schedule class1::get_PL_class() const {
     return PL_class;
 }
@@ -37,6 +41,11 @@ list<student> class1::get_students() const {
     return students;
 }
 
+int class1::get_class_grade() const{
+    return class_name[0] - '0';
+}
+
+//setters -----------------------------------------------------
 void class1::set_T_class(const schedule& T_time) {
     this->T_class = T_time;
 }
@@ -57,15 +66,13 @@ void class1::add_students(student st) {
     students.push_back(st);
 }
 
+//auxiliary function -------------------------------------------
 bool class1::student_in_class(student st) const {
     auto it = std::find(students.begin(), students.end(), st);
     return it != students.end();
 }
 
-int class1::get_class_grade() const{
-    return class_name[0] - '0';
-}
-
+//operator -----------------------------------------------------
 bool class1::operator==(const class1& other_class1) const {
     return other_class1.class_name == class_name;
 }
@@ -83,6 +90,7 @@ void class1::operator=(const class1& other_class1){
     students = other_class1.students;
 }
 
+//functions to convert the time format -------------------------------------------------------------------
 string class1::convert_class_to_hour_and_minute_format(schedule class_schedule){
     string time_and_duration, start_time_hour, start_time_minute, duration_hours, duration_minutes;
     stringstream ss;
@@ -155,18 +163,25 @@ string class1::convert_PL_class_to_hour_and_minute_format() const {
     return convert_class_to_hour_and_minute_format(PL_class);
 }
 
+//Data printers -----------------------------------------------------------------------------------
+
 //prints all class data
-void class1::print_class_data() const {
+void class1::print_class_data(const string& student_sort_by,const string& student_sort_option) const {
     std::cout << "Class name = " << class_name << endl;
     std::cout << "T Class schedule = " << T_class.week_day << " Start time = " << convert_T_class_to_hour_and_minute_format() << endl;
     std::cout << "T Class schedule = " << T_class_2.week_day << " Start time = " << convert_T_class2_to_hour_and_minute_format() << endl;
     std::cout << "TP Class schedule = " << TP_class.week_day << " Start time = " << convert_TP_class_to_hour_and_minute_format() << endl;
     std::cout << "PL Class schedule = " << PL_class.week_day << " Start time = " << convert_PL_class_to_hour_and_minute_format() << endl;
-    for(const student& s : students){
-        s.print_student();
-    }
+
     if(students.empty()){
         std::cout << "There is no student in this class" << endl;
+    }
+    else{
+        list<student> sorted_students = students;
+        sorted_students = sort_students_list(sorted_students, student_sort_by, student_sort_option);
+        for(const student& s : sorted_students){
+            s.print_student();
+        }
     }
     std::cout <<'\n';
 }

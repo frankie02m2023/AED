@@ -10,11 +10,16 @@ using namespace std;
 
 class schedule{
 public:
+    //constructors
     schedule(){};
     schedule(string week_day, float hour, float duration);
+
+    //member variables
     string week_day;
     float hour;
     float duration;
+
+    //operators
     bool operator<(const schedule& other_schedule) const;
     bool operator>(const schedule& other_schedule) const;
     bool operator==(const schedule& other_schedule) const;

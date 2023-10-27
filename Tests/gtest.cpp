@@ -342,3 +342,53 @@ TEST(Schedule_readers,  get_all_students_in_aCourse){
     EXPECT_NE(it1, students_test.end());
     EXPECT_NE(it2, students_test.end());
 }
+
+TEST(Schedule_readers, get_all_students_in_aYear){
+    student test_1 {"Carolina", "202020302"};
+    student test_2 {"Madalena", "202021492"};
+
+    //initialize the test interface
+    interface testi;
+    testi.read_data_classes_per_uc();
+    testi.read_data_classes();
+    testi.read_data_students_classes();
+
+    //call the class we want to test
+    set<student> students_test =  testi.get_all_students_in_aYear(1);
+
+    //get the values for testing
+    auto it1 = students_test.find(test_1);
+    auto it2 = students_test.find(test_2);
+
+    //assertions
+    EXPECT_NE(it1, students_test.end());
+    EXPECT_NE(it2, students_test.end());
+
+}
+
+TEST(Schedule_readers, number_of_students){
+    //initialize the test interface
+    interface testi;
+    testi.read_data_classes_per_uc();
+    testi.read_data_classes();
+    testi.read_data_students_classes();
+
+    //initialize the expected values and auxiliary values
+    course test_course {"L.EIC001"};
+    class1 test_class{"1LEIC01"};
+    int test_year = 1;
+    size_t expected_class = 2;
+    size_t expected_course = 32;
+
+
+    //initialize the test values
+    size_t n_cl = testi.number_of_students_in_aClass(test_class, test_course);
+    size_t n_course = testi.number_of_students_in_anUC(test_course);
+    size_t n_year = testi.number_of_students_in_aYear(test_year);
+
+    //assertions
+    EXPECT_EQ(expected_class, n_cl);
+    EXPECT_EQ(expected_course, n_course);
+    EXPECT_NE(n_year, 0);
+
+}

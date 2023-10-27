@@ -12,7 +12,7 @@ int main(){
      test.read_data_classes_per_uc();
      test.read_data_classes();
      test.read_data_students_classes();
-     student test_student {"Ludovico", "202071557"};
-     test.consult_student_schedule(test_student);
+     course a {"L.EIC001"};
+     test.consult_all_students_in_aCourse(a);
     return 0;
 }

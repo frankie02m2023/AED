@@ -10,7 +10,8 @@
 #include <utility>
 #include <functional>
 
-
+//----------------------------------------------------------------------------------------
+//Basic getters
 vector<course> interface::get_courses() const {
     return courses;
 }
@@ -19,6 +20,9 @@ queue<course_request> interface::get_requests() const {
     return requests;
 }
 
+
+//--------------------------------------------------------------------------------------
+//Data readers (from files)
 
 //reads data from the file "classes_per_uc.csv"
 //and organizes the data into the correct data structures
@@ -171,6 +175,10 @@ void interface::read_data_students_classes() {
 }
 
 
+
+//----------------------------------------------------------------------------------------------------------------
+//Advanced getters
+
 //TODO
 //Loop through courses and use course::has_class to check if a given course has the class you are looking for
 //If it does use course::get_class to get access to the class
@@ -180,7 +188,7 @@ set<pair<pair<schedule,string>,course>> interface::get_class_schedule(class1 a_c
     class1 a_class_copy = a_class;
     string class_type;
 
-    for(course a_course : courses){
+    for(const course& a_course : courses){
         if(a_course.get_course_grade() == a_class.get_class_grade()) {
             if (a_course.get_class(a_class)) {
                 if (a_class.get_T_class().week_day != "Dont Apply") {
@@ -209,10 +217,10 @@ set<pair<pair<schedule,string>,course>> interface::get_class_schedule(class1 a_c
 //NEEDS TO BE REMOVED
 set<student> interface::get_class_students_for_all_courses(class1 a_class) const{
     set<student> students;
-    for(course a_course : courses){
+    for(const course& a_course : courses){
         if(a_course.get_course_grade() == a_class.get_class_grade()){
            if(a_course.get_class(a_class)){
-               for(student a_student : a_class.get_students()){
+               for(const student& a_student : a_class.get_students()){
                    students.insert(a_student);
                }
            }
@@ -232,9 +240,55 @@ list<student> interface::get_class_students_for_course(class1 a_class, course a_
     return students;
 }
 
+//gets all the students in a course
+set<student> interface::get_all_students_in_aCourse(course a_course) const {
+    set<student> students;
+    auto it = std::find(courses.begin(), courses.end(), a_course);
+    a_course = *it;
+    for(const class1& a_class: a_course.get_classes()){
+        list<student> aux = get_class_students_for_course(a_class, a_course);
+        students.insert(aux.begin(), aux.end());
+    }
+
+    return students;
+}
+
+//gets all the students in a year
+set<student> interface::get_all_students_in_aYear(int year) const {
+    set<student> students;
+
+    for(const course& a_course : courses ){
+        if(a_course.get_course_grade() != year){
+            continue;
+        }
+        set<student> aux = get_all_students_in_aCourse(a_course);
+        students.insert(aux.begin(), aux.end());
+    }
+
+    return students;
+}
+
+//gets the number of students in a class
+size_t interface::number_of_students_in_aClass(const class1& a_class, const course& a_course) const {
+    return get_class_students_for_course(a_class, a_course).size();
+}
+
+//gets the number of students in a year
+size_t interface::number_of_students_in_aYear(int year) const {
+    return get_all_students_in_aYear(year).size();
+}
+
+//gets the number of students in a course(Uc)
+size_t interface::number_of_students_in_anUC(const course& a_course) const {
+    return get_all_students_in_aCourse(a_course).size();
+}
+
+//---------------------------------------------------------------------------------------------
+//Data printers
+
 //TODO
 //prints the given class schedule
-void interface::consult_class_schedule(class1 a_class) const {
+void interface::consult_class_schedule(const class1& a_class) const {
     set<pair<pair<schedule,string>,course>> class_schedule = get_class_schedule(a_class);
     auto it = class_schedule.begin();
     cout << "Schedule for class " << a_class.get_class_name() << ':' << endl;
@@ -250,9 +304,9 @@ void interface::consult_class_schedule(class1 a_class) const {
 //Loop through courses and check if the given student is in course by using course::has_student
 //If it does use course::get_student_class to access his scheduled classes for the course
 //Create a set of pairs where the first pair element is a course and the second are the students' schedules for the different courses
-void interface::consult_student_schedule(student a_student) const{
+void interface::consult_student_schedule(const student& a_student) const{
     cout << "Schedule for student " << a_student.get_name() << ", number " << a_student.get_number() <<":" << endl;
-    
+
     for(course c: courses){
         if(c.has_student(a_student)){
            class1 cl = c.get_student_class(a_student);
@@ -266,7 +320,7 @@ void interface::consult_student_schedule(student a_student) const{
 }
 
 //NEEDS TO BE REMOVED
-void interface::consult_students_in_class(class1 a_class) const {
+void interface::consult_students_in_class(const class1& a_class) const {
     set<student> students = get_class_students_for_all_courses(a_class);
     auto it = students.begin();
     cout << "List of students for class " << a_class.get_class_name() << " in all available courses for this class: " << endl;
@@ -277,11 +331,11 @@ void interface::consult_students_in_class(class1 a_class) const {
 }
 
 //prints the students in a given class
-void interface::consult_students_in_class_and_course(class1 a_class, course a_course) const{
+void interface::consult_students_in_class_and_course(const class1& a_class, const course& a_course) const{
     list<student> students = get_class_students_for_course(a_class,a_course);
     if(!students.empty()){
         cout << "List of students for class " << a_class.get_class_name() << " in course " << a_course.get_course_name() << ':' << endl;
-        for(student a_student : students){
+        for(const student& a_student : students){
             a_student.print_student();
         }
     }
@@ -290,10 +344,30 @@ void interface::consult_students_in_class_and_course(class1 a_class, course a_co
     }
 }
 
+//prints all the students in a course
+void interface::consult_all_students_in_aCourse(const course& a_course) const {
+    set<student> students = get_all_students_in_aCourse(a_course);
+    cout << "Course: " << a_course.get_course_name() << endl;
+    cout <<'\n';
+    for (const student& a_student : students){
+        cout <<"Name: " << a_student.get_name() << ' ' << "Number: " << a_student.get_number() << endl;
+    }
+}
+
+//prints all the students in a year
+void interface::consult_all_students_in_aYear(int year) const {
+    set<student> students = get_all_students_in_aYear(year);
+    cout << "Year: " << year << endl;
+    cout << '\n';
+    for(const student& a_student: students){
+        cout <<"Name: " << a_student.get_name() << ' ' << "Number: " << a_student.get_number();
+    }
+}
+
 //prints the data in the entire system
 void interface::print_data() const{
     cout << "Printing data for the entire system" << endl;
-    for(course a_course : courses){
+    for(const course& a_course : courses){
         a_course.print_course_data();
     }
 }

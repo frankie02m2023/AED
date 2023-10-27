@@ -155,6 +155,7 @@ string class1::convert_PL_class_to_hour_and_minute_format() const {
     return convert_class_to_hour_and_minute_format(PL_class);
 }
 
+//prints all class data
 void class1::print_class_data() const {
     std::cout << "Class name = " << class_name << endl;
     std::cout << "T Class schedule = " << T_class.week_day << " Start time = " << convert_T_class_to_hour_and_minute_format() << endl;
@@ -170,6 +171,7 @@ void class1::print_class_data() const {
     std::cout <<'\n';
 }
 
+//prints the class schedule
 void class1::print_class_schedule() const {
     std::cout << "Class name = " << class_name << endl;
     std::cout << "T Class schedule = " << T_class.week_day << " Start time = " << convert_T_class_to_hour_and_minute_format() << endl;

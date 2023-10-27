@@ -318,3 +318,27 @@ TEST(Course_operations, get_student_class){
     EXPECT_EQ(test_values_1, test_class);
     EXPECT_EQ(test_values_2, test_class2);
 }
+
+TEST(Schedule_readers,  get_all_students_in_aCourse){
+    //initialize test students and course
+    student test_1 {"Carolina", "202020302"};
+    student test_2 {"Madalena", "202021492"};
+    course test_course {"L.EIC001"};
+
+    //initialize the test interface
+    interface testi;
+    testi.read_data_classes_per_uc();
+    testi.read_data_classes();
+    testi.read_data_students_classes();
+
+    //call the class we want to test
+    set<student> students_test =  testi.get_all_students_in_aCourse(test_course);
+
+    //get the values for testing
+    auto it1 = students_test.find(test_1);
+    auto it2 = students_test.find(test_2);
+
+    //assertions
+    EXPECT_NE(it1, students_test.end());
+    EXPECT_NE(it2, students_test.end());
+}

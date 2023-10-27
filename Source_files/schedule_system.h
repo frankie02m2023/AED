@@ -16,6 +16,7 @@ public:
     void consult_student_schedule(student a_student) const;
     void consult_students_in_class_and_course(class1 a_class, course a_course) const;
     void consult_students_in_class(class1 a_class) const;
+    void store_new_request(const request& new_request);
     void print_current_schedule_system_data() const;
 };
 

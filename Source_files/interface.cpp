@@ -16,7 +16,7 @@ vector<course> interface::get_courses() const {
     return courses;
 }
 
-queue<course_request> interface::get_requests() const {
+queue<request> interface::get_requests() const {
     return requests;
 }
 
@@ -369,5 +369,37 @@ void interface::print_data() const{
     cout << "Printing data for the entire system" << endl;
     for(const course& a_course : courses){
         a_course.print_course_data();
+    }
+}
+
+//TODO
+void interface::enroll_student_in_course(student &a_student, course &a_course, class1& a_class) {}
+
+//TODO
+void interface::remove_student_from_course(student &a_student, course &a_course) {}
+
+//TODO
+void interface::switch_student_courses(student &a_student, course &old_course, course &new_course, class1& new_class) {}
+
+//TODO
+void interface::switch_student_classes(student &a_student, course &a_course, class1 &old_class, class1 &new_class) {}
+
+void interface::store_new_request(const request &new_request) {
+    requests.push(new_request);
+}
+
+void interface::process_request() {
+    request processed_request = requests.front();
+    if(processed_request.request_type == "add course"){
+        enroll_student_in_course(processed_request.target_student, processed_request.added_course, processed_request.added_class);
+    }
+    else if(processed_request.request_type == "remove course") {
+        remove_student_from_course(processed_request.target_student, processed_request.removed_course);
+    }
+    else if(processed_request.request_type == "switch courses") {
+        switch_student_courses(processed_request.target_student, processed_request.added_course,processed_request.removed_course, processed_request.added_class);
+    }
+    else if(processed_request.request_type == "switch classes"){
+        switch_student_classes(processed_request.target_student, processed_request.added_course, processed_request.removed_class, processed_request.added_class);
     }
 }

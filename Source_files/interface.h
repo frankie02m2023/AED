@@ -9,14 +9,15 @@
 #include <queue>
 #include "course_request.h"
 #include "course_class_request.h"
+#include "request.h"
 
 
 class interface {
     vector<course>courses;
-    queue<course_request> requests;
+    queue<request> requests;
 public:
     vector<course> get_courses() const;
-    queue<course_request> get_requests() const;
+    queue<request> get_requests() const;
     void read_data_classes_per_uc();
     void read_data_classes();
     void read_data_students_classes();
@@ -34,6 +35,12 @@ public:
     void consult_students_in_class_and_course(const class1& a_class, const course& a_course) const;
     void consult_all_students_in_aCourse(const course& a_course) const;
     void consult_all_students_in_aYear(int year) const;
+    void store_new_request(const request& new_request);
+    void process_request();
+    void enroll_student_in_course(student& a_student,course& a_course, class1& a_class);
+    void remove_student_from_course(student& a_student, course& a_course);
+    void switch_student_courses(student& a_student, course& old_course, course& new_course, class1& new_class);
+    void switch_student_classes(student& a_student, course& a_course, class1& old_class, class1& new_class);
     void print_data() const;
 };
 

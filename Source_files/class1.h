@@ -13,6 +13,7 @@
 
 class class1{
 public:
+    class1(){};
     class1(string class_name, schedule T_class = {"Dont Apply",0, 0 },schedule T_class_2 = {"Dont Apply", 0, 0}, schedule TP_class = {"Dont Apply",0, 0 }, schedule PL_class = {"Dont Apply",0, 0 });
     string get_class_name() const;
     schedule get_T_class() const;

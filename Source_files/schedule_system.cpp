@@ -27,10 +27,14 @@ void schedule_system::consult_students_in_class(class1 a_class) const{
     system_changes.top().consult_students_in_class(a_class);
 }
 
+void schedule_system::store_new_request(const request &new_request) {
+    system_changes.top().store_new_request(new_request);
+}
+
 //Controls the flow of the program according to the users instructions
 void schedule_system::schedule_system_functions(){
     std::cout << "Write 1 in the terminal if you wish to read data in the system" << endl;
-    std::cout << "Write 2 in the terminal if you wish to insert new data into the system" << endl;
+    std::cout << "Write 2 in the terminal if you wish to add a request into the system" << endl;
     std::cout << "Type here:  " ;
     char option;
     std::cin >> option;
@@ -85,6 +89,61 @@ void schedule_system::schedule_system_functions(){
             consult_students_in_class(target_class);
         }
 
+    }
+    else if(option == '2'){
+        string student_number, added_course, removed_course, added_class, removed_class;
+        struct request new_request;
+        std::cout << "Please enter your student number : ";
+        cin >> student_number;
+        std::cout << "Please type the number associated with the request you wish to make: " << endl;
+        std::cout << "1. Enroll in a new course" << endl;
+        std::cout << "2. Drop out of a course" << endl;
+        std::cout << "3. Swap one of your courses for a new one" << endl;
+        std::cout << "4. Swap classes for a specific course" << endl;
+        cin >> option;
+        if(option == '1'){
+            std::cout << "Please enter the name of the course you wish to enroll in: ";
+            cin >> added_course;
+            std::cout << "Please enter the name of the class you wish to enroll in: ";
+            cin >> added_class;
+            new_request.request_type = "add course";
+            new_request.added_course = added_course;
+            new_request.added_class = added_class;
+            store_new_request(new_request);
+        }
+        else if(option == '2'){
+            std::cout << "Please enter the name of the course you wish to drop out of: ";
+            cin >> removed_course;
+            new_request.request_type = "remove course";
+            new_request.removed_course = removed_course;
+            store_new_request(new_request);
+        }
+        else if(option == '3'){
+            std::cout << "Please enter the name of the course you wish to enroll in: ";
+            cin >> added_course;
+            std::cout << "Please enter the name of the course you wish to drop out of: ";
+            cin >> removed_course;
+            std::cout << "Please enter the name of the class you wish to enroll in: ";
+            cin >> added_class;
+            new_request.request_type = "switch courses";
+            new_request.added_course = added_course;
+            new_request.removed_course = removed_course;
+            new_request.added_class = added_class;
+            store_new_request(new_request);
+        }
+        else if(option == '4'){
+            std::cout << "Please enter the name of the course for which you desire to swap class: ";
+            cin >> added_course;
+            std::cout << "Please enter the name of the class you wish to enroll in: ";
+            cin >> added_class;
+            std::cout << "Please enter the name of the class you wish to leave : ";
+            cin >> removed_class;
+            new_request.request_type = "switch classes";
+            new_request.added_course = added_course;
+            new_request.added_class = added_class;
+            new_request.removed_class = removed_class;
+            store_new_request(new_request);
+        }
     }
 }
 

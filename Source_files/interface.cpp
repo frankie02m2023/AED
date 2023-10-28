@@ -315,7 +315,7 @@ void interface::consult_student_schedule(const student& a_student) const{
 }
 
 //prints the students in a given class
-void interface::consult_students_in_class_and_course(const class1& a_class, const course& a_course, string sortby, string sort_option) const{
+void interface::consult_students_in_class_and_course(const class1& a_class, const course& a_course, const string& sortby, const string& sort_option) const{
     list<student> students = get_class_students_for_course(a_class,a_course);
     list<student> sorted_students {students.begin(), students.end()};
 
@@ -333,7 +333,7 @@ void interface::consult_students_in_class_and_course(const class1& a_class, cons
 }
 
 //prints all the students in a course
-void interface::consult_all_students_in_aCourse(const course& a_course, string sortby, string sort_option) const {
+void interface::consult_all_students_in_aCourse(const course& a_course, const string& sortby, const string& sort_option) const {
     set<student> students = get_all_students_in_aCourse(a_course);
     list<student> sorted_students {students.begin(), students.end()};
 
@@ -347,7 +347,7 @@ void interface::consult_all_students_in_aCourse(const course& a_course, string s
 }
 
 //prints all the students in a year
-void interface::consult_all_students_in_aYear(int year, string sortby, string sort_option) const {
+void interface::consult_all_students_in_aYear(int year, const string& sortby, const string& sort_option) const {
     set<student> students = get_all_students_in_aYear(year);
     list<student> sorted_students {students.begin(), students.end()};
 

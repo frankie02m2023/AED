@@ -14,6 +14,7 @@ public:
     void set_classes(vector<class1> classes);
     void add_class(class1 cl);
     bool get_class(class1& cl) const;
+    class1 get_class_by_ref(class1& cl);
     bool has_student(student st) const;
     int get_course_grade() const;
     class1 get_student_class(student st) const;

@@ -5,7 +5,6 @@
 
 int main(){
     schedule_system system;
-    student a_student(" ","202027697");
-    system.consult_student_schedule(a_student);
+    system.schedule_system_functions();
     return 0;
 }

@@ -42,11 +42,11 @@ public:
     void consult_all_students_in_aYear(int year) const;
     bool can_add_to_class(course& a_course, student& a_student, class1& a_class) const;
     void store_new_request(const request& new_request);
-    void process_request();
-    bool enroll_student_in_course(student& a_student,course& a_course, class1& a_class);
-    bool remove_student_from_course(student& a_student, course& a_course);
-    void switch_student_courses(student& a_student, course& old_course, course& new_course, class1& new_class);
-    void switch_student_classes(student& a_student, course& a_course, class1& old_class, class1& new_class);
+    void process_request(string& error_message);
+    bool enroll_student_in_course(student& a_student,course& a_course, class1& a_class, string& error_message);
+    bool remove_student_from_course(student& a_student, course& a_course, string& error_message);
+    bool switch_student_courses(student& a_student, course& old_course, course& new_course, class1& new_class, string& error_message);
+    bool switch_student_classes(student& a_student, course& a_course, class1& old_class, class1& new_class);
     void print_data() const;
 };
 

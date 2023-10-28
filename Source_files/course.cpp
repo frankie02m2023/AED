@@ -62,6 +62,16 @@ bool course::get_class(class1& cl) const {
     return it != classes.end();
 }
 
+//always use get_class before get_class_by_reference
+class1 course::get_class_by_ref(class1& cl) {
+    auto it = std::find(classes.begin(),classes.end(),cl);
+    class1 &cl1 = *it;
+    if(it != classes.end()){
+        return cl1;
+    }
+    return cl;
+}
+
 int course::get_course_grade() const {
     return classes[0].get_class_grade();
 }

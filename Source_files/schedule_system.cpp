@@ -35,6 +35,12 @@ void schedule_system::store_new_request(const request &new_request) {
     system_changes.top().store_new_request(new_request);
 }
 
+void schedule_system::process_request(std::string &error_message) {
+    interface new_system_iteration = system_changes.top();
+    new_system_iteration.process_request(error_message);
+    system_changes.push(new_system_iteration);
+}
+
 //Controls the flow of the program according to the users instructions
 void schedule_system::schedule_system_functions(){
     std::cout << "Write 1 in the terminal if you wish to read data in the system" << endl;

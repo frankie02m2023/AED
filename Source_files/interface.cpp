@@ -273,13 +273,27 @@ size_t interface::number_of_students_in_anUC(const course& a_course) const {
 //prints the given class schedule
 void interface::consult_class_schedule(const class1& a_class) const {
     set<pair<pair<schedule,string>,course>> class_schedule = get_class_schedule(a_class);
-    auto it = class_schedule.begin();
+
+    //convert to vector, so we can order the way we want (by course instead of schedule)
+    vector<pair<pair<schedule,string>,course>> class_schedule_ordered = {class_schedule.begin(), class_schedule.end()};
+    sort(class_schedule_ordered.begin(), class_schedule_ordered.end(), class_schedule_sort);
+
     cout << "Schedule for class " << a_class.get_class_name() << ':' << endl;
-    while(it != class_schedule.end()){
-        cout << "Course " << it->second.get_course_name() << endl;
+
+    string prev = ""; //auxiliary variable
+    for(auto it = class_schedule_ordered.begin(); it != class_schedule_ordered.end(); it++){
+
+        //checks if is the schedule corresponds to the same course
+        if(prev != it->second.get_course_name()) {
+            cout << '\n';
+            cout << "-----------------------------------------------------" << endl;
+            cout << "Course " << it->second.get_course_name() << endl;
+            cout << '\n';
+            prev = it->second.get_course_name();
+        }
+
+        //the schedule of each course is presented ordered by the day of the week and day
         cout << "Class " << it->first.second << " Schedule = " << it->first.first.week_day << " " << class1::convert_class_to_hour_and_minute_format(it->first.first) << endl;
-        cout << '\n';
-        it++;
     }
 }
 

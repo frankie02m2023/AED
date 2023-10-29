@@ -411,3 +411,88 @@ TEST(Schedule_operations, overlapping_classes){
     EXPECT_TRUE(class_5.overlapping_class(class_6));
     EXPECT_TRUE(class_6.overlapping_class(class_5));
 }
+
+TEST(System_changes,check_class_balance){
+    interface testi;
+    testi.read_data_classes_per_uc();
+    testi.read_data_classes();
+    testi.read_data_students_classes();
+    course test_course1("L.EIC014");
+    for(course c : testi.get_courses()){
+        if(c == test_course1){
+            test_course1 = c;
+        }
+    }
+    class1 test_class1("2LEIC05");
+    test_course1.get_class(test_class1);
+    EXPECT_TRUE(test_course1.check_class_balance(test_class1));
+}
+
+TEST(System_changes,can_add_to_class){
+    interface testi;
+    testi.read_data_classes_per_uc();
+    testi.read_data_classes();
+    testi.read_data_students_classes();
+
+    course test_course1("L.EIC014");
+    for(course c : testi.get_courses()){
+        if(c == test_course1){
+            test_course1 = c;
+            break;
+        }
+    }
+    class1 test_class1("2LEIC05");
+    test_course1.get_class(test_class1);
+    student test_student1("Gisela","202031607");
+    test_course1.get_class(test_class1);
+    EXPECT_FALSE(testi.can_add_to_class(test_course1,test_student1,test_class1));
+
+    course test_course2("L.EIC002");
+    for(course c : testi.get_courses()){
+        if(c == test_course2){
+            test_course2 = c;
+            break;
+        }
+    }
+    class1 test_class2("1LEIC03");
+    test_course2.get_class(test_class2);
+    student test_student2("Ludovico","202071557");
+    EXPECT_FALSE(testi.can_add_to_class(test_course2,test_student2,test_class2));
+
+
+    course test_course3("L.EIC002");
+    for(course c : testi.get_courses()){
+        if(c == test_course3){
+            test_course3= c;
+            break;
+        }
+    }
+    class1 test_class3("1LEIC12");
+    test_course3.get_class(test_class3);
+    student test_student3("Manuel Santiago","202066712");
+    EXPECT_FALSE(testi.can_add_to_class(test_course3,test_student3,test_class3));
+
+    course test_course4("L.EIC002");
+    for(course c : testi.get_courses()){
+        if(c == test_course4){
+            test_course4 = c;
+            break;
+        }
+    }
+    class1 test_class4("1LEIC06");
+    test_course4.get_class(test_class4);
+    student test_student4("Gisela","202031607");
+    EXPECT_TRUE(testi.can_add_to_class(test_course4,test_student4,test_class4));
+
+    course test_course5("L.EIC005");
+    for(course c : testi.get_courses()){
+        if(c == test_course5){
+            test_course5 = c;
+            break;
+        }
+    }
+    class1 test_class5("1LEIC01");
+    test_course5.get_class(test_class5);
+    student test_student5("Manuel Santiago","202066712");
+    EXPECT_TRUE(testi.can_add_to_class(test_course5,test_student5,test_class5));
+}

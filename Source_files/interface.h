@@ -48,6 +48,7 @@ public:
     bool switch_student_courses(student& a_student, course& old_course, course& new_course, class1& new_class, string& error_message);
     bool switch_student_classes(student& a_student, course& a_course, class1& old_class, class1& new_class);
     void print_data() const;
+    void set_courses(vector<course>);
 };
 
 

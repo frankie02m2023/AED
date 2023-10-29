@@ -96,7 +96,6 @@ class1 course::get_student_class(student st) const{
 
 
 bool course::operator==(const course& other_course) const {
-
     return other_course.course_code == course_code;
 }
 
@@ -105,41 +104,28 @@ bool course::operator!=(const course& other_course) const {
 }
 
 bool course::operator<(const course& other_course) const {
-
     return course_code < other_course.course_code;
 }
 
-bool compare_class_ocupation(class1 cl1, class1 cl2){
-    if(cl1.get_students().size() <= cl2.get_students().size()){
-        return true;
-    }
-    return false;
+void course::operator=(const course &other_course) {
+    course_code = other_course.course_code;
+    classes = other_course.classes;
+}
+
+bool compare_class_ocupation(const class1& cl1, const class1& cl2){
+    size_t cl1_occupation = cl1.get_students().size();
+    size_t cl2_occupation = cl2.get_students().size();
+    return cl1_occupation < cl2_occupation;
 }
 
 //Checking if the balance between course classes is not disturbed
-bool course::check_class_balance() const {
+bool course::check_class_balance(const class1& cl) const {
     vector<class1> copy_classes = classes;
     sort(copy_classes.begin(), copy_classes.end(), compare_class_ocupation);
     size_t min_ocupation = copy_classes[0].get_students().size();
-    size_t max_ocupation = copy_classes[copy_classes.size()].get_students().size();
-    if(max_ocupation - min_ocupation > 4){
+    size_t target_class_ocupation = cl.get_students().size();
+    if(target_class_ocupation - min_ocupation > 4){
         return false;
     }
-    return true;
-}
-
-bool course::can_add_student_to_class(class1 &cl, student& st) {
-    vector<class1> copy_course_classes = classes;
-    class1 copy_a_class = cl;
-    if(cl.get_students().size() == class1::student_capacity){
-        return false;
-    }
-    cl.add_students(st);
-    if(!check_class_balance()){
-        return false;
-    }
-    // need to get student schedule
-    classes = copy_course_classes;
-    cl = copy_a_class;
     return true;
 }

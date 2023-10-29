@@ -7,6 +7,9 @@
 
 short class1::student_capacity = 30;
 
+
+//constructor
+
 class1::class1(std::string class_name, schedule T_class, schedule T_class_2, schedule TP_class , schedule PL_class ) {
     this->class_name = class_name;
     this->T_class = T_class;
@@ -15,6 +18,8 @@ class1::class1(std::string class_name, schedule T_class, schedule T_class_2, sch
     this->PL_class = PL_class;
 }
 
+
+//getters
 
 schedule class1::get_PL_class() const {
     return PL_class;
@@ -39,6 +44,13 @@ string class1::get_class_name() const {
 list<student> class1::get_students() const {
     return students;
 }
+
+int class1::get_class_grade() const{
+    return class_name[0] - '0';
+}
+
+
+//setters
 
 void class1::set_T_class(const schedule& T_time) {
     this->T_class = T_time;
@@ -65,6 +77,9 @@ void class1::remove_students(student st) {
     students.erase(it);
 }
 
+
+//auxiliary functions
+
 bool class1::student_in_class(student st) const {
     auto it = std::find(students.begin(), students.end(), st);
     return it != students.end();
@@ -75,9 +90,8 @@ student class1::get_student_in_class(student st) const {
     return *it;
 }
 
-int class1::get_class_grade() const{
-    return class_name[0] - '0';
-}
+
+//operators
 
 bool class1::operator==(const class1& other_class1) const {
     return other_class1.class_name == class_name;
@@ -100,48 +114,8 @@ void class1::operator=(const class1& other_class1){
     students = other_class1.students;
 }
 
-bool class1::under_max_student_capicity() const {
-    return students.size() < student_capacity;
-}
 
-bool overlapping_schedule(const schedule& schedule1, const schedule &schedule2) {
-    if(schedule1.week_day == "Dont Apply" || schedule2.week_day == "Dont Apply"){
-        return false;
-    }
-    else{
-        if(schedule1.week_day == schedule2.week_day){
-            if(schedule1.hour == schedule2.hour){
-                return true;
-            }
-            else{
-                schedule earlier_schedule = min(schedule1, schedule2);
-                schedule later_schedule = max(schedule1, schedule2);
-                if(earlier_schedule.hour + earlier_schedule.duration > later_schedule.hour){
-                    return true;
-                }
-                return false;
-            }
-        }
-        return false;
-    }
-}
-
-//I do not think this is needed
-bool class1::overlapping_class(const class1 &other_class) const {
-    if(overlapping_schedule(TP_class,other_class.TP_class)){
-        return true;
-    }
-    else if(overlapping_schedule(TP_class,other_class.PL_class)){
-        return true;
-    }
-    else if(overlapping_schedule(PL_class,other_class.PL_class)){
-        return true;
-    }
-    else if(overlapping_schedule(PL_class,other_class.TP_class)){
-        return true;
-    }
-    return false;
-}
+//functions to convert time format
 
 string class1::convert_class_to_hour_and_minute_format(schedule class_schedule){
     string time_and_duration, start_time_hour, start_time_minute, duration_hours, duration_minutes;
@@ -214,6 +188,9 @@ string class1::convert_TP_class_to_hour_and_minute_format() const {
 string class1::convert_PL_class_to_hour_and_minute_format() const {
     return convert_class_to_hour_and_minute_format(PL_class);
 }
+
+
+//Data printers
 
 //prints all class data
 void class1::print_class_data() const {

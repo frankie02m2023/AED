@@ -46,7 +46,7 @@ public:
     bool enroll_student_in_course(student& a_student,course& a_course, class1& a_class, string& error_message);
     bool remove_student_from_course(student& a_student, course& a_course, string& error_message);
     bool switch_student_courses(student& a_student, course& old_course, course& new_course, class1& new_class, string& error_message);
-    bool switch_student_classes(student& a_student, course& a_course, class1& old_class, class1& new_class);
+    bool switch_student_classes(student& a_student, course& a_course, class1& old_class, class1& new_class, string& error_message);
     void print_data() const;
     void set_courses(vector<course>);
 };

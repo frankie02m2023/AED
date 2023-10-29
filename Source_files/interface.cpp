@@ -490,14 +490,17 @@ bool interface::enroll_student_in_course(student &a_student, course &a_course, c
     auto it = std::find(courses.begin(), courses.end(),a_course);
     course& added_course = *it;
     course copy_added_course = added_course;
-    class1& added_class = a_class;
+    class1 copy_added_class = a_class;
     student added_student = get_student(a_student);
+    if(copy_added_course.has_student(added_student)){
+        error_message = "The student is already enrolled in the desired course.";
+        return false;
+    }
     // accessing the given class in the given course
-    if(copy_added_course.get_class(added_class)) {
-        added_class = copy_added_course.get_class_by_ref(added_class);
+    if(copy_added_course.get_class(copy_added_class)) {
         // checking if the enrollment in the given course and class is possible
-        if (can_add_to_class(copy_added_course, added_student, added_class)) {
-            added_class = added_course.get_class_by_ref(added_class);
+        if (can_add_to_class(copy_added_course, added_student, copy_added_class)) {
+            class1& added_class = added_course.get_class_by_ref(a_class);
             added_class.add_students(added_student);
             return true;
         }
@@ -506,18 +509,15 @@ bool interface::enroll_student_in_course(student &a_student, course &a_course, c
     //the system tries to allocate them to another class in the same course, starting with the classes
     //that have the least amount of students enrolled in them
     error_message = "Student could not be allocated to their desired class.";
-    sort(added_course.get_classes().begin(),added_course.get_classes().end(), compare_class_ocupation);
-    auto it1 = added_course.get_classes().begin();
-    while(!can_add_to_class(added_course, added_student , *it1) && it1 != added_course.get_classes().end()){
-        it1++;
+    vector<class1> copy_course_classes = added_course.get_classes();
+    sort(copy_course_classes.begin(), copy_course_classes.end(), compare_class_ocupation);
+    for(class1 cl : copy_course_classes){
+        if(can_add_to_class(added_course, added_student , cl)){
+            class1& available_class = added_course.get_class_by_ref(cl);
+            available_class.add_students(added_student);
+            return true;
+        }
     }
-    //allocating the student to a different class in the given course
-    if(it1 != added_course.get_classes().end()){
-        it1->add_students(added_student);
-        sort(added_course.get_classes().begin(),added_course.get_classes().end());
-        return true;
-    }
-    sort(added_course.get_classes().begin(),added_course.get_classes().end());
     error_message = "Enrollment failed because the student could not be allocated to any of the classes available for course " + a_course.get_course_name();
     return false;
 }
@@ -531,9 +531,10 @@ bool interface::remove_student_from_course(student &a_student, course &a_course,
     auto it = std::find(courses.begin(),courses.end(),a_course);
     course& removable_course = *it;
     //creating a copy of the course to check if removing the student from it will affect its class balance
-    for(class1 &a_class : removable_course.get_classes()){
+    for(class1 a_class : removable_course.get_classes()){
         if(a_class.student_in_class(a_student)){
-            a_class.remove_students(a_student);
+            class1& removable_class = removable_course.get_class_by_ref(a_class);
+            removable_class.remove_students(a_student);
             return true;
         }
     }
@@ -603,28 +604,32 @@ bool interface::switch_student_courses(student &a_student, course &old_course, c
 }
 
 //TODO
-bool interface::switch_student_classes(student &a_student, course &a_course, class1 &old_class, class1 &new_class) {
+bool interface::switch_student_classes(student &a_student, course &a_course, class1 &old_class, class1 &new_class, string& error_message) {
     auto it = std::find(courses.begin(),courses.end(),a_course);
     course &target_course = *it;
     course copy_target_course = *it;
     student added_student = get_student(a_student);
     if(!copy_target_course.get_class(old_class)){
+        error_message = old_class.get_class_name() + "does not exist in course " + target_course.get_course_name();
         return false;
     }
     if(!old_class.student_in_class(added_student)){
+        error_message = "The student is not enrolled in class " + old_class.get_class_name() + " of course " + target_course.get_course_name();
         return false;
     }
     if(!copy_target_course.get_class(new_class)){
-       return false;
+        error_message = "The class the student wishes to join does not exist in course " + target_course.get_course_name();
+        return false;
     }
     new_class = copy_target_course.get_class_by_ref(new_class);
     if(!can_add_to_class(copy_target_course,added_student,new_class)){
+        error_message = "The student could not be added to their desired class.";
         return false;
     }
-    old_class = target_course.get_class_by_ref(old_class);
-    old_class.remove_students(added_student);
-    new_class = target_course.get_class_by_ref(new_class);
-    new_class.add_students(added_student);
+    class1& old_class_ref = target_course.get_class_by_ref(old_class);
+    old_class_ref.remove_students(added_student);
+    class1& new_class_ref = target_course.get_class_by_ref(new_class);
+    new_class_ref.add_students(added_student);
     return true;
 }
 
@@ -645,7 +650,7 @@ void interface::process_request(string& error_message) {
         switch_student_courses(processed_request.target_student, processed_request.added_course,processed_request.removed_course, processed_request.added_class, error_message);
     }
     else if(processed_request.request_type == "switch classes"){
-        switch_student_classes(processed_request.target_student, processed_request.added_course, processed_request.removed_class, processed_request.added_class);
+        switch_student_classes(processed_request.target_student, processed_request.added_course, processed_request.removed_class, processed_request.added_class,error_message);
     }
 }
 

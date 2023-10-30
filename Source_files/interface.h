@@ -38,8 +38,9 @@ public:
     void consult_student_schedule_by_course(const student& a_student) const;
     void consult_students_in_class(const class1& a_class) const;
     void consult_students_in_class_and_course(const class1& a_class, const course& a_course) const;
-    void consult_all_students_in_aCourse(const course& a_course) const;
-    void consult_all_students_in_aYear(int year) const;
+    void consult_all_students_in_aCourse(const course& a_course,  const string& sortby = "name", const string& sort_option  = "ascending") const;
+    void consult_all_students_in_aYear(int year,  const string& sortby = "name", const string& sort_option  = "ascending") const;
+    void consult_classes_and_courses_occupation_by_year(int year, const string& uc_sort_by = "occupation", const string& class_sort_by = "occupation",const string& sorting_uc  = "ascending", const string& sorting_classes  = "ascending");
     bool can_add_to_class(course& a_course, student& a_student, class1& a_class) const;
     void store_new_request(const request& new_request);
     void process_request(string& error_message);

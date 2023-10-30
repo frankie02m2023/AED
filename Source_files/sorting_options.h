@@ -4,7 +4,7 @@
 
 #ifndef TRABALHOAED_SORTING_OPTIONS_H
 #define TRABALHOAED_SORTING_OPTIONS_H
-
+#include <list>
 #include "student.h"
 #include "course.h"
 #include "class1.h"

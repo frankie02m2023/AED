@@ -673,4 +673,29 @@ TEST(System_changes,switch_student_classes){
     EXPECT_TRUE(test_old_class4.student_in_class(test_student4));
     EXPECT_FALSE(test_new_class4.student_in_class(test_student4));
 
+    interface testi5;
+    testi5.read_data_classes_per_uc();
+    testi5.read_data_classes();
+    testi5.read_data_students_classes();
+
+    course test_course5("L.EIC001");
+    class1 test_old_class5("1LEIC02");
+    class1 test_new_class5("1LEIC06");
+    student test_student5("Sara","202022172");
+    string error_message5 = "";
+    bool bool5 = testi5.switch_student_classes(test_student5,test_course5,test_old_class5,test_new_class5,error_message5);
+
+    for(course c : testi5.get_courses()){
+        if(c == test_course5){
+            test_course5 = c;
+        }
+    }
+
+    test_course5.get_class(test_old_class5);
+    test_course5.get_class(test_new_class5);
+
+    EXPECT_TRUE(bool5);
+    EXPECT_FALSE(test_old_class5.student_in_class(test_student5));
+    EXPECT_TRUE(test_new_class5.student_in_class(test_student5));
+
 }

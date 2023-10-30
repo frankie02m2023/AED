@@ -3,6 +3,7 @@
 //
 #ifndef CLASS1_H
 #define CLASS1_H
+
 #include <algorithm>
 #include <list>
 #include <string>

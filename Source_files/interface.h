@@ -7,8 +7,6 @@
 #include <set>
 #include "course.h"
 #include <queue>
-#include "course_request.h"
-#include "course_class_request.h"
 #include "request.h"
 
 

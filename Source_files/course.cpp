@@ -93,6 +93,32 @@ bool course::has_student(const student& st) const{
     return false;
 }
 
+//always use get_class before get_class_by_reference
+class1& course::get_class_by_ref(class1& cl) {
+    auto it = std::find(classes.begin(),classes.end(),cl);
+    class1 &cl1 = *it;
+    if(it != classes.end()){
+        return cl1;
+    }
+    return cl;
+}
+
+vector<class1>& course::get_classes_by_ref() {
+    return classes;
+}
+
+//Checking if the balance between course classes is not disturbed
+bool course::check_class_balance(const class1& cl) const {
+    vector<class1> copy_classes = classes;
+    sort(copy_classes.begin(), copy_classes.end(), compare_class_ocupation);
+    size_t min_ocupation = copy_classes[0].get_students().size();
+    size_t target_class_ocupation = cl.get_students().size();
+    if(target_class_ocupation - min_ocupation > 4){
+        return false;
+    }
+    return true;
+}
+
 //Data printer ----------------------------------------------------------
 //complexity: O(nlog(n))
 void course::print_course_data( const string& class_sort_by ,const string& student_sort_by, const string& class_sort_option, const string& student_sort_option) const {
@@ -121,4 +147,9 @@ bool course::operator!=(const course& other_course) const {
 bool course::operator<(const course& other_course) const {
 
     return course_code < other_course.course_code;
+}
+
+void course::operator=(const course &other_course) {
+    course_code = other_course.course_code;
+    classes = other_course.classes;
 }

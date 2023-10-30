@@ -28,6 +28,7 @@ bool sort_class_name_reverse(const class1& cl1, const class1& cl2);
 bool sort_class_occupation(const class1& cl1, const class1& cl2);
 bool sort_class_occupation_reverse(const class1& cl1, const class1& cl2);
 bool class_schedule_sort(const pair<pair<schedule,string>,course>& s1, const pair<pair<schedule,string>,course>& s2);
+bool compare_class_ocupation(const class1& cl1, const class1& cl2);
 
 //sorting functions
 list <student> sort_students_list(list<student> sorted_students, const string& sortby, const string& sort_option );

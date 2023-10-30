@@ -24,5 +24,6 @@ public:
     bool operator>(const schedule& other_schedule) const;
     bool operator==(const schedule& other_schedule) const;
 };
-
+//auxiliary function
+bool overlapping_schedule(const schedule& schedule1, const schedule &schedule2);
 #endif

@@ -72,3 +72,26 @@ bool schedule::operator>(const schedule& other_schedule) const{
 bool schedule::operator==(const schedule& other_schedule) const{
     return (week_day == other_schedule.week_day) && (hour == other_schedule.hour) && (duration == other_schedule.duration);
 }
+
+//auxiliary function to check if two schedules overlap each other
+bool overlapping_schedule(const schedule& schedule1, const schedule &schedule2) {
+    if(schedule1.week_day == "Dont Apply" || schedule2.week_day == "Dont Apply"){
+        return false;
+    }
+    else{
+        if(schedule1.week_day == schedule2.week_day){
+            if(schedule1.hour == schedule2.hour){
+                return true;
+            }
+            else{
+                schedule earlier_schedule = min(schedule1, schedule2);
+                schedule later_schedule = max(schedule1, schedule2);
+                if(earlier_schedule.hour + earlier_schedule.duration > later_schedule.hour){
+                    return true;
+                }
+                return false;
+            }
+        }
+        return false;
+    }
+}

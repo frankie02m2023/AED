@@ -393,6 +393,363 @@ TEST(Schedule_readers, number_of_students){
     EXPECT_NE(n_year, 0);
 }
 
+TEST(Schedule_operations,overlapping_schedules){
+    schedule schedule1("Monday",10.5,2.0);
+    schedule schedule2("Friday",8.0,1.5);
+    schedule schedule3("Monday",11.0,2.0);
+    schedule schedule4("Monday",11.0,1.0);
+    schedule schedule5("Friday",9.5,2.0);
+    schedule schedule6("Dont Apply",0,0);
+    EXPECT_FALSE(overlapping_schedule(schedule1,schedule2));
+    EXPECT_TRUE(overlapping_schedule(schedule1,schedule3));
+    EXPECT_TRUE(overlapping_schedule(schedule1,schedule4));
+    EXPECT_TRUE(overlapping_schedule(schedule3,schedule4));
+    EXPECT_FALSE(overlapping_schedule(schedule2,schedule5));
+    EXPECT_FALSE(overlapping_schedule(schedule5,schedule6));
+}
+
+TEST(System_changes,check_class_balance){
+    interface testi;
+    testi.read_data_classes_per_uc();
+    testi.read_data_classes();
+    testi.read_data_students_classes();
+    course test_course1("L.EIC014");
+    for(course c : testi.get_courses()){
+        if(c == test_course1){
+            test_course1 = c;
+        }
+    }
+    class1 test_class1("2LEIC05");
+    test_course1.get_class(test_class1);
+    EXPECT_TRUE(test_course1.check_class_balance(test_class1));
+}
+
+TEST(System_changes,can_add_to_class){
+    interface testi;
+    testi.read_data_classes_per_uc();
+    testi.read_data_classes();
+    testi.read_data_students_classes();
+
+    course test_course1("L.EIC014");
+    for(course c : testi.get_courses()){
+        if(c == test_course1){
+            test_course1 = c;
+            break;
+        }
+    }
+    class1 test_class1("2LEIC05");
+    test_course1.get_class(test_class1);
+    student test_student1("Gisela","202031607");
+    test_course1.get_class(test_class1);
+    EXPECT_FALSE(testi.can_add_to_class(test_course1,test_student1,test_class1));
+
+    course test_course2("L.EIC002");
+    for(course c : testi.get_courses()){
+        if(c == test_course2){
+            test_course2 = c;
+            break;
+        }
+    }
+    class1 test_class2("1LEIC03");
+    test_course2.get_class(test_class2);
+    student test_student2("Ludovico","202071557");
+    EXPECT_FALSE(testi.can_add_to_class(test_course2,test_student2,test_class2));
+
+
+    course test_course3("L.EIC002");
+    for(course c : testi.get_courses()){
+        if(c == test_course3){
+            test_course3= c;
+            break;
+        }
+    }
+    class1 test_class3("1LEIC12");
+    test_course3.get_class(test_class3);
+    student test_student3("Manuel Santiago","202066712");
+    EXPECT_FALSE(testi.can_add_to_class(test_course3,test_student3,test_class3));
+
+    course test_course4("L.EIC002");
+    for(course c : testi.get_courses()){
+        if(c == test_course4){
+            test_course4 = c;
+            break;
+        }
+    }
+    class1 test_class4("1LEIC06");
+    test_course4.get_class(test_class4);
+    student test_student4("Gisela","202031607");
+    EXPECT_TRUE(testi.can_add_to_class(test_course4,test_student4,test_class4));
+
+    course test_course5("L.EIC005");
+    for(course c : testi.get_courses()){
+        if(c == test_course5){
+            test_course5 = c;
+            break;
+        }
+    }
+    class1 test_class5("1LEIC01");
+    test_course5.get_class(test_class5);
+    student test_student5("Manuel Santiago","202066712");
+    EXPECT_TRUE(testi.can_add_to_class(test_course5,test_student5,test_class5));
+}
+
+
+TEST(System_changes,enroll_student_in_class){
+    interface testi1;
+    testi1.read_data_classes_per_uc();
+    testi1.read_data_classes();
+    testi1.read_data_students_classes();
+
+    course test_course1("L.EIC005");
+    class1 test_class1("1LEIC01");
+    student test_student1("Manuel Santiago","202066712");
+    string error_message = "";
+    testi1.enroll_student_in_course(test_student1,test_course1,test_class1,error_message);
+    for(course c : testi1.get_courses()){
+        if(c == test_course1){
+            test_course1 = c;
+        }
+    }
+    test_course1.get_class(test_class1);
+    EXPECT_EQ(error_message,"");
+    EXPECT_EQ(test_class1.get_students().size(),3);
+    EXPECT_TRUE(test_class1.student_in_class(test_student1));
+
+
+    interface testi2;
+    testi2.read_data_classes_per_uc();
+    testi2.read_data_classes();
+    testi2.read_data_students_classes();
+
+    course test_course2("L.EIC002");
+    class1 test_class2("1LEIC03");
+    student test_student2("Ludovico","202071557");
+    string error_message2 = "";
+    testi2.enroll_student_in_course(test_student2,test_course2,test_class2,error_message2);
+
+    for(course c : testi2.get_courses()){
+        if(c == test_course2){
+            test_course2 = c;
+        }
+    }
+
+    EXPECT_EQ(error_message2,"Student could not be allocated to their desired class.");
+    EXPECT_TRUE(test_course2.has_student(test_student2));
+
+    interface testi3;
+    testi3.read_data_classes_per_uc();
+    testi3.read_data_classes();
+    testi3.read_data_students_classes();
+
+    course test_course3("L.EIC013");
+    class1 test_class3("2LEIC01");
+    student test_student3("Leonor","202020217");
+    string error_message3 = "";
+    testi3.enroll_student_in_course(test_student3,test_course3,test_class3,error_message3);
+
+    for(course c : testi3.get_courses()){
+        if(c == test_course3){
+            test_course3 = c;
+        }
+    }
+
+    EXPECT_EQ(error_message3,"Enrollment failed because student is already enrolled in the maximum number of courses possible.");
+    EXPECT_FALSE(test_course3.has_student(test_student3));
+
+}
+
+
+TEST(System_changes,remove_student_from_course){
+    interface testi1;
+    testi1.read_data_classes_per_uc();
+    testi1.read_data_classes();
+    testi1.read_data_students_classes();
+
+    course test_course1("L.EIC002");
+    student test_student1("Ludovico","202071557");
+    string error_message1 = "";
+    bool test_bool = testi1.remove_student_from_course(test_student1,test_course1,error_message1);
+
+    for(course c : testi1.get_courses()){
+        if(c == test_course1){
+            test_course1 = c;
+        }
+    }
+
+    EXPECT_EQ(error_message1,"The student is not enrolled in course L.EIC002");
+    EXPECT_FALSE(test_bool);
+
+
+    interface testi2;
+    testi2.read_data_classes_per_uc();
+    testi2.read_data_classes();
+    testi2.read_data_students_classes();
+
+    course test_course2("L.EIC005");
+    student test_student2("Leonor","202020217");
+    string error_message2 = "";
+    bool test_bool1 = testi2.remove_student_from_course(test_student2,test_course2,error_message2);
+
+    for(course c : testi2.get_courses()){
+        if(c == test_course2){
+            test_course2 = c;
+        }
+    }
+
+    EXPECT_TRUE(test_bool1);
+    EXPECT_FALSE(test_course2.has_student(test_student2));
+
+    interface testi3;
+    testi3.read_data_classes_per_uc();
+    testi3.read_data_classes();
+    testi3.read_data_students_classes();
+
+    course test_course3("L.EIC003");
+    student test_student3("Rute","202028717");
+    string error_message3 = "";
+    bool test_bool2 = testi3.remove_student_from_course(test_student3,test_course3,error_message3);
+
+    for(course c : testi3.get_courses()){
+        if(c == test_course3){
+            test_course3 = c;
+        }
+    }
+
+    EXPECT_TRUE(test_bool2);
+    EXPECT_FALSE(test_course3.has_student(test_student3));
+}
+
+
+TEST(System_changes,switch_student_classes){
+    interface testi1;
+    testi1.read_data_classes_per_uc();
+    testi1.read_data_classes();
+    testi1.read_data_students_classes();
+
+    course test_course1("L.EIC014");
+    class1 test_old_class1("2LEIC04");
+    class1 test_new_class1("2LEIC05");
+    student test_student1("Marcio","202043592");
+    string error_message1 = "";
+    bool bool1 = testi1.switch_student_classes(test_student1,test_course1,test_old_class1,test_new_class1,error_message1);
+
+    for(course c : testi1.get_courses()){
+        if(c == test_course1){
+            test_course1 = c;
+        }
+    }
+
+    test_course1.get_class(test_old_class1);
+    test_course1.get_class(test_new_class1);
+
+    EXPECT_EQ(error_message1,"The student could not be added to their desired class.");
+    EXPECT_FALSE(bool1);
+    EXPECT_TRUE(test_old_class1.student_in_class(test_student1));
+    EXPECT_FALSE(test_new_class1.student_in_class(test_student1));
+
+
+    interface testi2;
+    testi2.read_data_classes_per_uc();
+    testi2.read_data_classes();
+    testi2.read_data_students_classes();
+
+    course test_course2("L.EIC003");
+    class1 test_old_class2("1LEIC04");
+    class1 test_new_class2("1LEIC03");
+    student test_student2("Rute","202028717");
+    string error_message2 = "";
+    bool bool2 = testi2.switch_student_classes(test_student2,test_course2,test_old_class2,test_new_class2,error_message2);
+
+    for(course c : testi2.get_courses()){
+        if(c == test_course2){
+            test_course2 = c;
+        }
+    }
+
+    test_course2.get_class(test_old_class2);
+    test_course2.get_class(test_new_class2);
+
+    EXPECT_TRUE(bool2);
+    EXPECT_FALSE(test_old_class2.student_in_class(test_student2));
+    EXPECT_TRUE(test_new_class2.student_in_class(test_student2));
+
+    interface testi3;
+    testi3.read_data_classes_per_uc();
+    testi3.read_data_classes();
+    testi3.read_data_students_classes();
+
+    course test_course3("L.EIC001");
+    class1 test_old_class3("1LEIC01");
+    class1 test_new_class3("1LEIC03");
+    student test_student3("Rute","202028717");
+    string error_message3 = "";
+    bool bool3 = testi3.switch_student_classes(test_student3,test_course3,test_old_class3,test_new_class3,error_message3);
+
+    for(course c : testi3.get_courses()){
+        if(c == test_course3){
+            test_course3 = c;
+        }
+    }
+
+    test_course3.get_class(test_old_class3);
+    test_course3.get_class(test_new_class3);
+
+    EXPECT_EQ(error_message3,"The student is not enrolled in class 1LEIC01 of course L.EIC001");
+    EXPECT_FALSE(bool3);
+
+    interface testi4;
+    testi4.read_data_classes_per_uc();
+    testi4.read_data_classes();
+    testi4.read_data_students_classes();
+
+    course test_course4("L.EIC013");
+    class1 test_old_class4("2LEIC09");
+    class1 test_new_class4("2LEIC12");
+    student test_student4("Manuel Benjamin","202047162");
+    string error_message4 = "";
+    bool bool4 = testi4.switch_student_classes(test_student4,test_course4,test_old_class4,test_new_class4,error_message4);
+
+    for(course c : testi4.get_courses()){
+        if(c == test_course4){
+            test_course4 = c;
+        }
+    }
+
+    test_course4.get_class(test_old_class4);
+    test_course4.get_class(test_new_class4);
+
+    EXPECT_EQ(error_message4,"The student could not be added to their desired class.");
+    EXPECT_FALSE(bool4);
+    EXPECT_TRUE(test_old_class4.student_in_class(test_student4));
+    EXPECT_FALSE(test_new_class4.student_in_class(test_student4));
+
+    interface testi5;
+    testi5.read_data_classes_per_uc();
+    testi5.read_data_classes();
+    testi5.read_data_students_classes();
+
+    course test_course5("L.EIC001");
+    class1 test_old_class5("1LEIC02");
+    class1 test_new_class5("1LEIC06");
+    student test_student5("Sara","202022172");
+    string error_message5 = "";
+    bool bool5 = testi5.switch_student_classes(test_student5,test_course5,test_old_class5,test_new_class5,error_message5);
+
+    for(course c : testi5.get_courses()){
+        if(c == test_course5){
+            test_course5 = c;
+        }
+    }
+
+    test_course5.get_class(test_old_class5);
+    test_course5.get_class(test_new_class5);
+
+    EXPECT_TRUE(bool5);
+    EXPECT_FALSE(test_old_class5.student_in_class(test_student5));
+    EXPECT_TRUE(test_new_class5.student_in_class(test_student5));
+
+}
+
 //=============================================================================
 // BENCHMARK
 //=============================================================================

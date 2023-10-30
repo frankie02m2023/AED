@@ -18,6 +18,10 @@ vector<course> interface::get_courses() const {
     return courses;
 }
 
+queue<request> interface::get_requests() const {
+    return requests;
+}
+
 //--------------------------------------------------------------------------------------
 //Data readers (from files)
 
@@ -213,6 +217,35 @@ set<pair<pair<schedule,string>,course>> interface::get_class_schedule(class1 a_c
     return class_schedule;
 }
 
+set<pair<pair<schedule,string>,course>> interface::get_student_schedule(const student& a_student) const {
+    set<pair<pair<schedule,string>,course>> student_schedule;
+    class1 aux_class;
+    string class_type;
+    for(course a_course : courses){
+        if(a_course.has_student(a_student)){
+            aux_class = a_course.get_student_class(a_student);
+            if(aux_class.get_T_class().week_day != "Dont Apply"){
+                class_type = "T";
+                student_schedule.insert(make_pair(make_pair(aux_class.get_T_class(),class_type),a_course));
+            }
+            if(aux_class.get_T_class_2().week_day != "Dont Apply"){
+                class_type = "T";
+                student_schedule.insert(make_pair(make_pair(aux_class.get_T_class_2(),class_type),a_course));
+            }
+            if(aux_class.get_TP_class().week_day != "Dont Apply"){
+                class_type = "TP";
+                student_schedule.insert(make_pair(make_pair(aux_class.get_TP_class(),class_type),a_course));
+            }
+            if(aux_class.get_PL_class().week_day != "Dont Apply"){
+                class_type = "PL";
+                student_schedule.insert(make_pair(make_pair(aux_class.get_PL_class(),class_type),a_course));
+            }
+        }
+    }
+    return student_schedule;
+}
+
+
 /**Gets the students in a class for a specific course.
     * Complexity: O(n).*/
 list<student> interface::get_class_students_for_course(class1 a_class, course a_course) const{
@@ -255,6 +288,29 @@ set<student> interface::get_all_students_in_aYear(int year) const {
     return students;
 }
 
+vector<course> interface::get_all_courses_for_student(const student &a_student) const {
+    vector<course> student_courses;
+    for(course a_course : courses){
+        if(a_course.has_student(a_student)){
+            student_courses.push_back(a_course);
+        }
+    }
+    return student_courses;
+}
+
+student interface::get_student(const student& a_student) const{
+    class1 student_class;
+    student student_info;
+    for(course a_course : courses){
+        if(a_course.has_student(a_student)){
+            student_class = a_course.get_student_class(a_student);
+            student_info = student_class.get_student_in_class(a_student);
+            break;
+        }
+    }
+    return student_info;
+}
+
 /**Gets the number of students in a class.
     * Complexity: O(n)*/
 size_t interface::number_of_students_in_aClass(const class1& a_class, const course& a_course) const {
@@ -271,6 +327,10 @@ size_t interface::number_of_students_in_aYear(int year) const {
     *Complexity: O(n^2).*/
 size_t interface::number_of_students_in_anUC(const course& a_course) const {
     return get_all_students_in_aCourse(a_course).size();
+}
+
+size_t interface::number_of_courses_per_student(const student &a_student) const {
+    return get_all_courses_for_student(a_student).size();
 }
 
 
@@ -307,9 +367,21 @@ void interface::consult_class_schedule(const class1& a_class) const {
 }
 
 
+void interface::consult_student_schedule_by_schedule(const student &a_student) const {
+    set<pair<pair<schedule,string>,course>> student_schedule = get_student_schedule(a_student);
+    cout << "Schedule for student " << a_student.get_name() << ", number " << a_student.get_number() <<":" << endl;
+    auto it = student_schedule.begin();
+    while(it != student_schedule.end()){
+        cout << "Course " << it->second.get_course_name() << endl;
+        cout << "Class " << it->first.second << " Schedule = " << it->first.first.week_day << " " << class1::convert_class_to_hour_and_minute_format(it->first.first) << endl;
+        cout << '\n';
+        it++;
+    }
+}
+
 /**Prints the student schedule.
     * Complexity: O(n^3).*/
-void interface::consult_student_schedule(const student& a_student) const{
+void interface::consult_student_schedule_by_course(const student& a_student) const{
     cout << "Schedule for student " << a_student.get_name() << ", number " << a_student.get_number() <<":" << endl;
 
     for(const course& c: courses){
@@ -408,4 +480,187 @@ void interface::consult_classes_and_courses_occupation_by_year(int year , const 
         }
         cout << '\n';
     }
+}
+
+//TO BE TESTED TOMORROW
+//checking if it is possible to add a student to a given class in a given course
+bool interface::can_add_to_class(course &a_course, student &a_student, class1 &a_class) const {
+    course copy_a_course = a_course;
+    class1 copy_a_class = a_class;
+    // checking if the class is not full
+    if(a_class.get_students().size() == class1::student_capacity){
+        return false;
+    }
+    // temporarily adding the student to the class to check if that doesn t break the class balance in the given course
+    a_class.add_students(a_student);
+    if(!a_course.check_class_balance(a_class)){
+        return false;
+    }
+    // restoring the input class and course objects back to their initial state
+    a_course = copy_a_course;
+    a_class = copy_a_class;
+    // getting the student schedule and checking potencial schedule overlaps
+    set<pair<pair<schedule,string>,course>> student_schedule = get_student_schedule(a_student);
+    class1 comparable_class(" ");
+    auto it = student_schedule.begin();
+    while(it != student_schedule.end()){
+        if(it->second != a_course){
+            if(it->first.second == "TP" || it->first.second == "PL"){
+                if(overlapping_schedule(it->first.first,a_class.get_TP_class())){
+                    return false;
+                }
+                if(overlapping_schedule(it->first.first,a_class.get_PL_class())){
+                    return false;
+                }
+            }
+        }
+        it++;
+    }
+    return true;
+}
+
+
+//!functions that tries to enroll a student in a new course
+//!returns true if the enrollment is successful and false if it isn't
+bool interface::enroll_student_in_course(student &a_student, course &a_course, class1& a_class, string& error_message) {
+    //!Checking if the student has not enrolled in the maximum number of courses
+    if(number_of_courses_per_student(a_student) >= 7){
+        error_message = "Enrollment failed because student is already enrolled in the maximum number of courses possible.";
+        return false;
+    }
+    //!accessing the desired course in courses
+    auto it = std::find(courses.begin(), courses.end(),a_course);
+    course& added_course = *it;
+    course copy_added_course = added_course;
+    class1 copy_added_class = a_class;
+    student added_student = get_student(a_student);
+    if(copy_added_course.has_student(added_student)){
+        error_message = "The student is already enrolled in the desired course.";
+        return false;
+    }
+    //!accessing the given class in the given course
+    if(copy_added_course.get_class(copy_added_class)) {
+        // checking if the enrollment in the given course and class is possible
+        if (can_add_to_class(copy_added_course, added_student, copy_added_class)) {
+            class1& added_class = added_course.get_class_by_ref(a_class);
+            added_class.add_students(added_student);
+            return true;
+        }
+    }
+    //!if it is not possible to allocate the student to their desired class in the given course
+    //!the system tries to allocate them to another class in the same course, starting with the classes
+    //!that have the least amount of students enrolled in them
+    error_message = "Student could not be allocated to their desired class.";
+    vector<class1> copy_course_classes = added_course.get_classes();
+    sort(copy_course_classes.begin(), copy_course_classes.end(), compare_class_ocupation);
+    for(class1 cl : copy_course_classes){
+        if(can_add_to_class(added_course, added_student , cl)){
+            class1& available_class = added_course.get_class_by_ref(cl);
+            available_class.add_students(added_student);
+            return true;
+        }
+    }
+    error_message = "Enrollment failed because the student could not be allocated to any of the classes available for course " + a_course.get_course_name();
+    return false;
+}
+
+
+//!functions that tries to remove a student from a course
+//returns true if the removal is successful and false if it isn't
+bool interface::remove_student_from_course(student &a_student, course &a_course, string& error_message) {
+    //!finding the target course in courses
+    auto it = std::find(courses.begin(),courses.end(),a_course);
+    course& removable_course = *it;
+    //!trying to find the students class in the target course and remove him from it
+    for(class1 a_class : removable_course.get_classes()){
+        if(a_class.student_in_class(a_student)){
+            class1& removable_class = removable_course.get_class_by_ref(a_class);
+            removable_class.remove_students(a_student);
+            return true;
+        }
+    }
+    //!if the student could not be found in the given course set an error message and return false
+    error_message = "The student is not enrolled in course " + a_course.get_course_name();
+    return false;
+}
+
+//!removes student from a given course to enroll him in another one if possible
+bool interface::switch_student_courses(student &a_student, course &old_course, course &new_course, class1& new_class, string& error_message) {
+    auto it = std::find(courses.begin(), courses.end(), old_course);
+    course old_course_copy = *it;
+
+    if (!old_course_copy.has_student(a_student)) {
+        error_message = "Student is not enrolled in course " + old_course.get_course_name();
+        return false;
+    }
+    if(!enroll_student_in_course(a_student,new_course,new_class,error_message)){
+        return false;
+    }
+    remove_student_from_course(a_student,old_course,error_message);
+    return true;
+}
+
+//!switches students from one class to another in a given course if possible
+bool interface::switch_student_classes(student &a_student, course &a_course, class1 &old_class, class1 &new_class, string& error_message) {
+    //!finding the target course in courses
+    auto it = std::find(courses.begin(),courses.end(),a_course);
+    course &target_course = *it;
+    course copy_target_course = *it;
+    student added_student = get_student(a_student);
+    //!checking if the class the student wants to leave exists
+    if(!copy_target_course.get_class(old_class)){
+        error_message = old_class.get_class_name() + "does not exist in course " + target_course.get_course_name();
+        return false;
+    }
+    //!checking if student is actually a part of the class he wants to leave
+    if(!old_class.student_in_class(added_student)){
+        error_message = "The student is not enrolled in class " + old_class.get_class_name() + " of course " + target_course.get_course_name();
+        return false;
+    }
+    //!checking if the class the student wants to join exists
+    if(!copy_target_course.get_class(new_class)){
+        error_message = "The class the student wishes to join does not exist in course " + target_course.get_course_name();
+        return false;
+    }
+    //!creating a reference to the copy old class
+    class1& copy_target_course_old_class = copy_target_course.get_class_by_ref(old_class);
+    //!removing student from copy of the old class to check if we can add him to the new one after removing him from the one
+    copy_target_course_old_class.remove_students(added_student);
+    if(!can_add_to_class(copy_target_course,added_student,new_class)){
+        error_message = "The student could not be added to their desired class.";
+        return false;
+    }
+    //!creating reference to old class and removing student from it
+    class1& old_class_ref = target_course.get_class_by_ref(old_class);
+    old_class_ref.remove_students(added_student);
+    //!creating reference to new class and adding student to it
+    class1& new_class_ref = target_course.get_class_by_ref(new_class);
+    new_class_ref.add_students(added_student);
+    return true;
+}
+
+void interface::store_new_request(const request &new_request) {
+    requests.push(new_request);
+}
+
+void interface::process_request(string& error_message) {
+    request processed_request = requests.front();
+    requests.pop();
+    if(processed_request.request_type == "add course"){
+        enroll_student_in_course(processed_request.target_student, processed_request.added_course, processed_request.added_class, error_message);
+    }
+    else if(processed_request.request_type == "remove course") {
+        remove_student_from_course(processed_request.target_student, processed_request.removed_course, error_message);
+    }
+    else if(processed_request.request_type == "switch courses") {
+        switch_student_courses(processed_request.target_student, processed_request.added_course,processed_request.removed_course, processed_request.added_class, error_message);
+    }
+    else if(processed_request.request_type == "switch classes"){
+        switch_student_classes(processed_request.target_student, processed_request.added_course, processed_request.removed_class, processed_request.added_class,error_message);
+    }
+}
+
+//Stupid function only used to build tests
+void interface::set_courses(vector<course> courses) {
+    this->courses = courses;
 }

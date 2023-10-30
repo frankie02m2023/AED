@@ -6,6 +6,8 @@
 #include "class1.h"
 #include "sorting_options.h"
 
+short class1::student_capacity = 30;
+
 //constructor --------------------------------------------------
 //complexity: O(1)
 class1::class1(std::string class_name, schedule T_class, schedule T_class_2, schedule TP_class , schedule PL_class ) {
@@ -69,11 +71,21 @@ void class1::add_students(const student& st) {
     students.push_back(st);
 }
 
+void class1::remove_students(student st) {
+    auto it = std::find(students.begin(),students.end(),st);
+    students.erase(it);
+}
+
 //auxiliary function -------------------------------------------
 //complexity O(n)
 bool class1::student_in_class(const student& st) const {
     auto it = std::find(students.begin(), students.end(), st);
     return it != students.end();
+}
+
+student class1::get_student_in_class(student st) const {
+    auto it = std::find(students.begin(),students.end(),st);
+    return *it;
 }
 
 //operator -----------------------------------------------------
@@ -85,6 +97,11 @@ bool class1::operator==(const class1& other_class1) const {
 bool class1::operator!=(const class1& other_class1) const {
     return other_class1.class_name != class_name;
 }
+
+bool class1::operator<(const class1& other_class1) const{
+    return class_name < other_class1.class_name;
+}
+
 
 void class1::operator=(const class1& other_class1){
     class_name = other_class1.class_name;

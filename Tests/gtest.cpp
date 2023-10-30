@@ -423,6 +423,18 @@ static void BM_convert_class_to_hour_and_minute_format(benchmark::State& state){
     state.SetComplexityN(state.range(0));
 }
 
+static void BM_read_data_classes_per_uc(benchmark::State& state){
+    for (auto _ : state) {
+        state.PauseTiming();
+        interface testi;
+        //This code gets timed
+        state.ResumeTiming();
+        testi.read_data_classes_per_uc();
+
+    }
+    state.SetComplexityN(state.range(0));
+}
+
 
 //=============================================================================
 // Register the functions as a benchmark
@@ -430,8 +442,16 @@ static void BM_convert_class_to_hour_and_minute_format(benchmark::State& state){
 
 
 
-
+/*
 BENCHMARK(BM_convert_class_to_hour_and_minute_format)
         ->Unit(benchmark::kNanosecond)
         ->RangeMultiplier(2)->Range(1<<5, 1<<10)
         ->Complexity();
+*/
+
+/*
+BENCHMARK(BM_read_data_classes_per_uc)
+        ->Unit(benchmark::kNanosecond)
+        ->RangeMultiplier(2)->Range(1<<5, 1<<10)
+        ->Complexity();
+*/

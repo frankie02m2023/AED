@@ -12,22 +12,19 @@
 #include"sorting_options.h"
 //----------------------------------------------------------------------------------------
 //Basic getters
-//complexity for all basic getters: O(1)
+
+/** Gets the courses. Complexity: O(1)*/
 vector<course> interface::get_courses() const {
     return courses;
 }
 
-queue<course_request> interface::get_requests() const {
-    return requests;
-}
-
-
 //--------------------------------------------------------------------------------------
 //Data readers (from files)
 
-//reads data from the file "classes_per_uc.csv"
-//and organizes the data into the correct data structures
-//complexity: O(n^2)
+/**Reads data from the file "classes_per_uc.csv"
+    * and organizes the data into the correct data structures.
+    * Complexity: O(n^2).*/
+
 void interface::read_data_classes_per_uc() {
     string file, line;
     file = "classes_per_uc.csv";
@@ -59,9 +56,9 @@ void interface::read_data_classes_per_uc() {
     }
 }
 
-//reads data from the file "classes.csv"
-//and organizes the data into the correct data structures
-//complexity: O(n^2)
+/**Reads data from the file "classes.csv"
+    *and organizes the data into the correct data structures.
+    * Complexity: O(n^2). */
 void interface::read_data_classes() {
     string file, line;
     file = "classes.csv";
@@ -120,9 +117,9 @@ void interface::read_data_classes() {
     }
 }
 
-//reads data from the file "students_classes.csv"
-//and organizes the data into the correct data structures
-//complexity : O(n^3)
+/**Reads data from the file "students_classes.csv"
+    * and organizes the data into the correct data structures.
+    * Complexity : O(n^3). */
 void interface::read_data_students_classes() {
     ifstream f("students_classes.csv");
     string line;
@@ -183,8 +180,8 @@ void interface::read_data_students_classes() {
 //----------------------------------------------------------------------------------------------------------------
 //Advanced getters
 
-//gets a specific class schedule
-//complexity : O(nlog(n))
+/**Gets a specific class schedule.
+   * Complexity : O(nlog(n)).*/
 set<pair<pair<schedule,string>,course>> interface::get_class_schedule(class1 a_class) const{
     set<pair<pair<schedule,string>,course>> class_schedule; //schedule for each class
     class1 a_class_copy = a_class;
@@ -216,8 +213,8 @@ set<pair<pair<schedule,string>,course>> interface::get_class_schedule(class1 a_c
     return class_schedule;
 }
 
-//gets the students in a class for a specific course
-//complexity: O(n)
+/**Gets the students in a class for a specific course.
+    * Complexity: O(n).*/
 list<student> interface::get_class_students_for_course(class1 a_class, course a_course) const{
     list<student> students;
     auto it = std::find(courses.begin(), courses.end(), a_course);
@@ -228,8 +225,8 @@ list<student> interface::get_class_students_for_course(class1 a_class, course a_
     return students;
 }
 
-//gets all the students in a course
-//complexity : O(n^2)
+/**Gets all the students in a course.
+* Complexity : O(n^2).*/
 set<student> interface::get_all_students_in_aCourse(course a_course) const {
     set<student> students;
     auto it = std::find(courses.begin(), courses.end(), a_course);
@@ -242,8 +239,8 @@ set<student> interface::get_all_students_in_aCourse(course a_course) const {
     return students;
 }
 
-//gets all the students in a year
-//complexity: O(n^3)
+/**Gets all the students in a year.
+    * Complexity: O(n^3).*/
 set<student> interface::get_all_students_in_aYear(int year) const {
     set<student> students;
 
@@ -258,20 +255,20 @@ set<student> interface::get_all_students_in_aYear(int year) const {
     return students;
 }
 
-//gets the number of students in a class
-//complexity: O(n)
+/**Gets the number of students in a class.
+    * Complexity: O(n)*/
 size_t interface::number_of_students_in_aClass(const class1& a_class, const course& a_course) const {
     return get_class_students_for_course(a_class, a_course).size();
 }
 
-//gets the number of students in a year
-//complexity: O(n^3)
+/**Gets the number of students in a year.
+    * Complexity: O(n^3).*/
 size_t interface::number_of_students_in_aYear(int year) const {
     return get_all_students_in_aYear(year).size();
 }
 
-//gets the number of students in a course(Uc)
-//complexity: O(n^2)
+/**Gets the number of students in a course(Uc).
+    *Complexity: O(n^2).*/
 size_t interface::number_of_students_in_anUC(const course& a_course) const {
     return get_all_students_in_aCourse(a_course).size();
 }
@@ -281,8 +278,8 @@ size_t interface::number_of_students_in_anUC(const course& a_course) const {
 //Data printers
 
 
-//prints the given class schedule
-//complexity: O(nlog(n))
+/**Prints the given class schedule.
+    * Complexity: O(nlog(n)).*/
 void interface::consult_class_schedule(const class1& a_class) const {
     set<pair<pair<schedule,string>,course>> class_schedule = get_class_schedule(a_class); //O(nlog(n))
 
@@ -310,8 +307,8 @@ void interface::consult_class_schedule(const class1& a_class) const {
 }
 
 
-//prints the student schedule
-//complexity: O(n^3)
+/**Prints the student schedule.
+    * Complexity: O(n^3).*/
 void interface::consult_student_schedule(const student& a_student) const{
     cout << "Schedule for student " << a_student.get_name() << ", number " << a_student.get_number() <<":" << endl;
 
@@ -327,8 +324,8 @@ void interface::consult_student_schedule(const student& a_student) const{
     }
 }
 
-//prints the students in a given class
-//complexity: O(nlog(n))
+/**Prints the students in a given class.
+    * Complexity: O(nlog(n)).*/
 void interface::consult_students_in_class_and_course(const class1& a_class, const course& a_course, const string& sortby, const string& sort_option) const{
     list<student> students = get_class_students_for_course(a_class,a_course);   //O(n)
     list<student> sorted_students {students.begin(), students.end()};   //O(n)
@@ -346,8 +343,8 @@ void interface::consult_students_in_class_and_course(const class1& a_class, cons
     }
 }
 
-//prints all the students in a course
-//complexity: O(n^2)
+/**Prints all the students in a course.
+    * Complexity: O(n^2).*/
 void interface::consult_all_students_in_aCourse(const course& a_course, const string& sortby, const string& sort_option) const {
     set<student> students = get_all_students_in_aCourse(a_course); //O(n^2)
     list<student> sorted_students {students.begin(), students.end()}; //O(n)
@@ -361,8 +358,8 @@ void interface::consult_all_students_in_aCourse(const course& a_course, const st
     }
 }
 
-//prints all the students in a year
-//complexity: O(n^3)
+/**Prints all the students in a year.
+    * Complexity: O(n^3).*/
 void interface::consult_all_students_in_aYear(int year, const string& sortby, const string& sort_option) const {
     set<student> students = get_all_students_in_aYear(year); //O(n^3)
     list<student> sorted_students {students.begin(), students.end()};
@@ -376,8 +373,8 @@ void interface::consult_all_students_in_aYear(int year, const string& sortby, co
     }
 }
 
-//prints the data in the entire system
-//complexity: O(n^2log(n))
+/**Prints the data in the entire system.
+    * Complexity: O(n^2log(n)).*/
 void interface::print_data(const string& uc_sort_by , const string& class_sort_by ,const string& student_sort_by,const string& uc_sort_option, const string& class_sort_option, const string& student_sort_option) const{
     cout << "Printing data for the entire system" << endl;
     vector <course> sorted_courses = courses;
@@ -388,8 +385,8 @@ void interface::print_data(const string& uc_sort_by , const string& class_sort_b
     }
 }
 
-//prints the occupation in every course and class for a specific year
-//complexity: O(n^2log(n))
+/**Prints the occupation in every course and class for a specific year.
+    * Complexity: O(n^2log(n)).*/
 void interface::consult_classes_and_courses_occupation_by_year(int year , const string& uc_sort_by, const string& class_sort_by, const string& uc_sort_option, const string& class_sort_option) {
     vector<course> sorted_courses = courses;
     sorted_courses = sort_course_vector(sorted_courses, uc_sort_by, uc_sort_option); //O(nlog(n))

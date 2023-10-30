@@ -1,0 +1,43 @@
+\doxysection{sorting\+\_\+options.\+h}
+\hypertarget{sorting__options_8h_source}{}\label{sorting__options_8h_source}\index{Source\_files/sorting\_options.h@{Source\_files/sorting\_options.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{//}}
+\DoxyCodeLine{00002\ \textcolor{comment}{//\ Created\ by\ lucas\ on\ 27/10/2023.}}
+\DoxyCodeLine{00003\ \textcolor{comment}{//}}
+\DoxyCodeLine{00004\ }
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#ifndef\ TRABALHOAED\_SORTING\_OPTIONS\_H}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#define\ TRABALHOAED\_SORTING\_OPTIONS\_H}}
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ "{}student.h"{}}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ "{}course.h"{}}}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ "{}class1.h"{}}}
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#include\ "{}interface.h"{}}}
+\DoxyCodeLine{00012\ }
+\DoxyCodeLine{00013\ \textcolor{comment}{//student\ compare\ options}}
+\DoxyCodeLine{00014\ \textcolor{keywordtype}{bool}\ sort\_student\_name(\textcolor{keyword}{const}\ \mbox{\hyperlink{classstudent}{student}}\&\ st1,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classstudent}{student}}\&\ st2);}
+\DoxyCodeLine{00015\ \textcolor{keywordtype}{bool}\ sort\_student\_name\_reverse(\textcolor{keyword}{const}\ \mbox{\hyperlink{classstudent}{student}}\&\ st1,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classstudent}{student}}\&\ st2);}
+\DoxyCodeLine{00016\ \textcolor{keywordtype}{bool}\ sort\_student\_number(\textcolor{keyword}{const}\ \mbox{\hyperlink{classstudent}{student}}\&\ st1,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classstudent}{student}}\&\ st2);}
+\DoxyCodeLine{00017\ \textcolor{keywordtype}{bool}\ sort\_student\_number\_reverse(\textcolor{keyword}{const}\ \mbox{\hyperlink{classstudent}{student}}\&\ st1,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classstudent}{student}}\&\ st2);}
+\DoxyCodeLine{00018\ }
+\DoxyCodeLine{00019\ \textcolor{comment}{//course\ compare\ options}}
+\DoxyCodeLine{00020\ \textcolor{keywordtype}{bool}\ sort\_course\_name(\textcolor{keyword}{const}\ \mbox{\hyperlink{classcourse}{course}}\&\ c1,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classcourse}{course}}\&\ c2);}
+\DoxyCodeLine{00021\ \textcolor{keywordtype}{bool}\ sort\_course\_name\_reverse(\textcolor{keyword}{const}\ \mbox{\hyperlink{classcourse}{course}}\&\ c1,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classcourse}{course}}\&\ c2);}
+\DoxyCodeLine{00022\ \textcolor{keywordtype}{bool}\ sort\_course\_occupation(\textcolor{keyword}{const}\ \mbox{\hyperlink{classcourse}{course}}\&\ c1,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classcourse}{course}}\&\ c2);}
+\DoxyCodeLine{00023\ \textcolor{keywordtype}{bool}\ sort\_course\_occupation\_reverse(\textcolor{keyword}{const}\ \mbox{\hyperlink{classcourse}{course}}\&\ c1,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classcourse}{course}}\&\ c2);}
+\DoxyCodeLine{00024\ }
+\DoxyCodeLine{00025\ \textcolor{comment}{//class\ compare\ options}}
+\DoxyCodeLine{00026\ \textcolor{keywordtype}{bool}\ sort\_class\_name(\textcolor{keyword}{const}\ \mbox{\hyperlink{classclass1}{class1}}\&\ cl1,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classclass1}{class1}}\&\ cl2);}
+\DoxyCodeLine{00027\ \textcolor{keywordtype}{bool}\ sort\_class\_name\_reverse(\textcolor{keyword}{const}\ \mbox{\hyperlink{classclass1}{class1}}\&\ cl1,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classclass1}{class1}}\&\ cl2);}
+\DoxyCodeLine{00028\ \textcolor{keywordtype}{bool}\ sort\_class\_occupation(\textcolor{keyword}{const}\ \mbox{\hyperlink{classclass1}{class1}}\&\ cl1,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classclass1}{class1}}\&\ cl2);}
+\DoxyCodeLine{00029\ \textcolor{keywordtype}{bool}\ sort\_class\_occupation\_reverse(\textcolor{keyword}{const}\ \mbox{\hyperlink{classclass1}{class1}}\&\ cl1,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classclass1}{class1}}\&\ cl2);}
+\DoxyCodeLine{00030\ \textcolor{keywordtype}{bool}\ class\_schedule\_sort(\textcolor{keyword}{const}\ pair<pair<schedule,string>,\mbox{\hyperlink{classcourse}{course}}>\&\ s1,\ \textcolor{keyword}{const}\ pair<pair<schedule,string>,\mbox{\hyperlink{classcourse}{course}}>\&\ s2);}
+\DoxyCodeLine{00031\ }
+\DoxyCodeLine{00032\ \textcolor{comment}{//sorting\ functions}}
+\DoxyCodeLine{00033\ list\ <student>\ sort\_students\_list(list<student>\ sorted\_students,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{string}\&\ sortby,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{string}\&\ sort\_option\ );}
+\DoxyCodeLine{00034\ vector<course>\ sort\_course\_vector(vector<course>\ sorted\_courses,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{string}\&\ sortby,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{string}\&\ sort\_option);}
+\DoxyCodeLine{00035\ vector<class1>\ sort\_class\_vector(vector<class1>\ sorted\_classes,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{string}\&\ sortby,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{string}\&\ sort\_option);}
+\DoxyCodeLine{00036\ }
+\DoxyCodeLine{00037\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//TRABALHOAED\_SORTING\_OPTIONS\_H}}
+
+\end{DoxyCode}

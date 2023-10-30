@@ -9,7 +9,6 @@
 #include "../Source_files/interface.h"
 #include "../Source_files/schedule.h"
 #include "../Source_files/schedule_system.h"
-#include "../Source_files/course_class_request.h"
 #include "benchmark/benchmark.h"
 
 

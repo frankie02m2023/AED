@@ -1,0 +1,50 @@
+\doxysection{interface.\+h}
+\hypertarget{interface_8h_source}{}\label{interface_8h_source}\index{Source\_files/interface.h@{Source\_files/interface.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{//}}
+\DoxyCodeLine{00002\ \textcolor{comment}{//\ Created\ by\ franc\ on\ 20/10/2023.}}
+\DoxyCodeLine{00003\ \textcolor{comment}{//}}
+\DoxyCodeLine{00004\ }
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#ifndef\ TRABALHOAED\_INTERFACE\_H}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#define\ TRABALHOAED\_INTERFACE\_H}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ <set>}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ "{}course.h"{}}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ <queue>}}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ "{}course\_request.h"{}}}
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#include\ "{}course\_class\_request.h"{}}}
+\DoxyCodeLine{00012\ }
+\DoxyCodeLine{00017\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classinterface}{interface}}\ \{}
+\DoxyCodeLine{00018\ \ \ \ \ vector<course>courses;}
+\DoxyCodeLine{00019\ \ \ \ \ queue<course\_request>\ requests;}
+\DoxyCodeLine{00020\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00025\ \ \ \ \ vector<course>\ \mbox{\hyperlink{classinterface_a83c038947efe5d40c1d256bc044cef50}{get\_courses}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00026\ \ \ \ \ queue<course\_request>\ \mbox{\hyperlink{classinterface_a770c52c2384196de88603c9e16650faa}{get\_requests}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00028\ }
+\DoxyCodeLine{00033\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classinterface_adb53c97ba0b7dff7b377fdd41fce6462}{read\_data\_classes\_per\_uc}}();}
+\DoxyCodeLine{00034\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classinterface_a228c1b0bc49e9359c76b5a6c8ba72a3e}{read\_data\_classes}}();}
+\DoxyCodeLine{00035\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classinterface_a05d2a70c59784a4e57a22c0ee97f8b42}{read\_data\_students\_classes}}();}
+\DoxyCodeLine{00037\ }
+\DoxyCodeLine{00042\ \ \ \ \ set<pair<pair<schedule,string>,\mbox{\hyperlink{classcourse}{course}}>>\ \mbox{\hyperlink{classinterface_a3c57f6d0057c7e494857826351477a12}{get\_class\_schedule}}(\mbox{\hyperlink{classclass1}{class1}}\ a\_class)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00043\ \ \ \ \ list<student>\ \mbox{\hyperlink{classinterface_a34fcdc567bd375c255f44fb228d13eb7}{get\_class\_students\_for\_course}}(\mbox{\hyperlink{classclass1}{class1}}\ a\_class,\ \mbox{\hyperlink{classcourse}{course}}\ a\_course)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00044\ \ \ \ \ set<student>\ \mbox{\hyperlink{classinterface_a4701f4e9648a12934645b3f535e6ab29}{get\_all\_students\_in\_aCourse}}(\mbox{\hyperlink{classcourse}{course}}\ a\_course)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00045\ \ \ \ \ set<student>\ \mbox{\hyperlink{classinterface_adc84fc6dd23fadf6739189caba2e0920}{get\_all\_students\_in\_aYear}}(\textcolor{keywordtype}{int}\ year)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00046\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{classinterface_a653396433de17be67bce32d3d6168577}{number\_of\_students\_in\_aYear}}(\textcolor{keywordtype}{int}\ year)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00047\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{classinterface_a118920827505b7a1503ba66a7c3883bc}{number\_of\_students\_in\_anUC}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classcourse}{course}}\&\ a\_course)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00048\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{classinterface_a94abfd033dd50021e301489b91730afe}{number\_of\_students\_in\_aClass}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classclass1}{class1}}\&\ a\_class,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classcourse}{course}}\&\ a\_course)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00050\ }
+\DoxyCodeLine{00055\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classinterface_ae8082642a3fc597c4ab2b5b96d130725}{consult\_class\_schedule}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classclass1}{class1}}\&\ a\_class)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00056\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classinterface_a44050b924f73fa6f712718cadf3ec32a}{consult\_student\_schedule}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classstudent}{student}}\&\ a\_student)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00057\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classinterface_a9671d4419852c46c0eda486952d3ecf3}{consult\_students\_in\_class\_and\_course}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classclass1}{class1}}\&\ a\_class,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classcourse}{course}}\&\ a\_course,\ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{string}\&\ sortby\ =\ \textcolor{stringliteral}{"{}name"{}},\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{string}\&\ sort\_option\ =\ \textcolor{stringliteral}{"{}ascending"{}})\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00058\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classinterface_a07c94a9f8c0a8fa3e01e9ccaeb724597}{consult\_all\_students\_in\_aCourse}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classcourse}{course}}\&\ a\_course,\ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{string}\&\ sortby\ =\ \textcolor{stringliteral}{"{}name"{}},\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{string}\&\ sort\_option\ \ =\ \textcolor{stringliteral}{"{}ascending"{}})\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00059\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classinterface_af6c0d1784557df82d06643720267b646}{consult\_all\_students\_in\_aYear}}(\textcolor{keywordtype}{int}\ year,\ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{string}\&\ sortby\ =\ \textcolor{stringliteral}{"{}name"{}},\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{string}\&\ sort\_option\ \ =\ \textcolor{stringliteral}{"{}ascending"{}})\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00060\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classinterface_a3e88937c6047aa2ca7992a38cab20c94}{consult\_classes\_and\_courses\_occupation\_by\_year}}(\textcolor{keywordtype}{int}\ year,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{string}\&\ uc\_sort\_by\ =\ \textcolor{stringliteral}{"{}occupation"{}},\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{string}\&\ class\_sort\_by\ =\ \textcolor{stringliteral}{"{}occupation"{}},}
+\DoxyCodeLine{00061\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{string}\&\ sorting\_uc\ \ =\ \textcolor{stringliteral}{"{}ascending"{}},\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{string}\&\ sorting\_classes\ \ =\ \textcolor{stringliteral}{"{}ascending"{}});}
+\DoxyCodeLine{00062\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classinterface_a4a911cb42b7a20e283ba6acfa46f9258}{print\_data}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{string}\&\ uc\_sort\_by\ =\ \textcolor{stringliteral}{"{}name"{}},\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{string}\&\ class\_sort\_by\ =\ \textcolor{stringliteral}{"{}name"{}},\textcolor{keyword}{const}\ \textcolor{keywordtype}{string}\&\ student\_sort\_by\ =\ \textcolor{stringliteral}{"{}name"{}},}
+\DoxyCodeLine{00063\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{string}\&\ uc\_sort\_option\ =\ \textcolor{stringliteral}{"{}ascending"{}},\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{string}\&\ class\_sort\_option\ =\ \textcolor{stringliteral}{"{}ascending"{}},\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{string}\&\ student\_sort\_option\ =\ \textcolor{stringliteral}{"{}ascending"{}})\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00065\ \};}
+\DoxyCodeLine{00066\ }
+\DoxyCodeLine{00067\ }
+\DoxyCodeLine{00068\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//TRABALHOAED\_INTERFACE\_H}}
+
+\end{DoxyCode}

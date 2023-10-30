@@ -8,6 +8,7 @@
 #include "course.h"
 #include <queue>
 #include "request.h"
+#include <fstream>
 
 
 class interface {
@@ -19,6 +20,7 @@ public:
     void read_data_classes_per_uc();
     void read_data_classes();
     void read_data_students_classes();
+    void read_data_students_requests();
     set<pair<pair<schedule,string>,course>> get_class_schedule(class1 a_class) const;
     set<pair<pair<schedule,string>,course>> get_student_schedule(const student& a_student) const;
     set<student> get_class_students_for_all_courses(class1 a_class) const;
@@ -46,8 +48,10 @@ public:
     bool remove_student_from_course(student& a_student, course& a_course, string& error_message);
     bool switch_student_courses(student& a_student, course& old_course, course& new_course, class1& new_class, string& error_message);
     bool switch_student_classes(student& a_student, course& a_course, class1& old_class, class1& new_class, string& error_message);
+    void add_request_to_file(const request& new_request);
+    void remove_request_from_file();
     void print_data() const;
-    void set_courses(vector<course>);
+
 };
 
 

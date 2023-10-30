@@ -36,7 +36,7 @@ set(SOURCE_FILES
         Source_files/sorting_options.h
 )
 
-file(COPY Data_files/classes_per_uc.csv Data_files/classes.csv Data_files/students_classes.csv DESTINATION ${CMAKE_BINARY_DIR})
+file(COPY Data_files/classes_per_uc.csv Data_files/classes.csv Data_files/students_classes.csv Data_files/students_requests.csv DESTINATION ${CMAKE_BINARY_DIR})
 
 # Define the executable target
 add_executable(testing1 ${SOURCE_FILES})

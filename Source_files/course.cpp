@@ -12,6 +12,7 @@ course::course(std::string course) {
 }
 
 //getters ---------------------------------------------------------------
+//complexity for almost all getters: O(1)
 vector<class1> course::get_classes() const{
     return classes;
 }
@@ -24,6 +25,7 @@ int course::get_course_grade() const {
     return classes[0].get_class_grade();
 }
 
+//complexity: O(n)
 bool course::get_class(class1& cl) const {
     auto it = std::find(classes.begin(),classes.end(),cl);
     if(it != classes.end()){
@@ -32,6 +34,7 @@ bool course::get_class(class1& cl) const {
     return it != classes.end();
 }
 
+//complexity: O(n^2)
 class1 course::get_student_class(student st) const{
     class1 dummy {"Dummy"};
     for(class1 cl: classes){
@@ -41,6 +44,7 @@ class1 course::get_student_class(student st) const{
     return dummy;
 }
 
+//complexity: O(n)
 size_t course::number_of_students() const {
     size_t res = 0;
     for(class1 cl: classes){
@@ -50,6 +54,7 @@ size_t course::number_of_students() const {
 }
 
 //setters --------------------------------------------------------------
+//complexity for all setters: O(1)
 void course::set_classes(vector<class1> classes){
     this->classes = classes;
 }
@@ -59,6 +64,7 @@ void course::add_class(class1 cl) {
 }
 
 //auxiliary functions ---------------------------------------------------
+//complexity: O(n)
 void course::edit_class(class1 cl, schedule time1, string class_type){
     for (class1 &a_class: classes) {
         if (a_class.get_class_name() == cl.get_class_name()) {
@@ -78,15 +84,17 @@ void course::edit_class(class1 cl, schedule time1, string class_type){
     }
 }
 
+//complexity: O(n^2)
 bool course::has_student(const student& st) const{
     for(const class1& cl: classes){
-        if(cl.student_in_class(st))
+        if(cl.student_in_class(st)) //O(n)
             return true;
     }
     return false;
 }
 
 //Data printer ----------------------------------------------------------
+//complexity: O(nlog(n))
 void course::print_course_data( const string& class_sort_by ,const string& student_sort_by, const string& class_sort_option, const string& student_sort_option) const {
     cout << "----------------------------------------------" << endl;
     cout << "Course Code = " << course_code << endl;
@@ -100,6 +108,7 @@ void course::print_course_data( const string& class_sort_by ,const string& stude
 }
 
 //Operators -----------------------------------------------------------
+//complexity for all operators: O(1)
 bool course::operator==(const course& other_course) const {
 
     return other_course.course_code == course_code;

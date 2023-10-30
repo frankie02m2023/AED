@@ -12,6 +12,7 @@
 #include"sorting_options.h"
 //----------------------------------------------------------------------------------------
 //Basic getters
+//complexity for all basic getters: O(1)
 vector<course> interface::get_courses() const {
     return courses;
 }

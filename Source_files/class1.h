@@ -29,7 +29,7 @@ public:
     void set_T_class_2(const schedule& T_time);
     void set_TP_class(const schedule& TP_time);
     void set_PL_class(const schedule& PL_time);
-    void add_students(student st);
+    void add_students(const student& st);
     int get_class_grade() const;
 
     //operators
@@ -38,14 +38,14 @@ public:
     void operator=(const class1& other_class1);
 
     //functions to convert the time format
-    static string convert_class_to_hour_and_minute_format(schedule class_schedule);
+    static string convert_class_to_hour_and_minute_format(const schedule& class_schedule);
     string convert_T_class_to_hour_and_minute_format() const;
     string convert_T_class2_to_hour_and_minute_format() const;
     string convert_TP_class_to_hour_and_minute_format() const;
     string convert_PL_class_to_hour_and_minute_format() const;
 
     //auxiliary function
-    bool student_in_class(student st) const;
+    bool student_in_class(const student& st) const;
 
     //data printers
     void print_class_data(const string& student_sort_by, const string& student_sort_option) const;

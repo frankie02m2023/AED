@@ -8,12 +8,14 @@ set( CMAKE_BUILD_TYPE "Release" )
 add_subdirectory(googletest)
 include_directories(googletest/googletest/include)
 include_directories(googletest/googlemock/include)
+add_subdirectory(benchmark)
+include_directories(benchmark/include)
 set( CMAKE_BUILD_TYPE ${CMAKE_BUILD_TYPE_TMP} )
 
 add_executable(googletest Tests/gtest.cpp Source_files/student.cpp Source_files/interface.cpp Source_files/class1.cpp Source_files/course.cpp Source_files/schedule.cpp
-        Source_files/course_class_request.cpp Source_files/course_request.cpp Source_files/sorting_options.cpp)
+        Source_files/course_class_request.cpp Source_files/course_request.cpp Source_files/sorting_options.cpp Source_files/testing1.cpp)
 
-target_link_libraries(googletest gtest gtest_main)
+target_link_libraries(googletest gtest gtest_main benchmark benchmark_main)
 
 # List your source files for the executable
 set(SOURCE_FILES

@@ -7,6 +7,7 @@
 #include "sorting_options.h"
 
 //constructor --------------------------------------------------
+//complexity: O(1)
 class1::class1(std::string class_name, schedule T_class, schedule T_class_2, schedule TP_class , schedule PL_class ) {
     this->class_name = class_name;
     this->T_class = T_class;
@@ -17,6 +18,7 @@ class1::class1(std::string class_name, schedule T_class, schedule T_class_2, sch
 
 
 //getters -------------------------------------------------------
+//Complexity for all getter: O(1)
 schedule class1::get_PL_class() const {
     return PL_class;
 }
@@ -46,6 +48,7 @@ int class1::get_class_grade() const{
 }
 
 //setters -----------------------------------------------------
+//Complexity for all setter: O(1)
 void class1::set_T_class(const schedule& T_time) {
     this->T_class = T_time;
 }
@@ -62,17 +65,19 @@ void class1::set_PL_class(const schedule& PL_time) {
     this->PL_class = PL_time;
 }
 
-void class1::add_students(student st) {
+void class1::add_students(const student& st) {
     students.push_back(st);
 }
 
 //auxiliary function -------------------------------------------
-bool class1::student_in_class(student st) const {
+//complexity O(n)
+bool class1::student_in_class(const student& st) const {
     auto it = std::find(students.begin(), students.end(), st);
     return it != students.end();
 }
 
 //operator -----------------------------------------------------
+//complexity for all operators: O(1)
 bool class1::operator==(const class1& other_class1) const {
     return other_class1.class_name == class_name;
 }
@@ -91,7 +96,8 @@ void class1::operator=(const class1& other_class1){
 }
 
 //functions to convert the time format -------------------------------------------------------------------
-string class1::convert_class_to_hour_and_minute_format(schedule class_schedule){
+//complexity: O(log(n))
+string class1::convert_class_to_hour_and_minute_format(const schedule& class_schedule){
     string time_and_duration, start_time_hour, start_time_minute, duration_hours, duration_minutes;
     stringstream ss;
 
@@ -166,6 +172,7 @@ string class1::convert_PL_class_to_hour_and_minute_format() const {
 //Data printers -----------------------------------------------------------------------------------
 
 //prints all class data
+//complexity : O(nlog(n))
 void class1::print_class_data(const string& student_sort_by,const string& student_sort_option) const {
     std::cout << "Class name = " << class_name << endl;
     std::cout << "T Class schedule = " << T_class.week_day << " Start time = " << convert_T_class_to_hour_and_minute_format() << endl;
@@ -187,6 +194,7 @@ void class1::print_class_data(const string& student_sort_by,const string& studen
 }
 
 //prints the class schedule
+//complexity : O(log(n))
 void class1::print_class_schedule() const {
     std::cout << "Class name = " << class_name << endl;
     std::cout << "T Class schedule = " << T_class.week_day << " Start time = " << convert_T_class_to_hour_and_minute_format() << endl;

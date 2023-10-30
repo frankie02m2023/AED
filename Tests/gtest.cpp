@@ -2,6 +2,7 @@
 // Created by lucas on 21/10/2023.
 //
 #include <gtest/gtest.h>
+#include <random>
 #include "../Source_files/student.h"
 #include "../Source_files/class1.h"
 #include "../Source_files/course.h"
@@ -9,6 +10,7 @@
 #include "../Source_files/schedule.h"
 #include "../Source_files/schedule_system.h"
 #include "../Source_files/course_class_request.h"
+#include "benchmark/benchmark.h"
 
 
 
@@ -391,3 +393,45 @@ TEST(Schedule_readers, number_of_students){
     EXPECT_EQ(expected_course, n_course);
     EXPECT_NE(n_year, 0);
 }
+
+//=============================================================================
+// BENCHMARK
+//=============================================================================
+
+static void BM_convert_class_to_hour_and_minute_format(benchmark::State& state){
+    schedule s;
+    class1 cl{"test"};
+    auto rng = std::default_random_engine {};
+    vector<int> rnd(state.range(0));
+    for (auto _ : state) {
+        state.PauseTiming();
+        // runtime of this will be ignored
+        for (int i=0; i< state.range(0); i++)
+            rnd.at(i) = i;
+        vector<int> rnd2 = rnd;
+        std::shuffle(std::begin(rnd), std::end(rnd), rng);
+        for (int i=0; i< state.range(0); i++) {
+            s.week_day.append(std::to_string(rnd.at(i)));
+        }
+        s.duration = state.range(0);
+        s.hour = state.range(0);
+        //This code gets timed
+        state.ResumeTiming();
+        cl.convert_class_to_hour_and_minute_format(s);
+
+        }
+    state.SetComplexityN(state.range(0));
+}
+
+
+//=============================================================================
+// Register the functions as a benchmark
+//=============================================================================
+
+
+
+
+BENCHMARK(BM_convert_class_to_hour_and_minute_format)
+        ->Unit(benchmark::kNanosecond)
+        ->RangeMultiplier(2)->Range(1<<5, 1<<10)
+        ->Complexity();

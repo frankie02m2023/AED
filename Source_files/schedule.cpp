@@ -6,6 +6,7 @@
 #include <algorithm>
 
 //constructor ----------------------------------------------------------
+//complexity: O(1)
 schedule::schedule(string week_day, float hour, float duration){
     this->week_day = week_day;
     this->hour = hour;
@@ -14,6 +15,7 @@ schedule::schedule(string week_day, float hour, float duration){
 
 
 //operators -------------------------------------------------------------
+//complexity: O(n)
 bool schedule::operator<(const schedule& other_schedule) const{
     //auxiliary vector with the days os the week ordered
     vector<string> week_days = {"Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"};
@@ -39,6 +41,7 @@ bool schedule::operator<(const schedule& other_schedule) const{
     return false;
 }
 
+//complexity: O(n)
 bool schedule::operator>(const schedule& other_schedule) const{
     //auxiliary vector with the days os the week ordered
     vector<string> week_days = {"Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"};
@@ -64,6 +67,8 @@ bool schedule::operator>(const schedule& other_schedule) const{
     return false;
 }
 
+
+//complexity: O(1)
 bool schedule::operator==(const schedule& other_schedule) const{
     return (week_day == other_schedule.week_day) && (hour == other_schedule.hour) && (duration == other_schedule.duration);
 }

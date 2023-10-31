@@ -5,7 +5,10 @@
 #include <sstream>
 #include "class1.h"
 #include "sorting_options.h"
-
+/**
+* @file class1.cpp
+* @brief Implementation of class class1.
+*/
 short class1::student_capacity = 30;
 
 //constructor --------------------------------------------------

@@ -10,7 +10,12 @@
 #include "request.h"
 
 /**
- * Class interface. Where are performed the most important functions in our system.
+ *
+* @file interface.h
+* @brief Definition of class interface.
+*
+ *\class interface
+ * Where are performed the most important functions in our system.
  * Stores a vector with the courses and a queue with the requests
  */
 class interface {

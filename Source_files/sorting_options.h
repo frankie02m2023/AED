@@ -9,7 +9,13 @@
 #include "course.h"
 #include "class1.h"
 #include "interface.h"
-/** Functions used to sort the data structures in the other files*/
+
+/**
+ *\file sorting_options.h
+* @brief Definition of sort functions and sort options.
+ *
+ * Functions used to sort the data structures in the other files.
+*/
 
 /** @name Student compare options
  *

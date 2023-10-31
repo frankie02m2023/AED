@@ -5,7 +5,12 @@
 #include "class1.h"
 using namespace std;
 
-/** Class course. Where are performed specific functions related to the courses.
+/**
+* @file course.h
+* @brief Definition of class course.
+ *
+ *\class course
+ * Where are performed specific functions related to the courses.
  *  Stores the course code and a vector with his classes.
  */
 class course{

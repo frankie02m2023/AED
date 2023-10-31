@@ -35,7 +35,7 @@ set(SOURCE_FILES
         Source_files/sorting_options.h
         Source_files/request.cpp
         Source_files/request.h
-        Source_files/testing1.cpp
+        Source_files/main.cpp
 )
 
 file(COPY Data_files/classes_per_uc.csv Data_files/classes.csv Data_files/students_classes.csv DESTINATION ${CMAKE_BINARY_DIR})

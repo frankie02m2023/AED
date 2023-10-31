@@ -9,7 +9,7 @@
 short class1::student_capacity = 30;
 
 //constructor --------------------------------------------------
-//complexity: O(1)
+// Time complexity: O(1)
 class1::class1(std::string class_name, schedule T_class, schedule T_class_2, schedule TP_class , schedule PL_class ) {
     this->class_name = class_name;
     this->T_class = T_class;
@@ -21,57 +21,97 @@ class1::class1(std::string class_name, schedule T_class, schedule T_class_2, sch
 
 //getters -------------------------------------------------------
 //Complexity for all getter: O(1)
+
+/** Gets the PL class schedule.
+ * Time complexity: O(1)
+ */
 schedule class1::get_PL_class() const {
     return PL_class;
 }
 
+/** Gets the TP class schedule.
+ * Time complexity: O(1)
+ */
 schedule class1::get_TP_class() const {
     return TP_class;
 }
 
+/** Gets the T class schedule.
+ * Time complexity: O(1)
+ */
 schedule class1::get_T_class() const {
     return T_class;
 }
 
+/** Gets the T_2 class schedule.
+ * Time complexity: O(1)
+ */
 schedule class1::get_T_class_2() const {
     return T_class_2;
 }
 
+/** Gets the class name.
+ * Time complexity: O(1)
+ */
 string class1::get_class_name() const {
     return class_name;
 }
 
+/** Gets the students list.
+ * Time complexity: O(1)
+ */
 list<student> class1::get_students() const {
     return students;
 }
 
+/** Gets the grade of the class (1,2,3).
+ * Time complexity: O(1)
+ */
 int class1::get_class_grade() const{
     return class_name[0] - '0';
 }
 
 //setters -----------------------------------------------------
 //Complexity for all setter: O(1)
+
+/** Sets the T Schedule.
+ * Time complexity: O(1)
+ */
 void class1::set_T_class(const schedule& T_time) {
     this->T_class = T_time;
 }
 
+/** Sets the T_2 Schedule.
+ * Time complexity: O(1)
+ */
 void class1::set_T_class_2(const schedule& T_time) {
     this->T_class_2 = T_time;
 }
 
+/** Sets the TP Schedule.
+ * Time complexity: O(1)
+ */
 void class1::set_TP_class(const schedule& TP_time) {
     this->TP_class = TP_time;
 }
 
+/** Sets the PL Schedule.
+ * Time complexity: O(1)
+ */
 void class1::set_PL_class(const schedule& PL_time) {
     this->PL_class = PL_time;
 }
 
+/** Adds student to the students list.
+ * Time complexity: O(1)
+ */
 void class1::add_students(const student& st) {
     students.push_back(st);
 }
 
-//O(n)
+/** Removes student from student list.
+ * Time complexity: O(n)
+ */
 void class1::remove_students(student st) {
     auto it = std::find(students.begin(),students.end(),st);
     students.erase(it);
@@ -79,12 +119,17 @@ void class1::remove_students(student st) {
 
 //auxiliary function -------------------------------------------
 //complexity O(n)
+/** Checks if a student belongs to the class.
+ * Tyme complexity: O(n)
+ */
 bool class1::student_in_class(const student& st) const {
     auto it = std::find(students.begin(), students.end(), st);
     return it != students.end();
 }
 
-//O(n)
+/**Gets a  specific student in the students list.
+ * Time complexity: O(n)
+ */
 student class1::get_student_in_class(student st) const {
     auto it = std::find(students.begin(),students.end(),st);
     return *it;
@@ -115,7 +160,9 @@ void class1::operator=(const class1& other_class1){
 }
 
 //functions to convert the time format -------------------------------------------------------------------
-//complexity: O(log(n))
+
+/** Converts the time format from a simple float format to the string format '00:00'.
+* Time complexity: O(log(n))*/
 string class1::convert_class_to_hour_and_minute_format(const schedule& class_schedule){
     string time_and_duration, start_time_hour, start_time_minute, duration_hours, duration_minutes;
     stringstream ss;
@@ -172,26 +219,34 @@ string class1::convert_class_to_hour_and_minute_format(const schedule& class_sch
     return time_and_duration;
 }
 
+/** Converts the T time format from a simple float format to the string format '00:00'.
+* Time complexity: O(log(n))*/
 string class1::convert_T_class_to_hour_and_minute_format() const {
     return convert_class_to_hour_and_minute_format(T_class);
 }
 
+/** Converts the T_2 time format from a simple float format to the string format '00:00'.
+* Time complexity: O(log(n))*/
 string class1::convert_T_class2_to_hour_and_minute_format() const {
     return convert_class_to_hour_and_minute_format(T_class_2);
 }
 
+/** Converts the TP time format from a simple float format to the string format '00:00'.
+* Time complexity: O(log(n))*/
 string class1::convert_TP_class_to_hour_and_minute_format() const {
     return convert_class_to_hour_and_minute_format(TP_class);
 }
 
+/** Converts the PL time format from a simple float format to the string format '00:00'.
+* Time complexity: O(log(n))*/
 string class1::convert_PL_class_to_hour_and_minute_format() const {
     return convert_class_to_hour_and_minute_format(PL_class);
 }
 
 //Data printers -----------------------------------------------------------------------------------
 
-//prints all class data
-//complexity : O(nlog(n))
+/**Prints all class data.
+*Time complexity : O(nlog(n))*/
 void class1::print_class_data(const string& student_sort_by,const string& student_sort_option) const {
     std::cout << "Class name = " << class_name << endl;
     std::cout << "T Class schedule = " << T_class.week_day << " Start time = " << convert_T_class_to_hour_and_minute_format() << endl;
@@ -212,8 +267,8 @@ void class1::print_class_data(const string& student_sort_by,const string& studen
     std::cout <<'\n';
 }
 
-//prints the class schedule
-//complexity : O(log(n))
+/**Prints the class schedule.
+*Time complexity : O(log(n))*/
 void class1::print_class_schedule() const {
     std::cout << "Class name = " << class_name << endl;
     std::cout << "T Class schedule = " << T_class.week_day << " Start time = " << convert_T_class_to_hour_and_minute_format() << endl;

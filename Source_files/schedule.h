@@ -7,23 +7,41 @@
 
 #include <string>
 using namespace std;
+/** Class schedule. Where are performed specific functions related to the schedules.
+ * Stores the week_day, hour and duration of a class.
+ */
 
 class schedule{
 public:
-    //constructors
+    /** @name Constructors
+     *
+     */
+     ///@{
     schedule(){};
     schedule(string week_day, float hour, float duration);
+    ///@}
 
-    //member variables
+    /** @name Member Variables
+     *
+     */
+     ///@{
     string week_day;
     float hour;
     float duration;
+    ///@}
 
-    //operators
+    /** @name Operators
+     *
+     */
+     ///@{
     bool operator<(const schedule& other_schedule) const;
     bool operator>(const schedule& other_schedule) const;
     bool operator==(const schedule& other_schedule) const;
+    ///@}
 };
-//auxiliary function
+
+/** @name auxiliary function
+ *
+ */
 bool overlapping_schedule(const schedule& schedule1, const schedule &schedule2);
 #endif

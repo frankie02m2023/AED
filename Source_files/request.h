@@ -7,6 +7,10 @@
 
 #include "course.h"
 
+/** Struct with the info used to process the requests.
+ *
+ */
+
 struct request {
     string request_type;
     student target_student;

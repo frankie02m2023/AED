@@ -13,19 +13,31 @@ course::course(std::string course) {
 
 //getters ---------------------------------------------------------------
 //complexity for almost all getters: O(1)
+
+/**Gets the classes vector.
+ * Time complexity. O(1)
+ */
 vector<class1> course::get_classes() const{
     return classes;
 }
 
+/**Gets the course name.
+ * Time complexity. O(1)
+ */
 string course::get_course_name() const{
     return course_code;
 }
 
+/**Gets the course grade (1,2,3).
+ * Time complexity. O(1)
+ */
 int course::get_course_grade() const {
     return classes[0].get_class_grade();
 }
 
-//complexity: O(n)
+/**Gets a specific class. Return a boolean confirming if the class exists.
+ * Time complexity. O(n)
+ */
 bool course::get_class(class1& cl) const {
     auto it = std::find(classes.begin(),classes.end(),cl);
     if(it != classes.end()){
@@ -34,7 +46,9 @@ bool course::get_class(class1& cl) const {
     return it != classes.end();
 }
 
-//complexity: O(n^2)
+/**Gets a specific student class. If it is not found, a generic class("dummy") is returned.
+ * Time complexity. O(n^2)
+ */
 class1 course::get_student_class(student st) const{
     class1 dummy {"Dummy"};
     for(class1 cl: classes){
@@ -44,8 +58,9 @@ class1 course::get_student_class(student st) const{
     return dummy;
 }
 
-//always use get_class before get_class_by_reference
-//O(n)
+/**Gets a specific class by reference. Always use get_class before get_class_by_reference.
+ * Time complexity. O(n)
+ */
 class1& course::get_class_by_ref(class1& cl) {
     auto it = std::find(classes.begin(),classes.end(),cl);
     class1 &cl1 = *it;
@@ -55,8 +70,16 @@ class1& course::get_class_by_ref(class1& cl) {
     return cl;
 }
 
+/**Gets the classes vector by reference.
+* Time complexity. O(1)
+*/
+vector<class1>& course::get_classes_by_ref() {
+    return classes;
+}
 
-//complexity: O(n)
+/**Gets the number that are enrolled to the course.
+ * Time complexity: O(n)
+ */
 size_t course::number_of_students() const {
     size_t res = 0;
     for(class1 cl: classes){
@@ -67,16 +90,27 @@ size_t course::number_of_students() const {
 
 //setters --------------------------------------------------------------
 //complexity for all setters: O(1)
+
+/**Sets the classes vector.
+ * Time complexity: O(1).
+ */
 void course::set_classes(vector<class1> classes){
     this->classes = classes;
 }
 
+/**Adds a class to the classes vector.
+ * Time complexity: O(1)
+ */
 void course::add_class(class1 cl) {
     classes.push_back(cl);
 }
 
+
 //auxiliary functions ---------------------------------------------------
-//complexity: O(n)
+
+/** Changes a specific class schedule.
+ *  Time complexity: O(n)
+ */
 void course::edit_class(class1 cl, schedule time1, string class_type){
     for (class1 &a_class: classes) {
         if (a_class.get_class_name() == cl.get_class_name()) {
@@ -96,7 +130,8 @@ void course::edit_class(class1 cl, schedule time1, string class_type){
     }
 }
 
-//complexity: O(n^2)
+/**Checks if a student attends to a specific class of the course
+* Time complexity: O(n^2) */
 bool course::has_student(const student& st) const{
     for(const class1& cl: classes){
         if(cl.student_in_class(st)) //O(n)
@@ -106,13 +141,8 @@ bool course::has_student(const student& st) const{
 }
 
 
-//O(1)
-vector<class1>& course::get_classes_by_ref() {
-    return classes;
-}
-
-//Checking if the balance between course classes is not disturbed
-//O(nlog(n)
+/**Checks if the balance between course classes is not disturbed.
+* Time complexity: O(nlog(n) */
 bool course::check_class_balance(const class1& cl) const {
     vector<class1> copy_classes = classes;
     sort(copy_classes.begin(), copy_classes.end(), compare_class_ocupation);
@@ -125,7 +155,10 @@ bool course::check_class_balance(const class1& cl) const {
 }
 
 //Data printer ----------------------------------------------------------
-//complexity: O(nlog(n))
+
+/**Prints all the course data.
+ * Time complexity: O(nlog(n))
+ */
 void course::print_course_data( const string& class_sort_by ,const string& student_sort_by, const string& class_sort_option, const string& student_sort_option) const {
     cout << "----------------------------------------------" << endl;
     cout << "Course Code = " << course_code << endl;

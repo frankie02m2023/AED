@@ -7,23 +7,41 @@
 #include <string>
 using namespace std;
 
+/** Class student. Where are performed some specific functions related to students.
+ * Stores the student name and his number.
+ */
+
 class student{
 public:
-    //constructors
+    /** @name Constructors
+     *
+     */
+     ///@{
     student(){};
     student(string student_name, string student_number);
+    ///@}
 
-    //getters
+    /** @name Getters
+     *
+     */
+     ///@{
     string get_name() const;
     string get_number() const;
+    ///@}
 
-    //operators
+    /** @name Operators
+     *
+     */
+     ///@{
     bool operator==(const student& other_student) const;
     bool operator!=(const student& other_student) const;
     bool operator<(const student& other_student) const;
     bool operator>(const student& other_student) const;
+    ///@}
 
-    //data printers
+    /** @name Data printers
+     *
+     */
     void print_student() const;
 
 private:

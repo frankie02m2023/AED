@@ -8,6 +8,10 @@
 
 //student compare options ---------------------------------------------------
 //complexity for all compares : O(1)
+
+/** Functions used to compare the students
+ */
+ ///@{
 bool sort_student_name(const student& st1, const student& st2){
     return st1.get_name() < st2.get_name();
 }
@@ -23,9 +27,14 @@ bool sort_student_number(const student& st1, const student& st2){
 bool sort_student_number_reverse(const student& st1, const student& st2){
     return st1.get_number() > st2.get_number();
 }
+///@}
 
 //course compare options ----------------------------------------------------
 //complexity for almost all compares : O(1)
+
+/**Functions used to compare the courses
+ */
+ ///@{
 bool sort_course_name(const course& c1, const course& c2){
     return c1.get_course_name() < c2.get_course_name();
 }
@@ -46,10 +55,15 @@ bool sort_course_occupation_reverse(const course& c1, const course& c2){
     size_t c2_occupation = c2.number_of_students();
     return c1_occupation > c2_occupation;
 }
+///@}
 
 
 //class compare options ---------------------------------------------------------
 //complexity for non compare function: O(1)
+/** Functions used to compare classes
+ *
+ */
+ ///@{
 bool sort_class_name(const class1& cl1, const class1& cl2){
     return cl1.get_class_name() < cl2.get_class_name();
 }
@@ -82,10 +96,13 @@ bool compare_class_ocupation(const class1& cl1, const class1& cl2){
     size_t cl2_occupation = cl2.get_students().size();
     return cl1_occupation < cl2_occupation;
 }
-
+///@}
 
 //sorting functions ----------------------------------------------------------------
 //complexity: O(nlog(n))
+/** Sorts a list of students with various sort options.
+ * Time complexity: O(nlog(n))
+ */
 list<student> sort_students_list(list<student> sorted_students, const string& sortby, const string& sort_option ){
     if(sortby == "name"){
         if(sort_option == "ascending") {
@@ -112,7 +129,9 @@ list<student> sort_students_list(list<student> sorted_students, const string& so
     return sorted_students;
 }
 
-//complexity: O(nlog(n))
+/** Sorts a vector of courses with various sort options.
+ * Time complexity: O(nlog(n))
+ */
 vector<course> sort_course_vector(vector<course> sorted_courses, const string& sortby, const string& sort_option){
     if(sortby == "name") {
         if (sort_option == "ascending") {
@@ -137,7 +156,9 @@ vector<course> sort_course_vector(vector<course> sorted_courses, const string& s
     return sorted_courses;
 }
 
-//complexity: O(nlog(n))
+/** Sorts a vector of classes with various sort options.
+ * Time complexity: O(nlog(n))
+ */
 vector<class1> sort_class_vector(vector<class1> sorted_classes, const string& sortby, const string& sort_option){
     if(sortby == "name") {
         if (sort_option == "ascending") {

@@ -74,6 +74,7 @@ bool schedule::operator==(const schedule& other_schedule) const{
 }
 
 //auxiliary function to check if two schedules overlap each other
+//O(1)
 bool overlapping_schedule(const schedule& schedule1, const schedule &schedule2) {
     if(schedule1.week_day == "Dont Apply" || schedule2.week_day == "Dont Apply"){
         return false;

@@ -1,9 +1,11 @@
 var searchData=
 [
-  ['get_5fall_5fstudents_5fin_5facourse_0',['get_all_students_in_aCourse',['../classinterface.html#a4701f4e9648a12934645b3f535e6ab29',1,'interface']]],
-  ['get_5fall_5fstudents_5fin_5fayear_1',['get_all_students_in_aYear',['../classinterface.html#adc84fc6dd23fadf6739189caba2e0920',1,'interface']]],
-  ['get_5fclass_5fschedule_2',['get_class_schedule',['../classinterface.html#a3c57f6d0057c7e494857826351477a12',1,'interface']]],
-  ['get_5fclass_5fstudents_5ffor_5fcourse_3',['get_class_students_for_course',['../classinterface.html#a34fcdc567bd375c255f44fb228d13eb7',1,'interface']]],
-  ['get_5fcourses_4',['get_courses',['../classinterface.html#a83c038947efe5d40c1d256bc044cef50',1,'interface']]],
-  ['get_5frequests_5',['get_requests',['../classinterface.html#a770c52c2384196de88603c9e16650faa',1,'interface']]]
+  ['can_5fadd_5fto_5fclass_0',['can_add_to_class',['../classinterface.html#aca6e537d081e712afd0129b6eb699876',1,'interface']]],
+  ['consult_5fall_5fstudents_5fin_5facourse_1',['consult_all_students_in_aCourse',['../classinterface.html#a07c94a9f8c0a8fa3e01e9ccaeb724597',1,'interface']]],
+  ['consult_5fall_5fstudents_5fin_5fayear_2',['consult_all_students_in_aYear',['../classinterface.html#af6c0d1784557df82d06643720267b646',1,'interface']]],
+  ['consult_5fclass_5fschedule_3',['consult_class_schedule',['../classinterface.html#ae8082642a3fc597c4ab2b5b96d130725',1,'interface']]],
+  ['consult_5fclasses_5fand_5fcourses_5foccupation_5fby_5fyear_4',['consult_classes_and_courses_occupation_by_year',['../classinterface.html#a3e88937c6047aa2ca7992a38cab20c94',1,'interface']]],
+  ['consult_5fstudent_5fschedule_5fby_5fcourse_5',['consult_student_schedule_by_course',['../classinterface.html#a544c2b14e8984be01303c4846c2b0b51',1,'interface']]],
+  ['consult_5fstudent_5fschedule_5fby_5fschedule_6',['consult_student_schedule_by_schedule',['../classinterface.html#aa4bcdd7f2c7893b0896db6972d5aaa1d',1,'interface']]],
+  ['consult_5fstudents_5fin_5fclass_5fand_5fcourse_7',['consult_students_in_class_and_course',['../classinterface.html#a9671d4419852c46c0eda486952d3ecf3',1,'interface']]]
 ];

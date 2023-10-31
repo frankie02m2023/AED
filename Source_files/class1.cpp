@@ -71,6 +71,7 @@ void class1::add_students(const student& st) {
     students.push_back(st);
 }
 
+//O(n)
 void class1::remove_students(student st) {
     auto it = std::find(students.begin(),students.end(),st);
     students.erase(it);
@@ -83,6 +84,7 @@ bool class1::student_in_class(const student& st) const {
     return it != students.end();
 }
 
+//O(n)
 student class1::get_student_in_class(student st) const {
     auto it = std::find(students.begin(),students.end(),st);
     return *it;

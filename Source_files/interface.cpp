@@ -13,11 +13,12 @@
 //----------------------------------------------------------------------------------------
 //Basic getters
 
-/** Gets the courses. Complexity: O(1)*/
+/** Gets the courses. Time complexity: O(1)*/
 vector<course> interface::get_courses() const {
     return courses;
 }
 
+/** Gets the requests. Time complexity: O(1)*/
 queue<request> interface::get_requests() const {
     return requests;
 }
@@ -27,7 +28,7 @@ queue<request> interface::get_requests() const {
 
 /**Reads data from the file "classes_per_uc.csv"
     * and organizes the data into the correct data structures.
-    * Complexity: O(n^2).*/
+    * Time complexity: O(n^2).*/
 
 void interface::read_data_classes_per_uc() {
     string file, line;
@@ -62,7 +63,7 @@ void interface::read_data_classes_per_uc() {
 
 /**Reads data from the file "classes.csv"
     *and organizes the data into the correct data structures.
-    * Complexity: O(n^2). */
+    * Time complexity: O(n^2). */
 void interface::read_data_classes() {
     string file, line;
     file = "classes.csv";
@@ -123,7 +124,7 @@ void interface::read_data_classes() {
 
 /**Reads data from the file "students_classes.csv"
     * and organizes the data into the correct data structures.
-    * Complexity : O(n^3). */
+    * Time complexity : O(n^3). */
 void interface::read_data_students_classes() {
     ifstream f("students_classes.csv");
     string line;
@@ -179,13 +180,95 @@ void interface::read_data_students_classes() {
     }
 }
 
+/** Reads the data from students_requests.csv
+ *  and organizes the data into the correct data structures.
+ *  Time complexity: O(n)
+ */
+void interface::read_data_students_requests(){
+    string file,line;
+    string target_student_name,target_student_number,request_type;
+    request new_request,reset_new_request;
+    file = "../Data_files/students_requests.csv";
+    ifstream open_file(file);
+    while(getline(open_file,line)){
+        //get the student number
+        auto it = line.find_first_of(',');
+        target_student_number = line.substr(0,it);
+        line = line.substr(it + 1);
+
+        //get the student name
+        it = line.find_first_of(',');
+        target_student_name = line.substr(0,it);
+
+        //create a new student object and add it to the request
+        student target_student(target_student_name,target_student_number);
+        new_request.target_student = target_student;
+        line = line.substr(it + 1);
+
+        //get the type of request and add it to the request
+        it = line.find_first_of(',');
+        request_type = line.substr(0,it);
+        new_request.request_type = request_type;
+        line = line.substr(it + 1);
+
+        //process the  type of request
+        if(request_type == "add course"){
+            it = line.find_first_of(',');
+            //add the course and class to the request
+            course added_course(line.substr((0,it)));
+            new_request.added_course = added_course;
+            line = line.substr(it + 1);
+            class1 added_class(line);
+            new_request.added_class = added_class;
+        }
+
+        else if(request_type == "remove_course"){
+            //add the course to remove to the request
+            course removed_course(line);
+            new_request.removed_course = removed_course;
+        }
+
+        else if(request_type == "switch courses"){
+            it = line.find_first_of(',');
+            //add the course the student want to move, the class and the course he was before
+            course added_course(line.substr(0,it));
+            new_request.added_course = added_course;
+            line = line.substr(it + 1);
+            it = line.find_first_of(',');
+            class1 added_class(line.substr(0,it));
+            new_request.added_class = added_class;
+            line = line.substr(it + 1);
+            course removed_course(line);
+            new_request.removed_course = removed_course;
+        }
+
+        else if(request_type == "switch classes"){
+            it = line.find_first_of(',');
+            //add the course, the class the student want to move and the class he was before
+            course added_course(line.substr(0,it));
+            new_request.added_course = added_course;
+            line = line.substr(it + 1);
+            it = line.find_first_of(',');
+            class1 added_class(line.substr(0,it));
+            new_request.added_class = added_class;
+            line = line.substr(it + 1);
+            class1 removed_class(line);
+            new_request.removed_class = removed_class;
+        }
+
+        //Puts the new request in the requests queue
+        requests.push(new_request);
+        new_request = reset_new_request;
+    }
+}
+
 
 
 //----------------------------------------------------------------------------------------------------------------
 //Advanced getters
 
 /**Gets a specific class schedule.
-   * Complexity : O(nlog(n)).*/
+   * Time complexity : O(nlog(n)).*/
 set<pair<pair<schedule,string>,course>> interface::get_class_schedule(class1 a_class) const{
     set<pair<pair<schedule,string>,course>> class_schedule; //schedule for each class
     class1 a_class_copy = a_class;
@@ -217,6 +300,8 @@ set<pair<pair<schedule,string>,course>> interface::get_class_schedule(class1 a_c
     return class_schedule;
 }
 
+/**Gets a specific student schedule.
+ * Time complexity: O(nlog(n))*/
 set<pair<pair<schedule,string>,course>> interface::get_student_schedule(const student& a_student) const {
     set<pair<pair<schedule,string>,course>> student_schedule;
     class1 aux_class;
@@ -247,7 +332,7 @@ set<pair<pair<schedule,string>,course>> interface::get_student_schedule(const st
 
 
 /**Gets the students in a class for a specific course.
-    * Complexity: O(n).*/
+    * Time complexity: O(n).*/
 list<student> interface::get_class_students_for_course(class1 a_class, course a_course) const{
     list<student> students;
     auto it = std::find(courses.begin(), courses.end(), a_course);
@@ -259,7 +344,7 @@ list<student> interface::get_class_students_for_course(class1 a_class, course a_
 }
 
 /**Gets all the students in a course.
-* Complexity : O(n^2).*/
+* Time complexity : O(n^2).*/
 set<student> interface::get_all_students_in_aCourse(course a_course) const {
     set<student> students;
     auto it = std::find(courses.begin(), courses.end(), a_course);
@@ -273,7 +358,7 @@ set<student> interface::get_all_students_in_aCourse(course a_course) const {
 }
 
 /**Gets all the students in a year.
-    * Complexity: O(n^3).*/
+    * Time complexity: O(n^3).*/
 set<student> interface::get_all_students_in_aYear(int year) const {
     set<student> students;
 
@@ -288,16 +373,21 @@ set<student> interface::get_all_students_in_aYear(int year) const {
     return students;
 }
 
+/** Gets all the courses a student is part of.
+ *  Time complexity: O(n^3)*/
 vector<course> interface::get_all_courses_for_student(const student &a_student) const {
     vector<course> student_courses;
     for(course a_course : courses){
-        if(a_course.has_student(a_student)){
+        if(a_course.has_student(a_student)){ //O(n^2)
             student_courses.push_back(a_course);
         }
     }
     return student_courses;
 }
 
+/** Gets a specific student info.
+ *  Time complexity: O(n^3)
+ */
 student interface::get_student(const student& a_student) const{
     class1 student_class;
     student student_info;
@@ -312,23 +402,25 @@ student interface::get_student(const student& a_student) const{
 }
 
 /**Gets the number of students in a class.
-    * Complexity: O(n)*/
+    * Time complexity: O(n)*/
 size_t interface::number_of_students_in_aClass(const class1& a_class, const course& a_course) const {
     return get_class_students_for_course(a_class, a_course).size();
 }
 
 /**Gets the number of students in a year.
-    * Complexity: O(n^3).*/
+    * Time complexity: O(n^3).*/
 size_t interface::number_of_students_in_aYear(int year) const {
     return get_all_students_in_aYear(year).size();
 }
 
 /**Gets the number of students in a course(Uc).
-    *Complexity: O(n^2).*/
+    * Time complexity: O(n^2).*/
 size_t interface::number_of_students_in_anUC(const course& a_course) const {
     return get_all_students_in_aCourse(a_course).size();
 }
-
+/** Gets the number of courses for a specific student
+ *  Time complexity: O(n^3)
+ */
 size_t interface::number_of_courses_per_student(const student &a_student) const {
     return get_all_courses_for_student(a_student).size();
 }
@@ -339,7 +431,7 @@ size_t interface::number_of_courses_per_student(const student &a_student) const 
 
 
 /**Prints the given class schedule.
-    * Complexity: O(nlog(n)).*/
+    * Time complexity: O(nlog(n)).*/
 void interface::consult_class_schedule(const class1& a_class) const {
     set<pair<pair<schedule,string>,course>> class_schedule = get_class_schedule(a_class); //O(nlog(n))
 
@@ -366,7 +458,9 @@ void interface::consult_class_schedule(const class1& a_class) const {
     }
 }
 
-
+/** Consult a specific student schedule ordered by the schedules
+ *  Time complexity: O(nlog(n))
+ */
 void interface::consult_student_schedule_by_schedule(const student &a_student) const {
     set<pair<pair<schedule,string>,course>> student_schedule = get_student_schedule(a_student);
     cout << "Schedule for student " << a_student.get_name() << ", number " << a_student.get_number() <<":" << endl;
@@ -380,7 +474,7 @@ void interface::consult_student_schedule_by_schedule(const student &a_student) c
 }
 
 /**Prints the student schedule.
-    * Complexity: O(n^3).*/
+    * Time complexity: O(n^3).*/
 void interface::consult_student_schedule_by_course(const student& a_student) const{
     cout << "Schedule for student " << a_student.get_name() << ", number " << a_student.get_number() <<":" << endl;
 
@@ -397,7 +491,7 @@ void interface::consult_student_schedule_by_course(const student& a_student) con
 }
 
 /**Prints the students in a given class.
-    * Complexity: O(nlog(n)).*/
+    * Time complexity: O(nlog(n)).*/
 void interface::consult_students_in_class_and_course(const class1& a_class, const course& a_course, const string& sortby, const string& sort_option) const{
     list<student> students = get_class_students_for_course(a_class,a_course);   //O(n)
     list<student> sorted_students {students.begin(), students.end()};   //O(n)
@@ -416,7 +510,7 @@ void interface::consult_students_in_class_and_course(const class1& a_class, cons
 }
 
 /**Prints all the students in a course.
-    * Complexity: O(n^2).*/
+    * Time complexity: O(n^2).*/
 void interface::consult_all_students_in_aCourse(const course& a_course, const string& sortby, const string& sort_option) const {
     set<student> students = get_all_students_in_aCourse(a_course); //O(n^2)
     list<student> sorted_students {students.begin(), students.end()}; //O(n)
@@ -431,7 +525,7 @@ void interface::consult_all_students_in_aCourse(const course& a_course, const st
 }
 
 /**Prints all the students in a year.
-    * Complexity: O(n^3).*/
+    * Time complexity: O(n^3).*/
 void interface::consult_all_students_in_aYear(int year, const string& sortby, const string& sort_option) const {
     set<student> students = get_all_students_in_aYear(year); //O(n^3)
     list<student> sorted_students {students.begin(), students.end()};
@@ -446,7 +540,7 @@ void interface::consult_all_students_in_aYear(int year, const string& sortby, co
 }
 
 /**Prints the data in the entire system.
-    * Complexity: O(n^2log(n)).*/
+    * Time complexity: O(n^2log(n)).*/
 void interface::print_data(const string& uc_sort_by , const string& class_sort_by ,const string& student_sort_by,const string& uc_sort_option, const string& class_sort_option, const string& student_sort_option) const{
     cout << "Printing data for the entire system" << endl;
     vector <course> sorted_courses = courses;
@@ -458,7 +552,7 @@ void interface::print_data(const string& uc_sort_by , const string& class_sort_b
 }
 
 /**Prints the occupation in every course and class for a specific year.
-    * Complexity: O(n^2log(n)).*/
+    * Time complexity: O(n^2log(n)).*/
 void interface::consult_classes_and_courses_occupation_by_year(int year , const string& uc_sort_by, const string& class_sort_by, const string& uc_sort_option, const string& class_sort_option) {
     vector<course> sorted_courses = courses;
     sorted_courses = sort_course_vector(sorted_courses, uc_sort_by, uc_sort_option); //O(nlog(n))
@@ -482,8 +576,9 @@ void interface::consult_classes_and_courses_occupation_by_year(int year , const 
     }
 }
 
-//TO BE TESTED TOMORROW
-//checking if it is possible to add a student to a given class in a given course
+/**Checks if it is possible to add a student to a given class in a given course
+ * Time complexity: O(nlog(n))
+ */
 bool interface::can_add_to_class(course &a_course, student &a_student, class1 &a_class) const {
     course copy_a_course = a_course;
     class1 copy_a_class = a_class;
@@ -500,7 +595,7 @@ bool interface::can_add_to_class(course &a_course, student &a_student, class1 &a
     a_course = copy_a_course;
     a_class = copy_a_class;
     // getting the student schedule and checking potencial schedule overlaps
-    set<pair<pair<schedule,string>,course>> student_schedule = get_student_schedule(a_student);
+    set<pair<pair<schedule,string>,course>> student_schedule = get_student_schedule(a_student); //O(nlog(n))
     class1 comparable_class(" ");
     auto it = student_schedule.begin();
     while(it != student_schedule.end()){
@@ -520,15 +615,18 @@ bool interface::can_add_to_class(course &a_course, student &a_student, class1 &a
 }
 
 
-//!functions that tries to enroll a student in a new course
-//!returns true if the enrollment is successful and false if it isn't
+/**Function that tries to enroll a student in a new course.
+ *  Returns true if the enrollment is successful and false if it isn't.
+ *  Time complexity: O(n^3)
+ */
+
 bool interface::enroll_student_in_course(student &a_student, course &a_course, class1& a_class, string& error_message) {
-    //!Checking if the student has not enrolled in the maximum number of courses
-    if(number_of_courses_per_student(a_student) >= 7){
+    //Checking if the student has not enrolled in the maximum number of courses
+    if(number_of_courses_per_student(a_student) >= 7){ //O(n^3)
         error_message = "Enrollment failed because student is already enrolled in the maximum number of courses possible.";
         return false;
     }
-    //!accessing the desired course in courses
+    //accessing the desired course in courses
     auto it = std::find(courses.begin(), courses.end(),a_course);
     course& added_course = *it;
     course copy_added_course = added_course;
@@ -538,7 +636,7 @@ bool interface::enroll_student_in_course(student &a_student, course &a_course, c
         error_message = "The student is already enrolled in the desired course.";
         return false;
     }
-    //!accessing the given class in the given course
+    //accessing the given class in the given course
     if(copy_added_course.get_class(copy_added_class)) {
         // checking if the enrollment in the given course and class is possible
         if (can_add_to_class(copy_added_course, added_student, copy_added_class)) {
@@ -547,9 +645,9 @@ bool interface::enroll_student_in_course(student &a_student, course &a_course, c
             return true;
         }
     }
-    //!if it is not possible to allocate the student to their desired class in the given course
-    //!the system tries to allocate them to another class in the same course, starting with the classes
-    //!that have the least amount of students enrolled in them
+    //if it is not possible to allocate the student to their desired class in the given course
+    //the system tries to allocate them to another class in the same course, starting with the classes
+    //that have the least amount of students enrolled in them
     error_message = "Student could not be allocated to their desired class.";
     vector<class1> copy_course_classes = added_course.get_classes();
     sort(copy_course_classes.begin(), copy_course_classes.end(), compare_class_ocupation);
@@ -565,13 +663,14 @@ bool interface::enroll_student_in_course(student &a_student, course &a_course, c
 }
 
 
-//!functions that tries to remove a student from a course
-//returns true if the removal is successful and false if it isn't
+/**Functions that tries to remove a student from a course.
+* Returns true if the removal is successful and false if it isn't
+* Time complexity: O(n^2) */
 bool interface::remove_student_from_course(student &a_student, course &a_course, string& error_message) {
-    //!finding the target course in courses
+    //finding the target course in courses
     auto it = std::find(courses.begin(),courses.end(),a_course);
     course& removable_course = *it;
-    //!trying to find the students class in the target course and remove him from it
+    //trying to find the students class in the target course and remove him from it
     for(class1 a_class : removable_course.get_classes()){
         if(a_class.student_in_class(a_student)){
             class1& removable_class = removable_course.get_class_by_ref(a_class);
@@ -579,12 +678,13 @@ bool interface::remove_student_from_course(student &a_student, course &a_course,
             return true;
         }
     }
-    //!if the student could not be found in the given course set an error message and return false
+    //if the student could not be found in the given course set an error message and return false
     error_message = "The student is not enrolled in course " + a_course.get_course_name();
     return false;
 }
 
-//!removes student from a given course to enroll him in another one if possible
+/**Removes student from a given course to enroll him in another one if possible.
+* Time complexity: O(n^3)*/
 bool interface::switch_student_courses(student &a_student, course &old_course, course &new_course, class1& new_class, string& error_message) {
     auto it = std::find(courses.begin(), courses.end(), old_course);
     course old_course_copy = *it;
@@ -600,49 +700,49 @@ bool interface::switch_student_courses(student &a_student, course &old_course, c
     return true;
 }
 
-//!switches students from one class to another in a given course if possible
+/**Switches students from one class to another in a given course if possible.
+* Time complexity: O(n^3) */
 bool interface::switch_student_classes(student &a_student, course &a_course, class1 &old_class, class1 &new_class, string& error_message) {
-    //!finding the target course in courses
+    //finding the target course in courses
     auto it = std::find(courses.begin(),courses.end(),a_course);
     course &target_course = *it;
     course copy_target_course = *it;
     student added_student = get_student(a_student);
-    //!checking if the class the student wants to leave exists
+    //checking if the class the student wants to leave exists
     if(!copy_target_course.get_class(old_class)){
         error_message = old_class.get_class_name() + "does not exist in course " + target_course.get_course_name();
         return false;
     }
-    //!checking if student is actually a part of the class he wants to leave
+    //checking if student is actually a part of the class he wants to leave
     if(!old_class.student_in_class(added_student)){
         error_message = "The student is not enrolled in class " + old_class.get_class_name() + " of course " + target_course.get_course_name();
         return false;
     }
-    //!checking if the class the student wants to join exists
+    //checking if the class the student wants to join exists
     if(!copy_target_course.get_class(new_class)){
         error_message = "The class the student wishes to join does not exist in course " + target_course.get_course_name();
         return false;
     }
-    //!creating a reference to the copy old class
+    //creating a reference to the copy old class
     class1& copy_target_course_old_class = copy_target_course.get_class_by_ref(old_class);
-    //!removing student from copy of the old class to check if we can add him to the new one after removing him from the one
+    //removing student from copy of the old class to check if we can add him to the new one after removing him from the one
     copy_target_course_old_class.remove_students(added_student);
     if(!can_add_to_class(copy_target_course,added_student,new_class)){
         error_message = "The student could not be added to their desired class.";
         return false;
     }
-    //!creating reference to old class and removing student from it
+    //creating reference to old class and removing student from it
     class1& old_class_ref = target_course.get_class_by_ref(old_class);
     old_class_ref.remove_students(added_student);
-    //!creating reference to new class and adding student to it
+    //creating reference to new class and adding student to it
     class1& new_class_ref = target_course.get_class_by_ref(new_class);
     new_class_ref.add_students(added_student);
     return true;
 }
 
-void interface::store_new_request(const request &new_request) {
-    requests.push(new_request);
-}
-
+/**Processes the request that is at the front of the requests queue.
+ * Time complexity: O(n^3)
+ */
 void interface::process_request(string& error_message) {
     request processed_request = requests.front();
     requests.pop();
@@ -660,7 +760,71 @@ void interface::process_request(string& error_message) {
     }
 }
 
-//Stupid function only used to build tests
+/**Adds a request to the file "students_requests.csv".
+ * Time complexity: O(n)
+ */
+void interface::add_request_to_file(const request &new_request) {
+    string line,file,new_line;
+    file = "../Data_files/students_requests.csv";
+    // setting several request formats for the different types of requests
+    new_line = new_request.target_student.get_number() + ',' + new_request.target_student.get_name() + ',' + new_request.request_type;
+    if(new_request.request_type == "add course"){
+        new_line += ',' + new_request.added_course.get_course_name() + ',' + new_request.added_class.get_class_name();
+    }
+    else if(new_request.request_type == "remove course"){
+        new_line += ',' + new_request.removed_course.get_course_name();
+    }
+    else if(new_request.request_type == "switch courses"){
+        new_line += ',' + new_request.added_course.get_course_name() + ',' + new_request.added_class.get_class_name() + ',' + new_request.removed_course.get_course_name();
+    }
+    else if(new_request.request_type == "switch classes"){
+        new_line += ',' + new_request.added_course.get_course_name() + ',' + new_request.added_class.get_class_name() + ',' + new_request.removed_class.get_class_name();
+    }
+    // opening the student requests file in write mode
+    ofstream write_file(file,ios::app);
+    if (!write_file.is_open()) {
+        std::cerr << "Error: Unable to open the CSV file for writing." << std::endl;
+        return;
+    }
+    // adding the new request to the file using the appropriate format
+    write_file << new_line << endl;
+    write_file.close();
+}
+
+/**Removes the top request from the student requests file after a request is processed.
+* Time complexity : O(n) */
+void interface::remove_request_from_file() {
+    string file,copy_file,line;
+    file = "../Data_files/students_requests.csv";
+    copy_file = "../Data_files/students_requests_copy.csv";
+    //opening original student requests file
+    ifstream read_file(file);
+    // opening copy of student requests file
+    ofstream write_file(copy_file);
+    //getting the first line of the file so that oit is not copied to the copy of the student requests file
+    getline(read_file,line);
+    //copying every line of the original file to the new copy file with the exception of the first one
+    while(getline(read_file,line)){
+        write_file << line << endl;
+    }
+    //closing both files
+    read_file.close();
+    write_file.close();
+    //deleting the old students requests file and replacing it with its modified copy
+    remove(file.c_str());
+    rename(copy_file.c_str(),file.c_str());
+}
+
+/**Stores a new request into the requests queue.
+ * Time complexity: O(1)
+ */
+void interface::store_new_request(const request &new_request) {
+    requests.push(new_request);
+}
+
+//setters --------------------------------------------------------------
+/**Sets the courses vector to the given vector of courses
+* Time complexity: O(1)*/
 void interface::set_courses(vector<course> courses) {
     this->courses = courses;
 }

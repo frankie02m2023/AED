@@ -11,7 +11,7 @@
 
 /**
  * Class interface. Where are performed the most important functions in our system.
- * Stores a vector with the courses and the requests
+ * Stores a vector with the courses and a queue with the requests
  */
 class interface {
     vector<course>courses;
@@ -32,6 +32,7 @@ public:
     void read_data_classes_per_uc();
     void read_data_classes();
     void read_data_students_classes();
+    void read_data_students_requests();
     ///@}
 
     /** @name Advanced getters
@@ -58,6 +59,21 @@ public:
      void set_courses(vector<course>);
      ///@}
 
+     /** @name Request processing functions
+      *
+      */
+     ///@{
+     bool can_add_to_class(course& a_course, student& a_student, class1& a_class) const;
+    void store_new_request(const request& new_request);
+    void process_request(string& error_message);
+    bool enroll_student_in_course(student& a_student,course& a_course, class1& a_class, string& error_message);
+    bool remove_student_from_course(student& a_student, course& a_course, string& error_message);
+    bool switch_student_courses(student& a_student, course& old_course, course& new_course, class1& new_class, string& error_message);
+    bool switch_student_classes(student& a_student, course& a_course, class1& old_class, class1& new_class, string& error_message);
+    void add_request_to_file(const request& new_request);
+    void remove_request_from_file();
+    ///@}
+
     /** @name Data printers
      *
      */
@@ -73,13 +89,6 @@ public:
 
     void print_data(const string& uc_sort_by = "name", const string& class_sort_by = "name",const string& student_sort_by = "name",
                     const string& uc_sort_option = "ascending", const string& class_sort_option = "ascending", const string& student_sort_option = "ascending") const;
-    bool can_add_to_class(course& a_course, student& a_student, class1& a_class) const;
-    void store_new_request(const request& new_request);
-    void process_request(string& error_message);
-    bool enroll_student_in_course(student& a_student,course& a_course, class1& a_class, string& error_message);
-    bool remove_student_from_course(student& a_student, course& a_course, string& error_message);
-    bool switch_student_courses(student& a_student, course& old_course, course& new_course, class1& new_class, string& error_message);
-    bool switch_student_classes(student& a_student, course& a_course, class1& old_class, class1& new_class, string& error_message);
     ///@}
 };
 

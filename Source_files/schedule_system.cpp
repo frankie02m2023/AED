@@ -15,34 +15,42 @@ schedule_system::schedule_system() {
     system_changes.push((start_interface));
 }
 
+//O(nlog(n))
 void schedule_system::consult_class_schedule(class1 a_class) const {
     system_changes.top().consult_class_schedule(a_class);
 }
 
+//O(n^3)
 void schedule_system::consult_student_schedule(student a_student) const {
     system_changes.top().consult_student_schedule_by_course(a_student);
 }
 
+//O(nlog(n))
 void schedule_system::consult_students_in_class_and_course(class1 a_class, course a_course, string sortby, string sort_option) const{
     system_changes.top().consult_students_in_class_and_course(a_class,a_course,sortby, sort_option);
 }
 
+//O(n^2)
 void schedule_system::consult_all_students_in_aCourse(course a_course, const string& sort_by, const string& sort_option) const{
     system_changes.top().consult_all_students_in_aCourse(a_course,sort_by,sort_option);
 }
 
+//O(n^3)
 void schedule_system::consult_all_students_in_aYear(int year, const string& sort_by, const string& sort_option) const{
     system_changes.top().consult_all_students_in_aYear(year,sort_by,sort_option);
 }
 
+//O(n^2log(n))
 void schedule_system::consult_classes_and_courses_occupation_by_year(int year, const string& uc_sort_by, const string& class_sort_by,const string& sorting_uc, const string& sorting_classes){
     system_changes.top().consult_classes_and_courses_occupation_by_year(year,uc_sort_by,class_sort_by,sorting_uc,sorting_classes);
 }
 
+//O(1)
 void schedule_system::store_new_request(const request &new_request) {
     system_changes.top().store_new_request(new_request);
 }
 
+//O(n^3)
 void schedule_system::process_request(std::string &error_message) {
     interface new_system_iteration = system_changes.top();
     new_system_iteration.process_request(error_message);
@@ -50,6 +58,7 @@ void schedule_system::process_request(std::string &error_message) {
 }
 
 //Controls the flow of the program according to the users instructions
+//Complexity varies depending on the functions that are called: between O(n) and O(n^3)
     void schedule_system::schedule_system_functions(){
         std::cout << "Write 1 in the terminal if you wish to read data in the system" << endl;
         std::cout << "Write 2 in the terminal if you wish to add a request into the system" << endl;
@@ -284,6 +293,7 @@ void schedule_system::process_request(std::string &error_message) {
         }
     }
 
+    //O(n^2log(n))
 void schedule_system::print_current_schedule_system_data() const {
     system_changes.top().print_data();
 }

@@ -44,6 +44,18 @@ class1 course::get_student_class(student st) const{
     return dummy;
 }
 
+//always use get_class before get_class_by_reference
+//O(n)
+class1& course::get_class_by_ref(class1& cl) {
+    auto it = std::find(classes.begin(),classes.end(),cl);
+    class1 &cl1 = *it;
+    if(it != classes.end()){
+        return cl1;
+    }
+    return cl;
+}
+
+
 //complexity: O(n)
 size_t course::number_of_students() const {
     size_t res = 0;
@@ -93,21 +105,14 @@ bool course::has_student(const student& st) const{
     return false;
 }
 
-//always use get_class before get_class_by_reference
-class1& course::get_class_by_ref(class1& cl) {
-    auto it = std::find(classes.begin(),classes.end(),cl);
-    class1 &cl1 = *it;
-    if(it != classes.end()){
-        return cl1;
-    }
-    return cl;
-}
 
+//O(1)
 vector<class1>& course::get_classes_by_ref() {
     return classes;
 }
 
 //Checking if the balance between course classes is not disturbed
+//O(nlog(n)
 bool course::check_class_balance(const class1& cl) const {
     vector<class1> copy_classes = classes;
     sort(copy_classes.begin(), copy_classes.end(), compare_class_ocupation);

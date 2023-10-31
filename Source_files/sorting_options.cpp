@@ -76,6 +76,7 @@ bool class_schedule_sort(const pair<pair<schedule,string>,course>& s1, const pai
     return s1.second < s2.second;
 }
 
+//O(1)
 bool compare_class_ocupation(const class1& cl1, const class1& cl2){
     size_t cl1_occupation = cl1.get_students().size();
     size_t cl2_occupation = cl2.get_students().size();

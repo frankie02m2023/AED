@@ -5,11 +5,8 @@
 // The interface function should be associated to the interface that is on top of the system stack
 // in case it is a read only
 // or apllied to a new interface function if it changes the system interface in any way
-<<<<<<< HEAD
 
-=======
-
->>>>>>> 1efb7d863adaadba0b7ab09ed2a7f24deee88aa3
+#include <filesystem>
 #include "schedule_system.h"
 
 /**

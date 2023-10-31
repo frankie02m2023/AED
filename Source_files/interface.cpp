@@ -10,6 +10,12 @@
 #include <utility>
 #include <functional>
 #include"sorting_options.h"
+
+/**
+* @file interface.cpp
+* @brief Implementation of class interface.
+*/
+
 //----------------------------------------------------------------------------------------
 //Basic getters
 

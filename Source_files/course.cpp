@@ -6,6 +6,11 @@
 #include <algorithm>
 #include"sorting_options.h"
 
+/**
+* @file course.cpp
+* @brief Implementation of class course.
+*/
+
 //constructor ------------------------------------------------------------
 course::course(std::string course) {
     course_code = course;

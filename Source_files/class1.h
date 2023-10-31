@@ -10,8 +10,13 @@
 #include "student.h"
 #include "schedule.h"
 
+
 /**
- * Class class1. Where are performed specific functions related to the classes.
+ *\file class1.h
+ * @brief Definition of class class1.
+ *
+ *\class class1
+ * Where are performed specific functions related to the classes.
  * Stores the name of the class, its schedule and a list of students that are registered in this class.
  */
 

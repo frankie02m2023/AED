@@ -5,8 +5,17 @@
 // The interface function should be associated to the interface that is on top of the system stack
 // in case it is a read only
 // or apllied to a new interface function if it changes the system interface in any way
-#include <filesystem>
+<<<<<<< HEAD
+
+=======
+
+>>>>>>> 1efb7d863adaadba0b7ab09ed2a7f24deee88aa3
 #include "schedule_system.h"
+
+/**
+* @file schedule_system.cpp
+* @brief Implementation of class schedule_system.
+*/
 
 schedule_system::schedule_system() {
     interface start_interface;

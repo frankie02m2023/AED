@@ -7,7 +7,12 @@
 
 #include <string>
 using namespace std;
-/** Class schedule. Where are performed specific functions related to the schedules.
+/**
+* @file schedule.h
+* @brief Definition of class schedule.
+
+ *\class schedule
+ * Where are performed specific functions related to the schedules.
  * Stores the week_day, hour and duration of a class.
  */
 

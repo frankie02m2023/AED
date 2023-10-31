@@ -7,7 +7,14 @@
 #include "interface.h"
 #include <stack>
 
-/** Class schedule_system. Where the most important functions from the others classes are called.
+/**
+*\file schedule_system.h
+*@brief Definition of class schedule_system.
+*/
+
+/**
+ *\class schedule_system
+ * Where the most important functions from the others classes are called.
  *  Controls the flow of the program.
  *  Stores the changes made into a stack
  */

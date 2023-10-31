@@ -3,6 +3,12 @@
 //
 #include <iostream>
 #include "student.h"
+
+/**
+*\file student.cpp
+*@brief Implementation of class student.
+*/
+
 //constructor
 //complexity: O(1)
 student::student(string student_name, string student_number){

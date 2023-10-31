@@ -3,14 +3,17 @@
 //
 #ifndef STUDENT_H
 #define STUDENT_H
-
 #include <string>
 using namespace std;
 
-/** Class student. Where are performed some specific functions related to students.
+/**
+*\file student.h
+* @brief Definition of class student.
+*
+ * \class student
+ * Where are performed some specific functions related to students.
  * Stores the student name and his number.
  */
-
 class student{
 public:
     /** @name Constructors

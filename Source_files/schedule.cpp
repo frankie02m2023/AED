@@ -5,6 +5,11 @@
 #include <vector>
 #include <algorithm>
 
+/**
+* @file schedule.cpp
+* @brief Implementation of class schedule.
+*/
+
 //constructor ----------------------------------------------------------
 //complexity: O(1)
 schedule::schedule(string week_day, float hour, float duration){

@@ -23,6 +23,16 @@ queue<request> interface::get_requests() const {
     return requests;
 }
 
+/** Gets the name of the file where information about students is stored. Time complexity: O(1)*/
+string interface::get_students_classes_filename() const {
+    return students_classes_filename;
+}
+
+/** Gets the name of the file where student requests are stored. Time complexity: O(1)*/
+string interface::get_students_requests_filename() const {
+    return students_requests_filename;
+}
+
 //--------------------------------------------------------------------------------------
 //Data readers (from files)
 
@@ -262,7 +272,16 @@ void interface::read_data_students_requests(){
     }
 }
 
+//----------------------------------------------------------------------------------------------------------------
+//Operators
 
+
+void interface::operator=(const interface &other_interface) {
+    courses = other_interface.get_courses();
+    requests = other_interface.get_requests();
+    students_classes_filename = other_interface.get_students_classes_filename();
+    students_requests_filename = other_interface.get_students_requests_filename();
+}
 
 //----------------------------------------------------------------------------------------------------------------
 //Advanced getters
@@ -743,29 +762,51 @@ bool interface::switch_student_classes(student &a_student, course &a_course, cla
 /**Processes the request that is at the front of the requests queue.
  * Time complexity: O(n^3)
  */
-void interface::process_request(string& error_message) {
+bool interface::process_request(string& error_message, const string& new_student_filename, const string& new_request_filename) {
     request processed_request = requests.front();
     requests.pop();
+    remove_request_from_file(new_request_filename);
+    students_requests_filename = new_request_filename;
     if(processed_request.request_type == "add course"){
-        enroll_student_in_course(processed_request.target_student, processed_request.added_course, processed_request.added_class, error_message);
+        if(enroll_student_in_course(processed_request.target_student, processed_request.added_course, processed_request.added_class, error_message)){
+            class1 new_class = processed_request.added_course.get_student_class(processed_request.target_student);
+            enroll_student_in_course_in_file(processed_request.target_student,processed_request.added_course,new_class,new_student_filename);
+            students_classes_filename = new_student_filename;
+            return true;
+        }
     }
     else if(processed_request.request_type == "remove course") {
-        remove_student_from_course(processed_request.target_student, processed_request.removed_course, error_message);
+        if(remove_student_from_course(processed_request.target_student, processed_request.removed_course, error_message)){
+            remove_student_from_course_in_file(processed_request.target_student, processed_request.removed_course,new_student_filename);
+            students_classes_filename = new_student_filename;
+            return true;
+        };
     }
     else if(processed_request.request_type == "switch courses") {
-        switch_student_courses(processed_request.target_student, processed_request.added_course,processed_request.removed_course, processed_request.added_class, error_message);
+        if(switch_student_courses(processed_request.target_student, processed_request.added_course,processed_request.removed_course, processed_request.added_class, error_message)){
+            class1 new_class = processed_request.added_course.get_student_class(processed_request.target_student);
+            switch_student_courses_in_file(processed_request.target_student, processed_request.added_course,processed_request.removed_course, new_class,new_student_filename);
+            students_classes_filename = new_student_filename;
+            return true;
+        }
     }
     else if(processed_request.request_type == "switch classes"){
-        switch_student_classes(processed_request.target_student, processed_request.added_course, processed_request.removed_class, processed_request.added_class,error_message);
+        if(switch_student_classes(processed_request.target_student, processed_request.added_course, processed_request.removed_class, processed_request.added_class,error_message)){
+            switch_student_classes_in_file(processed_request.target_student, processed_request.added_course,processed_request.removed_class, processed_request.added_class,new_student_filename);
+            students_classes_filename = new_student_filename;
+            return true;
+        }
     }
+    return false;
 }
 
 /**Adds a request to the file "students_requests.csv".
  * Time complexity: O(n)
  */
-void interface::add_request_to_file(const request &new_request) {
-    string line,file,new_line;
-    file = "../Data_files/students_requests.csv";
+void interface::add_request_to_file(const request &new_request, const string& new_filename) {
+    string line,filename_path,new_filename_path,new_line;
+    filename_path = "../Data_files/" + students_requests_filename;
+    new_filename_path = "../Data_files/" + new_filename;
     // setting several request formats for the different types of requests
     new_line = new_request.target_student.get_number() + ',' + new_request.target_student.get_name() + ',' + new_request.request_type;
     if(new_request.request_type == "add course"){
@@ -780,27 +821,33 @@ void interface::add_request_to_file(const request &new_request) {
     else if(new_request.request_type == "switch classes"){
         new_line += ',' + new_request.added_course.get_course_name() + ',' + new_request.added_class.get_class_name() + ',' + new_request.removed_class.get_class_name();
     }
+    ifstream read_file(filename_path);
+    if(!read_file.is_open()){
+        std::cerr << "Error: Unable to open the CSV file for writing." << std::endl;
+        return;
+    }
     // opening the student requests file in write mode
-    ofstream write_file(file,ios::app);
+    ofstream write_file(new_filename_path,ios::app);
     if (!write_file.is_open()) {
         std::cerr << "Error: Unable to open the CSV file for writing." << std::endl;
         return;
     }
+    write_file << read_file.rdbuf();
     // adding the new request to the file using the appropriate format
     write_file << new_line << endl;
+    read_file.close();
     write_file.close();
 }
 
 /**Removes the top request from the student requests file after a request is processed.
 * Time complexity : O(n) */
-void interface::remove_request_from_file() {
-    string file,copy_file,line;
-    file = "../Data_files/students_requests.csv";
-    copy_file = "../Data_files/students_requests_copy.csv";
+void interface::remove_request_from_file(const string& new_request_filename) {
+    string requests_file,line;
+    requests_file = "../Data_files/" + students_requests_filename;
     //opening original student requests file
-    ifstream read_file(file);
+    ifstream read_file(requests_file);
     // opening copy of student requests file
-    ofstream write_file(copy_file);
+    ofstream write_file(new_request_filename);
     //getting the first line of the file so that oit is not copied to the copy of the student requests file
     getline(read_file,line);
     //copying every line of the original file to the new copy file with the exception of the first one
@@ -810,16 +857,134 @@ void interface::remove_request_from_file() {
     //closing both files
     read_file.close();
     write_file.close();
-    //deleting the old students requests file and replacing it with its modified copy
-    remove(file.c_str());
-    rename(copy_file.c_str(),file.c_str());
+}
+
+void interface::enroll_student_in_course_in_file(student &a_student, course &a_course, class1 &a_class, const string& new_filename){
+    string students_file,new_students_file,line,target_student_number,target_student_name;
+    students_file = "../Data_files/" + students_classes_filename;
+    new_students_file = new_filename;
+    ifstream read_file(students_file);
+    ofstream write_file(new_students_file);
+    if (!read_file.is_open() || !write_file.is_open()) {
+        cout << "Error: Unable to open files." << endl;
+        return;
+    }
+    bool found_student = false;
+    while(getline(read_file,line)){
+        auto it = line.find_first_of(',');
+        target_student_number = line.substr(0,it);
+        if(target_student_number != a_student.get_number() || found_student){
+            write_file << line << endl;
+            continue;
+        }
+        line = line.substr(it + 1);
+        it = line.find_first_of(',');
+        target_student_name = line.substr(0,it);
+        write_file << target_student_number << ',' << target_student_name << ',' << a_course.get_course_name() << ',' << a_class.get_class_name() << endl;
+        found_student = true;
+    }
+    read_file.close();
+    write_file.close();
+}
+
+void interface::remove_student_from_course_in_file(student &a_student, course &a_course,const std::string &new_filename) {
+    string student_file, new_student_file,line, target_student_number, target_student_name, target_course, aux_line;
+    student_file = students_classes_filename;
+    new_student_file = new_filename;
+    ifstream read_file(student_file);
+    ofstream write_file(new_student_file);
+    while(getline(read_file,line)){
+        auto it = line.find_first_of(',');
+        aux_line = line;
+        target_student_number = line.substr(0,it);
+        if(target_student_number != a_student.get_number()){
+            write_file << line << endl;
+            continue;
+        }
+        aux_line = aux_line.substr(it + 1);
+        it = aux_line.find_first_of(',');
+        target_student_name = aux_line.substr(0,it);
+        aux_line = aux_line.substr(it + 1);
+        it = aux_line.find_first_of(',');
+        target_course = aux_line.substr(0,it);
+        if(target_student_number == a_student.get_number() &&  target_course == a_course.get_course_name()){
+            continue;
+        }
+        write_file << line << endl;
+    }
+}
+
+void interface::switch_student_courses_in_file(student &a_student, course &old_course, course &new_course, class1 &new_class, const std::string &new_filename) {
+    string students_file,new_students_file,line,target_student_number,target_student_name,target_course,save_line;
+    students_file = "../Data_files/" + students_classes_filename;
+    new_students_file = new_filename;
+    ifstream read_file(students_file);
+    ofstream write_file(new_students_file);
+    if (!read_file.is_open() || !write_file.is_open()) {
+        cout << "Error: Unable to open files." << endl;
+        return;
+    }
+    while(getline(read_file,line)){
+        save_line = line;
+        auto it = line.find_first_of(',');
+        target_student_number = line.substr(0,it);
+        if(target_student_number != a_student.get_number()){
+            write_file << line << endl;
+            continue;
+        }
+        line = line.substr(it + 1);
+        it = line.find_first_of(',');
+        target_student_name = line.substr(0,it);
+        line = line.substr(it + 1);
+        target_course = line.substr(0,it);
+        if(target_course == old_course.get_course_name()){
+            write_file << target_student_number << ',' << target_student_name << ',' << new_course.get_course_name() << ',' << new_class.get_class_name() << endl;
+            continue;
+        }
+        line = save_line;
+        write_file << line << endl;
+    }
+}
+
+void interface::switch_student_classes_in_file(student &a_student, course &a_course, class1 &old_class,class1 &new_class, const std::string &new_filename) {
+    string students_file,new_students_file,line,target_student_number,target_student_name,target_course,save_line;
+    students_file = "../Data_files/" + students_classes_filename;
+    new_students_file = new_filename;
+    ifstream read_file(students_file);
+    ofstream write_file(new_students_file);
+    if (!read_file.is_open() || !write_file.is_open()) {
+        cout << "Error: Unable to open files." << endl;
+        return;
+    }
+    while(getline(read_file,line)){
+        save_line = line;
+        auto it = line.find_first_of(',');
+        target_student_number = line.substr(0,it);
+        if(target_student_number != a_student.get_number()){
+            write_file << line << endl;
+            continue;
+        }
+        line = line.substr(it + 1);
+        it = line.find_first_of(',');
+        target_student_name = line.substr(0,it);
+        line = line.substr(it + 1);
+        target_course = line.substr(0,it);
+        if(target_course == a_course.get_course_name()){
+            write_file << target_student_number << ',' << target_student_name << ',' << target_course << ',' << new_class.get_class_name() << endl;
+            continue;
+        }
+        line = save_line;
+        write_file << line << endl;
+    }
 }
 
 /**Stores a new request into the requests queue.
  * Time complexity: O(1)
  */
-void interface::store_new_request(const request &new_request) {
+void interface::store_new_request(const request &new_request, const string& new_filename) {
     requests.push(new_request);
+    add_request_to_file(new_request,new_filename);
+    students_requests_filename = new_filename;
 }
 
 //setters --------------------------------------------------------------

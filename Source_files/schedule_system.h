@@ -15,6 +15,8 @@
 class schedule_system {
 public:
     stack<interface> system_changes;
+    int number_of_student_data_changes;
+    int number_of_request_changes;
     /** @name Constructor
      *
      */
@@ -33,6 +35,7 @@ public:
     void consult_classes_and_courses_occupation_by_year(int year, const string& uc_sort_by = "occupation", const string& class_sort_by = "occupation",const string& sorting_uc  = "ascending", const string& sorting_classes  = "ascending");
     void store_new_request(const request& new_request);
     void process_request(string& error_message);
+    void undo_system_changes();
     ///@}
 
     /** @name Data printer

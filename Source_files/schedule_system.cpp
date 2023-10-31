@@ -5,6 +5,7 @@
 // The interface function should be associated to the interface that is on top of the system stack
 // in case it is a read only
 // or apllied to a new interface function if it changes the system interface in any way
+#include <filesystem>
 #include "schedule_system.h"
 
 schedule_system::schedule_system() {
@@ -12,7 +13,10 @@ schedule_system::schedule_system() {
     start_interface.read_data_classes_per_uc();
     start_interface.read_data_classes();
     start_interface.read_data_students_classes();
+    start_interface.read_data_students_requests();
     system_changes.push((start_interface));
+    number_of_request_changes = 0;
+    number_of_student_data_changes = 0;
 }
 
 /** Consults the given class schedule.
@@ -61,15 +65,45 @@ void schedule_system::consult_classes_and_courses_occupation_by_year(int year, c
  * Time complexity: O(1)
  */
 void schedule_system::store_new_request(const request &new_request) {
-    system_changes.top().store_new_request(new_request);
+    interface new_system_iteration = system_changes.top();
+    number_of_request_changes++;
+    string new_request_filename = "students_requests.csv" + to_string(number_of_request_changes);
+    new_system_iteration.store_new_request(new_request,new_request_filename);
+    system_changes.push(new_system_iteration);
 }
 
 /** Processes the request in front of the queue and stores the changes into the system_changes stack.
 * Time complexity: O(n^3) */
 void schedule_system::process_request(std::string &error_message) {
     interface new_system_iteration = system_changes.top();
-    new_system_iteration.process_request(error_message);
+    string new_data_change_filename,new_request_filename;
+    new_request_filename = "students_requests.csv" + to_string(number_of_request_changes);
+    number_of_request_changes++;
+    new_data_change_filename = "classes_students.csv" + to_string(number_of_student_data_changes + 1);
+    if(new_system_iteration.process_request(error_message,new_data_change_filename,new_request_filename)){
+        number_of_student_data_changes++;
+    }
     system_changes.push(new_system_iteration);
+}
+
+void schedule_system::undo_system_changes() {
+    string old_student_data_filename = system_changes.top().get_students_classes_filename();
+    string old_requests_filename = system_changes.top().get_students_requests_filename();
+    system_changes.pop();
+    if(system_changes.top().get_students_classes_filename() != old_student_data_filename){
+        string old_student_data_path = "../Data_files/" + old_student_data_filename;
+        std::filesystem::path oldStudentDataPath(old_student_data_path);
+        if (std::filesystem::exists(oldStudentDataPath)) {
+            std::filesystem::remove(oldStudentDataPath);
+        }
+    }
+    if(system_changes.top().get_students_classes_filename() != old_requests_filename){
+        string old_requests_path = "../Data_files/" + old_requests_filename;
+        std::filesystem::path oldRequestsPath(old_requests_path);
+        if (std::filesystem::exists(oldRequestsPath)) {
+            std::filesystem::remove(oldRequestsPath);
+        }
+    }
 }
 
 /**Controls the flow of the program according to the users instructions.

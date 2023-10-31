@@ -16,13 +16,18 @@
 class interface {
     vector<course>courses;
     queue<request> requests;
+    string students_classes_filename;
+    string students_requests_filename;
 public:
+    interface(){};
     /** @name Basic getters
      *
      */
     ///@{
     vector<course> get_courses() const;
     queue<request> get_requests() const;
+    string get_students_classes_filename() const;
+    string get_students_requests_filename() const;
     ///@}
 
     /** @name Data readers
@@ -52,6 +57,13 @@ public:
     size_t number_of_courses_per_student(const student& a_student) const;
     ///@}
 
+    /** @name Operators
+     *
+     */
+    ///@{
+    void operator=(const interface& other_interface);
+    ///@}
+
     /** @name Setters
      *
      */
@@ -64,14 +76,18 @@ public:
       */
      ///@{
      bool can_add_to_class(course& a_course, student& a_student, class1& a_class) const;
-    void store_new_request(const request& new_request);
-    void process_request(string& error_message);
+    void store_new_request(const request& new_request, const string& new_filename);
+    bool process_request(string& error_message, const string& new_student_filename, const string& new_request_filename);
     bool enroll_student_in_course(student& a_student,course& a_course, class1& a_class, string& error_message);
     bool remove_student_from_course(student& a_student, course& a_course, string& error_message);
     bool switch_student_courses(student& a_student, course& old_course, course& new_course, class1& new_class, string& error_message);
     bool switch_student_classes(student& a_student, course& a_course, class1& old_class, class1& new_class, string& error_message);
-    void add_request_to_file(const request& new_request);
-    void remove_request_from_file();
+    void add_request_to_file(const request& new_request, const string& new_filename);
+    void remove_request_from_file(const string& new_request_filename);
+    void enroll_student_in_course_in_file(student& a_student, course& a_course, class1& a_class, const string& new_filename);
+    void remove_student_from_course_in_file(student& a_student, course& a_course, const string& new_filename);
+    void switch_student_courses_in_file(student& a_student, course& old_course, course& new_course, class1& new_class, const string& new_filename);
+    void switch_student_classes_in_file(student& a_student, course& a_course, class1& old_class, class1& new_class, const string& filename);
     ///@}
 
     /** @name Data printers

@@ -23,7 +23,9 @@ var searchData=
   ['get_5fstudent_5fin_5fclass_20',['get_student_in_class',['../classclass1.html#a23e53623d93dcdd84563fee359bdbe45',1,'class1']]],
   ['get_5fstudent_5fschedule_21',['get_student_schedule',['../classinterface.html#ae0c69f795fcd504f6902cccd776caf50',1,'interface']]],
   ['get_5fstudents_22',['get_students',['../classclass1.html#a10f67d076b921e2d19ba294d59f90b70',1,'class1']]],
-  ['get_5ft_5fclass_23',['get_T_class',['../classclass1.html#a8390010cee00c5b921df6fa5b3eb1d1c',1,'class1']]],
-  ['get_5ft_5fclass_5f2_24',['get_T_class_2',['../classclass1.html#af61c8b89cd874eaadffffe06e7d0f500',1,'class1']]],
-  ['get_5ftp_5fclass_25',['get_TP_class',['../classclass1.html#a82cf2b2357ac3333f436eff4f85cd52e',1,'class1']]]
+  ['get_5fstudents_5fclasses_5ffilename_23',['get_students_classes_filename',['../classinterface.html#aeecf2965dd8e5e1115a81155ca70a63b',1,'interface']]],
+  ['get_5fstudents_5frequests_5ffilename_24',['get_students_requests_filename',['../classinterface.html#a994422194f697800bf5f26981c7a5891',1,'interface']]],
+  ['get_5ft_5fclass_25',['get_T_class',['../classclass1.html#a8390010cee00c5b921df6fa5b3eb1d1c',1,'class1']]],
+  ['get_5ft_5fclass_5f2_26',['get_T_class_2',['../classclass1.html#af61c8b89cd874eaadffffe06e7d0f500',1,'class1']]],
+  ['get_5ftp_5fclass_27',['get_TP_class',['../classclass1.html#a82cf2b2357ac3333f436eff4f85cd52e',1,'class1']]]
 ];

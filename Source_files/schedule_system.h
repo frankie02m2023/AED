@@ -16,7 +16,7 @@
  *\class schedule_system
  * Where the most important functions from the others classes are called.
  *  Controls the flow of the program.
- *  Stores the changes made into a stack
+ *  Stores the changes made into a stack. It also stores the number os student changes and requests.
  */
 
 class schedule_system {

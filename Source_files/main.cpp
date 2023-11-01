@@ -14,6 +14,7 @@
  * \subsection Instructions How to use
  * You will be asked to choose an option. All the options will appear on the screen with a number near them.
  * Then, just type the number corresponding to the option you want to execute.
+ * @warning <b> You need to use C++ 17 or above to run the program appropriately <b>
  */
 #include "schedule_system.h"
 

@@ -100,6 +100,10 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a06723ccfed6e2272f426c3ae1ee96714"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1148b0732b520fbfef23da10bf55713e" id="r_a1148b0732b520fbfef23da10bf55713e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classschedule__system.html#a1148b0732b520fbfef23da10bf55713e">process_request</a> (string &amp;error_message)</td></tr>
 <tr class="separator:a1148b0732b520fbfef23da10bf55713e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6163a0d12ac302ee31af4ad9ce203c87" id="r_a6163a0d12ac302ee31af4ad9ce203c87"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classschedule__system.html#a6163a0d12ac302ee31af4ad9ce203c87">undo_system_changes</a> ()</td></tr>
+<tr class="separator:a6163a0d12ac302ee31af4ad9ce203c87"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3d52a6070092bf41529b59deb8853496" id="r_a3d52a6070092bf41529b59deb8853496"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classschedule__system.html#a3d52a6070092bf41529b59deb8853496">shut_down_system</a> ()</td></tr>
+<tr class="separator:a3d52a6070092bf41529b59deb8853496"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr><td colspan="2"><div class="groupHeader">Data printer</div></td></tr>
 <tr class="memitem:a700c138b0682045acbe202f247fd3721" id="r_a700c138b0682045acbe202f247fd3721"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classschedule__system.html#a700c138b0682045acbe202f247fd3721">print_current_schedule_system_data</a> () const</td></tr>
 <tr class="separator:a700c138b0682045acbe202f247fd3721"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -109,9 +113,15 @@ Public Attributes</h2></td></tr>
 <tr class="memitem:ab6eebe27c733a5471b04f650780a9a5b" id="r_ab6eebe27c733a5471b04f650780a9a5b"><td class="memItemLeft" align="right" valign="top"><a id="ab6eebe27c733a5471b04f650780a9a5b" name="ab6eebe27c733a5471b04f650780a9a5b"></a>
 stack&lt; <a class="el" href="classinterface.html">interface</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>system_changes</b></td></tr>
 <tr class="separator:ab6eebe27c733a5471b04f650780a9a5b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8164b25a9c4276268f119067479619ac" id="r_a8164b25a9c4276268f119067479619ac"><td class="memItemLeft" align="right" valign="top"><a id="a8164b25a9c4276268f119067479619ac" name="a8164b25a9c4276268f119067479619ac"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>number_of_student_data_changes</b></td></tr>
+<tr class="separator:a8164b25a9c4276268f119067479619ac"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad43974a8a2b0279688f8c19dbcb78ee9" id="r_ad43974a8a2b0279688f8c19dbcb78ee9"><td class="memItemLeft" align="right" valign="top"><a id="ad43974a8a2b0279688f8c19dbcb78ee9" name="ad43974a8a2b0279688f8c19dbcb78ee9"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>number_of_request_changes</b></td></tr>
+<tr class="separator:ad43974a8a2b0279688f8c19dbcb78ee9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Where the most important functions from the others classes are called. Controls the flow of the program. Stores the changes made into a stack </p>
+<div class="textblock"><p>Where the most important functions from the others classes are called. Controls the flow of the program. Stores the changes made into a stack. It also stores the number os student changes and requests. </p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="afe93f77f980ad049173c74192ee33a31" name="afe93f77f980ad049173c74192ee33a31"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#afe93f77f980ad049173c74192ee33a31">&#9670;&#160;</a></span>consult_all_students_in_aCourse()</h2>
@@ -364,6 +374,24 @@ stack&lt; <a class="el" href="classinterface.html">interface</a> &gt;&#160;</td>
 
 </div>
 </div>
+<a id="a3d52a6070092bf41529b59deb8853496" name="a3d52a6070092bf41529b59deb8853496"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3d52a6070092bf41529b59deb8853496">&#9670;&#160;</a></span>shut_down_system()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void schedule_system::shut_down_system </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Ends current system execution and sets up the next one. Time complexity: O(n) </p>
+
+</div>
+</div>
 <a id="a06723ccfed6e2272f426c3ae1ee96714" name="a06723ccfed6e2272f426c3ae1ee96714"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a06723ccfed6e2272f426c3ae1ee96714">&#9670;&#160;</a></span>store_new_request()</h2>
 
@@ -380,6 +408,24 @@ stack&lt; <a class="el" href="classinterface.html">interface</a> &gt;&#160;</td>
       </table>
 </div><div class="memdoc">
 <p>Stores new requests into the requests queue in the interface that is on top of the stack. Time complexity: O(1) </p>
+
+</div>
+</div>
+<a id="a6163a0d12ac302ee31af4ad9ce203c87" name="a6163a0d12ac302ee31af4ad9ce203c87"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6163a0d12ac302ee31af4ad9ce203c87">&#9670;&#160;</a></span>undo_system_changes()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void schedule_system::undo_system_changes </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Reverts the last change made to the system. That change can be either the submission or the processing of a new a request and the changes that come with it. Time complexity: O(n) </p>
 
 </div>
 </div>

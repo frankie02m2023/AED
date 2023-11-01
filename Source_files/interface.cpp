@@ -75,6 +75,7 @@ void interface::read_data_classes_per_uc() {
         class1 new_class(line.substr(it1 + 1));
         courses[courses.size() - 1].add_class(new_class);
     }
+    open_file.close();
 }
 
 /**Reads data from the file "classes.csv"
@@ -136,6 +137,7 @@ void interface::read_data_classes() {
 
         }
     }
+    open_file.close();
 }
 
 /**Reads data from the file "students_classes.csv"
@@ -194,6 +196,7 @@ void interface::read_data_students_classes() {
             }
         }
     }
+    f.close();
 }
 
 /** Reads the data from students_requests.csv
@@ -276,6 +279,7 @@ void interface::read_data_students_requests(){
         requests.push(new_request);
         new_request = reset_new_request;
     }
+    open_file.close();
 }
 
 //----------------------------------------------------------------------------------------------------------------
@@ -861,7 +865,7 @@ void interface::remove_request_from_file(const string& new_request_filename) {
     ofstream write_file(new_request_filename);
     //getting the first line of the file so that oit is not copied to the copy of the student requests file
     getline(read_file,line);
-    //copying every line of the original file to the new copy file with the exception of the first one
+    //copying every line of the original file to the new copy file except the first one
     while(getline(read_file,line)){
         write_file << line << endl;
     }
@@ -870,22 +874,30 @@ void interface::remove_request_from_file(const string& new_request_filename) {
     write_file.close();
 }
 
-// function that creates a new copy of the students file when a student is added to a new course
+/** Creates a new copy of the students file when a student is added to a new course.
+ * Time complexity: O(n)
+ */
 void interface::enroll_student_in_course_in_file(student &a_student, course &a_course, class1 &a_class, const string& new_filename){
     string students_file,new_students_file,line,target_student_number,target_student_name,copy_line;
+
     //adding the complete path to the students' file
     students_file = "../Data_files/" + students_classes_filename;
     new_students_file = new_filename;
+
     // opening current students file in read mode
     ifstream read_file(students_file);
+
     // opening future students file in write mode
     ofstream write_file(new_students_file);
+
     //checking to see if they were open successfully
     if (!read_file.is_open() || !write_file.is_open()) {
         cout << "Error: Unable to open files." << endl;
         return;
     }
+
     bool found_student = false;
+
     // looping through lines of the file
     while(getline(read_file,line)){
         copy_line = line;
@@ -898,27 +910,35 @@ void interface::enroll_student_in_course_in_file(student &a_student, course &a_c
             write_file << line << endl;
             continue;
         }
+
         // when we find the first line that references our target student we get his name from the line
         line = line.substr(it + 1);
         it = line.find_first_of(',');
         target_student_name = line.substr(0,it);
+
         // we then add a new line to the new file where we register our target students' enrollment in a new course
         write_file << target_student_number << ',' << target_student_name << ',' << a_course.get_course_name() << ',' << a_class.get_class_name() << endl;
+
         //then we reset our line variable to its initial value and add the line we just found
         line = copy_line;
         write_file << line;
         found_student = true;
     }
+
     read_file.close();
     write_file.close();
 }
 
+/** Creates a new copy of the students file when a student is removed from a course.
+ * Time complexity: O(n)
+ */
 void interface::remove_student_from_course_in_file(student &a_student, course &a_course,const std::string &new_filename) {
     string student_file, new_student_file,line, target_student_number, target_student_name, target_course, aux_line;
     student_file = students_classes_filename;
     new_student_file = new_filename;
     ifstream read_file(student_file);
     ofstream write_file(new_student_file);
+
     while(getline(read_file,line)){
         auto it = line.find_first_of(',');
         aux_line = line;
@@ -938,18 +958,25 @@ void interface::remove_student_from_course_in_file(student &a_student, course &a
         }
         write_file << line << endl;
     }
+    read_file.close();
+    write_file.close();
 }
 
+/** Creates a new copy of the students file when a student switches courses.
+ * Time complexity: O(n)
+ */
 void interface::switch_student_courses_in_file(student &a_student, course &old_course, course &new_course, class1 &new_class, const std::string &new_filename) {
     string students_file,new_students_file,line,target_student_number,target_student_name,target_course,save_line;
     students_file = "../Data_files/" + students_classes_filename;
     new_students_file = new_filename;
     ifstream read_file(students_file);
     ofstream write_file(new_students_file);
+
     if (!read_file.is_open() || !write_file.is_open()) {
         cout << "Error: Unable to open files." << endl;
         return;
     }
+
     while(getline(read_file,line)){
         save_line = line;
         auto it = line.find_first_of(',');
@@ -970,8 +997,14 @@ void interface::switch_student_courses_in_file(student &a_student, course &old_c
         line = save_line;
         write_file << line << endl;
     }
+
+    read_file.close();
+    write_file.close();
 }
 
+/** Creates a new copy of the students file when a student is added to a new class.
+ * Time complexity: O(n)
+ */
 void interface::switch_student_classes_in_file(student &a_student, course &a_course, class1 &old_class,class1 &new_class, const std::string &new_filename) {
     string students_file,new_students_file,line,target_student_number,target_student_name,target_course,save_line;
     students_file = "../Data_files/" + students_classes_filename;
@@ -1002,6 +1035,9 @@ void interface::switch_student_classes_in_file(student &a_student, course &a_cou
         line = save_line;
         write_file << line << endl;
     }
+
+    read_file.close();
+    write_file.close();
 }
 
 /**Stores a new request into the requests queue.

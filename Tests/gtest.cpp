@@ -750,6 +750,26 @@ TEST(System_changes,switch_student_classes){
 
 }
 
+TEST(data_readers,read_data_students_requests){
+    interface testi;
+    testi.read_data_classes_per_uc();
+    testi.read_data_classes();
+    testi.read_data_students_classes();
+    testi.read_data_students_requests();
+
+    student target_student("Rute","202028717");
+    course added_course("L.EIC012");
+    class1 added_class("2LEIC05");
+    class1 removed_class("2LEIC11");
+
+    EXPECT_EQ(testi.get_requests().size(),4);
+    EXPECT_EQ(testi.get_requests().front().target_student,target_student);
+    EXPECT_EQ(testi.get_requests().front().request_type,"switch classes");
+    EXPECT_EQ(testi.get_requests().front().added_course,added_course);
+    EXPECT_EQ(testi.get_requests().front().added_class,added_class);
+    EXPECT_EQ(testi.get_requests().front().removed_class,removed_class);
+}
+
 //=============================================================================
 // BENCHMARK
 //=============================================================================

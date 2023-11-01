@@ -231,7 +231,7 @@ void interface::read_data_students_requests(){
         if(request_type == "add course"){
             it = line.find_first_of(',');
             //add the course and class to the request
-            course added_course(line.substr((0,it)));
+            course added_course(line.substr(0,it));
             new_request.added_course = added_course;
             line = line.substr(it + 1);
             class1 added_class(line);

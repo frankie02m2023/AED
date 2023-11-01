@@ -769,9 +769,14 @@ bool interface::switch_student_classes(student &a_student, course &a_course, cla
  * Time complexity: O(n^3)
  */
 bool interface::process_request(string& error_message, const string& new_student_filename, const string& new_request_filename) {
+    // getting the oldest request in our requests queue
     request processed_request = requests.front();
+    // removing the request we are about to process from the queue
     requests.pop();
+    // removing the request we are about to process from the queue from the file that stores the interface's requests
+    // to do so we call the method below that copies the content of the current requests file to a new file except for the line that references the request we are about to process
     remove_request_from_file(new_request_filename);
+    // then we associate the interface with the updated requests file
     students_requests_filename = new_request_filename;
     if(processed_request.request_type == "add course"){
         if(enroll_student_in_course(processed_request.target_student, processed_request.added_course, processed_request.added_class, error_message)){
@@ -865,28 +870,43 @@ void interface::remove_request_from_file(const string& new_request_filename) {
     write_file.close();
 }
 
+// function that creates a new copy of the students file when a student is added to a new course
 void interface::enroll_student_in_course_in_file(student &a_student, course &a_course, class1 &a_class, const string& new_filename){
-    string students_file,new_students_file,line,target_student_number,target_student_name;
+    string students_file,new_students_file,line,target_student_number,target_student_name,copy_line;
+    //adding the complete path to the students' file
     students_file = "../Data_files/" + students_classes_filename;
     new_students_file = new_filename;
+    // opening current students file in read mode
     ifstream read_file(students_file);
+    // opening future students file in write mode
     ofstream write_file(new_students_file);
+    //checking to see if they were open successfully
     if (!read_file.is_open() || !write_file.is_open()) {
         cout << "Error: Unable to open files." << endl;
         return;
     }
     bool found_student = false;
+    // looping through lines of the file
     while(getline(read_file,line)){
+        copy_line = line;
+        //getting the number of the student present in each line
         auto it = line.find_first_of(',');
         target_student_number = line.substr(0,it);
+        // if it does not match the number of the student we are looking for, we copy the line to the new students file and continue the loop
+        // if it does match the number of the target student, but we had already found him we also continue the loop
         if(target_student_number != a_student.get_number() || found_student){
             write_file << line << endl;
             continue;
         }
+        // when we find the first line that references our target student we get his name from the line
         line = line.substr(it + 1);
         it = line.find_first_of(',');
         target_student_name = line.substr(0,it);
+        // we then add a new line to the new file where we register our target students' enrollment in a new course
         write_file << target_student_number << ',' << target_student_name << ',' << a_course.get_course_name() << ',' << a_class.get_class_name() << endl;
+        //then we reset our line variable to its initial value and add the line we just found
+        line = copy_line;
+        write_file << line;
         found_student = true;
     }
     read_file.close();
@@ -988,8 +1008,11 @@ void interface::switch_student_classes_in_file(student &a_student, course &a_cou
  * Time complexity: O(1)
  */
 void interface::store_new_request(const request &new_request, const string& new_filename) {
+    //pushing the new request to the requests' queue
     requests.push(new_request);
+    //registering the new request in a new copy of the students requests file with the name equal to the value of string new_filename
     add_request_to_file(new_request,new_filename);
+    //making our interface reference the newly updated students file
     students_requests_filename = new_filename;
 }
 

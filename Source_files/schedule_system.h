@@ -43,6 +43,7 @@ public:
     void store_new_request(const request& new_request);
     void process_request(string& error_message);
     void undo_system_changes();
+    void shut_down_system();
     ///@}
 
     /** @name Data printer

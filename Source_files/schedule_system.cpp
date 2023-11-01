@@ -90,13 +90,17 @@ void schedule_system::process_request(std::string &error_message) {
     // creating a copy of the most recent system version
     interface new_system_iteration = system_changes.top();
     string new_data_change_filename,new_request_filename;
+
     //incrementing the variable that stores the number of changes made to the requests file during the current system execution
     //we do so to create a new version of the requests file that has a different name from all the older versions
     number_of_request_changes++;
+
     // setting up the name of the student requests file that will be linked to the new system iteration
     new_request_filename = "students_requests.csv" + to_string(number_of_request_changes);
+
     // setting up the name of the student classes file that will be linked to the new system iteration if the students request is fulfilled
     new_data_change_filename = "classes_students.csv" + to_string(number_of_student_data_changes + 1);
+
     //checking if the student request is fulfilled
     //if it is we increment the variable that stores the amount of changes made to the students classes file by one
     //if the request is fulfilled the process_request method in the interface class then creates a new version of the students_classes.csv file reflecting the changes made to the system due to the requests fulfillment
@@ -108,8 +112,9 @@ void schedule_system::process_request(std::string &error_message) {
     system_changes.push(new_system_iteration);
 }
 
-//function that reverts the last change made to the system
-//that change can be either the submission or the processing of a new a request and the changes that come with it
+/**Reverts the last change made to the system.
+* That change can be either the submission or the processing of a new a request and the changes that come with it.
+ * Time complexity: O(n) */
 void schedule_system::undo_system_changes() {
     //getting the names of the data files associated with the current version of the system
     string old_student_data_filename = system_changes.top().get_students_classes_filename();
@@ -376,14 +381,18 @@ void schedule_system::print_current_schedule_system_data() const {
     system_changes.top().print_data();
 }
 
-//function that ends current system execution and sets up the next one
+/**Ends current system execution and sets up the next one.
+ * Time complexity: O(n)
+ */
 void schedule_system::shut_down_system() {
     string saved_classes_filename = "classes.csv";
     string saved_classes_ucs_filename = "classes_per_uc.csv";
+
     //accessing the files linked to the current system version
     string saved_students_filename = system_changes.top().get_students_classes_filename();
     string saved_requests_filename = system_changes.top().get_students_requests_filename();
     std::filesystem::path data_files_directory("../Data_files");
+
     // looping through all the files in the data_files directory and deleting all the files whose data will not be relevant in the next system execution
     for(const std::filesystem::directory_entry data_file : std::filesystem::directory_iterator(data_files_directory)){
         if(data_file.path().filename() == saved_classes_filename){
@@ -400,20 +409,25 @@ void schedule_system::shut_down_system() {
         }
         std::filesystem::remove(data_file);
     }
+
     //getting the full path of saved versions of students_classes.csv and students_requests.csv
     saved_students_filename = "../Data_files/" + saved_students_filename;
     saved_requests_filename = "../Data_files/" + saved_requests_filename;
+
     //opening the saved files in read mode
     ifstream file1(saved_students_filename);
     ifstream file2(saved_requests_filename);
+
     //changing the names of the saved files to students_classes.csv and students_requests.csv as they will be the first version of those files in the next system execution
     rename(saved_students_filename.c_str(),"../Data_files/students_classes.csv");
     rename(saved_requests_filename.c_str(),"../Data_files/students_requests.csv");
+
     //not necessary but I think it makes sense to do this
     //emptying the system changes stack
     while(!system_changes.empty()){
         system_changes.pop();
     }
+
     //resetting the variables that store the number of changes made to the files back to 0
     number_of_student_data_changes = 0;
     number_of_request_changes = 0;

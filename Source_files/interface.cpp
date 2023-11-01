@@ -643,6 +643,39 @@ bool interface::can_add_to_class(course &a_course, student &a_student, class1 &a
     return true;
 }
 
+void interface::consult_student_requests() const {
+    queue<request> copy_requests = requests;
+    struct request current_request;
+    while(!copy_requests.empty()){
+        current_request = copy_requests.front();
+        cout << "Student : ";
+        current_request.target_student.print_student();
+        if(current_request.request_type == "add course"){
+            cout << "Request type : Enrollment in a new course" << endl;
+            cout << "Target course : " << current_request.added_course.get_course_name() << endl;
+            cout << "Target class : " << current_request.added_class.get_class_name() << endl;
+        }
+        if(current_request.request_type == "remove course"){
+            cout << "Request type : Removal from a course" << endl;
+            cout << "Chosen course : " << current_request.removed_course.get_course_name() << endl;
+        }
+        if(current_request.request_type == "switch courses"){
+            cout << "Request type : Switch between two courses" << endl;
+            cout << "New course : " << current_request.added_course.get_course_name() << endl;
+            cout << "New class : " << current_request.added_class.get_class_name() << endl;
+            cout << "Removable course : " << current_request.removed_course.get_course_name() << endl;
+        }
+        if(current_request.request_type == "switch classes"){
+            cout << "Request type : Switch between two classes in a course" << endl;
+            cout << "Target course : " << current_request.added_course.get_course_name() << endl;
+            cout << "New class : " << current_request.added_class.get_class_name() << endl;
+            cout << "Old class : " << current_request.removed_class.get_class_name() << endl;
+        }
+        cout << endl;
+        copy_requests.pop();
+    }
+}
+
 
 /**Function that tries to enroll a student in a new course.
  *  Returns true if the enrollment is successful and false if it isn't.
@@ -838,19 +871,23 @@ void interface::add_request_to_file(const request &new_request, const string& ne
     }
     ifstream read_file(filename_path);
     if(!read_file.is_open()){
-        std::cerr << "Error: Unable to open the CSV file for writing." << std::endl;
+        std::cerr << "Error: Unable to open the CSV file for reading." << std::endl;
         return;
     }
     // opening the student requests file in write mode
-    ofstream write_file(new_filename_path,ios::app);
+    ofstream write_file(new_filename_path);
     if (!write_file.is_open()) {
         std::cerr << "Error: Unable to open the CSV file for writing." << std::endl;
         return;
     }
-    write_file << read_file.rdbuf();
+    //copying lines from the previous file into the new version
+    while(getline(read_file,line)){
+        write_file << line << endl;
+    }
     // adding the new request to the file using the appropriate format
     write_file << new_line << endl;
     read_file.close();
+    write_file.flush();
     write_file.close();
 }
 
@@ -1052,9 +1089,22 @@ void interface::store_new_request(const request &new_request, const string& new_
     students_requests_filename = new_filename;
 }
 
+void interface::remove_request(const std::string &new_filename) {
+    requests.pop();
+    remove_request_from_file(new_filename);
+}
+
 //setters --------------------------------------------------------------
 /**Sets the courses vector to the given vector of courses
 * Time complexity: O(1)*/
 void interface::set_courses(vector<course> courses) {
     this->courses = courses;
+}
+
+void interface::set_students_classes_filename(const std::string &filename) {
+    students_classes_filename = filename;
+}
+
+void interface::set_students_requests_filename(const std::string &filename) {
+    students_requests_filename = filename;
 }

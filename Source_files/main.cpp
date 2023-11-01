@@ -16,10 +16,27 @@
  * Then, just type the number corresponding to the option you want to execute.
  * @warning <b> You need to use C++ 17 or above to run the program appropriately <b>
  */
+#include <filesystem>
 #include "schedule_system.h"
+
+void renaming_files_for_future_use(){
+    std::filesystem::path data_files_directory("../Data_files");
+    string filename_beginning;
+    for(const std::filesystem::directory_entry data_file : std::filesystem::directory_iterator(data_files_directory)){
+        auto it = filename_beginning.find_first_of('.');
+        filename_beginning = filename_beginning.substr(0,it);
+        if(filename_beginning == "students_classes"){
+            std::filesystem::rename(data_file,"students_classes.csv");
+        }
+        else if(filename_beginning == "students_requests"){
+            std::filesystem::rename(data_file,"students_requests.csv");
+        }
+    }
+}
 
 int main(){
     schedule_system system;
     system.schedule_system_functions();
+    renaming_files_for_future_use();
     return 0;
 }

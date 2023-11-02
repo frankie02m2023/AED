@@ -96,8 +96,12 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:ad8d095d56ecdb467386e6d6936b181f3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa1d64fda87a363879db3901783d6a3ae" id="r_aa1d64fda87a363879db3901783d6a3ae"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classschedule__system.html#aa1d64fda87a363879db3901783d6a3ae">consult_classes_and_courses_occupation_by_year</a> (int year, const string &amp;uc_sort_by=&quot;occupation&quot;, const string &amp;class_sort_by=&quot;occupation&quot;, const string &amp;sorting_uc=&quot;ascending&quot;, const string &amp;sorting_classes=&quot;ascending&quot;)</td></tr>
 <tr class="separator:aa1d64fda87a363879db3901783d6a3ae"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac4a8ad368afaf1ef48c8de3c60a28854" id="r_ac4a8ad368afaf1ef48c8de3c60a28854"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classschedule__system.html#ac4a8ad368afaf1ef48c8de3c60a28854">consult_student_requests</a> () const</td></tr>
+<tr class="separator:ac4a8ad368afaf1ef48c8de3c60a28854"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a06723ccfed6e2272f426c3ae1ee96714" id="r_a06723ccfed6e2272f426c3ae1ee96714"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classschedule__system.html#a06723ccfed6e2272f426c3ae1ee96714">store_new_request</a> (const <a class="el" href="structrequest.html">request</a> &amp;new_request)</td></tr>
 <tr class="separator:a06723ccfed6e2272f426c3ae1ee96714"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a46f5cb132649f90877884d5a0ab9ee62" id="r_a46f5cb132649f90877884d5a0ab9ee62"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classschedule__system.html#a46f5cb132649f90877884d5a0ab9ee62">remove_request</a> ()</td></tr>
+<tr class="separator:a46f5cb132649f90877884d5a0ab9ee62"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1148b0732b520fbfef23da10bf55713e" id="r_a1148b0732b520fbfef23da10bf55713e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classschedule__system.html#a1148b0732b520fbfef23da10bf55713e">process_request</a> (string &amp;error_message)</td></tr>
 <tr class="separator:a1148b0732b520fbfef23da10bf55713e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6163a0d12ac302ee31af4ad9ce203c87" id="r_a6163a0d12ac302ee31af4ad9ce203c87"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classschedule__system.html#a6163a0d12ac302ee31af4ad9ce203c87">undo_system_changes</a> ()</td></tr>
@@ -259,6 +263,24 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>number_of_request_chan
 
 </div>
 </div>
+<a id="ac4a8ad368afaf1ef48c8de3c60a28854" name="ac4a8ad368afaf1ef48c8de3c60a28854"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac4a8ad368afaf1ef48c8de3c60a28854">&#9670;&#160;</a></span>consult_student_requests()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void schedule_system::consult_student_requests </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Consults the requests made to the system. Time complexity: O(n) </p>
+
+</div>
+</div>
 <a id="ab88b95a0d4436f7c339603a1fc2272af" name="ab88b95a0d4436f7c339603a1fc2272af"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ab88b95a0d4436f7c339603a1fc2272af">&#9670;&#160;</a></span>consult_student_schedule()</h2>
 
@@ -356,6 +378,24 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>number_of_request_chan
 
 </div>
 </div>
+<a id="a46f5cb132649f90877884d5a0ab9ee62" name="a46f5cb132649f90877884d5a0ab9ee62"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a46f5cb132649f90877884d5a0ab9ee62">&#9670;&#160;</a></span>remove_request()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void schedule_system::remove_request </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Removes the request in front of the queue from the system, updates the files and adds this changes to the top of the system_changes stack. Time complexity: O(n) </p>
+
+</div>
+</div>
 <a id="a1a6ba19330a1bd5df806a0a4649ca70a" name="a1a6ba19330a1bd5df806a0a4649ca70a"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a1a6ba19330a1bd5df806a0a4649ca70a">&#9670;&#160;</a></span>schedule_system_functions()</h2>
 
@@ -430,8 +470,8 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>number_of_request_chan
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>
-<li><a class="el" href="schedule__system_8h_source.html">schedule_system.h</a></li>
-<li><a class="el" href="schedule__system_8cpp.html">schedule_system.cpp</a></li>
+<li>Source_files/<a class="el" href="schedule__system_8h_source.html">schedule_system.h</a></li>
+<li>Source_files/<a class="el" href="schedule__system_8cpp.html">schedule_system.cpp</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->

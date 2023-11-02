@@ -296,6 +296,9 @@ void interface::operator=(const interface &other_interface) {
 //----------------------------------------------------------------------------------------------------------------
 //Advanced getters
 
+/**Gets a specific course from the courses vector
+ *  Time complexity: O(n)
+ */
 course interface::get_course_from_courses(const course &a_course) const {
     course target_course;
     for(course c : courses){
@@ -464,6 +467,9 @@ size_t interface::number_of_courses_per_student(const student &a_student) const 
     return get_all_courses_for_student(a_student).size();
 }
 
+/** Checks if a student is in this interface.
+ *  Time complexity: O(n^3)
+ */
 bool interface:: has_student(const student& a_student) const{
     for(course a_course : courses){
         if(a_course.has_student(a_student)){
@@ -624,7 +630,7 @@ void interface::consult_classes_and_courses_occupation_by_year(int year , const 
     }
 }
 
-/**Checks if it is possible to add a student to a given class in a given course
+/**Checks if it is possible to add a student to a given class in a given course.
  * Time complexity: O(nlog(n))
  */
 bool interface::can_add_to_class(course &a_course, student &a_student, class1 &a_class) const {
@@ -642,7 +648,7 @@ bool interface::can_add_to_class(course &a_course, student &a_student, class1 &a
     // restoring the input class and course objects back to their initial state
     a_course = copy_a_course;
     a_class = copy_a_class;
-    // getting the student schedule and checking potencial schedule overlaps
+    // getting the student schedule and checking potential schedule overlaps
     set<pair<pair<schedule,string>,course>> student_schedule = get_student_schedule(a_student); //O(nlog(n))
     class1 comparable_class(" ");
     auto it = student_schedule.begin();
@@ -662,6 +668,9 @@ bool interface::can_add_to_class(course &a_course, student &a_student, class1 &a
     return true;
 }
 
+/**Consults the requests made to the system.
+ *  Time complexity: O(n)
+ */
 void interface::consult_student_requests() const {
     queue<request> copy_requests = requests;
     struct request current_request;
@@ -1006,20 +1015,32 @@ void interface::remove_student_from_course_in_file(student &a_student, course &a
     ifstream read_file(student_file);
     ofstream write_file(new_student_file);
 
+    //Loop the lines in the file to find the target student
     while(getline(read_file,line)){
+        //Get the student number
         auto it = line.find_first_of(',');
         aux_line = line;
         target_student_number = line.substr(0,it);
+
+        //Confirming if the student in this line is our target student
+        //If it isn´t, then we just add it to the new file and continue the loop
         if(target_student_number != a_student.get_number()){
             write_file << line << endl;
             continue;
         }
+
+        //Get student name
         aux_line = aux_line.substr(it + 1);
         it = aux_line.find_first_of(',');
         target_student_name = aux_line.substr(0,it);
+
+        //Get the course were we want to remove the student
         aux_line = aux_line.substr(it + 1);
         it = aux_line.find_first_of(',');
         target_course = aux_line.substr(0,it);
+
+        //Confirming if the course is the one we want to delete the student from
+        //if it isn´t, then just add the line to the new file and continue the loop
         if(target_student_number == a_student.get_number() &&  target_course == a_course.get_course_name()){
             continue;
         }
@@ -1039,24 +1060,37 @@ void interface::switch_student_courses_in_file(student &a_student, course &old_c
     ifstream read_file(students_file);
     ofstream write_file(new_students_file);
 
+    //Checks if the files opened successfully
     if (!read_file.is_open() || !write_file.is_open()) {
         cout << "Error: Unable to open files." << endl;
         return;
     }
 
+    //Loop the lines in the file
     while(getline(read_file,line)){
+        //Gets the student number
         save_line = line;
         auto it = line.find_first_of(',');
         target_student_number = line.substr(0,it);
+
+        //Confirming if the student in this line is our target student
+        //If it isn´t, then we just add it to the new file and continue the loop
         if(target_student_number != a_student.get_number()){
             write_file << line << endl;
             continue;
         }
+
+        //Get student name
         line = line.substr(it + 1);
         it = line.find_first_of(',');
         target_student_name = line.substr(0,it);
+
+        //Get the course we want to change
         line = line.substr(it + 1);
         target_course = line.substr(0,it);
+
+        //Checks if the course found is the old one
+        //If it's the old course then update the new file with the new course
         if(target_course == old_course.get_course_name()){
             write_file << target_student_number << ',' << target_student_name << ',' << new_course.get_course_name() << ',' << new_class.get_class_name() << endl;
             continue;
@@ -1078,23 +1112,37 @@ void interface::switch_student_classes_in_file(student &a_student, course &a_cou
     new_students_file = "../Data_files/" +  new_filename;
     ifstream read_file(students_file);
     ofstream write_file(new_students_file);
+
+    //Checks if the files opened successfully
     if (!read_file.is_open() || !write_file.is_open()) {
         cout << "Error: Unable to open files." << endl;
         return;
     }
+
+    //Loop the lines in the file
     while(getline(read_file,line)){
+        //Gets the student number
         save_line = line;
         auto it = line.find_first_of(',');
         target_student_number = line.substr(0,it);
+
+        //Confirming if the student in this line is our target student
+        //If it isn´t, then we just add it to the new file and continue the loop
         if(target_student_number != a_student.get_number()){
             write_file << line << endl;
             continue;
         }
+
+        //Get the student name
         line = line.substr(it + 1);
         it = line.find_first_of(',');
         target_student_name = line.substr(0,it);
+
+        //Get the target course
         line = line.substr(it + 1);
         target_course = line.substr(0,it);
+
+        //if the course is the one we are seeking then update the new file with the new class
         if(target_course == a_course.get_course_name()){
             write_file << target_student_number << ',' << target_student_name << ',' << target_course << ',' << new_class.get_class_name() << endl;
             continue;
@@ -1119,6 +1167,9 @@ void interface::store_new_request(const request &new_request, const string& new_
     students_requests_filename = new_filename;
 }
 
+/**Removes a request from the requests queue and from the requests file
+ *  Time complexity: O(n)
+ */
 void interface::remove_request(const std::string &new_filename) {
     requests.pop();
     remove_request_from_file(new_filename);
@@ -1132,10 +1183,16 @@ void interface::set_courses(vector<course> courses) {
     this->courses = courses;
 }
 
+/**Sets the students_classes file name to a new one.
+ * Time complexity: O(1)
+ */
 void interface::set_students_classes_filename(const std::string &filename) {
     students_classes_filename = filename;
 }
 
+/**Sets the students_requests file name to a new one.
+ * Time complexity: O(1)
+ */
 void interface::set_students_requests_filename(const std::string &filename) {
     students_requests_filename = filename;
 }

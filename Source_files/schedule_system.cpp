@@ -70,6 +70,9 @@ void schedule_system::consult_classes_and_courses_occupation_by_year(int year, c
     system_changes.top().consult_classes_and_courses_occupation_by_year(year,uc_sort_by,class_sort_by,sorting_uc,sorting_classes);
 }
 
+/** Consults the requests made to the system.
+ *  Time complexity: O(n)
+ */
 void schedule_system::consult_student_requests() const {
     system_changes.top().consult_student_requests();
 }
@@ -90,6 +93,9 @@ void schedule_system::store_new_request(const request &new_request) {
     system_changes.push(new_system_iteration);
 }
 
+/**Removes the request in front of the queue from the system, updates the files and adds this changes to the top of the system_changes stack.
+ * Time complexity: O(n)
+ */
 void schedule_system::remove_request() {
     interface new_system_iteration = system_changes.top();
     number_of_request_changes++;
@@ -191,14 +197,25 @@ void schedule_system::undo_system_changes() {
                 class1 target_class(class_name);
                 consult_class_schedule(target_class);
             } else if (option == '2') {
-                string student_name, student_number;
-                cout << "Please write the name and number of the student whose schedule you wish to consult: ";
+                string student_name, student_number, sort_option;
+                cout << "Please write the name and number of the student whose schedule you wish to consult: " << endl;
+                cout << "Name: ";
                 cin >> student_name;
-                cout << " ";
+                cout << "\n";
+                cout << "Number:";
                 cin >> student_number;
                 cout << endl;
                 student target_student(student_name, student_number);
-                system_changes.top().consult_student_schedule_by_schedule(target_student);
+                cout << "Please select the number associated with the sorting criteria you wish to choose" << endl;
+                cout <<"1. Course" << endl;
+                cout <<"2. Schedule" << endl;
+                cin >> sort_option;
+                if(sort_option == "1"){
+                    consult_student_schedule(target_student);
+                }
+                else if(sort_option == "2") {
+                    system_changes.top().consult_student_schedule_by_schedule(target_student);
+                }
             } else if (option == '3') {
                 string class_name, course_code;
                 cout << "Please write the name of the class you wish to check:";
@@ -208,7 +225,31 @@ void schedule_system::undo_system_changes() {
                 cout << endl;
                 class1 target_class(class_name);
                 course target_course(course_code);
-                //consult_students_in_class_and_course(target_class, target_course);
+                char sorting_option;
+                char sorting_order;
+                cout << "Please select the number associated with the sorting criteria you wish to choose:" << endl;
+                cout << "1. Name" << endl;
+                cout << "2. Number" << endl;
+                cout << "3. No sorting preference" << endl;
+                cin >> sorting_option;
+                cout << endl;
+                cout << "Please select how wish to order the list of students based on your sorting criteria:" << endl;
+                cout << "1. Ascending" << endl;
+                cout << "2. Descending" << endl;
+                cin >> sorting_order;
+                if (sorting_option == '1' || sorting_option == '3') {
+                    if (sorting_order == '1') {
+                        consult_students_in_class_and_course(target_class, target_course, "name", "ascending");
+                    } else if (sorting_order == '2') {
+                        consult_students_in_class_and_course(target_class,target_course, "name", "descending");
+                    }
+                } else if (sorting_option == '2') {
+                    if (sorting_order == '1') {
+                        consult_students_in_class_and_course(target_class,target_course, "number", "ascending");
+                    } else if (sorting_order == '2') {
+                        consult_students_in_class_and_course(target_class,target_course, "number", "descending");
+                    }
+                }
             } else if (option == '4') {
                 string course_name;
                 char sorting_option;
@@ -223,8 +264,8 @@ void schedule_system::undo_system_changes() {
                 cin >> sorting_option;
                 cout << endl;
                 cout << "Please select how wish to order the list of students based on your sorting criteria:" << endl;
-                cout << "1. Ascending";
-                cout << "2. Descending";
+                cout << "1. Ascending" << endl;
+                cout << "2. Descending" << endl;
                 cin >> sorting_order;
                 if (sorting_option == '1' || sorting_option == '3') {
                     if (sorting_order == '1') {
@@ -255,8 +296,8 @@ void schedule_system::undo_system_changes() {
                 cin >> sorting_option;
                 cout << endl;
                 cout << "Please select how wish to order the list of students based on your sorting criteria:" << endl;
-                cout << "1. Ascending";
-                cout << "2. Descending";
+                cout << "1. Ascending" << endl;
+                cout << "2. Descending" << endl;
                 cin >> sorting_order;
                 if (sorting_option == '1' || sorting_option == '3') {
                     if (sorting_order == '1') {

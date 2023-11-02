@@ -19,12 +19,21 @@
 #include <filesystem>
 #include "schedule_system.h"
 
+/**Changes the names of the files so that they can be used correctly the next time the system is started.
+ * Time complexity: O(n)
+ */
 void renaming_files_for_future_use(){
     std::filesystem::path data_files_directory("../Data_files");
     string filename_beginning;
+
+    //Iterates through the files
     for(const std::filesystem::directory_entry data_file : std::filesystem::directory_iterator(data_files_directory)){
+
+        //Gets the name of the file
         auto it = filename_beginning.find_first_of('.');
         filename_beginning = filename_beginning.substr(0,it);
+
+        //Alters the name of the file to eliminate the numbers corresponding to the changes in the systems
         if(filename_beginning == "students_classes"){
             std::filesystem::rename(data_file,"students_classes.csv");
         }

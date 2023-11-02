@@ -49,6 +49,7 @@ public:
      *
      */
      ///@{
+    course get_course_from_courses(const course& a_course) const;
     set<pair<pair<schedule,string>,course>> get_class_schedule(class1 a_class) const;
     set<pair<pair<schedule,string>,course>> get_student_schedule(const student& a_student) const;
     list<student> get_class_students_for_course(class1 a_class, course a_course) const;
@@ -60,6 +61,7 @@ public:
     size_t number_of_students_in_anUC(const course& a_course) const;
     size_t number_of_students_in_aClass(const class1& a_class, const course& a_course) const;
     size_t number_of_courses_per_student(const student& a_student) const;
+    bool has_student(const student& a_student) const;
     ///@}
 
     /** @name Operators

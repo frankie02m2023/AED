@@ -42,7 +42,7 @@ public:
     void consult_classes_and_courses_occupation_by_year(int year, const string& uc_sort_by = "occupation", const string& class_sort_by = "occupation",const string& sorting_uc  = "ascending", const string& sorting_classes  = "ascending");
     void consult_student_requests() const;
     void store_new_request(const request& new_request);
-    void remove_request(const request& a_request);
+    void remove_request();
     void process_request(string& error_message);
     void undo_system_changes();
     void shut_down_system();

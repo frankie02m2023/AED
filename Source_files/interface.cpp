@@ -48,7 +48,7 @@ string interface::get_students_requests_filename() const {
 
 void interface::read_data_classes_per_uc() {
     string file, line;
-    file = "classes_per_uc.csv";
+    file = "../Data_files/classes_per_uc.csv";
     ifstream open_file;
     open_file.open(file);
 
@@ -83,7 +83,7 @@ void interface::read_data_classes_per_uc() {
     * Time complexity: O(n^2). */
 void interface::read_data_classes() {
     string file, line;
-    file = "classes.csv";
+    file = "../Data_files/classes.csv";
     ifstream open_file(file);
 
     if (!open_file.is_open()) {
@@ -144,7 +144,7 @@ void interface::read_data_classes() {
     * and organizes the data into the correct data structures.
     * Time complexity : O(n^3). */
 void interface::read_data_students_classes() {
-    ifstream f("students_classes.csv");
+    ifstream f("../Data_files/students_classes.csv");
     string line;
 
     if (!f.is_open()) {
@@ -241,7 +241,7 @@ void interface::read_data_students_requests(){
             new_request.added_class = added_class;
         }
 
-        else if(request_type == "remove_course"){
+        else if(request_type == "remove course"){
             //add the course to remove to the request
             course removed_course(line);
             new_request.removed_course = removed_course;
@@ -295,6 +295,16 @@ void interface::operator=(const interface &other_interface) {
 
 //----------------------------------------------------------------------------------------------------------------
 //Advanced getters
+
+course interface::get_course_from_courses(const course &a_course) const {
+    course target_course;
+    for(course c : courses){
+        if(a_course == c){
+            target_course = c;
+            return c;
+        }
+    }
+}
 
 /**Gets a specific class schedule.
    * Time complexity : O(nlog(n)).*/
@@ -452,6 +462,15 @@ size_t interface::number_of_students_in_anUC(const course& a_course) const {
  */
 size_t interface::number_of_courses_per_student(const student &a_student) const {
     return get_all_courses_for_student(a_student).size();
+}
+
+bool interface:: has_student(const student& a_student) const{
+    for(course a_course : courses){
+        if(a_course.has_student(a_student)){
+            return true;
+        }
+    }
+    return false;
 }
 
 
@@ -806,6 +825,10 @@ bool interface::switch_student_classes(student &a_student, course &a_course, cla
  * Time complexity: O(n^3)
  */
 bool interface::process_request(string& error_message, const string& new_student_filename, const string& new_request_filename) {
+    if(requests.empty()){
+        error_message = "There are no requests left to process in the system!";
+        return false;
+    }
     // getting the oldest request in our requests queue
     request processed_request = requests.front();
     // removing the request we are about to process from the queue
@@ -815,9 +838,14 @@ bool interface::process_request(string& error_message, const string& new_student
     remove_request_from_file(new_request_filename);
     // then we associate the interface with the updated requests file
     students_requests_filename = new_request_filename;
+    if(!has_student(processed_request.target_student)){
+        error_message = "Student who submitted the request does not exist in the system";
+        return false;
+    }
     if(processed_request.request_type == "add course"){
         if(enroll_student_in_course(processed_request.target_student, processed_request.added_course, processed_request.added_class, error_message)){
-            class1 new_class = processed_request.added_course.get_student_class(processed_request.target_student);
+            course new_course = get_course_from_courses(processed_request.added_course);
+            class1 new_class = new_course.get_student_class(processed_request.target_student);
             enroll_student_in_course_in_file(processed_request.target_student,processed_request.added_course,new_class,new_student_filename);
             students_classes_filename = new_student_filename;
             return true;
@@ -832,7 +860,8 @@ bool interface::process_request(string& error_message, const string& new_student
     }
     else if(processed_request.request_type == "switch courses") {
         if(switch_student_courses(processed_request.target_student, processed_request.added_course,processed_request.removed_course, processed_request.added_class, error_message)){
-            class1 new_class = processed_request.added_course.get_student_class(processed_request.target_student);
+            course new_course = get_course_from_courses(processed_request.added_course);
+            class1 new_class = new_course.get_student_class(processed_request.target_student);
             switch_student_courses_in_file(processed_request.target_student, processed_request.added_course,processed_request.removed_course, new_class,new_student_filename);
             students_classes_filename = new_student_filename;
             return true;
@@ -894,12 +923,13 @@ void interface::add_request_to_file(const request &new_request, const string& ne
 /**Removes the top request from the student requests file after a request is processed.
 * Time complexity : O(n) */
 void interface::remove_request_from_file(const string& new_request_filename) {
-    string requests_file,line;
+    string requests_file,line,new_requests_file;
     requests_file = "../Data_files/" + students_requests_filename;
+    new_requests_file = "../Data_files/" + new_request_filename;
     //opening original student requests file
     ifstream read_file(requests_file);
     // opening copy of student requests file
-    ofstream write_file(new_request_filename);
+    ofstream write_file(new_requests_file);
     //getting the first line of the file so that oit is not copied to the copy of the student requests file
     getline(read_file,line);
     //copying every line of the original file to the new copy file except the first one
@@ -919,7 +949,7 @@ void interface::enroll_student_in_course_in_file(student &a_student, course &a_c
 
     //adding the complete path to the students' file
     students_file = "../Data_files/" + students_classes_filename;
-    new_students_file = new_filename;
+    new_students_file = "../Data_files/" + new_filename;
 
     // opening current students file in read mode
     ifstream read_file(students_file);
@@ -958,7 +988,7 @@ void interface::enroll_student_in_course_in_file(student &a_student, course &a_c
 
         //then we reset our line variable to its initial value and add the line we just found
         line = copy_line;
-        write_file << line;
+        write_file << line << endl;
         found_student = true;
     }
 
@@ -971,8 +1001,8 @@ void interface::enroll_student_in_course_in_file(student &a_student, course &a_c
  */
 void interface::remove_student_from_course_in_file(student &a_student, course &a_course,const std::string &new_filename) {
     string student_file, new_student_file,line, target_student_number, target_student_name, target_course, aux_line;
-    student_file = students_classes_filename;
-    new_student_file = new_filename;
+    student_file = "../Data_files/" + students_classes_filename;
+    new_student_file = "../Data_files/" + new_filename;
     ifstream read_file(student_file);
     ofstream write_file(new_student_file);
 
@@ -1005,7 +1035,7 @@ void interface::remove_student_from_course_in_file(student &a_student, course &a
 void interface::switch_student_courses_in_file(student &a_student, course &old_course, course &new_course, class1 &new_class, const std::string &new_filename) {
     string students_file,new_students_file,line,target_student_number,target_student_name,target_course,save_line;
     students_file = "../Data_files/" + students_classes_filename;
-    new_students_file = new_filename;
+    new_students_file = "../Data_files/"+ new_filename;
     ifstream read_file(students_file);
     ofstream write_file(new_students_file);
 
@@ -1045,7 +1075,7 @@ void interface::switch_student_courses_in_file(student &a_student, course &old_c
 void interface::switch_student_classes_in_file(student &a_student, course &a_course, class1 &old_class,class1 &new_class, const std::string &new_filename) {
     string students_file,new_students_file,line,target_student_number,target_student_name,target_course,save_line;
     students_file = "../Data_files/" + students_classes_filename;
-    new_students_file = new_filename;
+    new_students_file = "../Data_files/" +  new_filename;
     ifstream read_file(students_file);
     ofstream write_file(new_students_file);
     if (!read_file.is_open() || !write_file.is_open()) {
@@ -1092,6 +1122,7 @@ void interface::store_new_request(const request &new_request, const string& new_
 void interface::remove_request(const std::string &new_filename) {
     requests.pop();
     remove_request_from_file(new_filename);
+    students_requests_filename = new_filename;
 }
 
 //setters --------------------------------------------------------------

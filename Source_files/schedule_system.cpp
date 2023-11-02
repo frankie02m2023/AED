@@ -90,7 +90,7 @@ void schedule_system::store_new_request(const request &new_request) {
     system_changes.push(new_system_iteration);
 }
 
-void schedule_system::remove_request(const request &a_request) {
+void schedule_system::remove_request() {
     interface new_system_iteration = system_changes.top();
     number_of_request_changes++;
     string new_request_filename = "students_requests.csv" + to_string(number_of_request_changes);
@@ -113,7 +113,7 @@ void schedule_system::process_request(std::string &error_message) {
     new_request_filename = "students_requests.csv" + to_string(number_of_request_changes);
 
     // setting up the name of the student classes file that will be linked to the new system iteration if the students request is fulfilled
-    new_data_change_filename = "classes_students.csv" + to_string(number_of_student_data_changes + 1);
+    new_data_change_filename = "students_classes.csv" + to_string(number_of_student_data_changes + 1);
 
     //checking if the student request is fulfilled
     //if it is we increment the variable that stores the amount of changes made to the students classes file by one
@@ -158,7 +158,8 @@ void schedule_system::undo_system_changes() {
     void schedule_system::schedule_system_functions() {
     string continue_or_exit;
     while (true) {
-        cout << "Type EXIT in the terminal if you wish to close the system or CONTINUE if you wish to use the system" << endl;
+        cout << "Type EXIT in the terminal if you wish to close the system or type anything else if you wish to use the system" << endl;
+        cout << "Warning : While using the system inserting any invalid input into the terminal will cause the system menu to reset!" << endl;
         cin >> continue_or_exit;
         if(continue_or_exit == "EXIT"){
             break;
@@ -260,15 +261,30 @@ void schedule_system::undo_system_changes() {
                 if (sorting_option == '1' || sorting_option == '3') {
                     if (sorting_order == '1') {
                         consult_all_students_in_aYear(target_grade, "name", "ascending");
-                    } else if (sorting_order == '2') {
+                    }
+                    else if (sorting_order == '2') {
                         consult_all_students_in_aYear(target_grade, "name", "descending");
                     }
-                } else if (sorting_option == '2') {
+                    else {
+                        cout << endl;
+                        continue;
+                    }
+                }
+                else if (sorting_option == '2') {
                     if (sorting_order == '1') {
                         consult_all_students_in_aYear(target_grade, "number", "ascending");
-                    } else if (sorting_order == '2') {
+                    }
+                    else if (sorting_order == '2') {
                         consult_all_students_in_aYear(target_grade, "number", "descending");
                     }
+                    else{
+                        cout << endl;
+                        continue;
+                    }
+                }
+                else{
+                    cout << endl;
+                    continue;
                 }
             } else if (option == '6') {
                 string year;
@@ -300,30 +316,55 @@ void schedule_system::undo_system_changes() {
                 cout << endl;
                 if (sorting_course_option == "1") {
                     sorting_course_option = "name";
-                } else if (sorting_course_option == "2" || sorting_course_option == "3") {
+                }
+                else if (sorting_course_option == "2" || sorting_course_option == "3") {
                     sorting_course_option = "occupation";
+                }
+                else{
+                    cout << endl;
+                    continue;
                 }
                 if (sorting_course_order == "1") {
                     sorting_course_order = "ascending";
-                } else if (sorting_course_order == "2") {
+                }
+                else if (sorting_course_order == "2") {
                     sorting_course_order = "descending";
+                }
+                else{
+                    cout << endl;
+                    continue;
                 }
                 if (sorting_class_option == "1") {
                     sorting_class_option = "name";
-                } else if (sorting_class_option == "2" || sorting_class_option == "3") {
+                }
+                else if (sorting_class_option == "2" || sorting_class_option == "3") {
                     sorting_class_option = "occupation";
+                }
+                else{
+                    cout << endl;
+                    continue;
                 }
                 if (sorting_class_order == "1") {
                     sorting_class_order = "ascending";
-                } else if (sorting_class_order == "2") {
+                }
+                else if (sorting_class_order == "2") {
                     sorting_class_order = "descending";
+                }
+                else{
+                    cout << endl;
+                    continue;
                 }
                 consult_classes_and_courses_occupation_by_year(grade, sorting_course_option, sorting_class_option,
                                                                sorting_course_order, sorting_class_order);
                 cout << sorting_class_option;
             }
-
-        } else if (option == '2') {
+            else{
+                cout << endl;
+                continue;
+            }
+            cout << endl;
+        }
+        else if (option == '2') {
             string student_number, student_name, added_course, removed_course, added_class, removed_class;
             struct request new_request;
             std::cout << "Please enter your student number : ";
@@ -380,9 +421,58 @@ void schedule_system::undo_system_changes() {
                 new_request.removed_class = removed_class;
                 store_new_request(new_request);
             }
+            else{
+                cout << endl;
+                continue;
+            }
+            cout << endl;
         }
         else if(option == '3'){
             consult_student_requests();
+            cout << endl;
+        }
+        else if(option == '4'){
+            std::cout << "Please type the number associated with the task you wish to perform:" << endl;
+            std::cout << "1.Process the next student request" << endl;
+            std::cout << "2.Delete the next student request to be processed" << endl;
+            std::cout << "3.Undo the latest changes made to the system (should be used carefully and only as a last resort)" << endl;
+            cin >> option;
+            if(option == '1'){
+                string error_message = "";
+                process_request(error_message);
+                if(error_message == "" || error_message == "Student could not be allocated to their desired class."){
+                    cout << "The request was fulfilled successfully and the according changes were made to the system!" << endl;
+                    if(error_message == "Student could not be allocated to their desired class."){
+                        cout << "Warning : " + error_message << endl;
+                    }
+                }
+                else{
+                    cout << "The request was processed but could not be fulfilled" << endl;
+                    cout << "Reason : " + error_message << endl;
+
+                }
+            }
+            else if(option == '2'){
+                remove_request();
+                cout << "The request in front of the requests queue was successfully removed from the system" << endl;
+            }
+            else if(option == '3'){
+                std::cout << "Undoing the most recent changes made to the system can lead to an irrecoverable data loss! Are you sure you wish to continue? y or n?" << endl;
+                cin >> option;
+                if(option == 'y'){
+                    undo_system_changes();
+                    cout << "The most recent system changes have been reverted";
+                }
+                else if(option == 'n'){
+                    cout << endl;
+                    continue;
+                }
+            }
+            else{
+                cout << endl;
+                continue;
+            }
+            cout << endl;
         }
     }
     shut_down_system();

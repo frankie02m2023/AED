@@ -524,7 +524,10 @@ void schedule_system::undo_system_changes() {
 }
 
     /**Prints all the data into the interface that is on top of the stack.
-    * Time Complexity : O(n^2log(n)) */
+    * Time Complexity : O(n^2log(n))
+     * @note This function isn´t used during the execution of the program.
+     * Its only purpose is to facilitate the testing of the program.
+     * It´s used as an visual alternative to the tests made with the googletest framework*/
 void schedule_system::print_current_schedule_system_data() const {
     system_changes.top().print_data();
 }

@@ -668,6 +668,41 @@ bool interface::can_add_to_class(course &a_course, student &a_student, class1 &a
     return true;
 }
 
+bool interface::can_add_to_class_for_course_swap(course& a_course, student& a_student, class1& a_class, course& ignorable_course) const{
+    course copy_a_course = a_course;
+    class1 copy_a_class = a_class;
+    // checking if the class is not full
+    if(a_class.get_students().size() == class1::student_capacity){
+        return false;
+    }
+    // temporarily adding the student to the class to check if that doesn t break the class balance in the given course
+    a_class.add_students(a_student);
+    if(!a_course.check_class_balance(a_class)){
+        return false;
+    }
+    // restoring the input class and course objects back to their initial state
+    a_course = copy_a_course;
+    a_class = copy_a_class;
+    // getting the student schedule and checking potential schedule overlaps
+    set<pair<pair<schedule,string>,course>> student_schedule = get_student_schedule(a_student); //O(nlog(n))
+    class1 comparable_class(" ");
+    auto it = student_schedule.begin();
+    while(it != student_schedule.end()){
+        if(it->second != ignorable_course){
+            if(it->first.second == "TP" || it->first.second == "PL"){
+                if(overlapping_schedule(it->first.first,a_class.get_TP_class())){
+                    return false;
+                }
+                if(overlapping_schedule(it->first.first,a_class.get_PL_class())){
+                    return false;
+                }
+            }
+        }
+        it++;
+    }
+    return true;
+}
+
 /**Consults the requests made to the system.
  *  Time complexity: O(n)
  */
@@ -718,12 +753,16 @@ bool interface::enroll_student_in_course(student &a_student, course &a_course, c
     }
     //accessing the desired course in courses
     auto it = std::find(courses.begin(), courses.end(),a_course);
+    if(it == courses.end()){
+        error_message = "Course " + a_course.get_course_name() + " does not exist in our system.";
+        return false;
+    }
     course& added_course = *it;
     course copy_added_course = added_course;
     class1 copy_added_class = a_class;
     student added_student = get_student(a_student);
     if(copy_added_course.has_student(added_student)){
-        error_message = "The student is already enrolled in the desired course.";
+        error_message = "The student is already enrolled in course " + a_course.get_course_name();
         return false;
     }
     //accessing the given class in the given course
@@ -759,6 +798,10 @@ bool interface::enroll_student_in_course(student &a_student, course &a_course, c
 bool interface::remove_student_from_course(student &a_student, course &a_course, string& error_message) {
     //finding the target course in courses
     auto it = std::find(courses.begin(),courses.end(),a_course);
+    if(it == courses.end()){
+        error_message = "Course " + a_course.get_course_name() + " does not exist in our system.";
+        return false;
+    }
     course& removable_course = *it;
     //trying to find the students class in the target course and remove him from it
     for(class1 a_class : removable_course.get_classes()){
@@ -778,16 +821,51 @@ bool interface::remove_student_from_course(student &a_student, course &a_course,
 bool interface::switch_student_courses(student &a_student, course &old_course, course &new_course, class1& new_class, string& error_message) {
     auto it = std::find(courses.begin(), courses.end(), old_course);
     course old_course_copy = *it;
-
+    if(it == courses.end()){
+        error_message = "Course " + old_course.get_course_name() + " does not exist in our system.";
+        return false;
+    }
     if (!old_course_copy.has_student(a_student)) {
         error_message = "Student is not enrolled in course " + old_course.get_course_name();
         return false;
     }
-    if(!enroll_student_in_course(a_student,new_course,new_class,error_message)){
+    //accessing the desired course in courses
+    it = std::find(courses.begin(), courses.end(),new_course);
+    if(it == courses.end()){
+        error_message = "Course " + new_course.get_course_name() + " does not exist in our system.";
         return false;
     }
-    remove_student_from_course(a_student,old_course,error_message);
-    return true;
+    course& added_course = *it;
+    course copy_added_course = added_course;
+    class1 copy_added_class = new_class;
+    student added_student = get_student(a_student);
+    if(copy_added_course.has_student(added_student)){
+        error_message = "The student is already enrolled in course " + added_course.get_course_name();
+        return false;
+    }
+    //accessing the given class in the given course
+    if(copy_added_course.get_class(copy_added_class)) {
+        // checking if the enrollment in the given course and class is possible
+        if (can_add_to_class_for_course_swap(copy_added_course, added_student, copy_added_class,old_course_copy)) {
+            class1& added_class = added_course.get_class_by_ref(new_class);
+            added_class.add_students(added_student);
+            remove_student_from_course(added_student,old_course,error_message);
+            return true;
+        }
+    }
+    error_message = "Student could not be allocated to their desired class.";
+    vector<class1> copy_course_classes = added_course.get_classes();
+    sort(copy_course_classes.begin(), copy_course_classes.end(), compare_class_ocupation);
+    for(class1 cl : copy_course_classes){
+        if(can_add_to_class_for_course_swap(added_course, added_student , cl, old_course_copy)){
+            class1& available_class = added_course.get_class_by_ref(cl);
+            available_class.add_students(added_student);
+            remove_student_from_course(added_student,old_course,error_message);
+            return true;
+        }
+    }
+    error_message = "Could not enroll student in their desired course because the student could not be allocated to any of the classes available for course " + new_course.get_course_name();
+    return false;
 }
 
 /**Switches students from one class to another in a given course if possible.
@@ -795,6 +873,10 @@ bool interface::switch_student_courses(student &a_student, course &old_course, c
 bool interface::switch_student_classes(student &a_student, course &a_course, class1 &old_class, class1 &new_class, string& error_message) {
     //finding the target course in courses
     auto it = std::find(courses.begin(),courses.end(),a_course);
+    if(it == courses.end()){
+        error_message = "The target course does not exist in our system.";
+        return false;
+    }
     course &target_course = *it;
     course copy_target_course = *it;
     student added_student = get_student(a_student);
@@ -868,10 +950,10 @@ bool interface::process_request(string& error_message, const string& new_student
         };
     }
     else if(processed_request.request_type == "switch courses") {
-        if(switch_student_courses(processed_request.target_student, processed_request.added_course,processed_request.removed_course, processed_request.added_class, error_message)){
+        if(switch_student_courses(processed_request.target_student, processed_request.removed_course,processed_request.added_course, processed_request.added_class, error_message)){
             course new_course = get_course_from_courses(processed_request.added_course);
             class1 new_class = new_course.get_student_class(processed_request.target_student);
-            switch_student_courses_in_file(processed_request.target_student, processed_request.added_course,processed_request.removed_course, new_class,new_student_filename);
+            switch_student_courses_in_file(processed_request.target_student, processed_request.removed_course,processed_request.added_course, new_class,new_student_filename);
             students_classes_filename = new_student_filename;
             return true;
         }
@@ -1087,6 +1169,7 @@ void interface::switch_student_courses_in_file(student &a_student, course &old_c
 
         //Get the course we want to change
         line = line.substr(it + 1);
+        it = line.find_first_of(',');
         target_course = line.substr(0,it);
 
         //Checks if the course found is the old one

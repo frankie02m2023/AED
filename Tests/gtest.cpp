@@ -750,6 +750,70 @@ TEST(System_changes,switch_student_classes){
 
 }
 
+TEST(system_changes,switch_student_courses){
+    interface testi1;
+    testi1.read_data_classes_per_uc();
+    testi1.read_data_classes();
+    testi1.read_data_students_classes();
+
+    student test_target_student1("Rute","202028717");
+    course test_added_course1("L.EIC014");
+    class1 test_added_class1("2LEIC07");
+    course test_removed_course1("L.EIC003");
+    string error_message1 = "";
+
+    bool bool1 = testi1.switch_student_courses(test_target_student1,test_removed_course1,test_added_course1,test_added_class1,error_message1);
+
+    for(course c : testi1.get_courses()){
+        if(c == test_added_course1){
+            test_added_course1 = c;
+        }
+        if(c == test_removed_course1){
+            test_removed_course1 = c;
+        }
+    }
+    test_added_course1.get_class(test_added_class1);
+    EXPECT_TRUE(bool1);
+    EXPECT_EQ(error_message1,"Student could not be allocated to their desired class.");
+    EXPECT_TRUE(test_added_course1.has_student(test_target_student1));
+    EXPECT_FALSE(test_removed_course1.has_student(test_target_student1));
+    EXPECT_FALSE(test_added_class1.student_in_class(test_target_student1));
+
+    interface testi2;
+    testi2.read_data_classes_per_uc();
+    testi2.read_data_classes();
+    testi2.read_data_students_classes();
+
+    student test_target_student2("Rute","202028717");
+    course test_added_course2("L.EIC013");
+    class1 test_added_class2("2LEIC10");
+    course test_removed_course2("L.EIC011");
+    string error_message2 = "";
+
+    bool bool2 = testi2.switch_student_courses(test_target_student2,test_removed_course2,test_added_course2,test_added_class2,error_message2);
+
+    for(course c : testi2.get_courses()){
+        if(c == test_added_course2){
+            test_added_course2 = c;
+        }
+        if(c == test_removed_course2){
+            test_removed_course2 = c;
+        }
+    }
+
+    test_added_course2.get_class(test_added_class2);
+
+    EXPECT_TRUE(bool2);
+    EXPECT_TRUE(test_added_course2.has_student(test_target_student2));
+    EXPECT_FALSE(test_removed_course2.has_student(test_target_student2));
+    EXPECT_TRUE(test_added_class2.student_in_class(test_target_student2));
+
+
+
+
+}
+
+
 TEST(data_readers,read_data_students_requests){
     interface testi;
     testi.read_data_classes_per_uc();

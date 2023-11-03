@@ -85,6 +85,7 @@ public:
       */
      ///@{
      bool can_add_to_class(course& a_course, student& a_student, class1& a_class) const;
+     bool can_add_to_class_for_course_swap(course& a_course, student& a_student, class1& a_class, course& ignorable_course) const;
     void store_new_request(const request& new_request, const string& new_filename);
     void remove_request(const string& new_filename);
     bool process_request(string& error_message, const string& new_student_filename, const string& new_request_filename);

@@ -166,6 +166,7 @@ void schedule_system::undo_system_changes() {
     while (true) {
         cout << "Type EXIT in the terminal if you wish to close the system or type anything else if you wish to use the system" << endl;
         cout << "Warning : While using the system inserting any invalid input into the terminal will cause the system menu to reset!" << endl;
+        cout << "Warning : If you want to add a multi-word name when asked to add your name please separate the two words using '_'" << endl;
         cin >> continue_or_exit;
         if(continue_or_exit == "EXIT"){
             break;
@@ -408,10 +409,10 @@ void schedule_system::undo_system_changes() {
         else if (option == '2') {
             string student_number, student_name, added_course, removed_course, added_class, removed_class;
             struct request new_request;
-            std::cout << "Please enter your student number : ";
+            std::cout << "Please enter your student number:";
             cin >> student_number;
             cout << endl;
-            std::cout << "Please enter your student name : ";
+            std::cout << "Please enter your student name:";
             cin >> student_name;
             cout << endl;
             student target_student(student_name,student_number);
@@ -422,25 +423,26 @@ void schedule_system::undo_system_changes() {
             std::cout << "3. Swap one of your courses for a new one" << endl;
             std::cout << "4. Swap classes for a specific course" << endl;
             cin >> option;
+            cout << endl;
             if (option == '1') {
-                std::cout << "Please enter the name of the course you wish to enroll in: ";
+                std::cout << "Please enter the name of the course you wish to enroll in:";
                 cin >> added_course;
-                std::cout << "Please enter the name of the class you wish to enroll in: ";
+                std::cout << "Please enter the name of the class you wish to enroll in:";
                 cin >> added_class;
                 new_request.request_type = "add course";
                 new_request.added_course = added_course;
                 new_request.added_class = added_class;
                 store_new_request(new_request);
             } else if (option == '2') {
-                std::cout << "Please enter the name of the course you wish to drop out of: ";
+                std::cout << "Please enter the name of the course you wish to drop out of:";
                 cin >> removed_course;
                 new_request.request_type = "remove course";
                 new_request.removed_course = removed_course;
                 store_new_request(new_request);
             } else if (option == '3') {
-                std::cout << "Please enter the name of the course you wish to enroll in: ";
+                std::cout << "Please enter the name of the course you wish to enroll in:";
                 cin >> added_course;
-                std::cout << "Please enter the name of the course you wish to drop out of: ";
+                std::cout << "Please enter the name of the course you wish to drop out of:";
                 cin >> removed_course;
                 std::cout << "Please enter the name of the class you wish to enroll in: ";
                 cin >> added_class;
@@ -450,11 +452,11 @@ void schedule_system::undo_system_changes() {
                 new_request.added_class = added_class;
                 store_new_request(new_request);
             } else if (option == '4') {
-                std::cout << "Please enter the name of the course for which you desire to swap class: ";
+                std::cout << "Please enter the name of the course for which you desire to swap class:";
                 cin >> added_course;
-                std::cout << "Please enter the name of the class you wish to enroll in: ";
+                std::cout << "Please enter the name of the class you wish to enroll in:";
                 cin >> added_class;
-                std::cout << "Please enter the name of the class you wish to leave : ";
+                std::cout << "Please enter the name of the class you wish to leave:";
                 cin >> removed_class;
                 new_request.request_type = "switch classes";
                 new_request.added_course = added_course;
@@ -467,6 +469,8 @@ void schedule_system::undo_system_changes() {
                 continue;
             }
             cout << endl;
+            cout << "Your request was submitted successfully!";
+            cout << endl << endl;
         }
         else if(option == '3'){
             consult_student_requests();
@@ -558,13 +562,11 @@ void schedule_system::shut_down_system() {
     saved_students_filename = "../Data_files/" + saved_students_filename;
     saved_requests_filename = "../Data_files/" + saved_requests_filename;
 
-    //opening the saved files in read mode
-    ifstream file1(saved_students_filename);
-    ifstream file2(saved_requests_filename);
 
     //changing the names of the saved files to students_classes.csv and students_requests.csv as they will be the first version of those files in the next system execution
     rename(saved_students_filename.c_str(),"../Data_files/students_classes.csv");
     rename(saved_requests_filename.c_str(),"../Data_files/students_requests.csv");
+
 
     //not necessary but I think it makes sense to do this
     //emptying the system changes stack

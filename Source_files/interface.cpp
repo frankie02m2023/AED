@@ -556,6 +556,7 @@ void interface::consult_student_schedule_by_schedule(const student &a_student) c
     cout << "Schedule for student " << a_student.get_name() << ", number " << a_student.get_number() <<":" << endl;
     auto it = student_schedule.begin();
     while(it != student_schedule.end()){
+        cout << "----------------------------------------------------------------------" << endl;
         cout << "Course " << it->second.get_course_name() << endl;
         cout << "Class " << it->first.second << " Schedule = " << it->first.first.week_day << " " << class1::convert_class_to_hour_and_minute_format(it->first.first) << endl;
         cout << '\n';
@@ -594,6 +595,7 @@ void interface::consult_students_in_class_and_course(const class1& a_class, cons
     sorted_students = sort_students_list(sorted_students, sortby, sort_option); //O(nlog(n))
 
     if(!students.empty()){
+        cout << "------------------------------------------------------------------------------" << endl;
         cout << "List of students for class " << a_class.get_class_name() << " in course " << a_course.get_course_name() << ':' << endl;
         for(const student& a_student : sorted_students){
             a_student.print_student();
@@ -615,7 +617,8 @@ void interface::consult_all_students_in_aCourse(const course& a_course, const st
 
     sorted_students = sort_students_list(sorted_students, sortby, sort_option); //O(nlog(n))
 
-    cout << "Course: " << a_course.get_course_name() << endl;
+    cout << "----------------------------------------------------------------------------------" << endl;
+    cout << "List of students in course " << a_course.get_course_name() <<":" << endl;
     cout <<'\n';
     for (const student& a_student : sorted_students){
         cout <<"Name: " << a_student.get_name() << ' ' << "Number: " << a_student.get_number() << endl;
@@ -633,7 +636,8 @@ void interface::consult_all_students_in_aYear(int year, const string& sortby, co
 
     sorted_students = sort_students_list(sorted_students, sortby, sort_option);
 
-    cout << "Year: " << year << endl;
+    cout << "----------------------------------------------------------------------------------" << endl;
+    cout << "List of students in year " << year << ":" << endl;
     cout << '\n';
     for(const student& a_student: sorted_students){
         cout <<"Name: " << a_student.get_name() << ' ' << "Number: " << a_student.get_number() << endl;

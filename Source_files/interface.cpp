@@ -517,11 +517,30 @@ bool interface:: has_student(const student& a_student) const{
 //---------------------------------------------------------------------------------------------
 //Data printers
 
-
-/**Prints the given class schedule.
+/**Prints the given class schedule ordered by schedule.
     * Time complexity: O(nlog(n)).
     * @param a_class Class we want to consult the schedule*/
-void interface::consult_class_schedule(const class1& a_class) const {
+void interface::consult_class_schedule_by_schedule(const class1 &a_class) const {
+    set<pair<pair<schedule,string>,course>> class_schedule = get_class_schedule(a_class); //O(nlog(n))
+    cout << "Schedule for class " << a_class.get_class_name() << ':' << endl;
+    auto it = class_schedule.begin();
+    string week_day = "";
+    while(it != class_schedule.end()){
+        if(it->first.first.week_day != week_day){
+            cout << '\n';
+            week_day = it->first.first.week_day;
+            cout << week_day << endl;
+        }
+        cout << "Course " << it->second.get_course_name() << " - "  << it->first.second << " Class " << " Start time = " << class1::convert_class_to_hour_and_minute_format(it->first.first) << endl;
+        it++;
+    }
+}
+
+
+/**Prints the given class schedule ordered by course.
+    * Time complexity: O(nlog(n)).
+    * @param a_class Class we want to consult the schedule*/
+void interface::consult_class_schedule_by_course(const class1& a_class) const {
     set<pair<pair<schedule,string>,course>> class_schedule = get_class_schedule(a_class); //O(nlog(n))
 
     //convert to vector, so we can order the way we want (by course instead of schedule)
@@ -555,10 +574,14 @@ void interface::consult_student_schedule_by_schedule(const student &a_student) c
     set<pair<pair<schedule,string>,course>> student_schedule = get_student_schedule(a_student);
     cout << "Schedule for student " << a_student.get_name() << ", number " << a_student.get_number() <<":" << endl;
     auto it = student_schedule.begin();
+    string week_day = "";
     while(it != student_schedule.end()){
-        cout << "Course " << it->second.get_course_name() << endl;
-        cout << "Class " << it->first.second << " Schedule = " << it->first.first.week_day << " " << class1::convert_class_to_hour_and_minute_format(it->first.first) << endl;
-        cout << '\n';
+        if(it->first.first.week_day != week_day){
+            cout << '\n';
+            week_day = it->first.first.week_day;
+            cout << week_day << endl;
+        }
+        cout << "Course " << it->second.get_course_name() << " - " << it->first.second << " Class " << " Start time = " << class1::convert_class_to_hour_and_minute_format(it->first.first) << endl;
         it++;
     }
 }
@@ -859,6 +882,7 @@ bool interface::enroll_student_in_course(student &a_student, course &a_course, c
         if(can_add_to_class(added_course, added_student , cl)){
             class1& available_class = added_course.get_class_by_ref(cl);
             available_class.add_students(added_student);
+            error_message += "Student was instead allocated to class " + available_class.get_class_name() + '.';
             return true;
         }
     }
@@ -946,6 +970,7 @@ bool interface::switch_student_courses(student &a_student, course &old_course, c
             class1& available_class = added_course.get_class_by_ref(cl);
             available_class.add_students(added_student);
             remove_student_from_course(added_student,old_course,error_message);
+            error_message += "Student was instead allocated to class " + available_class.get_class_name() + '.';
             return true;
         }
     }

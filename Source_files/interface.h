@@ -105,7 +105,8 @@ public:
      *
      */
      ///@{
-    void consult_class_schedule(const class1& a_class) const;
+     void consult_class_schedule_by_schedule(const class1& a_class) const;
+    void consult_class_schedule_by_course(const class1& a_class) const;
     void consult_student_schedule_by_schedule(const student& a_student) const;
     void consult_student_schedule_by_course(const student& a_student) const;
     void consult_students_in_class_and_course(const class1& a_class, const course& a_course,  const string& sortby = "name", const string& sort_option = "ascending") const;

@@ -34,8 +34,10 @@ public:
      */
     ///@{
     void schedule_system_functions();
-    void consult_class_schedule(const class1& a_class) const;
-    void consult_student_schedule(const student& a_student) const;
+    void consult_class_schedule_by_schedule(const class1& a_class) const;
+    void consult_class_schedule_by_course(const class1& a_class) const;
+    void consult_student_schedule_by_schedule(const student& a_student) const;
+    void consult_student_schedule_by_course(const student& a_student) const;
     void consult_students_in_class_and_course(const class1& a_class, const course& a_course, const string& sortby, const string& sort_option) const;
     void consult_all_students_in_aCourse(const course& a_course, const string& sort_by = "name", const string& sort_option ="ascending") const;
     void consult_all_students_in_aYear(int year,  const string& sortby = "name", const string& sort_option  = "ascending") const;

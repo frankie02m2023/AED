@@ -17,10 +17,10 @@
 struct request {
     string request_type;        /**< Type of the request(add, remove, switch).*/
     student target_student;     /**< Information about the student to process. */
-    course added_course;        /**< Course were we want to add the student (only for add and switch requests). */
-    course removed_course;      /**< Course were we want to remove the student (only for remove and switch requests). */
-    class1 added_class;         /**< Class were we want to add the student (only for add and switch requests). */
-    class1 removed_class;       /**< Class were we want to remove the student (only for remove and switch requests). */
+    course added_course;        /**< Course where we want to add the student (only for add and switch requests). */
+    course removed_course;      /**< Course where we want to remove the student (only for remove and switch requests). */
+    class1 added_class;         /**< Class where we want to add the student (only for add and switch requests). */
+    class1 removed_class;       /**< Class where we want to remove the student (only for remove and switch requests). */
 };
 
 #endif //TRABALHOAED_REQUEST_H

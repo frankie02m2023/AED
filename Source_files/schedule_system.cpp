@@ -28,20 +28,36 @@ schedule_system::schedule_system() {
     number_of_student_data_changes = 0;
 }
 
-/** Consults the given class schedule.
+/** Consults the given class schedule ordered by course.
  * Time complexity : O(nlog(n))
  *  @param a_class Class we want to consult the schedule
  */
-void schedule_system::consult_class_schedule(const class1& a_class) const {
-    system_changes.top().consult_class_schedule(a_class);
+void schedule_system::consult_class_schedule_by_course(const class1& a_class) const {
+    system_changes.top().consult_class_schedule_by_course(a_class);
 }
 
-/** Consults the given student schedule.
+/** Consults the given class schedule ordered by schedule.
+ * Time complexity : O(nlog(n))
+ *  @param a_class Class we want to consult the schedule
+ */
+void schedule_system::consult_class_schedule_by_schedule(const class1 &a_class) const {
+    system_changes.top().consult_class_schedule_by_schedule(a_class);
+}
+
+/** Consults the given student schedule ordered by course.
 * Time complexity: O(n^3)
  *  @param a_student Student we want to get the schedule
  */
-void schedule_system::consult_student_schedule(const student& a_student) const {
+void schedule_system::consult_student_schedule_by_course(const student& a_student) const {
     system_changes.top().consult_student_schedule_by_course(a_student);
+}
+
+/** Consults the given student schedule ordered by class schedule.
+* Time complexity: O(nlog(n))
+ *  @param a_student Student we want to get the schedule
+ */
+void schedule_system::consult_student_schedule_by_schedule(const student &a_student) const {
+    system_changes.top().consult_student_schedule_by_schedule(a_student);
 }
 
 /** Consults students in a given class and course.
@@ -209,12 +225,24 @@ void schedule_system::undo_system_changes() {
             cin >> option;
 
             if (option == '1') {
-                string class_name;
+                string class_name, sort_option;
                 cout << "Please write the name of the class whose schedule you wish to consult: ";
                 cin >> class_name;
                 cout << endl;
                 class1 target_class(class_name);
-                consult_class_schedule(target_class);
+                cout << "Please select the number associated with the sorting criteria you wish to choose" << endl;
+                cout << "1.Course" << endl;
+                cout << "2.Schedule" << endl;
+                cin >> sort_option;
+                if(sort_option == "1"){
+                    consult_class_schedule_by_course(target_class);
+                }
+                else if(sort_option == "2"){
+                    consult_class_schedule_by_schedule(target_class);
+                }
+                else{
+                    continue;
+                }
             } else if (option == '2') {
                 string student_name, student_number, sort_option;
                 cout << "Please write the name and number of the student whose schedule you wish to consult: " << endl;
@@ -230,10 +258,13 @@ void schedule_system::undo_system_changes() {
                 cout <<"2. Schedule" << endl;
                 cin >> sort_option;
                 if(sort_option == "1"){
-                    consult_student_schedule(target_student);
+                    consult_student_schedule_by_course(target_student);
                 }
                 else if(sort_option == "2") {
-                    system_changes.top().consult_student_schedule_by_schedule(target_student);
+                    consult_student_schedule_by_schedule(target_student);
+                }
+                else{
+                    continue;
                 }
             } else if (option == '3') {
                 string class_name, course_code;
@@ -503,9 +534,10 @@ void schedule_system::undo_system_changes() {
             if(option == '1'){
                 string error_message = "";
                 process_request(error_message);
-                if(error_message == "" || error_message == "Student could not be allocated to their desired class."){
+                size_t found = error_message.find("Student could not be allocated to their desired class.");
+                if(error_message == "" || found != string::npos){
                     cout << "The request was fulfilled successfully and the according changes were made to the system!" << endl;
-                    if(error_message == "Student could not be allocated to their desired class."){
+                    if(found != string::npos){
                         cout << "Warning : " + error_message << endl;
                     }
                 }

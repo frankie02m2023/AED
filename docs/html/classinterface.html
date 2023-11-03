@@ -138,6 +138,8 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>operator=</b> (const 
 <tr><td colspan="2"><div class="groupHeader">Request processing functions</div></td></tr>
 <tr class="memitem:aca6e537d081e712afd0129b6eb699876" id="r_aca6e537d081e712afd0129b6eb699876"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classinterface.html#aca6e537d081e712afd0129b6eb699876">can_add_to_class</a> (<a class="el" href="classcourse.html">course</a> &amp;a_course, <a class="el" href="classstudent.html">student</a> &amp;a_student, <a class="el" href="classclass1.html">class1</a> &amp;a_class) const</td></tr>
 <tr class="separator:aca6e537d081e712afd0129b6eb699876"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2b6dcdff073d78549811690b4fc74a87" id="r_a2b6dcdff073d78549811690b4fc74a87"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classinterface.html#a2b6dcdff073d78549811690b4fc74a87">can_add_to_class_for_course_swap</a> (<a class="el" href="classcourse.html">course</a> &amp;a_course, <a class="el" href="classstudent.html">student</a> &amp;a_student, <a class="el" href="classclass1.html">class1</a> &amp;a_class, <a class="el" href="classcourse.html">course</a> &amp;ignorable_course) const</td></tr>
+<tr class="separator:a2b6dcdff073d78549811690b4fc74a87"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a21646ea1a09271c2cf11ef82ba38a5ed" id="r_a21646ea1a09271c2cf11ef82ba38a5ed"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classinterface.html#a21646ea1a09271c2cf11ef82ba38a5ed">store_new_request</a> (const <a class="el" href="structrequest.html">request</a> &amp;new_request, const string &amp;new_filename)</td></tr>
 <tr class="separator:a21646ea1a09271c2cf11ef82ba38a5ed"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6c6cb14cf4cb8f863c209de3e4934a26" id="r_a6c6cb14cf4cb8f863c209de3e4934a26"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classinterface.html#a6c6cb14cf4cb8f863c209de3e4934a26">remove_request</a> (const string &amp;new_filename)</td></tr>
@@ -212,7 +214,13 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>operator=</b> (const 
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Adds a request to the file "students_requests.csv". Time complexity: O(n) </p>
+<p>Adds a request to the file "students_requests.csv". Time complexity: O(n) </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">new_filename</td><td>File were the requests will be stored </td></tr>
+    <tr><td class="paramname">new_request</td><td>Request we are adding to the file </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -247,7 +255,65 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>operator=</b> (const 
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Checks if it is possible to add a student to a given class in a given course. Time complexity: O(nlog(n)) </p>
+<p>Checks if it is possible to add a student to a given class in a given course. Time complexity: O(nlog(n)) </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">a_course</td><td>Course from were the class belongs </td></tr>
+    <tr><td class="paramname">a_class</td><td>Class we want to check </td></tr>
+    <tr><td class="paramname">a_student</td><td>Student we wan to add to the class </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>True if we are able to add the student to the class or False if we cannot add the student to the class </dd></dl>
+
+</div>
+</div>
+<a id="a2b6dcdff073d78549811690b4fc74a87" name="a2b6dcdff073d78549811690b4fc74a87"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2b6dcdff073d78549811690b4fc74a87">&#9670;&#160;</a></span>can_add_to_class_for_course_swap()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool interface::can_add_to_class_for_course_swap </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classcourse.html">course</a> &amp;&#160;</td>
+          <td class="paramname"><em>a_course</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classstudent.html">student</a> &amp;&#160;</td>
+          <td class="paramname"><em>a_student</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classclass1.html">class1</a> &amp;&#160;</td>
+          <td class="paramname"><em>a_class</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classcourse.html">course</a> &amp;&#160;</td>
+          <td class="paramname"><em>ignorable_course</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Checks if it is possible to add a student to a given class in a given course (when swapping courses. Time complexity: O(nlog(n)) </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">a_course</td><td>Course from were the class belongs </td></tr>
+    <tr><td class="paramname">a_class</td><td>Class we want to check </td></tr>
+    <tr><td class="paramname">ignorable_course</td><td>Course we want to ignore during the execution of the function </td></tr>
+    <tr><td class="paramname">a_student</td><td>Student we wan to add to the class </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>True if we are able to add the student to the class or False if we cannot add the student to the class </dd></dl>
 
 </div>
 </div>
@@ -282,7 +348,14 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>operator=</b> (const 
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Prints all the students in a course. Time complexity: O(n^2). </p>
+<p>Prints all the students in a course. Time complexity: O(n^2). </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">a_course</td><td>Course from were we want to get the student </td></tr>
+    <tr><td class="paramname">sortby</td><td>Determines the sorting criteria </td></tr>
+    <tr><td class="paramname">sort_option</td><td>Determines the sorting order(ascending, descending) </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -317,7 +390,14 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>operator=</b> (const 
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Prints all the students in a year. Time complexity: O(n^3). </p>
+<p>Prints all the students in a year. Time complexity: O(n^3). </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">year</td><td>Year from were we want to get the students </td></tr>
+    <tr><td class="paramname">sortby</td><td>Determines the sorting criteria </td></tr>
+    <tr><td class="paramname">sort_option</td><td>Determines the sorting order(ascending, descending) </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -336,7 +416,12 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>operator=</b> (const 
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Prints the given class schedule. Time complexity: O(nlog(n)). </p>
+<p>Prints the given class schedule. Time complexity: O(nlog(n)). </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">a_class</td><td>Class we want to consult the schedule </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -383,7 +468,16 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>operator=</b> (const 
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Prints the occupation in every course and class for a specific year. Time complexity: O(n^2log(n)). </p>
+<p>Prints the occupation in every course and class for a specific year. Time complexity: O(n^2log(n)). </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">year</td><td>Year we want to get the occupation </td></tr>
+    <tr><td class="paramname">uc_sort_by</td><td>Uc sorting criteria </td></tr>
+    <tr><td class="paramname">class_sort_by</td><td>Class sorting criteria </td></tr>
+    <tr><td class="paramname">uc_sort_option</td><td>Uc sorting order </td></tr>
+    <tr><td class="paramname">class_sort_option</td><td>Class sorting order </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -420,7 +514,12 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>operator=</b> (const 
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Prints the student schedule. Time complexity: O(n^3). </p>
+<p>Prints the student schedule. Time complexity: O(n^3). </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">a_student</td><td>Student we want to get the schedule </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -439,7 +538,12 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>operator=</b> (const 
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Consult a specific student schedule ordered by the schedules Time complexity: O(nlog(n)) </p>
+<p>Consult a specific student schedule ordered by the schedules Time complexity: O(nlog(n)) </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">a_student</td><td>Student we want to get the schedule </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -480,7 +584,15 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>operator=</b> (const 
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Prints the students in a given class. Time complexity: O(nlog(n)). </p>
+<p>Prints the students in a given class. Time complexity: O(nlog(n)). </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">a_class</td><td>Class from were we want to get the student </td></tr>
+    <tr><td class="paramname">a_course</td><td>Course from were we want to access the class to get the student </td></tr>
+    <tr><td class="paramname">sortby</td><td>Determines the sorting criteria </td></tr>
+    <tr><td class="paramname">sort_option</td><td>Determines the sorting order(ascending, descending) </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -521,7 +633,16 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>operator=</b> (const 
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Function that tries to enroll a student in a new course. Returns true if the enrollment is successful and false if it isn't. Time complexity: O(n^3) </p>
+<p>Function that tries to enroll a student in a new course. Returns true if the enrollment is successful and false if it isn't. Time complexity: O(n^3) </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">a_student</td><td>Student we want to enroll </td></tr>
+    <tr><td class="paramname">a_course</td><td>Course were we want to enroll the student </td></tr>
+    <tr><td class="paramname">a_class</td><td>Class were we want to add the student </td></tr>
+    <tr><td class="paramname">error_message</td><td>Message that will be changed if something goes wrong during the execution of the function (it's given by reference) </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>True if the student is enrolled in a class or False if that isn´t possible </dd></dl>
 
 </div>
 </div>
@@ -562,7 +683,15 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>operator=</b> (const 
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Creates a new copy of the students file when a student is added to a new course. Time complexity: O(n) </p>
+<p>Creates a new copy of the students file when a student is added to a new course. Time complexity: O(n) </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">new_filename</td><td>File were the updated students info will be stored </td></tr>
+    <tr><td class="paramname">a_student</td><td>Student that will enroll into the course </td></tr>
+    <tr><td class="paramname">a_course</td><td>Course that the student wants to enroll </td></tr>
+    <tr><td class="paramname">a_class</td><td>Class that the student wants to enroll </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -581,7 +710,13 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>operator=</b> (const 
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Gets all the courses a student is part of. Time complexity: O(n^3) </p>
+<p>Gets all the courses a student is part of. Time complexity: O(n^3) </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">a_student</td><td>Student that we want to get the courses </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Vector with the courses the student is enrolled </dd></dl>
 
 </div>
 </div>
@@ -600,7 +735,13 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>operator=</b> (const 
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Gets all the students in a course. Time complexity : O(n^2). </p>
+<p>Gets all the students in a course. Time complexity : O(n^2). </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">a_course</td><td>Course from were we want to get the students </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Set of students (because we don´t want repeated students) that belong to the course </dd></dl>
 
 </div>
 </div>
@@ -619,7 +760,13 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>operator=</b> (const 
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Gets all the students in a year. Time complexity: O(n^3). </p>
+<p>Gets all the students in a year. Time complexity: O(n^3). </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">year</td><td>Year from were we want to get the students </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Set of students (because we don´t want repeated students) that belong to the year </dd></dl>
 
 </div>
 </div>
@@ -638,7 +785,12 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>operator=</b> (const 
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Gets a specific class schedule. Time complexity : O(nlog(n)). </p>
+<p>Gets a specific class schedule. Time complexity : O(nlog(n)). </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">a_class</td><td>Class that we want to get the schedule @Returns A set with the schedule information (pair with the course and a pair with the schedule and the class type) </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -667,7 +819,14 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>operator=</b> (const 
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Gets the students in a class for a specific course. Time complexity: O(n). </p>
+<p>Gets the students in a class for a specific course. Time complexity: O(n). </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">a_class</td><td>Class from were we want to get the student </td></tr>
+    <tr><td class="paramname">a_course</td><td>Course from were we want to access the class to obtain the students </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>List of students that belong to that class/course </dd></dl>
 
 </div>
 </div>
@@ -686,7 +845,13 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>operator=</b> (const 
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Gets a specific course from the courses vector Time complexity: O(n) </p>
+<p>Gets a specific course from the courses vector Time complexity: O(n) </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">a_course</td><td>The course we wan to get (object only contains the name of the course) </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The course with all the information </dd></dl>
 
 </div>
 </div>
@@ -704,7 +869,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>operator=</b> (const 
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Gets the courses. Time complexity: O(1) </p>
+<p>Gets the courses. Time complexity: O(1) </p><dl class="section return"><dt>Returns</dt><dd>Vector with the courses </dd></dl>
 
 </div>
 </div>
@@ -722,7 +887,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>operator=</b> (const 
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Gets the requests. Time complexity: O(1) </p>
+<p>Gets the requests. Time complexity: O(1) </p><dl class="section return"><dt>Returns</dt><dd>Queue with the requests </dd></dl>
 
 </div>
 </div>
@@ -741,7 +906,13 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>operator=</b> (const 
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Gets a specific student info. Time complexity: O(n^3) </p>
+<p>Gets a specific student info. Time complexity: O(n^3) </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">a_student</td><td>Student we want to obtain the information (student object with only some information) </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Student with the complete information </dd></dl>
 
 </div>
 </div>
@@ -760,7 +931,13 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>operator=</b> (const 
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Gets a specific student schedule. Time complexity: O(nlog(n)) </p>
+<p>Gets a specific student schedule. Time complexity: O(nlog(n)) </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">a_student</td><td>Student that we want to get the schedule </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>A set with the schedule information (pair with the course and a pair with the schedule and the class type) </dd></dl>
 
 </div>
 </div>
@@ -778,7 +955,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>operator=</b> (const 
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Gets the name of the file where information about students is stored. Time complexity: O(1) </p>
+<p>Gets the name of the file where information about students is stored. Time complexity: O(1) </p><dl class="section return"><dt>Returns</dt><dd>String with the name of the file were are stored the most recent students information </dd></dl>
 
 </div>
 </div>
@@ -796,7 +973,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>operator=</b> (const 
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Gets the name of the file where student requests are stored. Time complexity: O(1) </p>
+<p>Gets the name of the file where student requests are stored. Time complexity: O(1) </p><dl class="section return"><dt>Returns</dt><dd>String with the name of the file were are stored the most recent requests </dd></dl>
 
 </div>
 </div>
@@ -815,7 +992,13 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>operator=</b> (const 
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Checks if a student is in this interface. Time complexity: O(n^3) </p>
+<p>Checks if a student is in this interface. Time complexity: O(n^3) </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">a_student</td><td>Student we want to check </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>False if the student isn´t in the system and True if it is present in the system </dd></dl>
 
 </div>
 </div>
@@ -834,7 +1017,13 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>operator=</b> (const 
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Gets the number of courses for a specific student Time complexity: O(n^3) </p>
+<p>Gets the number of courses for a specific student Time complexity: O(n^3) </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">a_student</td><td>Student from were we want to obtain the number of courses he is enrolled </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Number of courses </dd></dl>
 
 </div>
 </div>
@@ -863,7 +1052,14 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>operator=</b> (const 
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Gets the number of students in a class. Time complexity: O(n) </p>
+<p>Gets the number of students in a class. Time complexity: O(n) </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">a_class</td><td>Class from were we want to obtain the number of students </td></tr>
+    <tr><td class="paramname">a_course</td><td>Course from were we want to consult the class to obtain the number of students </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Number of students </dd></dl>
 
 </div>
 </div>
@@ -882,7 +1078,13 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>operator=</b> (const 
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Gets the number of students in a <a class="el" href="classcourse.html">course(Uc)</a>. Time complexity: O(n^2). </p>
+<p>Gets the number of students in a <a class="el" href="classcourse.html">course(Uc)</a>. Time complexity: O(n^2). </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">a_course</td><td>course from were we want to obtain the number of students </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Number of students </dd></dl>
 
 </div>
 </div>
@@ -901,7 +1103,13 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>operator=</b> (const 
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Gets the number of students in a year. Time complexity: O(n^3). </p>
+<p>Gets the number of students in a year. Time complexity: O(n^3). </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">year</td><td>Year from were we want to obtain the number of students </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Number of students </dd></dl>
 
 </div>
 </div>
@@ -954,7 +1162,17 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>operator=</b> (const 
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Prints the data in the entire system. Time complexity: O(n^2log(n)). </p>
+<p>Prints the data in the entire system. Time complexity: O(n^2log(n)). </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">uc_sort_by</td><td>Uc sorting criteria </td></tr>
+    <tr><td class="paramname">class_sort_by</td><td>Class sorting criteria </td></tr>
+    <tr><td class="paramname">student_sort_by</td><td>Student sorting criteria </td></tr>
+    <tr><td class="paramname">uc_sort_option</td><td>Uc sorting order </td></tr>
+    <tr><td class="paramname">class_sort_option</td><td>Class sorting order </td></tr>
+    <tr><td class="paramname">student_sort_option</td><td>Student sorting order </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -989,7 +1207,15 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>operator=</b> (const 
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Processes the request that is at the front of the requests queue. Time complexity: O(n^3) </p>
+<p>Processes the request that is at the front of the requests queue. Time complexity: O(n^3) </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">new_student_filename</td><td>File were will be stored the updated students information </td></tr>
+    <tr><td class="paramname">new_request_filename</td><td>File were will be stored the updated request information </td></tr>
+    <tr><td class="paramname">error_message</td><td>Message that will be changed if something goes wrong during the execution of the function (it's given by reference) </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>True if the process is requested correctly or False otherwise </dd></dl>
 
 </div>
 </div>
@@ -1080,7 +1306,12 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>operator=</b> (const 
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Removes a request from the requests queue and from the requests file Time complexity: O(n) </p>
+<p>Removes a request from the requests queue and from the requests file Time complexity: O(n) </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">new_filename</td><td>File from were we want to remove the request </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -1099,7 +1330,12 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>operator=</b> (const 
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Removes the top request from the student requests file after a request is processed. Time complexity : O(n) </p>
+<p>Removes the top request from the student requests file after a request is processed. Time complexity : O(n) </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">new_request_filename</td><td>File were the updated requests information will be stored </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -1134,7 +1370,15 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>operator=</b> (const 
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Functions that tries to remove a student from a course. Returns true if the removal is successful and false if it isn't Time complexity: O(n^2) </p>
+<p>Functions that tries to remove a student from a course. Returns true if the removal is successful and false if it isn't Time complexity: O(n^2) </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">a_student</td><td>Student we want to remove </td></tr>
+    <tr><td class="paramname">a_course</td><td>Course from were we want to remove the student </td></tr>
+    <tr><td class="paramname">error_message</td><td>Message that will be changed if something goes wrong during the execution of the function (it's given by reference) </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>True if the student is removed from the course or False if the student isn´t enrolled in this course </dd></dl>
 
 </div>
 </div>
@@ -1169,7 +1413,14 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>operator=</b> (const 
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Creates a new copy of the students file when a student is removed from a course. Time complexity: O(n) </p>
+<p>Creates a new copy of the students file when a student is removed from a course. Time complexity: O(n) </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">a_student</td><td>Student that will be removed </td></tr>
+    <tr><td class="paramname">a_course</td><td>Course from were the student will be removed </td></tr>
+    <tr><td class="paramname">new_filename</td><td>File that will store the updated information </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -1188,7 +1439,12 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>operator=</b> (const 
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Sets the courses vector to the given vector of courses Time complexity: O(1) </p>
+<p>Sets the courses vector to the given vector of courses Time complexity: O(1) </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">courses</td><td>New courses vector </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -1207,7 +1463,12 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>operator=</b> (const 
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Sets the students_classes file name to a new one. Time complexity: O(1) </p>
+<p>Sets the students_classes file name to a new one. Time complexity: O(1) </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">filename</td><td>New name for the students file </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -1226,7 +1487,12 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>operator=</b> (const 
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Sets the students_requests file name to a new one. Time complexity: O(1) </p>
+<p>Sets the students_requests file name to a new one. Time complexity: O(1) </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">filename</td><td>New name for the requests file </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -1255,7 +1521,13 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>operator=</b> (const 
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Stores a new request into the requests queue. Time complexity: O(1) </p>
+<p>Stores a new request into the requests queue. Time complexity: O(n) </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">new_request</td><td>Request that will be stored </td></tr>
+    <tr><td class="paramname">new_filename</td><td>File that will store the updated information </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -1302,7 +1574,17 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>operator=</b> (const 
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Switches students from one class to another in a given course if possible. Time complexity: O(n^3) </p>
+<p>Switches students from one class to another in a given course if possible. Time complexity: O(n^3) </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">a_student</td><td>Student we want to switch courses </td></tr>
+    <tr><td class="paramname">a_course</td><td>Course from were we want to execute the switch </td></tr>
+    <tr><td class="paramname">old_class</td><td>Class were we want to remove the student </td></tr>
+    <tr><td class="paramname">new_class</td><td>Class were we want to add the student </td></tr>
+    <tr><td class="paramname">error_message</td><td>Message that will be changed if something goes wrong during the execution of the function (it's given by reference) </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>True if the switch is possible or False otherwise </dd></dl>
 
 </div>
 </div>
@@ -1349,7 +1631,16 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>operator=</b> (const 
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Creates a new copy of the students file when a student is added to a new class. Time complexity: O(n) </p>
+<p>Creates a new copy of the students file when a student is added to a new class. Time complexity: O(n) </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">a_student</td><td>Student that will switch classes </td></tr>
+    <tr><td class="paramname">new_class</td><td>Class that the student will enroll </td></tr>
+    <tr><td class="paramname">a_course</td><td>Course were the changes will be made </td></tr>
+    <tr><td class="paramname">old_class</td><td>Class from were the student wants to switch </td></tr>
+    <tr><td class="paramname">new_filename</td><td>File that will store the updated information </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -1396,7 +1687,17 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>operator=</b> (const 
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Removes student from a given course to enroll him in another one if possible. Time complexity: O(n^3) </p>
+<p>Removes student from a given course to enroll him in another one if possible. Time complexity: O(n^3) </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">a_student</td><td>Student we want to switch courses </td></tr>
+    <tr><td class="paramname">old_course</td><td>Course from were we want to remove the student </td></tr>
+    <tr><td class="paramname">new_course</td><td>Course were we want to add the student </td></tr>
+    <tr><td class="paramname">new_class</td><td>Class were we want to add the student </td></tr>
+    <tr><td class="paramname">error_message</td><td>Message that will be changed if something goes wrong during the execution of the function (it's given by reference) </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>True if the switch is possible or False otherwise </dd></dl>
 
 </div>
 </div>
@@ -1443,7 +1744,16 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>operator=</b> (const 
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Creates a new copy of the students file when a student switches courses. Time complexity: O(n) </p>
+<p>Creates a new copy of the students file when a student switches courses. Time complexity: O(n) </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">a_student</td><td>Student that will switch courses </td></tr>
+    <tr><td class="paramname">new_class</td><td>Class that the student will enroll </td></tr>
+    <tr><td class="paramname">new_course</td><td>Course that the student will enroll </td></tr>
+    <tr><td class="paramname">old_course</td><td>Course from were the student wants to switch </td></tr>
+    <tr><td class="paramname">new_filename</td><td>File that will store the updated information </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>

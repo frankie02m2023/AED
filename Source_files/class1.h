@@ -58,7 +58,7 @@ public:
     void set_TP_class(const schedule& TP_time);
     void set_PL_class(const schedule& PL_time);
     void add_students(const student& st);
-    void remove_students(student st);
+    void remove_students(const student& st);
     ///@}
 
     /** @name Operators
@@ -87,7 +87,7 @@ public:
      */
      ///@{
     bool student_in_class(const student& st) const;
-    student get_student_in_class(student st) const;
+    student get_student_in_class(const student& st) const;
     ///@}
 
     /** @name data printers

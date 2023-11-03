@@ -8,6 +8,6 @@ var searchData=
   ['remove_5frequest_5ffrom_5ffile_5',['remove_request_from_file',['../classinterface.html#a5cffb5edbd79891d41e1b2d946f89aaf',1,'interface']]],
   ['remove_5fstudent_5ffrom_5fcourse_6',['remove_student_from_course',['../classinterface.html#add6abadbfdec933df7ed2c60810243be',1,'interface']]],
   ['remove_5fstudent_5ffrom_5fcourse_5fin_5ffile_7',['remove_student_from_course_in_file',['../classinterface.html#a705d65fe8abd82422ea589d2cda67329',1,'interface']]],
-  ['remove_5fstudents_8',['remove_students',['../classclass1.html#a94e514cf2c5fb54cbdf17d346d498bc2',1,'class1']]],
+  ['remove_5fstudents_8',['remove_students',['../classclass1.html#a6ea393a76bfb4e4a3eed4139391c968b',1,'class1']]],
   ['renaming_5ffiles_5ffor_5ffuture_5fuse_9',['renaming_files_for_future_use',['../main_8cpp.html#a73f57a7424f3a4566bfb680e5f37eb8f',1,'main.cpp']]]
 ];

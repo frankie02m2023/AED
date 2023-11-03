@@ -110,8 +110,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a2908a76a619c4b629fa2e4d6d60e70b9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a197e4109896af10de8f51086bea37443" id="r_a197e4109896af10de8f51086bea37443"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classclass1.html#a197e4109896af10de8f51086bea37443">add_students</a> (const <a class="el" href="classstudent.html">student</a> &amp;st)</td></tr>
 <tr class="separator:a197e4109896af10de8f51086bea37443"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a94e514cf2c5fb54cbdf17d346d498bc2" id="r_a94e514cf2c5fb54cbdf17d346d498bc2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classclass1.html#a94e514cf2c5fb54cbdf17d346d498bc2">remove_students</a> (<a class="el" href="classstudent.html">student</a> st)</td></tr>
-<tr class="separator:a94e514cf2c5fb54cbdf17d346d498bc2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6ea393a76bfb4e4a3eed4139391c968b" id="r_a6ea393a76bfb4e4a3eed4139391c968b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classclass1.html#a6ea393a76bfb4e4a3eed4139391c968b">remove_students</a> (const <a class="el" href="classstudent.html">student</a> &amp;st)</td></tr>
+<tr class="separator:a6ea393a76bfb4e4a3eed4139391c968b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr><td colspan="2"><div class="groupHeader">Operators</div></td></tr>
 <tr class="memitem:a39409ab24831b418d45359a1e7f41a76" id="r_a39409ab24831b418d45359a1e7f41a76"><td class="memItemLeft" align="right" valign="top"><a id="a39409ab24831b418d45359a1e7f41a76" name="a39409ab24831b418d45359a1e7f41a76"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>operator==</b> (const <a class="el" href="classclass1.html">class1</a> &amp;other_class1) const</td></tr>
@@ -128,8 +128,8 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>operator=</b> (const 
 <tr><td colspan="2"><div class="groupHeader">Auxiliary functions</div></td></tr>
 <tr class="memitem:ac6a028ae8d32a5f5457cc6225af48b5e" id="r_ac6a028ae8d32a5f5457cc6225af48b5e"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classclass1.html#ac6a028ae8d32a5f5457cc6225af48b5e">student_in_class</a> (const <a class="el" href="classstudent.html">student</a> &amp;st) const</td></tr>
 <tr class="separator:ac6a028ae8d32a5f5457cc6225af48b5e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a23e53623d93dcdd84563fee359bdbe45" id="r_a23e53623d93dcdd84563fee359bdbe45"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classstudent.html">student</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classclass1.html#a23e53623d93dcdd84563fee359bdbe45">get_student_in_class</a> (<a class="el" href="classstudent.html">student</a> st) const</td></tr>
-<tr class="separator:a23e53623d93dcdd84563fee359bdbe45"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a38a449d199660e73ba6f7f8c5f324ad9" id="r_a38a449d199660e73ba6f7f8c5f324ad9"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classstudent.html">student</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classclass1.html#a38a449d199660e73ba6f7f8c5f324ad9">get_student_in_class</a> (const <a class="el" href="classstudent.html">student</a> &amp;st) const</td></tr>
+<tr class="separator:a38a449d199660e73ba6f7f8c5f324ad9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr><td colspan="2"><div class="groupHeader">data printers</div></td></tr>
 <tr class="memitem:abf0d239bca936a5ac85a67ff9da8ed20" id="r_abf0d239bca936a5ac85a67ff9da8ed20"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classclass1.html#abf0d239bca936a5ac85a67ff9da8ed20">print_class_data</a> (const string &amp;student_sort_by, const string &amp;student_sort_option) const</td></tr>
 <tr class="separator:abf0d239bca936a5ac85a67ff9da8ed20"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -171,7 +171,12 @@ Static Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Adds student to the students list. Time complexity: O(1) </p>
+<p>Adds student to the students list. Time complexity: O(1) </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">st</td><td>Student that will be added </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -198,7 +203,13 @@ Static Public Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Converts the time format from a simple float format to the string format '00:00'. Time complexity: O(log(n)) </p>
+<p>Converts the time format from a simple float format to the string format '00:00'. Time complexity: O(log(n)) </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">class_schedule</td><td>Schedule for a specific class </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>String with the pretended hour and minute format </dd></dl>
 
 </div>
 </div>
@@ -216,7 +227,7 @@ Static Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Converts the PL time format from a simple float format to the string format '00:00'. Time complexity: O(log(n)) </p>
+<p>Converts the PL time format from a simple float format to the string format '00:00'. Time complexity: O(log(n)) </p><dl class="section return"><dt>Returns</dt><dd>String with the pretended hour and minute format </dd></dl>
 
 </div>
 </div>
@@ -234,7 +245,7 @@ Static Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Converts the T_2 time format from a simple float format to the string format '00:00'. Time complexity: O(log(n)) </p>
+<p>Converts the T_2 time format from a simple float format to the string format '00:00'. Time complexity: O(log(n)) </p><dl class="section return"><dt>Returns</dt><dd>String with the pretended hour and minute format </dd></dl>
 
 </div>
 </div>
@@ -252,7 +263,7 @@ Static Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Converts the T time format from a simple float format to the string format '00:00'. Time complexity: O(log(n)) </p>
+<p>Converts the T time format from a simple float format to the string format '00:00'. Time complexity: O(log(n)) </p><dl class="section return"><dt>Returns</dt><dd>String with the pretended hour and minute format </dd></dl>
 
 </div>
 </div>
@@ -270,7 +281,7 @@ Static Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Converts the TP time format from a simple float format to the string format '00:00'. Time complexity: O(log(n)) </p>
+<p>Converts the TP time format from a simple float format to the string format '00:00'. Time complexity: O(log(n)) </p><dl class="section return"><dt>Returns</dt><dd>String with the pretended hour and minute format </dd></dl>
 
 </div>
 </div>
@@ -288,7 +299,7 @@ Static Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Gets the grade of the class (1,2,3). Time complexity: O(1) </p>
+<p>Gets the grade of the class (1,2,3). Time complexity: O(1) </p><dl class="section return"><dt>Returns</dt><dd>Class grade </dd></dl>
 
 </div>
 </div>
@@ -306,7 +317,7 @@ Static Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Gets the class name. Time complexity: O(1) </p>
+<p>Gets the class name. Time complexity: O(1) </p><dl class="section return"><dt>Returns</dt><dd>class name </dd></dl>
 
 </div>
 </div>
@@ -324,12 +335,12 @@ Static Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Gets the PL class schedule. Time complexity: O(1) </p>
+<p>Gets the PL class schedule. Time complexity: O(1) </p><dl class="section return"><dt>Returns</dt><dd>PL class schedule </dd></dl>
 
 </div>
 </div>
-<a id="a23e53623d93dcdd84563fee359bdbe45" name="a23e53623d93dcdd84563fee359bdbe45"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a23e53623d93dcdd84563fee359bdbe45">&#9670;&#160;</a></span>get_student_in_class()</h2>
+<a id="a38a449d199660e73ba6f7f8c5f324ad9" name="a38a449d199660e73ba6f7f8c5f324ad9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a38a449d199660e73ba6f7f8c5f324ad9">&#9670;&#160;</a></span>get_student_in_class()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -337,13 +348,19 @@ Static Public Attributes</h2></td></tr>
         <tr>
           <td class="memname"><a class="el" href="classstudent.html">student</a> class1::get_student_in_class </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="classstudent.html">student</a>&#160;</td>
+          <td class="paramtype">const <a class="el" href="classstudent.html">student</a> &amp;&#160;</td>
           <td class="paramname"><em>st</em></td><td>)</td>
           <td> const</td>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Gets a specific student in the students list. Time complexity: O(n) </p>
+<p>Gets a specific student in the students list. Time complexity: O(n) </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">st</td><td>student we want to get (Object only with some information) </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Student with all the information </dd></dl>
 
 </div>
 </div>
@@ -361,7 +378,7 @@ Static Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Gets the students list. Time complexity: O(1) </p>
+<p>Gets the students list. Time complexity: O(1) </p><dl class="section return"><dt>Returns</dt><dd>List of students that are enrolled into the class </dd></dl>
 
 </div>
 </div>
@@ -379,7 +396,7 @@ Static Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Gets the T class schedule. Time complexity: O(1) </p>
+<p>Gets the T class schedule. Time complexity: O(1) </p><dl class="section return"><dt>Returns</dt><dd>T class schedule </dd></dl>
 
 </div>
 </div>
@@ -397,7 +414,7 @@ Static Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Gets the T_2 class schedule. Time complexity: O(1) </p>
+<p>Gets the T_2 class schedule. Time complexity: O(1) </p><dl class="section return"><dt>Returns</dt><dd>T_class_2 schedule </dd></dl>
 
 </div>
 </div>
@@ -415,7 +432,7 @@ Static Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Gets the TP class schedule. Time complexity: O(1) </p>
+<p>Gets the TP class schedule. Time complexity: O(1) </p><dl class="section return"><dt>Returns</dt><dd>TP class schedule </dd></dl>
 
 </div>
 </div>
@@ -444,7 +461,13 @@ Static Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Prints all class data. Time complexity : O(nlog(n)) </p>
+<p>Prints all class data. Time complexity : O(nlog(n)) </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">student_sort_by</td><td>Student sorting criteria </td></tr>
+    <tr><td class="paramname">student_sort_option</td><td>Student sorting order (ascending, descending) </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -466,8 +489,8 @@ Static Public Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a94e514cf2c5fb54cbdf17d346d498bc2" name="a94e514cf2c5fb54cbdf17d346d498bc2"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a94e514cf2c5fb54cbdf17d346d498bc2">&#9670;&#160;</a></span>remove_students()</h2>
+<a id="a6ea393a76bfb4e4a3eed4139391c968b" name="a6ea393a76bfb4e4a3eed4139391c968b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6ea393a76bfb4e4a3eed4139391c968b">&#9670;&#160;</a></span>remove_students()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -475,13 +498,18 @@ Static Public Attributes</h2></td></tr>
         <tr>
           <td class="memname">void class1::remove_students </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="classstudent.html">student</a>&#160;</td>
+          <td class="paramtype">const <a class="el" href="classstudent.html">student</a> &amp;&#160;</td>
           <td class="paramname"><em>st</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Removes student from student list. Time complexity: O(n) </p>
+<p>Removes student from student list. Time complexity: O(n) </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">st</td><td>Student that will be removed </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -500,7 +528,15 @@ Static Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Sets the PL Schedule. Time complexity: O(1) </p>
+<p>Sets the PL Schedule. Time complexity: O(1)</p><ul>
+<li><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">PL_time</td><td>New schedule </td></tr>
+  </table>
+  </dd>
+</dl>
+</li>
+</ul>
 
 </div>
 </div>
@@ -519,7 +555,12 @@ Static Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Sets the T Schedule. Time complexity: O(1) </p>
+<p>Sets the T Schedule. Time complexity: O(1) </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">T_time</td><td>New schedule </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -538,7 +579,15 @@ Static Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Sets the T_2 Schedule. Time complexity: O(1) </p>
+<p>Sets the T_2 Schedule. Time complexity: O(1)</p><ul>
+<li><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">T_time</td><td>New schedule </td></tr>
+  </table>
+  </dd>
+</dl>
+</li>
+</ul>
 
 </div>
 </div>
@@ -557,7 +606,15 @@ Static Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Sets the TP Schedule. Time complexity: O(1) </p>
+<p>Sets the TP Schedule. Time complexity: O(1)</p><ul>
+<li><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">TP_time</td><td>New schedule </td></tr>
+  </table>
+  </dd>
+</dl>
+</li>
+</ul>
 
 </div>
 </div>
@@ -576,7 +633,13 @@ Static Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Checks if a student belongs to the class. Tyme complexity: O(n) </p>
+<p>Checks if a student belongs to the class. Time complexity: O(n) </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">st</td><td>Student we want to check </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>True if the student is in this class or False otherwise </dd></dl>
 
 </div>
 </div>

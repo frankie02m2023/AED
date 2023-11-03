@@ -19,22 +19,28 @@
 //----------------------------------------------------------------------------------------
 //Basic getters
 
-/** Gets the courses. Time complexity: O(1)*/
+/** Gets the courses. Time complexity: O(1)
+ *  @return Vector with the courses */
 vector<course> interface::get_courses() const {
     return courses;
 }
 
-/** Gets the requests. Time complexity: O(1)*/
+/** Gets the requests. Time complexity: O(1)
+ *  @returns Queue with the requests*/
 queue<request> interface::get_requests() const {
     return requests;
 }
 
-/** Gets the name of the file where information about students is stored. Time complexity: O(1)*/
+/** Gets the name of the file where information about students is stored. Time complexity: O(1)
+ *  @returns String with the name of the file were are stored the most recent students information
+ *  */
 string interface::get_students_classes_filename() const {
     return students_classes_filename;
 }
 
-/** Gets the name of the file where student requests are stored. Time complexity: O(1)*/
+/** Gets the name of the file where student requests are stored. Time complexity: O(1)
+ *   @returns String with the name of the file were are stored the most recent requests
+ *   */
 string interface::get_students_requests_filename() const {
     return students_requests_filename;
 }
@@ -298,10 +304,12 @@ void interface::operator=(const interface &other_interface) {
 
 /**Gets a specific course from the courses vector
  *  Time complexity: O(n)
+ *  @param a_course The course we wan to get (object only contains the name of the course)
+ *  @return The course with all the information
  */
 course interface::get_course_from_courses(const course &a_course) const {
     course target_course;
-    for(course c : courses){
+    for(const course& c : courses){
         if(a_course == c){
             target_course = c;
             return c;
@@ -310,7 +318,9 @@ course interface::get_course_from_courses(const course &a_course) const {
 }
 
 /**Gets a specific class schedule.
-   * Time complexity : O(nlog(n)).*/
+   * Time complexity : O(nlog(n)).
+   *  @param a_class Class that we want to get the schedule
+   * @Returns A set with the schedule information (pair with the course and a pair with the schedule and the class type)*/
 set<pair<pair<schedule,string>,course>> interface::get_class_schedule(class1 a_class) const{
     set<pair<pair<schedule,string>,course>> class_schedule; //schedule for each class
     class1 a_class_copy = a_class;
@@ -343,12 +353,14 @@ set<pair<pair<schedule,string>,course>> interface::get_class_schedule(class1 a_c
 }
 
 /**Gets a specific student schedule.
- * Time complexity: O(nlog(n))*/
+ * Time complexity: O(nlog(n))
+ * @param a_student Student that we want to get the schedule
+ * @returns A set with the schedule information (pair with the course and a pair with the schedule and the class type) */
 set<pair<pair<schedule,string>,course>> interface::get_student_schedule(const student& a_student) const {
     set<pair<pair<schedule,string>,course>> student_schedule;
     class1 aux_class;
     string class_type;
-    for(course a_course : courses){
+    for(const course& a_course : courses){
         if(a_course.has_student(a_student)){
             aux_class = a_course.get_student_class(a_student);
             if(aux_class.get_T_class().week_day != "Dont Apply"){
@@ -374,7 +386,10 @@ set<pair<pair<schedule,string>,course>> interface::get_student_schedule(const st
 
 
 /**Gets the students in a class for a specific course.
-    * Time complexity: O(n).*/
+    * Time complexity: O(n).
+    *  @param a_class Class from were we want to get the student
+    * @param a_course Course from were we want to access the class to obtain the students
+    * @returns List of students that belong to that class/course*/
 list<student> interface::get_class_students_for_course(class1 a_class, course a_course) const{
     list<student> students;
     auto it = std::find(courses.begin(), courses.end(), a_course);
@@ -386,7 +401,9 @@ list<student> interface::get_class_students_for_course(class1 a_class, course a_
 }
 
 /**Gets all the students in a course.
-* Time complexity : O(n^2).*/
+* Time complexity : O(n^2).
+ *  @param a_course Course from were we want to get the students
+ * @returns Set of students (because we don´t want repeated students) that belong to the course*/
 set<student> interface::get_all_students_in_aCourse(course a_course) const {
     set<student> students;
     auto it = std::find(courses.begin(), courses.end(), a_course);
@@ -400,7 +417,9 @@ set<student> interface::get_all_students_in_aCourse(course a_course) const {
 }
 
 /**Gets all the students in a year.
-    * Time complexity: O(n^3).*/
+    * Time complexity: O(n^3).
+    * @param year Year from were we want to get the students
+    * @returns Set of students (because we don´t want repeated students) that belong to the year*/
 set<student> interface::get_all_students_in_aYear(int year) const {
     set<student> students;
 
@@ -416,10 +435,12 @@ set<student> interface::get_all_students_in_aYear(int year) const {
 }
 
 /** Gets all the courses a student is part of.
- *  Time complexity: O(n^3)*/
+ *  Time complexity: O(n^3)
+ *  @param a_student Student that we want to get the courses
+ *  @returns Vector with the courses the student is enrolled*/
 vector<course> interface::get_all_courses_for_student(const student &a_student) const {
     vector<course> student_courses;
-    for(course a_course : courses){
+    for(const course& a_course : courses){
         if(a_course.has_student(a_student)){ //O(n^2)
             student_courses.push_back(a_course);
         }
@@ -429,6 +450,8 @@ vector<course> interface::get_all_courses_for_student(const student &a_student) 
 
 /** Gets a specific student info.
  *  Time complexity: O(n^3)
+ *  @param a_student Student we want to obtain the information (student object with only some information)
+ *  @returns Student with the complete information
  */
 student interface::get_student(const student& a_student) const{
     class1 student_class;
@@ -444,24 +467,33 @@ student interface::get_student(const student& a_student) const{
 }
 
 /**Gets the number of students in a class.
-    * Time complexity: O(n)*/
+    * Time complexity: O(n)
+    * @param a_class Class from were we want to obtain the number of students
+    * @param a_course Course from were we want to consult the class to obtain the number of students
+    * @returns Number of students*/
 size_t interface::number_of_students_in_aClass(const class1& a_class, const course& a_course) const {
     return get_class_students_for_course(a_class, a_course).size();
 }
 
 /**Gets the number of students in a year.
-    * Time complexity: O(n^3).*/
+    * Time complexity: O(n^3).
+    *  @param year Year from were we want to obtain the number of students
+    * @returns Number of students*/
 size_t interface::number_of_students_in_aYear(int year) const {
     return get_all_students_in_aYear(year).size();
 }
 
 /**Gets the number of students in a course(Uc).
-    * Time complexity: O(n^2).*/
+    * Time complexity: O(n^2).
+    * @param a_course course from were we want to obtain the number of students
+    * @returns Number of students*/
 size_t interface::number_of_students_in_anUC(const course& a_course) const {
     return get_all_students_in_aCourse(a_course).size();
 }
 /** Gets the number of courses for a specific student
  *  Time complexity: O(n^3)
+ *   @param a_student Student from were we want to obtain the number of courses he is enrolled
+   * @returns Number of courses
  */
 size_t interface::number_of_courses_per_student(const student &a_student) const {
     return get_all_courses_for_student(a_student).size();
@@ -469,6 +501,8 @@ size_t interface::number_of_courses_per_student(const student &a_student) const 
 
 /** Checks if a student is in this interface.
  *  Time complexity: O(n^3)
+ *   @param a_student Student we want to check
+ *  @returns False if the student isn´t in the system and True if it is present in the system
  */
 bool interface:: has_student(const student& a_student) const{
     for(course a_course : courses){
@@ -485,7 +519,8 @@ bool interface:: has_student(const student& a_student) const{
 
 
 /**Prints the given class schedule.
-    * Time complexity: O(nlog(n)).*/
+    * Time complexity: O(nlog(n)).
+    * @param a_class Class we want to consult the schedule*/
 void interface::consult_class_schedule(const class1& a_class) const {
     set<pair<pair<schedule,string>,course>> class_schedule = get_class_schedule(a_class); //O(nlog(n))
 
@@ -514,6 +549,7 @@ void interface::consult_class_schedule(const class1& a_class) const {
 
 /** Consult a specific student schedule ordered by the schedules
  *  Time complexity: O(nlog(n))
+ *  @param a_student Student we want to get the schedule
  */
 void interface::consult_student_schedule_by_schedule(const student &a_student) const {
     set<pair<pair<schedule,string>,course>> student_schedule = get_student_schedule(a_student);
@@ -528,7 +564,8 @@ void interface::consult_student_schedule_by_schedule(const student &a_student) c
 }
 
 /**Prints the student schedule.
-    * Time complexity: O(n^3).*/
+    * Time complexity: O(n^3).
+    *  @param a_student Student we want to get the schedule*/
 void interface::consult_student_schedule_by_course(const student& a_student) const{
     cout << "Schedule for student " << a_student.get_name() << ", number " << a_student.get_number() <<":" << endl;
 
@@ -545,7 +582,11 @@ void interface::consult_student_schedule_by_course(const student& a_student) con
 }
 
 /**Prints the students in a given class.
-    * Time complexity: O(nlog(n)).*/
+    * Time complexity: O(nlog(n)).
+    * @param a_class Class from were we want to get the student
+    * @param a_course Course from were we want to access the class to get the student
+    * @param sortby Determines the sorting criteria
+    * @param sort_option Determines the sorting order(ascending, descending)*/
 void interface::consult_students_in_class_and_course(const class1& a_class, const course& a_course, const string& sortby, const string& sort_option) const{
     list<student> students = get_class_students_for_course(a_class,a_course);   //O(n)
     list<student> sorted_students {students.begin(), students.end()};   //O(n)
@@ -564,7 +605,10 @@ void interface::consult_students_in_class_and_course(const class1& a_class, cons
 }
 
 /**Prints all the students in a course.
-    * Time complexity: O(n^2).*/
+    * Time complexity: O(n^2).
+    * @param a_course Course from were we want to get the student
+    * @param sortby Determines the sorting criteria
+    * @param sort_option Determines the sorting order(ascending, descending)*/
 void interface::consult_all_students_in_aCourse(const course& a_course, const string& sortby, const string& sort_option) const {
     set<student> students = get_all_students_in_aCourse(a_course); //O(n^2)
     list<student> sorted_students {students.begin(), students.end()}; //O(n)
@@ -579,7 +623,10 @@ void interface::consult_all_students_in_aCourse(const course& a_course, const st
 }
 
 /**Prints all the students in a year.
-    * Time complexity: O(n^3).*/
+    * Time complexity: O(n^3).
+    * @param year Year from were we want to get the students
+    * @param sortby Determines the sorting criteria
+    * @param sort_option Determines the sorting order(ascending, descending)*/
 void interface::consult_all_students_in_aYear(int year, const string& sortby, const string& sort_option) const {
     set<student> students = get_all_students_in_aYear(year); //O(n^3)
     list<student> sorted_students {students.begin(), students.end()};
@@ -594,7 +641,13 @@ void interface::consult_all_students_in_aYear(int year, const string& sortby, co
 }
 
 /**Prints the data in the entire system.
-    * Time complexity: O(n^2log(n)).*/
+    * Time complexity: O(n^2log(n)).
+    * @param uc_sort_by Uc sorting criteria
+    * @param class_sort_by Class sorting criteria
+    * @param student_sort_by Student sorting criteria
+    * @param uc_sort_option Uc sorting order
+    * @param class_sort_option Class sorting order
+    * @param student_sort_option Student sorting order*/
 void interface::print_data(const string& uc_sort_by , const string& class_sort_by ,const string& student_sort_by,const string& uc_sort_option, const string& class_sort_option, const string& student_sort_option) const{
     cout << "Printing data for the entire system" << endl;
     vector <course> sorted_courses = courses;
@@ -606,7 +659,12 @@ void interface::print_data(const string& uc_sort_by , const string& class_sort_b
 }
 
 /**Prints the occupation in every course and class for a specific year.
-    * Time complexity: O(n^2log(n)).*/
+    * Time complexity: O(n^2log(n)).
+    *  @param year Year we want to get the occupation
+    * @param uc_sort_by Uc sorting criteria
+    * @param class_sort_by Class sorting criteria
+    * @param uc_sort_option Uc sorting order
+    * @param class_sort_option Class sorting order*/
 void interface::consult_classes_and_courses_occupation_by_year(int year , const string& uc_sort_by, const string& class_sort_by, const string& uc_sort_option, const string& class_sort_option) {
     vector<course> sorted_courses = courses;
     sorted_courses = sort_course_vector(sorted_courses, uc_sort_by, uc_sort_option); //O(nlog(n))
@@ -632,6 +690,10 @@ void interface::consult_classes_and_courses_occupation_by_year(int year , const 
 
 /**Checks if it is possible to add a student to a given class in a given course.
  * Time complexity: O(nlog(n))
+ * @param a_course Course from were the class belongs
+ * @param a_class Class we want to check
+ * @param a_student Student we wan to add to the class
+ * @return True if we are able to add the student to the class or False if we cannot add the student to the class
  */
 bool interface::can_add_to_class(course &a_course, student &a_student, class1 &a_class) const {
     course copy_a_course = a_course;
@@ -668,6 +730,14 @@ bool interface::can_add_to_class(course &a_course, student &a_student, class1 &a
     return true;
 }
 
+/**Checks if it is possible to add a student to a given class in a given course (when swapping courses.
+* Time complexity: O(nlog(n))
+* @param a_course Course from were the class belongs
+* @param a_class Class we want to check
+ * @param ignorable_course Course we want to ignore during the execution of the function
+* @param a_student Student we wan to add to the class
+* @return True if we are able to add the student to the class or False if we cannot add the student to the class
+*/
 bool interface::can_add_to_class_for_course_swap(course& a_course, student& a_student, class1& a_class, course& ignorable_course) const{
     course copy_a_course = a_course;
     class1 copy_a_class = a_class;
@@ -743,6 +813,11 @@ void interface::consult_student_requests() const {
 /**Function that tries to enroll a student in a new course.
  *  Returns true if the enrollment is successful and false if it isn't.
  *  Time complexity: O(n^3)
+ *   @param a_student Student we want to enroll
+ *  @param a_course Course were we want to enroll the student
+ *  @param a_class Class were we want to add the student
+ *  @param error_message Message that will be changed if something goes wrong during the execution of the function (it's given by reference)
+ *  @returns True if the student is enrolled in a class or False if that isn´t possible
  */
 
 bool interface::enroll_student_in_course(student &a_student, course &a_course, class1& a_class, string& error_message) {
@@ -794,7 +869,11 @@ bool interface::enroll_student_in_course(student &a_student, course &a_course, c
 
 /**Functions that tries to remove a student from a course.
 * Returns true if the removal is successful and false if it isn't
-* Time complexity: O(n^2) */
+* Time complexity: O(n^2)
+ *  @param a_student Student we want to remove
+ * @param a_course Course from were we want to remove the student
+ * @param error_message Message that will be changed if something goes wrong during the execution of the function (it's given by reference)
+ * @returns True if the student is removed from the course or False if the student isn´t enrolled in this course*/
 bool interface::remove_student_from_course(student &a_student, course &a_course, string& error_message) {
     //finding the target course in courses
     auto it = std::find(courses.begin(),courses.end(),a_course);
@@ -817,7 +896,13 @@ bool interface::remove_student_from_course(student &a_student, course &a_course,
 }
 
 /**Removes student from a given course to enroll him in another one if possible.
-* Time complexity: O(n^3)*/
+* Time complexity: O(n^3)
+ * @param a_student Student we want to switch courses
+ * @param old_course Course from were we want to remove the student
+ * @param new_course Course were we want to add the student
+ * @param new_class Class were we want to add the student
+ * @param error_message Message that will be changed if something goes wrong during the execution of the function (it's given by reference)
+ *  @returns True if the switch is possible or False otherwise*/
 bool interface::switch_student_courses(student &a_student, course &old_course, course &new_course, class1& new_class, string& error_message) {
     auto it = std::find(courses.begin(), courses.end(), old_course);
     course old_course_copy = *it;
@@ -869,7 +954,14 @@ bool interface::switch_student_courses(student &a_student, course &old_course, c
 }
 
 /**Switches students from one class to another in a given course if possible.
-* Time complexity: O(n^3) */
+* Time complexity: O(n^3)
+ * @param a_student Student we want to switch courses
+ * @param a_course Course from were we want to execute the switch
+ * @param old_class Class were we want to remove the student
+ * @param new_class Class were we want to add the student
+ * @param error_message Message that will be changed if something goes wrong during the execution of the function (it's given by reference)
+ *  @returns True if the switch is possible or False otherwise
+ *  */
 bool interface::switch_student_classes(student &a_student, course &a_course, class1 &old_class, class1 &new_class, string& error_message) {
     //finding the target course in courses
     auto it = std::find(courses.begin(),courses.end(),a_course);
@@ -914,6 +1006,10 @@ bool interface::switch_student_classes(student &a_student, course &a_course, cla
 
 /**Processes the request that is at the front of the requests queue.
  * Time complexity: O(n^3)
+ * @param new_student_filename File were will be stored the updated students information
+ * @param new_request_filename File were will be stored the updated request information
+ * @param error_message Message that will be changed if something goes wrong during the execution of the function (it's given by reference)
+ *  @returns True if the process is requested correctly or False otherwise
  */
 bool interface::process_request(string& error_message, const string& new_student_filename, const string& new_request_filename) {
     if(requests.empty()){
@@ -970,6 +1066,8 @@ bool interface::process_request(string& error_message, const string& new_student
 
 /**Adds a request to the file "students_requests.csv".
  * Time complexity: O(n)
+ * @param new_filename File were the requests will be stored
+ * @param new_request Request we are adding to the file
  */
 void interface::add_request_to_file(const request &new_request, const string& new_filename) {
     string line,filename_path,new_filename_path,new_line;
@@ -1012,7 +1110,8 @@ void interface::add_request_to_file(const request &new_request, const string& ne
 }
 
 /**Removes the top request from the student requests file after a request is processed.
-* Time complexity : O(n) */
+* Time complexity : O(n)
+ * @param new_request_filename File were the updated requests information will be stored*/
 void interface::remove_request_from_file(const string& new_request_filename) {
     string requests_file,line,new_requests_file;
     requests_file = "../Data_files/" + students_requests_filename;
@@ -1034,6 +1133,10 @@ void interface::remove_request_from_file(const string& new_request_filename) {
 
 /** Creates a new copy of the students file when a student is added to a new course.
  * Time complexity: O(n)
+ * @param new_filename File were the updated students info will be stored
+ * @param a_student Student that will enroll into the course
+ * @param a_course Course that the student wants to enroll
+ * @param a_class Class that the student wants to enroll
  */
 void interface::enroll_student_in_course_in_file(student &a_student, course &a_course, class1 &a_class, const string& new_filename){
     string students_file,new_students_file,line,target_student_number,target_student_name,copy_line;
@@ -1089,6 +1192,9 @@ void interface::enroll_student_in_course_in_file(student &a_student, course &a_c
 
 /** Creates a new copy of the students file when a student is removed from a course.
  * Time complexity: O(n)
+ * @param a_student Student that will be removed
+ * @param a_course Course from were the student will be removed
+ * @param new_filename File that will store the updated information
  */
 void interface::remove_student_from_course_in_file(student &a_student, course &a_course,const std::string &new_filename) {
     string student_file, new_student_file,line, target_student_number, target_student_name, target_course, aux_line;
@@ -1134,6 +1240,11 @@ void interface::remove_student_from_course_in_file(student &a_student, course &a
 
 /** Creates a new copy of the students file when a student switches courses.
  * Time complexity: O(n)
+ * @param a_student Student that will switch courses
+ * @param new_class Class that the student will enroll
+ * @param new_course Course that the student will enroll
+ * @param old_course Course from were the student wants to switch
+ * @param new_filename File that will store the updated information
  */
 void interface::switch_student_courses_in_file(student &a_student, course &old_course, course &new_course, class1 &new_class, const std::string &new_filename) {
     string students_file,new_students_file,line,target_student_number,target_student_name,target_course,save_line;
@@ -1188,6 +1299,11 @@ void interface::switch_student_courses_in_file(student &a_student, course &old_c
 
 /** Creates a new copy of the students file when a student is added to a new class.
  * Time complexity: O(n)
+ * @param a_student Student that will switch classes
+ * @param new_class Class that the student will enroll
+ * @param a_course Course were the changes will be made
+ * @param old_class Class from were the student wants to switch
+ * @param new_filename File that will store the updated information
  */
 void interface::switch_student_classes_in_file(student &a_student, course &a_course, class1 &old_class,class1 &new_class, const std::string &new_filename) {
     string students_file,new_students_file,line,target_student_number,target_student_name,target_course,save_line;
@@ -1239,7 +1355,9 @@ void interface::switch_student_classes_in_file(student &a_student, course &a_cou
 }
 
 /**Stores a new request into the requests queue.
- * Time complexity: O(1)
+ * Time complexity: O(n)
+ * @param new_request Request that will be stored
+ * @param new_filename File that will store the updated information
  */
 void interface::store_new_request(const request &new_request, const string& new_filename) {
     //pushing the new request to the requests' queue
@@ -1252,6 +1370,7 @@ void interface::store_new_request(const request &new_request, const string& new_
 
 /**Removes a request from the requests queue and from the requests file
  *  Time complexity: O(n)
+ *  @param new_filename File from were we want to remove the request
  */
 void interface::remove_request(const std::string &new_filename) {
     requests.pop();
@@ -1261,13 +1380,15 @@ void interface::remove_request(const std::string &new_filename) {
 
 //setters --------------------------------------------------------------
 /**Sets the courses vector to the given vector of courses
-* Time complexity: O(1)*/
+* Time complexity: O(1)
+ * @param courses New courses vector*/
 void interface::set_courses(vector<course> courses) {
     this->courses = courses;
 }
 
 /**Sets the students_classes file name to a new one.
  * Time complexity: O(1)
+ * @param filename New name for the students file
  */
 void interface::set_students_classes_filename(const std::string &filename) {
     students_classes_filename = filename;
@@ -1275,6 +1396,7 @@ void interface::set_students_classes_filename(const std::string &filename) {
 
 /**Sets the students_requests file name to a new one.
  * Time complexity: O(1)
+ * @param filename New name for the requests file
  */
 void interface::set_students_requests_filename(const std::string &filename) {
     students_requests_filename = filename;

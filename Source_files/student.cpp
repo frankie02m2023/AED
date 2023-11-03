@@ -20,6 +20,7 @@ student::student(string student_name, string student_number){
 //complexity for all getters: O(1)
 /** Gets the name of the student.
  * Time complexity: O(1)
+ * @returns Student's name
  */
 string student::get_name() const {
     return student_name;
@@ -27,6 +28,7 @@ string student::get_name() const {
 
 /**Gets the number of the student.
  * Time complexity: O(1)
+ * @returns Student's number
  */
 string student::get_number() const {
     return student_number;
@@ -52,7 +54,7 @@ bool student::operator>(const student& other_student) const{
 
 //data printer----------------------------------------------------------
 
-/** Prints the information of the sutudent.
+/** Prints the information of the student.
  * Time complexity: O(1)
  */
 void student::print_student() const {

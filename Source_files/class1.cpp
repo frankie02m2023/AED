@@ -27,6 +27,7 @@ class1::class1(std::string class_name, schedule T_class, schedule T_class_2, sch
 
 /** Gets the PL class schedule.
  * Time complexity: O(1)
+ * @returns PL class schedule
  */
 schedule class1::get_PL_class() const {
     return PL_class;
@@ -34,6 +35,7 @@ schedule class1::get_PL_class() const {
 
 /** Gets the TP class schedule.
  * Time complexity: O(1)
+ * @returns TP class schedule
  */
 schedule class1::get_TP_class() const {
     return TP_class;
@@ -41,6 +43,7 @@ schedule class1::get_TP_class() const {
 
 /** Gets the T class schedule.
  * Time complexity: O(1)
+ * @returns T class schedule
  */
 schedule class1::get_T_class() const {
     return T_class;
@@ -48,6 +51,7 @@ schedule class1::get_T_class() const {
 
 /** Gets the T_2 class schedule.
  * Time complexity: O(1)
+ * @returns T_class_2 schedule
  */
 schedule class1::get_T_class_2() const {
     return T_class_2;
@@ -55,6 +59,7 @@ schedule class1::get_T_class_2() const {
 
 /** Gets the class name.
  * Time complexity: O(1)
+ * @return class name
  */
 string class1::get_class_name() const {
     return class_name;
@@ -62,6 +67,7 @@ string class1::get_class_name() const {
 
 /** Gets the students list.
  * Time complexity: O(1)
+ * @returns List of students that are enrolled into the class
  */
 list<student> class1::get_students() const {
     return students;
@@ -69,6 +75,7 @@ list<student> class1::get_students() const {
 
 /** Gets the grade of the class (1,2,3).
  * Time complexity: O(1)
+ * @returns Class grade
  */
 int class1::get_class_grade() const{
     return class_name[0] - '0';
@@ -79,6 +86,7 @@ int class1::get_class_grade() const{
 
 /** Sets the T Schedule.
  * Time complexity: O(1)
+ * @param T_time New schedule
  */
 void class1::set_T_class(const schedule& T_time) {
     this->T_class = T_time;
@@ -86,6 +94,7 @@ void class1::set_T_class(const schedule& T_time) {
 
 /** Sets the T_2 Schedule.
  * Time complexity: O(1)
+ * * @param T_time New schedule
  */
 void class1::set_T_class_2(const schedule& T_time) {
     this->T_class_2 = T_time;
@@ -93,6 +102,7 @@ void class1::set_T_class_2(const schedule& T_time) {
 
 /** Sets the TP Schedule.
  * Time complexity: O(1)
+ * * @param TP_time New schedule
  */
 void class1::set_TP_class(const schedule& TP_time) {
     this->TP_class = TP_time;
@@ -100,6 +110,7 @@ void class1::set_TP_class(const schedule& TP_time) {
 
 /** Sets the PL Schedule.
  * Time complexity: O(1)
+ * * @param PL_time New schedule
  */
 void class1::set_PL_class(const schedule& PL_time) {
     this->PL_class = PL_time;
@@ -107,6 +118,7 @@ void class1::set_PL_class(const schedule& PL_time) {
 
 /** Adds student to the students list.
  * Time complexity: O(1)
+ * @param st Student that will be added
  */
 void class1::add_students(const student& st) {
     students.push_back(st);
@@ -114,8 +126,9 @@ void class1::add_students(const student& st) {
 
 /** Removes student from student list.
  * Time complexity: O(n)
+ * @param st Student that will be removed
  */
-void class1::remove_students(student st) {
+void class1::remove_students(const student& st) {
     auto it = std::find(students.begin(),students.end(),st);
     students.erase(it);
 }
@@ -123,7 +136,9 @@ void class1::remove_students(student st) {
 //auxiliary function -------------------------------------------
 //complexity O(n)
 /** Checks if a student belongs to the class.
- * Tyme complexity: O(n)
+ * Time complexity: O(n)
+ * @param st Student we want to check
+ * @returns True if the student is in this class or False otherwise
  */
 bool class1::student_in_class(const student& st) const {
     auto it = std::find(students.begin(), students.end(), st);
@@ -132,8 +147,10 @@ bool class1::student_in_class(const student& st) const {
 
 /**Gets a  specific student in the students list.
  * Time complexity: O(n)
+ * @param st student we want to get (Object only with some information)
+ * @returns Student with all the information
  */
-student class1::get_student_in_class(student st) const {
+student class1::get_student_in_class(const student& st) const {
     auto it = std::find(students.begin(),students.end(),st);
     return *it;
 }
@@ -165,7 +182,9 @@ void class1::operator=(const class1& other_class1){
 //functions to convert the time format -------------------------------------------------------------------
 
 /** Converts the time format from a simple float format to the string format '00:00'.
-* Time complexity: O(log(n))*/
+* Time complexity: O(log(n))
+ * @param class_schedule Schedule for a specific class
+ * @returns String with the pretended hour and minute format*/
 string class1::convert_class_to_hour_and_minute_format(const schedule& class_schedule){
     string time_and_duration, start_time_hour, start_time_minute, duration_hours, duration_minutes;
     stringstream ss;
@@ -223,25 +242,29 @@ string class1::convert_class_to_hour_and_minute_format(const schedule& class_sch
 }
 
 /** Converts the T time format from a simple float format to the string format '00:00'.
-* Time complexity: O(log(n))*/
+* Time complexity: O(log(n))
+ * @returns String with the pretended hour and minute format*/
 string class1::convert_T_class_to_hour_and_minute_format() const {
     return convert_class_to_hour_and_minute_format(T_class);
 }
 
 /** Converts the T_2 time format from a simple float format to the string format '00:00'.
-* Time complexity: O(log(n))*/
+* Time complexity: O(log(n))
+ * @returns String with the pretended hour and minute format*/
 string class1::convert_T_class2_to_hour_and_minute_format() const {
     return convert_class_to_hour_and_minute_format(T_class_2);
 }
 
 /** Converts the TP time format from a simple float format to the string format '00:00'.
-* Time complexity: O(log(n))*/
+* Time complexity: O(log(n))
+ * @returns String with the pretended hour and minute format*/
 string class1::convert_TP_class_to_hour_and_minute_format() const {
     return convert_class_to_hour_and_minute_format(TP_class);
 }
 
 /** Converts the PL time format from a simple float format to the string format '00:00'.
-* Time complexity: O(log(n))*/
+* Time complexity: O(log(n))
+ * @returns String with the pretended hour and minute format*/
 string class1::convert_PL_class_to_hour_and_minute_format() const {
     return convert_class_to_hour_and_minute_format(PL_class);
 }
@@ -249,7 +272,9 @@ string class1::convert_PL_class_to_hour_and_minute_format() const {
 //Data printers -----------------------------------------------------------------------------------
 
 /**Prints all class data.
-*Time complexity : O(nlog(n))*/
+*Time complexity : O(nlog(n))
+ * @param student_sort_by Student sorting criteria
+ * @param student_sort_option Student sorting order (ascending, descending)*/
 void class1::print_class_data(const string& student_sort_by,const string& student_sort_option) const {
     std::cout << "Class name = " << class_name << endl;
     std::cout << "T Class schedule = " << T_class.week_day << " Start time = " << convert_T_class_to_hour_and_minute_format() << endl;

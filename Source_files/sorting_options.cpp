@@ -132,6 +132,9 @@ bool compare_class_ocupation(const class1& cl1, const class1& cl2){
 //complexity: O(nlog(n))
 /** Sorts a list of students with various sort options.
  * Time complexity: O(nlog(n))
+ * @param sorted_students List with students that will be sorted
+ * @param sortby Sorting criteria
+ * @param sort_option Sorting order
  */
 list<student> sort_students_list(list<student> sorted_students, const string& sortby, const string& sort_option ){
     if(sortby == "name"){
@@ -161,6 +164,9 @@ list<student> sort_students_list(list<student> sorted_students, const string& so
 
 /** Sorts a vector of courses with various sort options.
  * Time complexity: O(nlog(n))
+ * * @param sorted_courses Vector with courses that will be sorted
+ * @param sortby Sorting criteria
+ * @param sort_option Sorting order
  */
 vector<course> sort_course_vector(vector<course> sorted_courses, const string& sortby, const string& sort_option){
     if(sortby == "name") {
@@ -188,6 +194,9 @@ vector<course> sort_course_vector(vector<course> sorted_courses, const string& s
 
 /** Sorts a vector of classes with various sort options.
  * Time complexity: O(nlog(n))
+ * * @param sorted_classes Vector with classes that will be sorted
+ * @param sortby Sorting criteria
+ * @param sort_option Sorting order
  */
 vector<class1> sort_class_vector(vector<class1> sorted_classes, const string& sortby, const string& sort_option){
     if(sortby == "name") {

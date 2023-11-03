@@ -30,34 +30,45 @@ schedule_system::schedule_system() {
 
 /** Consults the given class schedule.
  * Time complexity : O(nlog(n))
- *
+ *  @param a_class Class we want to consult the schedule
  */
-void schedule_system::consult_class_schedule(class1 a_class) const {
+void schedule_system::consult_class_schedule(const class1& a_class) const {
     system_changes.top().consult_class_schedule(a_class);
 }
 
 /** Consults the given student schedule.
 * Time complexity: O(n^3)
+ *  @param a_student Student we want to get the schedule
  */
-void schedule_system::consult_student_schedule(student a_student) const {
+void schedule_system::consult_student_schedule(const student& a_student) const {
     system_changes.top().consult_student_schedule_by_course(a_student);
 }
 
 /** Consults students in a given class and course.
  *  Time complexity: O(nlog(n))
+ * @param a_class Class from were we want to get the student
+ * @param a_course Course from were we want to access the class to get the student
+ * @param sort_by Determines the sorting criteria
+ * @param sort_option Determines the sorting order(ascending, descending)
  */
-void schedule_system::consult_students_in_class_and_course(class1 a_class, course a_course, string sortby, string sort_option) const{
+void schedule_system::consult_students_in_class_and_course(const class1& a_class, const course& a_course, const string& sortby, const string& sort_option) const{
     system_changes.top().consult_students_in_class_and_course(a_class,a_course,sortby, sort_option);
 }
 
 /** Consults all the student in a given course.
-* Time complexity: O(n^2) */
-void schedule_system::consult_all_students_in_aCourse(course a_course, const string& sort_by, const string& sort_option) const{
+* Time complexity: O(n^2)
+ * @param a_course Course from were we want to get the student
+ * @param sort_by Determines the sorting criteria
+ * @param sort_option Determines the sorting order(ascending, descending)*/
+void schedule_system::consult_all_students_in_aCourse(const course& a_course, const string& sort_by, const string& sort_option) const{
     system_changes.top().consult_all_students_in_aCourse(a_course,sort_by,sort_option);
 }
 
 /** Consults all the students in a given year.
  * Time complexity: O(n^3)
+ *  @param year Year from were we want to get the students
+ * @param sort_by Determines the sorting criteria
+ * @param sort_option Determines the sorting order(ascending, descending)
  */
 void schedule_system::consult_all_students_in_aYear(int year, const string& sort_by, const string& sort_option) const{
     system_changes.top().consult_all_students_in_aYear(year,sort_by,sort_option);
@@ -65,6 +76,11 @@ void schedule_system::consult_all_students_in_aYear(int year, const string& sort
 
 /** Consults the occupation of all courses and classes in a given year.
  * Time complexity: O(n^2log(n))
+ *@param year Year we want to get the occupation
+ * @param uc_sort_by Uc sorting criteria
+ * @param class_sort_by Class sorting criteria
+ * @param uc_sort_option Uc sorting order
+ * @param class_sort_option Class sorting order
  */
 void schedule_system::consult_classes_and_courses_occupation_by_year(int year, const string& uc_sort_by, const string& class_sort_by,const string& sorting_uc, const string& sorting_classes){
     system_changes.top().consult_classes_and_courses_occupation_by_year(year,uc_sort_by,class_sort_by,sorting_uc,sorting_classes);
@@ -79,6 +95,7 @@ void schedule_system::consult_student_requests() const {
 
 /** Stores new requests into the requests queue in the interface that is on top of the stack.
  * Time complexity: O(1)
+ * @param new_request Request that will be stores
  */
 void schedule_system::store_new_request(const request &new_request) {
     //creating a copy of the current system version
@@ -105,7 +122,8 @@ void schedule_system::remove_request() {
 }
 
 /** Processes the request in front of the queue and stores the changes into the system_changes stack.
-* Time complexity: O(n^3) */
+* Time complexity: O(n^3)
+ * @param error_message Message that will be changed is something goes wrong during the execution of the function*/
 void schedule_system::process_request(std::string &error_message) {
     // creating a copy of the most recent system version
     interface new_system_iteration = system_changes.top();

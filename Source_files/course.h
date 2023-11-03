@@ -31,7 +31,7 @@ public:
     vector<class1> get_classes() const;
     bool get_class(class1& cl) const;
     int get_course_grade() const;
-    class1 get_student_class(student st) const;
+    class1 get_student_class(const student& st) const;
     size_t number_of_students() const;
     ///@}
 
@@ -40,7 +40,7 @@ public:
      */
      ///@{
     void set_classes(vector<class1> classes);
-    void add_class(class1 cl);
+    void add_class(const class1& cl);
     ///@}
 
     /** @name Auxiliary functions
@@ -50,7 +50,7 @@ public:
     class1& get_class_by_ref(class1& cl);
     vector<class1>& get_classes_by_ref();
     bool has_student(const student& st) const;
-    void edit_class(class1 cl, schedule time1, string class_type);
+    void edit_class(const class1& cl, const schedule& time1, const string& class_type);
     bool check_class_balance(const class1& cl) const;
     ///@}
 

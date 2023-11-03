@@ -222,27 +222,20 @@ void schedule_system::undo_system_changes() {
             std::cout << "4. Consult all the students enrolled in a given course" << endl;
             std::cout << "5. Consult all the students who are at a given grade" << endl;
             std::cout << "6. Consult detailed information about all the courses and classes in a given year" << endl;
+            std::cout << "Type here: ";
             cin >> option;
+            cout << '\n';
 
             if (option == '1') {
-                string class_name, sort_option;
-                cout << "Please write the name of the class whose schedule you wish to consult: ";
+                string class_name;
+                cout << "Please write the name of the class whose schedule you wish to consult: " << endl;
+                cout << "Class name: ";
                 cin >> class_name;
                 cout << endl;
                 class1 target_class(class_name);
                 cout << "Please select the number associated with the sorting criteria you wish to choose" << endl;
                 cout << "1.Course" << endl;
                 cout << "2.Schedule" << endl;
-                cin >> sort_option;
-                if(sort_option == "1"){
-                    consult_class_schedule_by_course(target_class);
-                }
-                else if(sort_option == "2"){
-                    consult_class_schedule_by_schedule(target_class);
-                }
-                else{
-                    continue;
-                }
             } else if (option == '2') {
                 string student_name, student_number, sort_option;
                 cout << "Please write the name and number of the student whose schedule you wish to consult: " << endl;
@@ -257,6 +250,7 @@ void schedule_system::undo_system_changes() {
                 cout <<"1. Course" << endl;
                 cout <<"2. Schedule" << endl;
                 cin >> sort_option;
+                cout << '\n';
                 if(sort_option == "1"){
                     consult_student_schedule_by_course(target_student);
                 }
@@ -268,9 +262,12 @@ void schedule_system::undo_system_changes() {
                 }
             } else if (option == '3') {
                 string class_name, course_code;
-                cout << "Please write the name of the class you wish to check:";
+                cout << "Please write the name of the class you wish to check:" << endl;
+                cout << "Class Name: ";
                 cin >> class_name;
-                cout << "Please write the name of the course you wish to check: ";
+                cout << '\n';
+                cout << "Please write the name of the course you wish to check: " << endl;
+                cout << "Course Name: ";
                 cin >> course_code;
                 cout << endl;
                 class1 target_class(class_name);
@@ -287,6 +284,7 @@ void schedule_system::undo_system_changes() {
                 cout << "1. Ascending" << endl;
                 cout << "2. Descending" << endl;
                 cin >> sorting_order;
+                cout << '\n';
                 if (sorting_option == '1' || sorting_option == '3') {
                     if (sorting_order == '1') {
                         consult_students_in_class_and_course(target_class, target_course, "name", "ascending");
@@ -305,7 +303,9 @@ void schedule_system::undo_system_changes() {
                 char sorting_option;
                 char sorting_order;
                 cout << "Please write the name of the course you wish to check:" << endl;
+                cout <<"Course Name: ";
                 cin >> course_name;
+                cout << '\n';
                 course target_course(course_name);
                 cout << "Please select the number associated with the sorting criteria you wish to choose:" << endl;
                 cout << "1. Name" << endl;
@@ -317,6 +317,7 @@ void schedule_system::undo_system_changes() {
                 cout << "1. Ascending" << endl;
                 cout << "2. Descending" << endl;
                 cin >> sorting_order;
+                cout << '\n';
                 if (sorting_option == '1' || sorting_option == '3') {
                     if (sorting_order == '1') {
                         consult_all_students_in_aCourse(target_course, "name", "ascending");
@@ -335,7 +336,8 @@ void schedule_system::undo_system_changes() {
                 int target_grade;
                 char sorting_option;
                 char sorting_order;
-                cout << "Please write the number associated with the grade you wish to check: ";
+                cout << "Please write the number associated with the grade you wish to check: " << endl;
+                cout << "Grade Number: ";
                 cin >> target_year;
                 cout << '\n';
                 target_grade = stoi(target_year);
@@ -349,6 +351,7 @@ void schedule_system::undo_system_changes() {
                 cout << "1. Ascending" << endl;
                 cout << "2. Descending" << endl;
                 cin >> sorting_order;
+                cout << '\n';
                 if (sorting_option == '1' || sorting_option == '3') {
                     if (sorting_order == '1') {
                         consult_all_students_in_aYear(target_grade, "name", "ascending");
@@ -381,8 +384,10 @@ void schedule_system::undo_system_changes() {
                 string year;
                 int grade;
                 string sorting_class_option, sorting_class_order, sorting_course_option, sorting_course_order;
-                cout << "Please write the number of the grade you wish to check:";
+                cout << "Please write the number of the grade you wish to check:" << endl;
+                cout << "Grade Number: ";
                 cin >> year;
+                cout << '\n';
                 grade = stoi(year);
                 cout << "Please select the number associated with the sorting criteria you wish to choose:" << endl;
                 cout << "1. Course Name" << endl;
@@ -394,6 +399,7 @@ void schedule_system::undo_system_changes() {
                 cout << "1. Ascending" << endl;
                 cout << "2. Descending" << endl;
                 cin >> sorting_course_order;
+                cout << '\n';
                 cout << "Please select the number associated with the sorting criteria you wish to choose:" << endl;
                 cout << "1. Class Name" << endl;
                 cout << "2. Class Occupation" << endl;
@@ -478,6 +484,7 @@ void schedule_system::undo_system_changes() {
                 cin >> added_course;
                 std::cout << "Please enter the name of the class you wish to enroll in:";
                 cin >> added_class;
+                cout << '\n';
                 new_request.request_type = "add course";
                 new_request.added_course = added_course;
                 new_request.added_class = added_class;
@@ -485,6 +492,7 @@ void schedule_system::undo_system_changes() {
             } else if (option == '2') {
                 std::cout << "Please enter the name of the course you wish to drop out of:";
                 cin >> removed_course;
+                cout << '\n';
                 new_request.request_type = "remove course";
                 new_request.removed_course = removed_course;
                 store_new_request(new_request);
@@ -495,6 +503,7 @@ void schedule_system::undo_system_changes() {
                 cin >> removed_course;
                 std::cout << "Please enter the name of the class you wish to enroll in: ";
                 cin >> added_class;
+                cout << '\n';
                 new_request.request_type = "switch courses";
                 new_request.added_course = added_course;
                 new_request.removed_course = removed_course;
@@ -507,6 +516,7 @@ void schedule_system::undo_system_changes() {
                 cin >> added_class;
                 std::cout << "Please enter the name of the class you wish to leave:";
                 cin >> removed_class;
+                cout << '\n';
                 new_request.request_type = "switch classes";
                 new_request.added_course = added_course;
                 new_request.added_class = added_class;
@@ -531,6 +541,7 @@ void schedule_system::undo_system_changes() {
             std::cout << "2.Delete the next student request to be processed" << endl;
             std::cout << "3.Undo the latest changes made to the system (should be used carefully and only as a last resort)" << endl;
             cin >> option;
+            cout << '\n';
             if(option == '1'){
                 string error_message = "";
                 process_request(error_message);

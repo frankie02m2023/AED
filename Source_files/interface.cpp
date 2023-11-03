@@ -576,10 +576,12 @@ void interface::consult_student_schedule_by_schedule(const student &a_student) c
     auto it = student_schedule.begin();
     string week_day = "";
     while(it != student_schedule.end()){
-        cout << "----------------------------------------------------------------------" << endl;
-        cout << "Course " << it->second.get_course_name() << endl;
-        cout << "Class " << it->first.second << " Schedule = " << it->first.first.week_day << " " << class1::convert_class_to_hour_and_minute_format(it->first.first) << endl;
-        cout << '\n';
+        if(it->first.first.week_day != week_day){
+            cout << '\n';
+            week_day = it->first.first.week_day;
+            cout << week_day << endl;
+        }
+        cout << "Course " << it->second.get_course_name() << " - " << it->first.second << " Class " << " Start time = " << class1::convert_class_to_hour_and_minute_format(it->first.first) << endl;
         it++;
     }
 }

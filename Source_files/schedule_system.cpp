@@ -227,15 +227,25 @@ void schedule_system::undo_system_changes() {
             cout << '\n';
 
             if (option == '1') {
-                string class_name;
+                string class_name, sort_option;
                 cout << "Please write the name of the class whose schedule you wish to consult: " << endl;
                 cout << "Class name: ";
                 cin >> class_name;
                 cout << endl;
                 class1 target_class(class_name);
-                cout << "Please select the number associated with the sorting criteria you wish to choose" << endl;
+                cout << "Please select the number associated with the sorting criteria you wish to choose:" << endl;
                 cout << "1.Course" << endl;
                 cout << "2.Schedule" << endl;
+                cin >> sort_option;
+                if(sort_option == "1"){
+                    consult_class_schedule_by_course(target_class);
+                }
+                else if(sort_option == "2"){
+                    consult_class_schedule_by_schedule(target_class);
+                }
+                else{
+                    continue;
+                }
             } else if (option == '2') {
                 string student_name, student_number, sort_option;
                 cout << "Please write the name and number of the student whose schedule you wish to consult: " << endl;

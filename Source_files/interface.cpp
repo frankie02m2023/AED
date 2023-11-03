@@ -505,7 +505,7 @@ size_t interface::number_of_courses_per_student(const student &a_student) const 
  *  @returns False if the student isn´t in the system and True if it is present in the system
  */
 bool interface:: has_student(const student& a_student) const{
-    for(course a_course : courses){
+    for(const course& a_course : courses){
         if(a_course.has_student(a_student)){
             return true;
         }

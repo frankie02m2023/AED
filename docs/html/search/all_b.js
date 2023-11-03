@@ -11,8 +11,7 @@ var searchData=
   ['remove_5fstudents_8',['remove_students',['../classclass1.html#a6ea393a76bfb4e4a3eed4139391c968b',1,'class1']]],
   ['removed_5fclass_9',['removed_class',['../structrequest.html#a6afb072400df7e262fee45b8762b9007',1,'request']]],
   ['removed_5fcourse_10',['removed_course',['../structrequest.html#a27e049f33a934a3dba014fb44dad966a',1,'request']]],
-  ['renaming_5ffiles_5ffor_5ffuture_5fuse_11',['renaming_files_for_future_use',['../main_8cpp.html#a73f57a7424f3a4566bfb680e5f37eb8f',1,'main.cpp']]],
-  ['request_12',['request',['../structrequest.html',1,'']]],
-  ['request_2eh_13',['request.h',['../request_8h.html',1,'']]],
-  ['request_5ftype_14',['request_type',['../structrequest.html#a9b1d8e9b466591e3e8f96135951ca951',1,'request']]]
+  ['request_11',['request',['../structrequest.html',1,'']]],
+  ['request_2eh_12',['request.h',['../request_8h.html',1,'']]],
+  ['request_5ftype_13',['request_type',['../structrequest.html#a9b1d8e9b466591e3e8f96135951ca951',1,'request']]]
 ];

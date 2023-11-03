@@ -167,8 +167,10 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>operator=</b> (const 
 <tr class="memitem:ac92764cbbbd9350c2dea9001354fe53d" id="r_ac92764cbbbd9350c2dea9001354fe53d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classinterface.html#ac92764cbbbd9350c2dea9001354fe53d">switch_student_classes_in_file</a> (<a class="el" href="classstudent.html">student</a> &amp;a_student, <a class="el" href="classcourse.html">course</a> &amp;a_course, <a class="el" href="classclass1.html">class1</a> &amp;old_class, <a class="el" href="classclass1.html">class1</a> &amp;new_class, const string &amp;filename)</td></tr>
 <tr class="separator:ac92764cbbbd9350c2dea9001354fe53d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr><td colspan="2"><div class="groupHeader">Data printers</div></td></tr>
-<tr class="memitem:ae8082642a3fc597c4ab2b5b96d130725" id="r_ae8082642a3fc597c4ab2b5b96d130725"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classinterface.html#ae8082642a3fc597c4ab2b5b96d130725">consult_class_schedule</a> (const <a class="el" href="classclass1.html">class1</a> &amp;a_class) const</td></tr>
-<tr class="separator:ae8082642a3fc597c4ab2b5b96d130725"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6d8c6a4ec57f67ade7f4be07559cc30d" id="r_a6d8c6a4ec57f67ade7f4be07559cc30d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classinterface.html#a6d8c6a4ec57f67ade7f4be07559cc30d">consult_class_schedule_by_schedule</a> (const <a class="el" href="classclass1.html">class1</a> &amp;a_class) const</td></tr>
+<tr class="separator:a6d8c6a4ec57f67ade7f4be07559cc30d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acd5ee0b756ca5486c9542c7103e3bc3e" id="r_acd5ee0b756ca5486c9542c7103e3bc3e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classinterface.html#acd5ee0b756ca5486c9542c7103e3bc3e">consult_class_schedule_by_course</a> (const <a class="el" href="classclass1.html">class1</a> &amp;a_class) const</td></tr>
+<tr class="separator:acd5ee0b756ca5486c9542c7103e3bc3e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa4bcdd7f2c7893b0896db6972d5aaa1d" id="r_aa4bcdd7f2c7893b0896db6972d5aaa1d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classinterface.html#aa4bcdd7f2c7893b0896db6972d5aaa1d">consult_student_schedule_by_schedule</a> (const <a class="el" href="classstudent.html">student</a> &amp;a_student) const</td></tr>
 <tr class="separator:aa4bcdd7f2c7893b0896db6972d5aaa1d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a544c2b14e8984be01303c4846c2b0b51" id="r_a544c2b14e8984be01303c4846c2b0b51"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classinterface.html#a544c2b14e8984be01303c4846c2b0b51">consult_student_schedule_by_course</a> (const <a class="el" href="classstudent.html">student</a> &amp;a_student) const</td></tr>
@@ -401,14 +403,14 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>operator=</b> (const 
 
 </div>
 </div>
-<a id="ae8082642a3fc597c4ab2b5b96d130725" name="ae8082642a3fc597c4ab2b5b96d130725"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae8082642a3fc597c4ab2b5b96d130725">&#9670;&#160;</a></span>consult_class_schedule()</h2>
+<a id="acd5ee0b756ca5486c9542c7103e3bc3e" name="acd5ee0b756ca5486c9542c7103e3bc3e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acd5ee0b756ca5486c9542c7103e3bc3e">&#9670;&#160;</a></span>consult_class_schedule_by_course()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void interface::consult_class_schedule </td>
+          <td class="memname">void interface::consult_class_schedule_by_course </td>
           <td>(</td>
           <td class="paramtype">const <a class="el" href="classclass1.html">class1</a> &amp;&#160;</td>
           <td class="paramname"><em>a_class</em></td><td>)</td>
@@ -416,7 +418,31 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>operator=</b> (const 
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Prints the given class schedule. Time complexity: O(nlog(n)). </p><dl class="params"><dt>Parameters</dt><dd>
+<p>Prints the given class schedule ordered by course. Time complexity: O(nlog(n)). </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">a_class</td><td>Class we want to consult the schedule </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a6d8c6a4ec57f67ade7f4be07559cc30d" name="a6d8c6a4ec57f67ade7f4be07559cc30d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6d8c6a4ec57f67ade7f4be07559cc30d">&#9670;&#160;</a></span>consult_class_schedule_by_schedule()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void interface::consult_class_schedule_by_schedule </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classclass1.html">class1</a> &amp;&#160;</td>
+          <td class="paramname"><em>a_class</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Prints the given class schedule ordered by schedule. Time complexity: O(nlog(n)). </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">a_class</td><td>Class we want to consult the schedule </td></tr>
   </table>
